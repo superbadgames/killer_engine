@@ -9,8 +9,9 @@ Assets
 Build
 Docs
 Bin
+ExLib [External Libraries that are to be included and are not part of the system]
+Headers
 Source
- header- will hold all header files
  [other folders for various files]
 Temp
 
@@ -21,9 +22,9 @@ Note: The $(PlatformName) is for any project that is going to be supported by mo
 
 Configutation Properties -> General
 
--> Output Directory: $(SolutionDir)..\..\Bin\$(PlatformName)$(Configuration)\ 
+-> Output Directory: $(ProjectDir)..\..\..\Bin\$(PlatformName)$(Configuration)\ 
 
--> Intermediate Directory: $(SolutionDir)..\..\Temp\$(ProjectName)$(Configuration)\
+-> Intermediate Directory: $(ProjectDir)..\..\..\Temp\$(ProjectName)$(Configuration)\
 
 -> Target Name: $(ProjectName)$(PlatformName)$(Configuration)
 
@@ -31,12 +32,12 @@ Configutation Properties -> General
 
 -> Debugging -> Debugging Command : $(TargetPath) *usually set by default
 
--> Debugging-> Working Directory : $(SolutionDir)..\..\Bin\
+-> Debugging-> Working Directory : $(ProjectDir)..\..\..\Bin\
 
 C/C++ -> Precompiled Headers -> Precompiled Header File : $(IntDir)$(TargetName).pch *usually set by default
 
 
--> General -> Additional Include Directories : $(SolutionDir)..\..\Source\headers\
+-> General -> Additional Include Directories : $(ProjectDir)..\..\Headers\
 
 -> Output Files : $(IntDir) for Asm List Location, Object Filename and Program Database File, this is usually set by default.
 
@@ -44,7 +45,7 @@ Linker -> Debug Settings -> Generate Program Database File : $(TargetDir)$(Targe
 
 -> Debugging -> Map File : $(TargetDir)$(TargetName).map [May have to enable the file to even be made]
 
-
+xcopy "$(TargetDir)$(TargetName).lib" "C:\Projects\KIller1_UnitTests\ExLib\" /s /i /y
 
 
 

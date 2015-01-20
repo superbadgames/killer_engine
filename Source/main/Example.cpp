@@ -11,8 +11,8 @@ bool Example::init() {
 	return true;
 }
 
-void Example::Prepare(float dt) {
-	const float SPEED = 15.0f;
+void Example::Prepare(F32 dt) {
+	const F32 SPEED = 15.0f;
 	m_rotationAngle += SPEED * dt;
 
 	if(m_rotationAngle > 360.0f) { m_rotationAngle -= 360.0f; }
@@ -44,7 +44,7 @@ void Example::OnResize(int width, int height) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, float(width) / float(height), 1.0f, 100.0f);
+	gluPerspective(45.0f, F32(width) / F32(height), 1.0f, 100.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

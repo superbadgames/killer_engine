@@ -1,0 +1,14 @@
+Atom.h:
+This is the header where base times, and common include files are to be placed.
+Types:
+Signed
+U8  = __int8
+U16 = __int16
+U32 = __int32
+U64 = __int64
+
+Unsigned
+S8  = unsigned __int8
+S16 = unsigned __int16
+S32 = unsigned __int32
+S64 = unsigned __int64
