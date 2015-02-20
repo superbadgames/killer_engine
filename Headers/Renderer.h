@@ -1,5 +1,5 @@
-#ifndef EXAMPLE_H
-#define EXAMPLE_H
+#ifndef RENDERER_H
+#define RENDERER_H
 //Killer1 inlucdes
 #include <Atom.h>
 
@@ -7,11 +7,12 @@
 #include <windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <vector>
 
 
-class Example {
+class Renderer {
 public:
-	Example();
+	Renderer();
 
 	bool init();
 	void Prepare(F32 dt);
@@ -21,7 +22,9 @@ public:
 	void OnResize(int width, int height);
 
 private:
-	F32 m_rotationAngle;
+	F32 		     m_rotationAngle;
+	std::vector<F32> _vertices;
+	std::vector<GLuint> _indices;
 };
 
 #endif

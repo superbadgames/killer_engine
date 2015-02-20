@@ -3,7 +3,7 @@
 
 //user defined includes
 #include <Atom.h>
-#include <Example.h>
+#include <Renderer.h>
 
 //3rd Party includes
 #include <windows.h>
@@ -23,7 +23,7 @@
 
 
 
-class Example;
+class Renderer;
 
 class GLWindow {
 public:
@@ -32,7 +32,7 @@ public:
 	bool Create(S32 width, S32 height, S32 bpp, bool fullscreen);
 	void Destroy();
 	void ProcessEvents();
-	void AttachExample(Example* example) { m_example = example; }
+	void AttachExample(Renderer* example) { m_example = example; }
 
 	bool isRunning() { return m_isRunning; }
 
@@ -44,7 +44,7 @@ public:
 	float GetElapsedSeconds();
 
 private:
-	Example* m_example;
+	Renderer* m_example;
 	bool 	 m_isRunning;
 	bool 	 m_isFullScreen;
 	float 	 m_lastTime;
@@ -59,7 +59,7 @@ private:
 	//HGLRC wglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, contst int *attribList);
 
 	void SetupPixelFormat(void);
-	Example* GetAttachedExample() { return m_example; }
+	Renderer* GetAttachedExample() { return m_example; }
 };
 
 #endif
