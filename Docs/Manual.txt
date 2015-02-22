@@ -12,3 +12,8 @@ S8  = unsigned __int8
 S16 = unsigned __int16
 S32 = unsigned __int32
 S64 = unsigned __int64
+
+Need to look into this warning for the Vector3: 
+
+c:\projects\killer1_engine\headers\vector3.h(27): warning C4172: returning address of local variable or temporary
+
