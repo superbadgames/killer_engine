@@ -1,3 +1,14 @@
+/*-------------------------------------------------------------------
+The high precision timer for the Killer1 Engine. At the time of writting
+this the timer is windows specific, but cross platform functionality is
+planned in the future. 
+
+This is not free to use, and cannot be used without the express permission
+of KillerWave.
+
+Written by Maxwell Miller
+---------------------------------------------------------------------*/
+
 #ifndef TIMER_H
 #define TIMER_H
 

@@ -17,3 +17,5 @@ Need to look into this warning for the Vector3:
 
 c:\projects\killer1_engine\headers\vector3.h(27): warning C4172: returning address of local variable or temporary
 
+I was able to fix this error very easily. Basicaly, when you are returning from a +, you don't want to bass by ref, because it can create memory issues. Because it is a rather small object, it is ok to pass it by value instead. If I ever redesign to make += to not just alter the current one, then it would return a ref.
+

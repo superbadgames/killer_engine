@@ -1,3 +1,17 @@
+/*--------------------------------------------------------------------
+Call Atom because it is the most basic include file. This is the file
+to be included with all other files that are made. This contains the 
+type definitions that will be the atomic variable types for the Killer1
+Engine (as suggested by Jason Gregory in Game Engine Architecture 2nd 
+Edition). It will also contain the basic header files that every other 
+class or file will need. 
+
+This is not free to use, and cannot be used without the express permission
+of KillerWave.
+
+Written by Maxwell Miller
+----------------------------------------------------------------------*/
+
 #ifndef ATOM_H
 #define ATOM_H
 
