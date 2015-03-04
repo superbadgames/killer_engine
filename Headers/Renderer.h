@@ -19,7 +19,6 @@ public:
 	void Render();
 	void ShutDown();
 
-	void OnResize(int width, int height);
 
 private:
 	F32 		     m_rotationAngle;

@@ -78,18 +78,4 @@ void Renderer::Render() {
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void Renderer::ShutDown() {
-	//Nothing yet
-}
-
-void Renderer::OnResize(int width, int height) {
-	glViewport(0, 0, width, height);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	gluPerspective(45.0f, F32(width) / F32(height), 1.0f, 100.0f);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-}
+void Renderer::ShutDown() {}

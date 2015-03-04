@@ -1,49 +1,51 @@
-#include <GLWindow.h>
+#include <OGLRenderingWindow.h>
 
 //typedef HGLRC(APIENTRYP PFNWGLCREATECONTEXTATTRIBSARBPROC)(HDC, HGLRC, const int*);
 //PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
 
 //-----------------------------------------------Default constructor
-GLWindow::GLWindow(HINSTANCE hInstance):
-m_isRunning(false),
-m_example(NULL),
-m_hInstance(hInstance),
-m_lastTime(0) {}
+OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance):
+_isRunning(false),
+_hInstance(hInstance),
+_lastTime(0) {}
 
 
 //----------------------------------------------------------------------------Create
-bool GLWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
+bool OGLRenderingWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;
 
-    m_isFullScreen = fullscreen;
+	_width  = width;
+	_height = height;
+    
+	_isFullScreen = fullscreen;
 
-    m_windowRect.left   = (S64)0;
-    m_windowRect.right  = (S64)width;
-    m_windowRect.top    = (S64)0;
-    m_windowRect.bottom = (S64)height;
+    _windowRect.left   = (S64)0;
+    _windowRect.right  = (S64)width;
+    _windowRect.top    = (S64)0;
+    _windowRect.bottom = (S64)height;
 
     //Fill out window call struct
-    m_windowClass.cbSize        = sizeof(WNDCLASSEX);
-    m_windowClass.style         = CS_HREDRAW | CS_VREDRAW;
-    m_windowClass.lpfnWndProc   = GLWindow::StaticWndProc; //Event handler
-    m_windowClass.cbClsExtra    = 0;
-    m_windowClass.cbWndExtra    = 0;
-    m_windowClass.hInstance     = m_hInstance;
-    m_windowClass.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
-    m_windowClass.hCursor       = LoadCursor(NULL, IDC_ARROW);
-	m_windowClass.hbrBackground = NULL;
-    m_windowClass.lpszMenuName  = NULL;
-    m_windowClass.lpszClassName = "GLClass";
-    m_windowClass.hIconSm       = LoadIcon(NULL, IDI_WINLOGO);
+    _windowClass.cbSize        = sizeof(WNDCLASSEX);
+    _windowClass.style         = CS_HREDRAW | CS_VREDRAW;
+    _windowClass.lpfnWndProc   = OGLRenderingWindow::StaticWndProc; //Event handler
+    _windowClass.cbClsExtra    = 0;
+    _windowClass.cbWndExtra    = 0;
+    _windowClass.hInstance     = _hInstance;
+    _windowClass.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
+    _windowClass.hCursor       = LoadCursor(NULL, IDC_ARROW);
+	_windowClass.hbrBackground = NULL;
+    _windowClass.lpszMenuName  = NULL;
+    _windowClass.lpszClassName = "GLClass";
+    _windowClass.hIconSm       = LoadIcon(NULL, IDI_WINLOGO);
 
     //Register the windows class
-	if (!RegisterClassEx(&m_windowClass)) {
+	if (!RegisterClassEx(&_windowClass)) {
         MessageBox(NULL, "Failed to register window class", NULL, MB_OK);
         return false;
     }
 
-    if(m_isFullScreen) {
+    if(_isFullScreen) {
         DEVMODE dmScreenSettings;
 
         memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
@@ -57,11 +59,11 @@ bool GLWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
         if(ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL) {
             //Setting mode failed, switch to windowed
             MessageBox(NULL, "Display mode failed", NULL, MB_OK);
-            m_isFullScreen = false;
+            _isFullScreen = false;
         }
     }
 
-    if(m_isFullScreen) {
+    if(_isFullScreen) {
         dwExStyle = WS_EX_APPWINDOW;
         dwStyle   = WS_POPUP;
         ShowCursor(false);
@@ -71,50 +73,50 @@ bool GLWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
         dwStyle   = WS_OVERLAPPEDWINDOW;
     }
 
-    AdjustWindowRectEx(&m_windowRect, dwStyle, false, dwExStyle);
+    AdjustWindowRectEx(&_windowRect, dwStyle, false, dwExStyle);
 
-    m_hwnd = CreateWindowEx(NULL,                                       //extended style
+    _hwnd = CreateWindowEx(NULL,                                       //extended style
                             "GLClass",                                  //class name
                             "BOGLGP - Chapter 2 OpenGL Application",    //app name
 							dwStyle | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
                             0, 0,                                       //X, Y
-                            m_windowRect.right - m_windowRect.left,
-                            m_windowRect.bottom - m_windowRect.top,     //height and width
+                            _windowRect.right - _windowRect.left,
+                            _windowRect.bottom - _windowRect.top,     //height and width
                             NULL,                                       //handle to parent
                             NULL,                                       //handle to menu
-                            m_hInstance,                                //application instance
-                            this);                                      //pointer to GLWindow
+                            _hInstance,                                //application instance
+                            this);                                      //pointer to OGLRenderingWindow
 
-    if(!m_hwnd) { return 0; }
+    if(!_hwnd) { return 0; }
 
-    m_hdc = GetDC(m_hwnd);
+    _hdc = GetDC(_hwnd);
 
-    ShowWindow(m_hwnd, SW_SHOW);
-    UpdateWindow(m_hwnd);
+    ShowWindow(_hwnd, SW_SHOW);
+    UpdateWindow(_hwnd);
 
-	m_lastTime = GetTickCount() / 1000.0f; //Initialize the timer
+	_lastTime = GetTickCount() / 1000.0f; //Initialize the timer
     return true;
 }
 
 //-----------------------------------------------------------------------------Destroy
-void GLWindow::Destroy() {
-    if(m_isFullScreen) {
+void OGLRenderingWindow::Destroy() {
+    if(_isFullScreen) {
         ChangeDisplaySettings(NULL, 0);
 		ShowCursor(true);
     }
 }
 
 //----------------------------------------------------------------------------------------------StaticWndProc
-LRESULT CALLBACK GLWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	GLWindow* window = NULL;
+LRESULT CALLBACK OGLRenderingWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	OGLRenderingWindow* window = NULL;
 
     if(uMsg == WM_CREATE) {
-        window = (GLWindow*)((LPCREATESTRUCT)lParam)->lpCreateParams;
+        window = (OGLRenderingWindow*)((LPCREATESTRUCT)lParam)->lpCreateParams;
 
         SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)window);
     }
     else {
-        window = (GLWindow*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+        window = (OGLRenderingWindow*)GetWindowLongPtr(hWnd, GWL_USERDATA);
 
 		if (!window) { DefWindowProc(hWnd, uMsg, wParam, lParam); }
     }
@@ -123,11 +125,11 @@ LRESULT CALLBACK GLWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 }
 
 //------------------------------------------------------------------------------WndProc
-LRESULT GLWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch(uMsg) {
         case WM_CREATE: {
-            m_hdc = GetDC(hWnd);
-            SetupPixelFormat();
+            _hdc = GetDC(hWnd);
+            _SetupPixelFormat();
 
 			PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
 
@@ -135,8 +137,8 @@ LRESULT GLWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                              WGL_CONTEXT_MINOR_VERSION_ARB, 0,
                              0};
 
-            HGLRC tmpContext = wglCreateContext(m_hdc);
-            wglMakeCurrent(m_hdc, tmpContext);
+            HGLRC tmpContext = wglCreateContext(_hdc);
+            wglMakeCurrent(_hdc, tmpContext);
 
             wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
 
@@ -146,19 +148,19 @@ LRESULT GLWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 return 0;
             }
 
-            m_hglrc = wglCreateContextAttribsARB(m_hdc, 0, attribs);
+            _hglrc = wglCreateContextAttribsARB(_hdc, 0, attribs);
            // wglDeleteContext(tmpContext);
-            wglMakeCurrent(m_hdc, m_hglrc);
+            wglMakeCurrent(_hdc, _hglrc);
 
-            m_isRunning = true;
+            _isRunning = true;
         }
 		break;
         
         case WM_DESTROY:
         case WM_CLOSE: {
-            wglMakeCurrent(m_hdc, NULL);
-            wglDeleteContext(m_hglrc);
-            m_isRunning = false;
+            wglMakeCurrent(_hdc, NULL);
+            wglDeleteContext(_hglrc);
+            _isRunning = false;
             PostQuitMessage(0);
             return 0;
         }
@@ -166,11 +168,11 @@ LRESULT GLWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
         case WM_SIZE: {
             int height = HIWORD(lParam);
             int width  = LOWORD(lParam);
-            GetAttachedExample()->OnResize(width, height);
+            _OnResize(width, height);
         }
         break;
         case WM_KEYDOWN: {
-            if(wParam == VK_ESCAPE) { DestroyWindow(m_hwnd); }
+            if(wParam == VK_ESCAPE) { DestroyWindow(_hwnd); }
         }
         break;
         default:
@@ -181,7 +183,7 @@ LRESULT GLWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 
 //-------------------------------------------------------------------ProcessEvents
-void GLWindow::ProcessEvents() {
+void OGLRenderingWindow::ProcessEvents() {
     MSG msg;
 
     while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -191,15 +193,15 @@ void GLWindow::ProcessEvents() {
 }
 
 //-----------------------------------------------------------------GetElapsedSeconds
-float GLWindow::GetElapsedSeconds(){
+float OGLRenderingWindow::GetElapsedSeconds(){
     float currentTime = float(GetTickCount()) / 1000.0f;
-    float seconds = float(currentTime - m_lastTime);
-    m_lastTime = currentTime;
+    float seconds = float(currentTime - _lastTime);
+    _lastTime = currentTime;
     return seconds;
 }
 
-//--------------------------------------------------------------------------SetupPixelFormat
-void GLWindow::SetupPixelFormat(void) {
+//--------------------------------------------------------------------------_SetupPixelFormat
+void OGLRenderingWindow::_SetupPixelFormat(void) {
     int pixelFormat;
 
     PIXELFORMATDESCRIPTOR pfd =
@@ -225,6 +227,19 @@ void GLWindow::SetupPixelFormat(void) {
 
     };
 
-    pixelFormat = ChoosePixelFormat(m_hdc, &pfd);
-    SetPixelFormat(m_hdc, pixelFormat, &pfd);
+    pixelFormat = ChoosePixelFormat(_hdc, &pfd);
+    SetPixelFormat(_hdc, pixelFormat, &pfd);
+}
+
+//---------------------------------------------------------------------------------_OnResize
+void OGLRenderingWindow::_OnResize(S32 width, S32 height) {
+	glViewport(0, 0, width, height);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	gluPerspective(45.0f, F32(width) / F32(height), 1.0f, 100.0f);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
