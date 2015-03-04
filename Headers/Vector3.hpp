@@ -14,8 +14,8 @@ of KillerWave.
 Written by Maxwell Miller
 ---------------------------------------------------------------------*/
 
-#ifndef VECTOR3_H
-#define VECTOR3_H
+#ifndef VECTOR3_HPP
+#define VECTOR3_HPP
 
 #include <Atom.h>
 

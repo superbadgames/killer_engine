@@ -1,3 +1,37 @@
+
+
+------------------------------------------------------------------------------------------------------------------
+Misc
+------------------------------------------------------------------------------------------------------------------
+
+Need to look into this warning for the Vector3: 
+
+c:\projects\killer1_engine\headers\vector3.h(27): warning C4172: returning address of local variable or temporary
+
+I was able to fix this error very easily. Basicaly, when you are returning from a +, you don't want to bass by ref, because it can create memory issues. Because it is a rather small object, it is ok to pass it by value instead. If I ever redesign to make += to not just alter the current one, then it would return a ref.
+
+The original post build events to copy the lib into the included project. This should be handled by the projects that need the lib, so that it can be more dynamic. Keeping these as a record. 
+
+xcopy "$(TargetDir)$(TargetName).lib" "C:\Projects\Killer1_UnitTests\ExLib\" /s /i /y
+xcopy "$(TargetDir)$(TargetName).lib" "C:\Projects\OpenGL_Tests\ExLib\" /s /i /y
+xcopy "$(ProjectDir)..\..\..\Headers\*.h" "C:\Projects\OpenGL_Tests\Exlib\Headers" /s /i /y
+
+------------------------------------------------------------------------------------------------------------------
+The Entry Point
+------------------------------------------------------------------------------------------------------------------
+There are 2 models that come to mind as I begin the design of the engine itself. 
+
+Model 1:
+In this model, the engine is a .lib file, which has no entry point. The engine will act as a series of functions to compliement another project. This means that in order to make a game, there will need to be a c++ project that will have to call the library, and this will then call any external scripts ect. to run. 
+
+Model 2: 
+In this model, the entry point will be in the engine, and the engine will act not just as a library, but as a framework for building games. The scripting language will then interact with the engine, and the engine will be less controlled, and more something that you use. 
+
+I am not sure which is the best design for where the project is heading. For now, I will go with model one. I am going to do this for a few reasons. First, because I know how. Second, because it is much easier. 
+
+------------------------------------------------------------------------------------------------------------------
+Atoms
+------------------------------------------------------------------------------------------------------------------
 Atom.h:
 This is the header where base times, and common include files are to be placed.
 Types:
@@ -12,10 +46,4 @@ S8  = unsigned __int8
 S16 = unsigned __int16
 S32 = unsigned __int32
 S64 = unsigned __int64
-
-Need to look into this warning for the Vector3: 
-
-c:\projects\killer1_engine\headers\vector3.h(27): warning C4172: returning address of local variable or temporary
-
-I was able to fix this error very easily. Basicaly, when you are returning from a +, you don't want to bass by ref, because it can create memory issues. Because it is a rather small object, it is ok to pass it by value instead. If I ever redesign to make += to not just alter the current one, then it would return a ref.
 
