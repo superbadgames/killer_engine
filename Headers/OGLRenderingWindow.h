@@ -1,9 +1,21 @@
+/*-------------------------------------------------------------------
+The OGLRenderingWindow is where the OGL window is opened, and set up. It
+will also control the windows messages for resizing, and focus. This should 
+not be called outside of the program start up.
+
+This is not free to use, and cannot be used without the express permission
+of KillerWave.
+
+Written by Maxwell Miller
+---------------------------------------------------------------------*/
+
 #ifndef GL_WINDOW_H
 #define GL_WINDOW_H
 
 //user defined includes
 #include <Atom.h>
 #include <Renderer.h>
+#include <Timer.h>
 
 //3rd Party includes
 //#include <ctime>
@@ -31,11 +43,11 @@ public:
 	float GetElapsedSeconds();
 
 private:
-	bool 	 _isRunning;
-	bool 	 _isFullScreen;
-	float 	 _lastTime;
-	S32		 _width;
-	S32		 _height;
+	bool 	  _isRunning;
+	bool 	  _isFullScreen;
+	S32		  _width;
+	S32		  _height;
+	Timer*    _timer;
 
 	HWND       _hwnd;
 	HGLRC      _hglrc; //Rendering context

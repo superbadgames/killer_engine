@@ -1,11 +1,11 @@
 #include <Timer.h>
 #include <iostream>
 
-//----------------------------------------------------------Static Member Declartions
+//--Static Member Declartions
 F32 Timer::_frequency = 0;
 Timer* Timer::_instance = NULL;
 
-//----------------------------------------------------------Protected Constructor Timer()
+//-------------------------------------------------------------------------------Protected Constructor Timer
 Timer::Timer(F64 startTimerSeconds = 0.0) {
 	_frequency  = _QueryFrequency();
 	_deltaTime  = 0.0f;
@@ -16,15 +16,16 @@ Timer::Timer(F64 startTimerSeconds = 0.0) {
 	_paused     = false;
 }
 
-//-----------------------------------------------------------Instance()
-//-----------------------------------------------------------Singleton, if NULL, make a new one
-Timer* Timer::Instance() {
+//--------------------------------------------------------------------------------------------------Instance
+//--Singleton, if NULL, make a new one
+Timer* Timer::Instance(void) {
 	if(_instance == NULL) { _instance = new Timer(); }
 
 	return _instance;
 }
 
-void Timer::Update() {
+//----------------------------------------------------------------------------------------------------Update
+void Timer::Update(void) {
 	if(!_paused) {
 		_pastCycles = _curCycles;
 		_curCycles  = _QueryHiResTimer();
@@ -33,7 +34,8 @@ void Timer::Update() {
 	}
 }
 
-void Timer::SingleStep() {
+//-------------------------------------------------------------------------------------------------SingleStep
+void Timer::SingleStep(void) {
 	if(!_paused) {
 		U64 oneStep = _SecondsToCycles((1.0f/30.0f) * _timeScale);
 
@@ -45,17 +47,17 @@ void Timer::SingleStep() {
 
 
 
-//-------------------------------------------------------------------Private _QueryHiResTimer()
-//-------------------------------------------------------------------Windows only implemenation
-U64 Timer::_QueryHiResTimer() { 
+//------------------------------------------------------------------------------------------_QueryHiResTimer
+//--Windows only implemenation
+U64 Timer::_QueryHiResTimer(void) { 
 	static LARGE_INTEGER _cycles;
 	QueryPerformanceCounter(&_cycles);
 	return _cycles.QuadPart;
 }
 
-//-------------------------------------------------------------------Private _QueryFrequence()
-//-------------------------------------------------------------------Windows only implemenation
-F32 Timer::_QueryFrequency() { 
+//-------------------------------------------------------------------------------------------_QueryFrequence
+//--Windows only implemenation
+F32 Timer::_QueryFrequency(void) { 
 	static LARGE_INTEGER _freq;
 	QueryPerformanceFrequency(&_freq); 
 	return (F32)_freq.QuadPart;

@@ -1,16 +1,13 @@
 #include <OGLRenderingWindow.h>
 
-//typedef HGLRC(APIENTRYP PFNWGLCREATECONTEXTATTRIBSARBPROC)(HDC, HGLRC, const int*);
-//PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
-
-//-----------------------------------------------Default constructor
-OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance):
-_isRunning(false),
-_hInstance(hInstance),
-_lastTime(0) {}
+//---------------------------------------------------------------------------------------Default constructor
+OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
+                                                             _hInstance(hInstance) { 
+    _timer->Instance(); 
+}
 
 
-//----------------------------------------------------------------------------Create
+//----------------------------------------------------------------------------------------------------Create
 bool OGLRenderingWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;
@@ -94,11 +91,14 @@ bool OGLRenderingWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen)
     ShowWindow(_hwnd, SW_SHOW);
     UpdateWindow(_hwnd);
 
-	_lastTime = GetTickCount() / 1000.0f; //Initialize the timer
+	//Start up OGL stuff
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
     return true;
 }
 
-//-----------------------------------------------------------------------------Destroy
+//--------------------------------------------------------------------------------------------------Destroy
 void OGLRenderingWindow::Destroy() {
     if(_isFullScreen) {
         ChangeDisplaySettings(NULL, 0);
@@ -106,7 +106,7 @@ void OGLRenderingWindow::Destroy() {
     }
 }
 
-//----------------------------------------------------------------------------------------------StaticWndProc
+//---------------------------------------------------------------------------------------------StaticWndProc
 LRESULT CALLBACK OGLRenderingWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	OGLRenderingWindow* window = NULL;
 
@@ -124,7 +124,7 @@ LRESULT CALLBACK OGLRenderingWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM 
     return window->WndProc(hWnd, uMsg, wParam, lParam);
 }
 
-//------------------------------------------------------------------------------WndProc
+//---------------------------------------------------------------------------------------------------WndProc
 LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch(uMsg) {
         case WM_CREATE: {
@@ -133,7 +133,7 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 			PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
 
-            int attribs[] = {WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+            S32 attribs[] = {WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
                              WGL_CONTEXT_MINOR_VERSION_ARB, 0,
                              0};
 
@@ -166,8 +166,8 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
         }
         break;
         case WM_SIZE: {
-            int height = HIWORD(lParam);
-            int width  = LOWORD(lParam);
+            S32 height = HIWORD(lParam);
+            S32 width  = LOWORD(lParam);
             _OnResize(width, height);
         }
         break;
@@ -182,7 +182,7 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 }
 
 
-//-------------------------------------------------------------------ProcessEvents
+//---------------------------------------------------------------------------------------------ProcessEvents
 void OGLRenderingWindow::ProcessEvents() {
     MSG msg;
 
@@ -192,17 +192,10 @@ void OGLRenderingWindow::ProcessEvents() {
     }
 }
 
-//-----------------------------------------------------------------GetElapsedSeconds
-float OGLRenderingWindow::GetElapsedSeconds(){
-    float currentTime = float(GetTickCount()) / 1000.0f;
-    float seconds = float(currentTime - _lastTime);
-    _lastTime = currentTime;
-    return seconds;
-}
 
-//--------------------------------------------------------------------------_SetupPixelFormat
+//-----------------------------------------------------------------------------------------_SetupPixelFormat
 void OGLRenderingWindow::_SetupPixelFormat(void) {
-    int pixelFormat;
+    S32 pixelFormat;
 
     PIXELFORMATDESCRIPTOR pfd =
     {
@@ -231,7 +224,7 @@ void OGLRenderingWindow::_SetupPixelFormat(void) {
     SetPixelFormat(_hdc, pixelFormat, &pfd);
 }
 
-//---------------------------------------------------------------------------------_OnResize
+//-------------------------------------------------------------------------------------------------_OnResize
 void OGLRenderingWindow::_OnResize(S32 width, S32 height) {
 	glViewport(0, 0, width, height);
 

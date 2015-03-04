@@ -3,7 +3,7 @@ A Vector class that will follow the rules of Mathematics. The equations
 that the Vectors use for each operation were taken from 3D Math Primer 
 for Graphics and Game Development by Dunn and Parberry. 
 
-It is called Vector3 because it will only support 3D vectors. For any 2D 
+It is called Vector because it will only support 3D vectors. For any 2D 
 work, simply adapt by not using the z axis (although you should not that
 there will be some operations that will not support this, such as the 
 cross multiplication operation. 
@@ -14,58 +14,58 @@ of KillerWave.
 Written by Maxwell Miller
 ---------------------------------------------------------------------*/
 
-#ifndef VECTOR3_HPP
-#define VECTOR3_HPP
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
 
 #include <Atom.h>
 
 template<typename T>
-class Vector3 {
+class Vector {
 public:
-	Vector3(){}
-	Vector3(T xT, T yT, T zT) {
+	Vector(){}
+	Vector(T xT, T yT, T zT) {
 		x = xT;
 		y = yT;
 		z = zT;
 
 	}
-	~Vector3<T>(){}
+	~Vector<T>(){}
 
 	T x;
 	T y;
 	T z;
 
 	//operator overloads
-	Vector3<T> operator +(const Vector3<T>& a) {
-		return Vector3<T>(x+a.x,
-						  y+a.y,
-						  z+a.z);
+	Vector<T> operator +(const Vector<T>& a) {
+		return Vector<T>(x+a.x,
+						 y+a.y,
+						 z+a.z);
 	}
 
-	void operator +=(const Vector3<T>& a) {
+	void operator +=(const Vector<T>& a) {
 		x += a.x;
 		y += a.y;
 		z += a.z;
 	}
 
-	Vector3<T> operator-(const Vector3<T>& s) {
-		return Vector3<T>(x-s.x,
-						  y-s.y,
-						  z-s.z);
+	Vector<T> operator-(const Vector<T>& s) {
+		return Vector<T>(x-s.x,
+						 y-s.y,
+						 z-s.z);
 	}
 
-	void operator -=(const Vector3<T>& s) {
+	void operator -=(const Vector<T>& s) {
 		x -= s.x;
 		y -= s.y;
 		z -= s.z;
 	}
-	//void operator =(const Vector3<T>& s)
+	//void operator =(const Vector<T>& s)
 
 	//Multiply by a scalar
-	Vector3<T> operator *(const T m) {
-		return Vector3<T>(x*m,
-						  y*m,
-						  z*m);
+	Vector<T> operator *(const T m) {
+		return Vector<T>(x*m,
+						 y*m,
+						 z*m);
 	}
 
 	void operator *=(const T m) {
@@ -75,27 +75,27 @@ public:
 	}
 
 	//Vector Dot Operations will return a scalar value
-	T operator *(const Vector3<T>& m) {
+	T operator *(const Vector<T>& m) {
 		return (x * m.x) +
 		       (y * m.y) +
 		       (z * m.z);
 	}
-	//T& operator *+(const Vector3<T>& m);
+	//T& operator *+(const Vector<T>& m);
 
 	//Vector Cross operation will return a Vector
-	Vector3<T> X(const Vector3<T>& m) { return Vector3<T>((y*m.z - z*m.y), (z*m.x - x*m.z), (x*m.y - y*m.x)); }
+	Vector<T> X(const Vector<T>& m) { return Vector<T>((y*m.z - z*m.y), (z*m.x - x*m.z), (x*m.y - y*m.x)); }
 
 	//Division by scalar
-	Vector3<T> operator /(const T d) {
+	Vector<T> operator /(const T d) {
 		//if(d == 0) {return NULL;}
 
-		return Vector3<T>(x / d,
-						  y / d,
-						  z / d);
+		return Vector<T>(x / d,
+						 y / d,
+						 z / d);
 	}
 
 	void operator /=(const T d) {
-		//if(d == 0) {return NULL;}
+		if (d == 0) { d == 1; }
 
 		x /= d;
 		y /= d;
@@ -104,7 +104,7 @@ public:
 
 	T Magnitude() { return sqrt((x*x) + (y*y) + (z*z)); }
 
-	Vector3<T> Unit() { return Vector3<T>((x/Magnitude()), (y/Magnitude()), (z/Magnitude())); }
+	Vector<T> Unit() { return Vector<T>((x/Magnitude()), (y/Magnitude()), (z/Magnitude())); }
 
 };
 

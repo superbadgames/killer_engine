@@ -30,31 +30,31 @@ protected:
 	explicit Timer(F64);
 
 public:
-	~Timer(){}
+	~Timer(void){}
 
-	static Timer* Instance();
+	static Timer* Instance(void);
 	
 	//Called once per frame to update time
-	void Update();
+	void Update(void);
 
-	void SingleStep();
+	void SingleStep(void);
 
 	//Setters and Getters
 	void SetPaused(bool paused) { _paused = paused; }
-	bool GetPaused()            { return _paused; }
+	bool GetPaused(void)        { return _paused; }
 
 	void SetTimeScale(F32 scale) { _timeScale = scale; }
-	F32  GetTimeScale()          { return _timeScale; }
+	F32  GetTimeScale(void)      { return _timeScale; }
 
-	F32 DeltaTime() { return _deltaTime; }
+	F32 DeltaTime(void) { return _deltaTime; }
 
 private:	
 	static inline U64 _SecondsToCycles (F32 timeSeconds) { return (U64)(timeSeconds * _frequency); }
 	//WARNING do not use this on big values, very system intensive
 	static inline F32 _CyclesToSeconds (U64 timeCycles) { return (F32)timeCycles / _frequency; }
 
-	static U64 _QueryHiResTimer();
-	static F32 _QueryFrequency();
+	static U64 _QueryHiResTimer(void);
+	static F32 _QueryFrequency(void);
 };
 
 #endif
