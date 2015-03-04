@@ -95,11 +95,14 @@ public:
 	}
 
 	void operator /=(const T d) {
-		if (d == 0) { d == 1; }
-
-		x /= d;
-		y /= d;
-		z /= d;
+		if (d == 0) { 
+			//do nothing 
+		}
+		else {
+			x /= d;
+			y /= d;
+			z /= d;
+		}
 	}
 
 	T Magnitude() { return sqrt((x*x) + (y*y) + (z*z)); }
