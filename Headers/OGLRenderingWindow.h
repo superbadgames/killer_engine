@@ -14,7 +14,6 @@ Written by Maxwell Miller
 
 //user defined includes
 #include <Atom.h>
-#include <Renderer.h>
 #include <Timer.h>
 
 //3rd Party includes
@@ -29,8 +28,8 @@ class OGLRenderingWindow {
 public:
 	OGLRenderingWindow(HINSTANCE hInstance);//Default constructor
 	
-	bool Create(S32 width, S32 height, S32 bpp, bool fullscreen);
-	void Destroy();
+	bool Init(S32 width, S32 height, S32 bpp, bool fullscreen);
+	void ShutDown();
 	void ProcessEvents();
 
 	bool isRunning() { return _isRunning; }

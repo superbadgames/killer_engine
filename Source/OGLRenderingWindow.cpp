@@ -7,8 +7,8 @@ OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
 }
 
 
-//----------------------------------------------------------------------------------------------------Create
-bool OGLRenderingWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen) {
+//-------------------------------------------------------------------------------------------------------Init
+bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;
 
@@ -98,8 +98,8 @@ bool OGLRenderingWindow::Create(S32 width, S32 height, S32 bpp, bool fullscreen)
     return true;
 }
 
-//--------------------------------------------------------------------------------------------------Destroy
-void OGLRenderingWindow::Destroy() {
+//--------------------------------------------------------------------------------------------------ShutDown
+void OGLRenderingWindow::ShutDown() {
     if(_isFullScreen) {
         ChangeDisplaySettings(NULL, 0);
 		ShowCursor(true);
