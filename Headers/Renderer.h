@@ -20,13 +20,15 @@ Written by Maxwell Miller
 #include <gl/glu.h>
 
 
+
 class Renderer {
 private:
 	U32  _maxVerticies;
-	F32* _verticies;
+	GLfloat* _verticies;
 	F32* _colors;
 	F32* _uvs;
 	U32  _batchSize;
+
 
 	static Renderer* _instance;
 

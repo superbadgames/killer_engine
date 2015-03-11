@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------------------Default constructor
 OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
                                                              _hInstance(hInstance) { 
-    _timer->Instance(); 
+                                                             _timer->Instance(); 
 }
 
 
@@ -74,7 +74,7 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
 
     _hwnd = CreateWindowEx(NULL,                                       //extended style
                             "GLClass",                                  //class name
-                            "BOGLGP - Chapter 2 OpenGL Application",    //app name
+                            "Boxes",    //app name
 							dwStyle | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
                             0, 0,                                       //X, Y
                             _windowRect.right - _windowRect.left,
@@ -92,8 +92,8 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     UpdateWindow(_hwnd);
 
 	//Start up OGL stuff
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
+	//glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LEQUAL);
 
     return true;
 }

@@ -29,12 +29,12 @@ public:
 	OGLRenderingWindow(HINSTANCE hInstance);//Default constructor
 	
 	bool Init(S32 width, S32 height, S32 bpp, bool fullscreen);
-	void ShutDown();
-	void ProcessEvents();
+	void ShutDown(void);
+	void ProcessEvents(void);
 
-	bool isRunning() { return _isRunning; }
+	bool isRunning(void) { return _isRunning; }
 
-	void MySwapBuffers() { SwapBuffers(_hdc); }
+	void Swap(void) { SwapBuffers(_hdc); }
 
 	static LRESULT CALLBACK StaticWndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam);
