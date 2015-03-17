@@ -14,14 +14,26 @@ Written by Maxwell Miller
 //User defined includes
 #include <Atom.h>
 
-template <typename T>
+template <typename T=F32>
 struct Point {
 	T x;
 	T y; 
 	T z;
 
-	Point(void) : x(0), y(0), z(0) {}
+	Point(void): x(0.0f), y(0.0f), z(0.0f) {}
 	Point(T a, T b, T c) : x(a), y(b), z(c) {}
+
+	void operator =(const Point<T>& p) {
+		x = p.x;
+		y = p.y;
+		z = p.z;
+	}
+
+	void operator =(const Point<T>* p) {
+		x = p->x;
+		y = p->y;
+		z = p->z;
+	}
 };
 
 #endif

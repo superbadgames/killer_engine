@@ -14,14 +14,25 @@ Written by Maxwell Miller
 //User Defined includes
 #include <Atom.h>
 
-template <typename T>
+template <typename T=F32>
 struct Color {
-	T r;
-	T b;
-	T g;
+	T Red;
+	T Green;
+	T Blue;
 
-	Color(void) : r(0), b(0), g(0) {}
-	Color(T red, T blue, T green) : r(red), b(blue), g(green) {}
+	Color(void): Red(0.0f), Blue(0.0f), Green(0.0f) {}
+	Color(T red, T blue, T green) : Red(red), Green(green), Blue(blue) {}
+	void operator =(const Color& c) {
+		Red    = c.Red;
+		Green  = c.Green;
+		Blue   = c.Blue;
+	}
+
+	void operator =(const Color* c) {
+		Red   = c->Red;
+		Green = c->Green;
+		Blue  = c->Blue;
+	}
 };
 
 #endif

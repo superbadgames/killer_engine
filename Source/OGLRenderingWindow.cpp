@@ -1,19 +1,26 @@
 #include <OGLRenderingWindow.h>
 
-//---------------------------------------------------------------------------------------Default constructor
+//-------------------------------------------------------------------------------------------------------
+//Constructor
+//-------------------------------------------------------------------------------------------------------
 OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
                                                              _hInstance(hInstance) { 
                                                              _timer->Instance(); 
 }
 
 
-//-------------------------------------------------------------------------------------------------------Init
+//-------------------------------------------------------------------------------------------------------
+//Init
+//-------------------------------------------------------------------------------------------------------
 bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;
 
 	_width  = width;
 	_height = height;
+
+    _halfWidth = width / 2;
+    _halfHeight = height / 2;
     
 	_isFullScreen = fullscreen;
 
@@ -91,14 +98,15 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     ShowWindow(_hwnd, SW_SHOW);
     UpdateWindow(_hwnd);
 
-	//Start up OGL stuff
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LEQUAL);
+    _SetProjectionMatrix();
+
 
     return true;
 }
 
-//--------------------------------------------------------------------------------------------------ShutDown
+//-------------------------------------------------------------------------------------------------------
+//ShutDown
+//-------------------------------------------------------------------------------------------------------
 void OGLRenderingWindow::ShutDown() {
     if(_isFullScreen) {
         ChangeDisplaySettings(NULL, 0);
@@ -106,7 +114,9 @@ void OGLRenderingWindow::ShutDown() {
     }
 }
 
-//---------------------------------------------------------------------------------------------StaticWndProc
+//-------------------------------------------------------------------------------------------------------
+//StaticWndProc
+//-------------------------------------------------------------------------------------------------------
 LRESULT CALLBACK OGLRenderingWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	OGLRenderingWindow* window = NULL;
 
@@ -124,7 +134,9 @@ LRESULT CALLBACK OGLRenderingWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM 
     return window->WndProc(hWnd, uMsg, wParam, lParam);
 }
 
-//---------------------------------------------------------------------------------------------------WndProc
+//-------------------------------------------------------------------------------------------------------
+//WndProc
+//-------------------------------------------------------------------------------------------------------
 LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch(uMsg) {
         case WM_CREATE: {
@@ -182,7 +194,9 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 }
 
 
-//---------------------------------------------------------------------------------------------ProcessEvents
+//-------------------------------------------------------------------------------------------------------
+//ProcessEvents
+//-------------------------------------------------------------------------------------------------------
 void OGLRenderingWindow::ProcessEvents() {
     MSG msg;
 
@@ -193,7 +207,9 @@ void OGLRenderingWindow::ProcessEvents() {
 }
 
 
-//-----------------------------------------------------------------------------------------_SetupPixelFormat
+//-------------------------------------------------------------------------------------------------------
+//_SetupPixelFormat
+//-------------------------------------------------------------------------------------------------------
 void OGLRenderingWindow::_SetupPixelFormat(void) {
     S32 pixelFormat;
 
@@ -224,7 +240,24 @@ void OGLRenderingWindow::_SetupPixelFormat(void) {
     SetPixelFormat(_hdc, pixelFormat, &pfd);
 }
 
-//-------------------------------------------------------------------------------------------------_OnResize
+//-------------------------------------------------------------------------------------------------------
+//_SetProjectionMatrix
+//-------------------------------------------------------------------------------------------------------
+void OGLRenderingWindow::_SetProjectionMatrix(void) {
+    //Start up OGL stuff
+    //glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_LEQUAL);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-_halfWidth, _halfWidth, -_halfHeight, _halfHeight, -100, 100 );
+    glMatrixMode(GL_MODELVIEW);
+
+	glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+}
+
+//-------------------------------------------------------------------------------------------------------
+//_OnResize
+//-------------------------------------------------------------------------------------------------------
 void OGLRenderingWindow::_OnResize(S32 width, S32 height) {
 	glViewport(0, 0, width, height);
 

@@ -14,33 +14,33 @@ Written by Maxwell Miller
 
 //User Defined Includes
 #include <Atom.h>
+#include <Cell.h>
 
 //3rd party defined Includes
 #include <GL/gl.h>
 #include <gl/glu.h>
 
-
+//Predefine class
+class Cell;
 
 class Renderer {
-private:
-	U32  _maxVerticies;
-	GLfloat* _verticies;
-	F32* _colors;
-	F32* _uvs;
-	U32  _batchSize;
-
-
-	static Renderer* _instance;
+	U32		 _maxVerticies;
+	Point<>* _verticies;
+	Color<>* _colors;
+	GLfloat* _uvs;
 
 protected:
 	Renderer(void);
 
 public:
+	U32		 _batchSize;
+	
 	~Renderer(void){};
 
+	static Renderer* _instance;
 	static Renderer* Instance(void);
 
-	void AddCell(void);//void for now, will take a cell after that class has been added. Implement later
+	void AddCell(Cell &cell);
 	void SetPointers(void);
 	void Render(void);
 	void ShutDown(void);

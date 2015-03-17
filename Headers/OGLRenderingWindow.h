@@ -46,6 +46,8 @@ private:
 	bool 	  _isFullScreen;
 	S32		  _width;
 	S32		  _height;
+	S32		  _halfWidth;
+	S32       _halfHeight;
 	Timer*    _timer;
 
 	HWND       _hwnd;
@@ -59,6 +61,7 @@ private:
 
 	void _OnResize(S32 width, S32 height);
 	void _SetupPixelFormat(void);
+	void _SetProjectionMatrix(void);
 };
 
 #endif
