@@ -49,15 +49,18 @@ public:
 
 	~Cell(void){}
 
+	//operators
+	void operator =(const Cell* cell);
+
 	void ShutDown(void);
 
 	void Render(void);
 	//Accessors
-	void SetPosition(Point<>& p);
-	void SetColor(Color<>& c);
+	void SetPosition(Point<>& p) { _position = p; }
+	void SetColor(Color<>& c) { _color = c; }
 
-	Point<> Position(void)  { return _position; }
-	Color<> CellColor(void) { return _color; }
+	Point<> CellPosition(void)  { return _position; }
+	Color<> CellColor(void)     { return _color; }
 
 	Point<>* VertexPositions(void) { return _vertexPositions; }
 	Color<>* VertexColors(void)    { return _vertexColors; }
