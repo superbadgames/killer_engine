@@ -36,6 +36,12 @@ public:
 	T z;
 
 	//operator overloads
+	void operator =(const Vector<T>& v) {
+		x = v.x;
+		y = v.y;
+		z = v.z;
+	}
+
 	Vector<T> operator +(const Vector<T>& a) {
 		return Vector<T>(x+a.x,
 						 y+a.y,

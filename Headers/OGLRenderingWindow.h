@@ -41,6 +41,8 @@ public:
 
 	float GetElapsedSeconds();
 
+	HWND GetHWND(void) { return _hwnd; }
+
 private:
 	bool 	  _isRunning;
 	bool 	  _isFullScreen;
@@ -59,7 +61,7 @@ private:
 
 	//HGLRC wglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, contst int *attribList);
 
-	void _OnResize(S32 width, S32 height);
+	void _OnResize(void);
 	void _SetupPixelFormat(void);
 	void _SetProjectionMatrix(void);
 };

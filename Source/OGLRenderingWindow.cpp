@@ -178,9 +178,13 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
         }
         break;
         case WM_SIZE: {
-            S32 height = HIWORD(lParam);
-            S32 width  = LOWORD(lParam);
-            _OnResize(width, height);
+            _width  = LOWORD(lParam);
+            _height = HIWORD(lParam);
+            
+            _halfWidth  = _width / 2;
+            _halfHeight = _height / 2;
+
+            _OnResize();
         }
         break;
         case WM_KEYDOWN: {
@@ -244,9 +248,6 @@ void OGLRenderingWindow::_SetupPixelFormat(void) {
 //_SetProjectionMatrix
 //-------------------------------------------------------------------------------------------------------
 void OGLRenderingWindow::_SetProjectionMatrix(void) {
-    //Start up OGL stuff
-    //glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LEQUAL);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-_halfWidth, _halfWidth, -_halfHeight, _halfHeight, -100, 100 );
@@ -258,14 +259,16 @@ void OGLRenderingWindow::_SetProjectionMatrix(void) {
 //-------------------------------------------------------------------------------------------------------
 //_OnResize
 //-------------------------------------------------------------------------------------------------------
-void OGLRenderingWindow::_OnResize(S32 width, S32 height) {
-	glViewport(0, 0, width, height);
+void OGLRenderingWindow::_OnResize(void) {
+	glViewport(0, 0, _width, _height);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, F32(width) / F32(height), 1.0f, 100.0f);
+	gluPerspective(45.0f, F32(_width) / F32(_height), 1.0f, 100.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+    _SetProjectionMatrix();
 }

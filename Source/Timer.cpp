@@ -32,6 +32,7 @@ void Timer::Update(void) {
 		_deltaTime  = _CyclesToSeconds(_curCycles - _pastCycles) * _timeScale;
 		_totalTime += _SecondsToCycles(_deltaTime);
 	}
+	if (_deltaTime < 0 || _deltaTime > 1.0f) { _deltaTime = 0.33f; }
 }
 
 //-------------------------------------------------------------------------------------------------SingleStep
