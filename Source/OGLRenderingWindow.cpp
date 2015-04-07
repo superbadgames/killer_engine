@@ -12,6 +12,12 @@ OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
 //-------------------------------------------------------------------------------------------------------
 //Init
 //-------------------------------------------------------------------------------------------------------
+
+S32 OGLRenderingWindow::_width      = 0;
+S32 OGLRenderingWindow::_height     = 0;
+S32 OGLRenderingWindow::_halfWidth  = 0;
+S32 OGLRenderingWindow::_halfHeight = 0;
+
 bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;

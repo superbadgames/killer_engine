@@ -21,7 +21,7 @@ struct Color {
 	T Blue;
 
 	Color(void): Red(0.0f), Blue(0.0f), Green(0.0f) {}
-	Color(T red, T blue, T green) : Red(red), Green(green), Blue(blue) {}
+	Color(T red, T green, T blue) : Red(red), Green(green), Blue(blue) {}
 	void operator =(const Color& c) {
 		Red    = c.Red;
 		Green  = c.Green;

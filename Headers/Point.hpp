@@ -35,10 +35,10 @@ struct Point {
 		z = p->z;
 	}
 
-	void operator+(const Point<T>& p) {
-		x += p.x;
-		y += p.y;
-		z += p.z;
+	Point operator+(const Point<T>& p) {
+		return Point<T>(x + p.x,
+						y + p.y,
+						z + p.z);
 	}
 
 	void operator +=(const Point<T>& p) {

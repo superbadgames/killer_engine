@@ -47,3 +47,19 @@ S16 = unsigned __int16
 S32 = unsigned __int32
 S64 = unsigned __int64
 
+------------------------------------------------------------------------------------------------------------------
+Points
+------------------------------------------------------------------------------------------------------------------
+The Point construct it meant to represent positions in the Cartesian Coordinate plane that is the rendering view field. As such, the operators needed for the point are more limited. Here are the operators that will be used: 
+
+= : This is used to assigne one point to another. It is written to support both a Point and a Point*
+
++ : Used to Add one Point to another. It would looke like this. PointC = PointA + PointB;
+
++= : Used to Add one Point to another, in a short hand version. PointA += PointB;
+
+The multiplication and division operators were not added because I do not see where they would ever be used. If in the future, when working on more aspects of the game, I could find that this would be useful, and if I do, I will add these operators. 
+
+------------------------------------------------------------------------------------------------------------------
+Color
+------------------------------------------------------------------------------------------------------------------

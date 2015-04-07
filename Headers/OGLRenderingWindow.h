@@ -43,13 +43,20 @@ public:
 
 	HWND GetHWND(void) { return _hwnd; }
 
+	static S32 GetWidth(void)  	   { return _width; }
+	static S32 GetHalfWidth(void)  { return _halfWidth; }
+	static S32 GetHeight(void) 	   { return _height; }
+	static S32 GetHalfHeight(void) { return _halfHeight; }
+
 private:
 	bool 	  _isRunning;
 	bool 	  _isFullScreen;
-	S32		  _width;
-	S32		  _height;
-	S32		  _halfWidth;
-	S32       _halfHeight;
+	
+	static S32 _width;
+	static S32 _height;
+	static S32 _halfWidth;
+	static S32 _halfHeight;
+
 	Timer*    _timer;
 
 	HWND       _hwnd;

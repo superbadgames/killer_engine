@@ -18,6 +18,7 @@ Written by Maxwell Miller
 //Includes. These will be the files that everything will need to have access to
 //User defined Includes
 #include <KillerMath.h>
+#include <KillerContainer.h>
 //Sytem and library includes
 #include <windows.h>
 

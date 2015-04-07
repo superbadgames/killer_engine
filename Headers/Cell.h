@@ -57,7 +57,7 @@ public:
 	void Render(void);
 	//Accessors
 	void SetPosition(Point<>& p) { _position = p; }
-	void SetColor(Color<>& c) { _color = c; }
+	void SetColor(Color<>& c)    { _color = c; }
 
 	Point<> CellPosition(void)  { return _position; }
 	Color<> CellColor(void)     { return _color; }
