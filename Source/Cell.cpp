@@ -78,14 +78,14 @@ void Cell::Render(void) {
 //------------------------------------------------------------------------------------------------
 void Cell::_InitVertexPositions(void) {
 	//Vertices of triangle 1
-	_vertexPositions[0] = new Point<>(_position.x -_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Left
-	_vertexPositions[1] = new Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[2] = new Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[0] = Point<>(_position.x -_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Left
+	_vertexPositions[1] = Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
+	_vertexPositions[2] = Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
 
 	//Verticies of triangle 2
-	_vertexPositions[3] = new Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[4] = new Point<>(_position.x +_halfWidth, _position.y +_halfHeight, _position.z); //Top Right
-	_vertexPositions[5] = new Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[3] = Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
+	_vertexPositions[4] = Point<>(_position.x +_halfWidth, _position.y +_halfHeight, _position.z); //Top Right
+	_vertexPositions[5] = Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
 }
 
 //------------------------------------------------------------------------------------------------

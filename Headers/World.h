@@ -17,13 +17,6 @@ Written by Maxwell Miller
 #include <map>
 
 class World{
-private:
-	std::map<U32, GameObject*> _worldObjects;
-
-	S32 _nextID;
-	S32 _mapWidth;
-	S32 _mapHeight;
-
 public:
 	World(void) {}
 
@@ -31,8 +24,8 @@ public:
 
 	bool InitWorld(S32 w, S32 h);
 
-	virtual bool v_Update(void);
-	virtual bool v_Render(void);
+	virtual void v_Update(void) {  }
+	virtual void v_Render(void) {  }
 
 	bool AddObjectToWorld(GameObject* obj);
 
@@ -42,7 +35,11 @@ public:
 	void SetMapWidth(S32 w)  { _mapWidth = w; }
 	void SetMapHeight(S32 h) { _mapHeight = h; }
 
-	
+protected:
+	std::map<U32, GameObject*> _worldObjects;
+	S32 _nextID;
+	S32 _mapWidth;
+	S32 _mapHeight;
 };
 
 

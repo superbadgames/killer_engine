@@ -37,6 +37,7 @@ public:
 	void SetPosition(Point<> p) { _cell.SetPosition(p); }
 	void SetColor(Color<> c)    { _cell.SetColor(c); }
 
+
 	Point<> GetPosition(void) { return _cell.CellPosition(); }
 	Color<> GetColor(void)    { return _cell.CellColor(); }
 

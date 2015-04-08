@@ -9,6 +9,7 @@ Written by Maxwell Miller
 ----------------------------------------------------------------------*/
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
+#define DIRECTINPUT_VERSION 0x0800
 
 //Engine includes
 #include <Atom.h>
