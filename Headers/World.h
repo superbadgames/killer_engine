@@ -42,5 +42,4 @@ protected:
 	S32 _mapHeight;
 };
 
-
 #endif

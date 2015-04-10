@@ -41,8 +41,11 @@ public:
 	Point<> GetPosition(void) { return _cell.CellPosition(); }
 	Color<> GetColor(void)    { return _cell.CellColor(); }
 
-	void v_Update(void) {  }
+	virtual void v_Update(void) {  }
 	void v_Render(void) { _cell.Render(); }
+
+	void SetActive(void) {}
+	void SetInactive(void) {}
 };
 
 #endif
