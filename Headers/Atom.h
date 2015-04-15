@@ -21,6 +21,7 @@ Written by Maxwell Miller
 #include <KillerContainer.h>
 //Sytem and library includes
 #include <windows.h>
+#include <string>
 
 //Signed Typedefs
 typedef signed __int8   S8;
@@ -37,5 +38,8 @@ typedef unsigned __int64 U64;
 //Floating types
 typedef float  F32;
 typedef double F64;
+
+//String type 
+typedef std::string string;
 
 #endif

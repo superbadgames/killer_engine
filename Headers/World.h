@@ -16,6 +16,10 @@ Written by Maxwell Miller
 //STL Includes
 #include <map>
 
+//ExLib Headers
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 class World{
 public:
 	World(void) {}
@@ -25,9 +29,10 @@ public:
 	bool InitWorld(S32 w, S32 h);
 
 	virtual void v_Update(void) {  }
-	virtual void v_Render(void) {  }
+	virtual void v_Render(void)	{  }
 
 	bool AddObjectToWorld(GameObject* obj);
+	void SetBackgroundColor();
 
 	//Map Width and Height Accessors
 	S32 GetMapWidth(void)  { return _mapWidth; }
@@ -37,6 +42,7 @@ public:
 
 protected:
 	std::map<U32, GameObject*> _worldObjects;
+	Color<> _bgColor;
 	S32 _nextID;
 	S32 _mapWidth;
 	S32 _mapHeight;

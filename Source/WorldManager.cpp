@@ -34,6 +34,7 @@ bool WorldManager::SetActiveWorld(std::string worldID) {
 	_activeWorldID = worldID;
 	auto w = _worlds.find(worldID);
 	_activeWorld = w->second;
+	_activeWorld->SetBackgroundColor();
 	return true;
 }
 

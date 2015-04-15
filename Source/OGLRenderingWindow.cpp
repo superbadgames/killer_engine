@@ -106,7 +106,7 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
 
     _SetProjectionMatrix();
 
-
+	glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
     return true;
 }
 
@@ -258,8 +258,6 @@ void OGLRenderingWindow::_SetProjectionMatrix(void) {
     glLoadIdentity();
     glOrtho(-_halfWidth, _halfWidth, -_halfHeight, _halfHeight, -100, 100 );
     glMatrixMode(GL_MODELVIEW);
-
-	glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
 }
 
 //-------------------------------------------------------------------------------------------------------

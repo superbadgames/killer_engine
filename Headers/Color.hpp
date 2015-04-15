@@ -19,19 +19,26 @@ struct Color {
 	T Red;
 	T Green;
 	T Blue;
+	//T Alpha;
 
-	Color(void): Red(0.0f), Blue(0.0f), Green(0.0f) {}
-	Color(T red, T green, T blue) : Red(red), Green(green), Blue(blue) {}
+	//Constructors
+	Color(void): Red(0.0f), Blue(0.0f), Green(0.0f) {  }
+	Color(T red, T green, T blue)		   : Red(red), Green(green), Blue(blue) {  }
+	Color(T red, T green, T blue, T alpha) : Red(red), Green(green), Blue(blue) {  }
+	
+	//Operators
 	void operator =(const Color& c) {
 		Red    = c.Red;
 		Green  = c.Green;
 		Blue   = c.Blue;
+		//Alpha  = c.Alpha;
 	}
 
 	void operator =(const Color* c) {
 		Red   = c->Red;
 		Green = c->Green;
 		Blue  = c->Blue;
+		//Alpha = c->Alpha;
 	}
 };
 

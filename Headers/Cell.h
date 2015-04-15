@@ -26,7 +26,7 @@ Written by Maxwell Miller
 //Predefined classes
 class Renderer;
 
-class Cell {
+class Cell {	
 	Renderer*	   _renderer;
 	Point<>        _position;
 	Color<>        _color;
@@ -58,10 +58,13 @@ public:
 	//Accessors
 	void SetPosition(Point<>& p) { _position = p; }
 	void SetColor(Color<>& c)    { _color = c; }
+	void SetEvenScale(F32 scale);
 
 	Point<> CellPosition(void)  { return _position; }
 	Color<> CellColor(void)     { return _color; }
-
+	F32     GetEvenScale(void)  { return _width; }
+	
+	//Rendering stuff
 	Point<>* VertexPositions(void) { return _vertexPositions; }
 	Color<>* VertexColors(void)    { return _vertexColors; }
 

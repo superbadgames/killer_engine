@@ -26,20 +26,22 @@ protected:
 	Cell _cell;
 
 public:
-	GameObject(void) { _cell = new Cell(50.0f, 50.0f, Point<>(0.0f, 0.0f, 0.0f), Color<>(0.0f, 0.0f, 0.0f)); }
-	GameObject(F32 width, F32 height, Point<> position, Color<> color) { _cell = new Cell(width, height, position, color); }
-
-	~GameObject(void){}
+	//GameObject(void) { _cell = new Cell(50.0f, 50.0f, Point<>(0.0f, 0.0f, 0.0f), Color<>(0.0f, 0.0f, 0.0f)); }
+	//GameObject(F32 width, F32 height, Point<> position, Color<> color) { _cell = new Cell(width, height, position, color); }
+	//GameObject(void) {  }
+	~GameObject(void){  }
 
 	//virtual void v_ShutDown(void);
 
 	//Accessors
 	void SetPosition(Point<> p) { _cell.SetPosition(p); }
 	void SetColor(Color<> c)    { _cell.SetColor(c); }
+	void SetScale(F32 s)		{ _cell.SetEvenScale(s); }
 
 
 	Point<> GetPosition(void) { return _cell.CellPosition(); }
 	Color<> GetColor(void)    { return _cell.CellColor(); }
+	F32   GetScale(void)    { return _cell.GetEvenScale(); }
 
 	virtual void v_Update(void) {  }
 	void v_Render(void) { _cell.Render(); }

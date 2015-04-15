@@ -28,7 +28,7 @@ class WorldManager{
 	//Members
 	std::map<std::string, World*>		  _worlds;
 	World* 								  _activeWorld;
-	std::string 						  _activeWorldID;
+	string 						  _activeWorldID;
 	static WorldManager* 				  _instance;
 
 public:
@@ -36,16 +36,16 @@ public:
 
 	static WorldManager* Instance();
 
-	bool 		AddWorld(std::string worldID, World* world);
-	bool 		RemoveWorld(std::string worldID);
-	bool 		SetActiveWorld(std::string worldID);
+	bool 		AddWorld(string worldID, World* world);
+	bool 		RemoveWorld(string worldID);
+	bool 		SetActiveWorld(string worldID);
 	std::string GetActiveWorldID(void) { return _activeWorldID; }
 
 	void Update(void);
 	void Render(void);
 
 protected:
-	WorldManager(void) {}
+	WorldManager(void) {  }
 
 };
 

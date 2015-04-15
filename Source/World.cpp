@@ -20,3 +20,10 @@ bool World::AddObjectToWorld(GameObject* obj){
 	_nextID++;
 	return true;
 }
+
+//--------------------------------------------------------------
+//SetBackgroundColor
+//--------------------------------------------------------------
+void World::SetBackgroundColor() {
+	glClearColor(_bgColor.Red, _bgColor.Green, _bgColor.Blue, 0.0f/*alpha*/);
+}
