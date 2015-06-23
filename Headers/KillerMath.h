@@ -1,10 +1,10 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 The main include file for all the Math libraries written as part of the 
 Killer1 Engine. Mostly, it is a holder for many other headers to keep 
 things organized. 
 
 Written by Maxwell Miller
----------------------------------------------------------------------*/
+========================================================================*/
 
 
 #ifndef KILLER_MATH_H

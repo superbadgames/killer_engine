@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 Call Atom because it is the most basic include file. This is the file
 to be included with all other files that are made. This contains the 
 type definitions that will be the atomic variable types for the Killer1
@@ -10,7 +10,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
-----------------------------------------------------------------------*/
+========================================================================*/
 
 #ifndef ATOM_H
 #define ATOM_H
@@ -18,8 +18,10 @@ Written by Maxwell Miller
 //Includes. These will be the files that everything will need to have access to
 //User defined Includes
 #include <KillerMath.h>
-#include <KillerContainer.h>
+#include <Point.hpp>
+#include <Color.hpp>
 //Sytem and library includes
+#include <GL/gl3w.h>
 #include <windows.h>
 #include <string>
 
@@ -39,7 +41,13 @@ typedef unsigned __int64 U64;
 typedef float  F32;
 typedef double F64;
 
-//String type 
-typedef std::string string;
+//text type 
+typedef std::string text;
+
+//Point typedef
+typedef Point<F32> point;
+
+//Color typedef
+typedef Color<F32> color;
 
 #endif

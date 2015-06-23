@@ -4,6 +4,8 @@
 //Constructor
 //-----------------------------------------------------------
 Controller::Controller(void) {
+	_errorManager->Instance();
+
 	_directInput = 0;
 	_keyboard    = 0;
 }
@@ -21,26 +23,23 @@ Controller* Controller::Instance(void) {
 //-----------------------------------------------------------
 //Init
 //-----------------------------------------------------------
-bool Controller::Init(HINSTANCE hInstance, HWND hwnd) {
+void Controller::Init(HINSTANCE hInstance, HWND hwnd) {
 	HRESULT result;
 
 	result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&_directInput, NULL);
-	if(FAILED(result)) { return false; }
+	if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to Create Input"); }
 
 	result = _directInput->CreateDevice(GUID_SysKeyboard, &_keyboard, NULL);
-	if(FAILED(result)) { return false; }
+	if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to create Keyboard Device"); }
 
 	result = _keyboard->SetDataFormat(&c_dfDIKeyboard);
-	if(FAILED(result)) { return false; }
+	if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to set Keyboard DataFormat"); }
 
 	result = _keyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
-	if(FAILED(result)) { return false; }
+	if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to set Keyboard Cooperative Level"); }
 
 	result = _keyboard->Acquire();
-	if(FAILED(result)) { return false; }
-
-	return true;
-
+	if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to Acquire keyboard"); }
 }
 
 //-----------------------------------------------------------
@@ -57,29 +56,16 @@ void Controller::ShutDown(void) {
 //-----------------------------------------------------------
 //UpdateInput
 //-----------------------------------------------------------
-bool Controller::UpdateKeyboard(void) {
+void Controller::UpdateKeyboard(void) {
 	HRESULT result;
 
 	result = _keyboard->GetDeviceState(sizeof(_keyboardState), (void*)&_keyboardState);
 	if(FAILED(result)) {
 		if((result == DIERR_INPUTLOST) || (result == DIERR_NOTACQUIRED)) { _keyboard->Acquire(); }
-		else {
-			MessageBox(NULL, "Unable to get Keyboard input", "An Error occured", MB_ICONERROR | MB_OK);
-			return false;
-		}
-		
-	}
-	return true;	
-					
+		else { _errorManager->SetError(EC_DirectInput, "Failed to Get keyboard state, and failed to Re-Aquire"); }
+	}					
 }
 
-unsigned char* Controller::ProcessInput(void) {
+unsigned char* Controller::GetKeyboardState(void) {
 	return _keyboardState;
-	
-	/*if(_keyboardState[DIK_UP])	    { return 'u'; }
-	if (_keyboardState[DIK_DOWN])   { return 'd'; }
-	if (_keyboardState[DIK_RIGHT])  { return  'r'; }
-	if (_keyboardState[DIK_LEFT])   { return 'l'; }
-	return 'p';*/
-	//else return ;
 }

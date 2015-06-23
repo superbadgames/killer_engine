@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 The Cell, or rendering cell is the basic Geometric perimitive that any
 game object or entity that is to be rendered will have. It will be the 
 OGL verticies that make up the position on the screen. While it will
@@ -8,7 +8,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
-----------------------------------------------------------------------*/
+========================================================================*/
 
 #ifndef CELL_H
 #define CELL_H
@@ -27,27 +27,27 @@ Written by Maxwell Miller
 class Renderer;
 
 class Cell {	
-	Renderer*	   _renderer;
-	Point<>        _position;
-	Color<>        _color;
+	Renderer* _renderer;
+	point     _position;
+	color     _color;
 
-	Point<>*	   _vertexPositions = NULL;
-	Color<>*	   _vertexColors = NULL;
+	point*	  _vertexPositions = NULL;
+	color*	  _vertexColors = NULL;
 
-	F32		       _width;
-	F32			   _halfWidth;
-	F32			   _height;
-	F32			   _halfHeight;
+	F32		  _width;
+	F32		  _halfWidth;
+	F32		  _height;
+	F32		  _halfHeight;
 
-	U32			   _totalPositions = 6;
-	U32			   _totalVertices = _totalPositions * 3; //Triangles for this one, making squares
+	U32		  _totalPositions = 6;
+	U32		  _totalVertices = _totalPositions * 3; //Triangles for this one, making squares
 
 public:
 	Cell(void);
 	Cell(F32 w, F32 h);
-	Cell(F32 w, F32 h, Point<>& p, Color<>& c);
+	Cell(F32 w, F32 h, point& p, color& c);
 
-	~Cell(void){}
+	~Cell(void){  }
 
 	//operators
 	void operator =(const Cell* cell);
@@ -56,17 +56,17 @@ public:
 
 	void Render(void);
 	//Accessors
-	void SetPosition(Point<>& p) { _position = p; }
-	void SetColor(Color<>& c)    { _color = c; }
+	void SetPosition(point& p) { _position = p; }
+	void SetColor(color& c)    { _color = c; }
 	void SetEvenScale(F32 scale);
 
-	Point<> CellPosition(void)  { return _position; }
-	Color<> CellColor(void)     { return _color; }
+	point CellPosition(void)  { return _position; }
+	color CellColor(void)     { return _color; }
 	F32     GetEvenScale(void)  { return _width; }
 	
 	//Rendering stuff
-	Point<>* VertexPositions(void) { return _vertexPositions; }
-	Color<>* VertexColors(void)    { return _vertexColors; }
+	point* VertexPositions(void) { return _vertexPositions; }
+	color* VertexColors(void)    { return _vertexColors; }
 
 	U32 TotalPositions(void){ return _totalPositions; }
 	U32 TotalVertices(void) { return _totalVertices; }

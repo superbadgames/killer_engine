@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 A Vector class that will follow the rules of Mathematics. The equations 
 that the Vectors use for each operation were taken from 3D Math Primer 
 for Graphics and Game Development by Dunn and Parberry. 
@@ -12,7 +12,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave. 
 
 Written by Maxwell Miller
----------------------------------------------------------------------*/
+========================================================================*/
 
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
@@ -22,24 +22,27 @@ Written by Maxwell Miller
 template<typename T>
 class Vector {
 public:
-	Vector(){}
+	T x;
+	T y;
+	T z;
+
+	Vector(){  }
 	Vector(T xT, T yT, T zT) {
 		x = xT;
 		y = yT;
 		z = zT;
 
 	}
-	~Vector<T>(){}
-
-	T x;
-	T y;
-	T z;
+	
+	~Vector<T>(){  }
 
 	//operator overloads
-	void operator =(const Vector<T>& v) {
+	Vector<T>& operator =(const Vector<T>& v) {
 		x = v.x;
 		y = v.y;
 		z = v.z;
+
+		return *this;
 	}
 
 	Vector<T> operator +(const Vector<T>& a) {
@@ -48,10 +51,12 @@ public:
 						 z+a.z);
 	}
 
-	void operator +=(const Vector<T>& a) {
+	Vector<T>& operator +=(const Vector<T>& a) {
 		x += a.x;
 		y += a.y;
 		z += a.z;
+
+		return *this;
 	}
 
 	Vector<T> operator-(const Vector<T>& s) {
@@ -60,10 +65,12 @@ public:
 						 z-s.z);
 	}
 
-	void operator -=(const Vector<T>& s) {
+	Vector<T> operator -=(const Vector<T>& s) {
 		x -= s.x;
 		y -= s.y;
 		z -= s.z;
+
+		return *this;
 	}
 	//void operator =(const Vector<T>& s)
 
@@ -74,10 +81,12 @@ public:
 						 z*m);
 	}
 
-	void operator *=(const T m) {
+	Vector<T> operator *=(const T m) {
 		x *= m;
 		y *= m;
 		z *= m;
+		
+		return *this;
 	}
 
 	//Vector Dot Operations will return a scalar value
@@ -100,7 +109,7 @@ public:
 						 z / d);
 	}
 
-	void operator /=(const T d) {
+	Vector<T>& operator /=(const T d) {
 		if (d == 0) { 
 			//do nothing 
 		}
@@ -109,6 +118,7 @@ public:
 			y /= d;
 			z /= d;
 		}
+		return *this;
 	}
 
 	T Magnitude() { return sqrt((x*x) + (y*y) + (z*z)); }

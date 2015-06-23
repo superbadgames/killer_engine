@@ -12,36 +12,22 @@ Written by Maxwell Miller
 #ifndef RENDERER_H
 #define RENDERER_H
 
-//==========User defined includes==========
+//User Defined Includes
 #include <Atom.h>
 #include <Cell.h>
-#include <ErrorManager.h>
 
-//=====OGL includes=====
+//3rd party defined Includes
 #include <GL/gl.h>
-#include <GL/glu.h>
-#include <wglext.h>
+#include <gl/glu.h>
+
 //Predefine class
 class Cell;
 
 class Renderer {
-private:	
 	U32		 _maxVerticies;
-	//Point<>* _verticies;
-	//Color<>* _colors;
-	F32*     _verticies;
-	F32*     _colors;
+	Point<>* _verticies;
+	Color<>* _colors;
 	GLfloat* _uvs;
-	GLuint   _renderingProgram;
-	GLuint   _vertexArrayObject;
-
-	static const GLchar* _vertexShaderSource[];
-	static const GLchar* _tessControlShaderSource[];
-	static const GLchar* _tessEvalShaderSource[];
-	static const GLchar* _geometryShaderSource[];
-	static const GLchar* _fragmentShaderSource[];
-
-	GLuint _CompileShaders(void);
 
 protected:
 	Renderer(void);
@@ -55,8 +41,6 @@ public:
 	static Renderer* Instance(void);
 
 	void AddCell(Cell &cell);
-	void ManualAddData(F32* vertices, U32 numVertices);
-	void ManualAddData(F32* vertices, F32* colors, U32 numVertices);
 	void SetPointers(void);
 	void Render(void);
 	void ShutDown(void);

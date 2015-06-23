@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 The holder and controller of the the world objects. This will act as 
 both a singleton and a state maching controller, where each world will
 be a state that can be set to active. 
@@ -11,7 +11,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
----------------------------------------------------------------------*/
+========================================================================*/
 
 #ifndef WORLD_MANAGER_H
 #define WORLD_MANAGER_H
@@ -21,31 +21,30 @@ Written by Maxwell Miller
 #include <World.h>
 
 //3rd party includes
-#include <string>
 #include <map>
 
 class WorldManager{
-	//Members
-	std::map<std::string, World*>		  _worlds;
-	World* 								  _activeWorld;
-	string 						  _activeWorldID;
-	static WorldManager* 				  _instance;
+private:
+	std::map<text, World*>		      _worlds;
+	World* 							  _activeWorld;
+	text 						  	  _activeWorldID;
+	static WorldManager* 			  _instance;
 
 public:
-	~WorldManager(void) {}
+	~WorldManager(void) {  }
 
 	static WorldManager* Instance();
 
-	bool 		AddWorld(string worldID, World* world);
-	bool 		RemoveWorld(string worldID);
-	bool 		SetActiveWorld(string worldID);
-	std::string GetActiveWorldID(void) { return _activeWorldID; }
+	bool   AddWorld		   (text worldID, World* world);
+	bool   RemoveWorld     (text worldID);
+	bool   SetActiveWorld  (text worldID);
+	text GetActiveWorldID(void) { return _activeWorldID; }
 
 	void Update(void);
 	void Render(void);
 
 protected:
-	WorldManager(void) {  }
+	WorldManager(void){  }
 
 };
 

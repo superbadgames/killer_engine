@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 The Game Object is the abstract class that all objects that will be
 placed in the game will inherit from. It will hold and define the 
 cell, and will include all calls for updating and rendering. There
@@ -9,7 +9,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
-----------------------------------------------------------------------*/
+========================================================================*/
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
@@ -26,10 +26,8 @@ protected:
 	Cell _cell;
 
 public:
-	//GameObject(void) { _cell = new Cell(50.0f, 50.0f, Point<>(0.0f, 0.0f, 0.0f), Color<>(0.0f, 0.0f, 0.0f)); }
-	//GameObject(F32 width, F32 height, Point<> position, Color<> color) { _cell = new Cell(width, height, position, color); }
-	//GameObject(void) {  }
-	~GameObject(void){  }
+	GameObject(void){  }
+	virtual ~GameObject(void){  }
 
 	//virtual void v_ShutDown(void);
 
@@ -41,13 +39,13 @@ public:
 
 	Point<> GetPosition(void) { return _cell.CellPosition(); }
 	Color<> GetColor(void)    { return _cell.CellColor(); }
-	F32   GetScale(void)    { return _cell.GetEvenScale(); }
+	F32     GetScale(void)    { return _cell.GetEvenScale(); }
 
 	virtual void v_Update(void) {  }
-	void v_Render(void) { _cell.Render(); }
+	void         v_Render(void) { _cell.Render(); }
 
-	void SetActive(void) {}
-	void SetInactive(void) {}
+	void SetActive(void)   {  }
+	void SetInactive(void) {  }
 };
 
 #endif

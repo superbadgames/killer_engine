@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------------------------
 //Default
 Cell::Cell(void) {
-	_vertexPositions = new Point<>[_totalPositions];
-	_vertexColors    = new Color<>[_totalPositions];
+	_vertexPositions = new point[_totalPositions];
+	_vertexColors    = new color[_totalPositions];
 
 	_renderer = Renderer::Instance();
 }
@@ -18,24 +18,24 @@ Cell::Cell(F32 w, F32 h) {
 	_height 	= h;
 	_halfHeight = h / 2;
 
-	_vertexPositions = new Point<>[_totalPositions];
-	_vertexColors	 = new Color<>[_totalPositions];
+	_vertexPositions = new point[_totalPositions];
+	_vertexColors	 = new color[_totalPositions];
 
 	_renderer = Renderer::Instance();
 }
 
 //Width, Height, Position, Color
-Cell::Cell(F32 w, F32 h, Point<>& p, Color<>& c) {
+Cell::Cell(F32 w, F32 h, point& p, color& c) {
 	_width 		= w;
 	_halfWidth  = w / 2;
 	_height 	= h;
 	_halfHeight = h / 2;
 
 	_position = p;
-	_color = c;
+	_color    = c;
 
-	_vertexPositions = new Point<>[_totalPositions];
-	_vertexColors	 = new Color<>[_totalPositions];
+	_vertexPositions = new point[_totalPositions];
+	_vertexColors	 = new color[_totalPositions];
 
 	_renderer = Renderer::Instance();
 }
@@ -89,14 +89,14 @@ void Cell::SetEvenScale(F32 scale) {
 //------------------------------------------------------------------------------------------------
 void Cell::_InitVertexPositions(void) {
 	//Vertices of triangle 1
-	_vertexPositions[0] = Point<>(_position.x -_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Left
-	_vertexPositions[1] = Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[2] = Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[0] = point(_position.x -_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Left
+	_vertexPositions[1] = point(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
+	_vertexPositions[2] = point(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
 
 	//Verticies of triangle 2
-	_vertexPositions[3] = Point<>(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[4] = Point<>(_position.x +_halfWidth, _position.y +_halfHeight, _position.z); //Top Right
-	_vertexPositions[5] = Point<>(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[3] = point(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
+	_vertexPositions[4] = point(_position.x +_halfWidth, _position.y +_halfHeight, _position.z); //Top Right
+	_vertexPositions[5] = point(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
 }
 
 //------------------------------------------------------------------------------------------------

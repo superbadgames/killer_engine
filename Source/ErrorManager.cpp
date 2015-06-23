@@ -12,39 +12,48 @@ ErrorManager* ErrorManager::Instance(void) {
 //============================================================================================
 //SetError
 //============================================================================================
-void ErrorManager::SetError(ErrorCode code, string message) {
-	_errorCode 	  = code;
-	_errorMessage = message;
+void ErrorManager::SetError(ErrorCode code, text message) {
+	_errorCodes[_numErrors]	   = code;
+	_errorMessages[_numErrors] = message;
+	_numErrors++;
 }
 
 //============================================================================================
 //DisplayError
 //============================================================================================
-void ErrorManager::DisplayError(void) {
-	switch(_errorCode) {
-		case EC_NoError: {
-			//later, it will print to a log file, maybe
+void ErrorManager::DisplayErrors(void) {
+	if (_numErrors > 0) {
+		for (U32 i = 0; i < _numErrors; i++) {
+			switch (_errorCodes[i]) {
+			case EC_NoError: {
+								 //later, it will print to a log file, maybe
+			}
+			case EC_Unknown: {
+								 MessageBox(NULL, _errorMessages[i].c_str(), "UNKNOWN", MB_ICONERROR | MB_OK);
+								 break;
+			}
+			case EC_Game: {
+							  MessageBox(NULL, _errorMessages[i].c_str(), "GAME", MB_ICONERROR | MB_OK);
+							  break;
+			}
+			case EC_KillerEngine: {
+									  MessageBox(NULL, _errorMessages[i].c_str(), "KILLER_ENGINE", MB_ICONERROR | MB_OK);
+									  break;
+			}
+			case EC_Windows: {
+								 MessageBox(NULL, _errorMessages[i].c_str(), "WINDOWS", MB_ICONERROR | MB_OK);
+								 break;
+			}
+			case EC_OpenGL: {
+								MessageBox(NULL, _errorMessages[i].c_str(), "OPENGL", MB_ICONERROR | MB_OK);
+								break;
+			}
+			case EC_DirectInput: {
+									 MessageBox(NULL, _errorMessages[i].c_str(), "DIRECT_INPUT", MB_ICONERROR | MB_OK);
+									 break;
+			}
+			default: break;
+			}
 		}
-		case EC_Unknown: {
-			MessageBox(NULL, _errorMessage.c_str(), "UNKNOWN", MB_ICONERROR | MB_OK); 
-			break;
-		}
-		case EC_KillerEngine: {
-			MessageBox(NULL, _errorMessage.c_str(), "KILLER_ENGINE", MB_ICONERROR | MB_OK);
-			break;
-		}
-		case EC_Windows: {
-			MessageBox(NULL, _errorMessage.c_str(), "WINDOWS", MB_ICONERROR | MB_OK);
-			break;
-		}
-		case EC_OpenGL: {
-			MessageBox(NULL, _errorMessage.c_str(), "OPENGL", MB_ICONERROR | MB_OK);
-			break;
-		}
-		case EC_DirectInput: {
-			MessageBox(NULL, _errorMessage.c_str(), "DIRECT_INPUT", MB_ICONERROR | MB_OK);
-			break;
-		}
-		default: break;
 	}
 }

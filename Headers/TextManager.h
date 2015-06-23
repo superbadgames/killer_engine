@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------
+/*========================================================================
 This class will be a singleton that will controll all text that is 
 drawn to the screen. It was built using FreeType 2, which was developed
 under the GNU Public License, Version 2. 
@@ -8,7 +8,7 @@ This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
----------------------------------------------------------------------*/
+========================================================================*/
 
 #ifndef TEXT_MANAGER_H
 #define TEXT_MANAGER_H

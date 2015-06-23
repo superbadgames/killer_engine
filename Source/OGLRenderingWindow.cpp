@@ -5,7 +5,8 @@
 //-------------------------------------------------------------------------------------------------------
 OGLRenderingWindow::OGLRenderingWindow(HINSTANCE hInstance): _isRunning(false),
                                                              _hInstance(hInstance) { 
-                                                             _timer->Instance(); 
+                                                             _timer->Instance();
+                                                             _errorManager->Instance(); 
 }
 
 
@@ -18,7 +19,7 @@ S32 OGLRenderingWindow::_height     = 0;
 S32 OGLRenderingWindow::_halfWidth  = 0;
 S32 OGLRenderingWindow::_halfHeight = 0;
 
-bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
+void OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     DWORD dwExStyle;
     DWORD dwStyle;
 
@@ -50,10 +51,8 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     _windowClass.hIconSm       = LoadIcon(NULL, IDI_WINLOGO);
 
     //Register the windows class
-	if (!RegisterClassEx(&_windowClass)) {
-        MessageBox(NULL, "Failed to register window class", NULL, MB_OK);
-        return false;
-    }
+	if (!RegisterClassEx(&_windowClass)) { _errorManager->SetError(EC_OpenGL, "Failed to register window class"); }
+    
 
     if(_isFullScreen) {
         DEVMODE dmScreenSettings;
@@ -68,7 +67,7 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
 
         if(ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL) {
             //Setting mode failed, switch to windowed
-            MessageBox(NULL, "Display mode failed", NULL, MB_OK);
+            _errorManager->SetError(EC_OpenGL, "Display mode failed");
             _isFullScreen = false;
         }
     }
@@ -97,7 +96,7 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
                             _hInstance,                                //application instance
                             this);                                      //pointer to OGLRenderingWindow
 
-    if(!_hwnd) { return 0; }
+    if(!_hwnd) { _errorManager->SetError(EC_OpenGL, "Error creating hwnd"); }
 
     _hdc = GetDC(_hwnd);
 
@@ -107,7 +106,6 @@ bool OGLRenderingWindow::Init(S32 width, S32 height, S32 bpp, bool fullscreen) {
     _SetProjectionMatrix();
 
 	glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
-    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -151,8 +149,8 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 			PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
 
-            S32 attribs[] = {WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
-                             WGL_CONTEXT_MINOR_VERSION_ARB, 0,
+            S32 attribs[] = {WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
+                             WGL_CONTEXT_MINOR_VERSION_ARB, 2,
                              0};
 
             HGLRC tmpContext = wglCreateContext(_hdc);
@@ -161,15 +159,13 @@ LRESULT OGLRenderingWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
             wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
 
             if(!wglCreateContextAttribsARB) {
-                MessageBox(NULL, "OpenGL 3.0 is not supported", "An error occured", MB_ICONERROR | MB_OK);
+				_errorManager->SetError(EC_OpenGL, "OpenGL 3.0 is not supported");
                 DestroyWindow(hWnd);
                 return 0;
             }
 
             _hglrc = wglCreateContextAttribsARB(_hdc, 0, attribs);
-           // wglDeleteContext(tmpContext);
             wglMakeCurrent(_hdc, _hglrc);
-
             _isRunning = true;
         }
 		break;

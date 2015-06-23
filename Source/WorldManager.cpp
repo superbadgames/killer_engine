@@ -13,7 +13,7 @@ WorldManager* WorldManager::Instance(void) {
 //--------------------------------------------------------------
 //AddWorld
 //--------------------------------------------------------------
-bool WorldManager::AddWorld(std::string worldID, World* world) {
+bool WorldManager::AddWorld(text worldID, World* world) {
 	_worlds[worldID] = world;
 	return true;
 }
@@ -21,7 +21,7 @@ bool WorldManager::AddWorld(std::string worldID, World* world) {
 //--------------------------------------------------------------
 //RemoveWorld
 //--------------------------------------------------------------
-bool WorldManager::RemoveWorld(std::string worldID) {
+bool WorldManager::RemoveWorld(text worldID) {
 	auto w = _worlds.find(worldID);
 	_worlds.erase(w);
 	return true;
@@ -30,7 +30,7 @@ bool WorldManager::RemoveWorld(std::string worldID) {
 //--------------------------------------------------------------
 //SetActiveWorld
 //--------------------------------------------------------------
-bool WorldManager::SetActiveWorld(std::string worldID) {
+bool WorldManager::SetActiveWorld(text worldID) {
 	_activeWorldID = worldID;
 	auto w = _worlds.find(worldID);
 	_activeWorld = w->second;
