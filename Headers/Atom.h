@@ -44,6 +44,9 @@ typedef double F64;
 //text type 
 typedef std::string text;
 
+//Vector type
+typedef Vector<F32> vec;
+
 //Point typedef
 typedef Point<F32> point;
 

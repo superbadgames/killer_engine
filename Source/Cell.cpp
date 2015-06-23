@@ -89,14 +89,14 @@ void Cell::SetEvenScale(F32 scale) {
 //------------------------------------------------------------------------------------------------
 void Cell::_InitVertexPositions(void) {
 	//Vertices of triangle 1
-	_vertexPositions[0] = point(_position.x -_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Left
-	_vertexPositions[1] = point(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[2] = point(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[0] = point(_position.GetX() -_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Left
+	_vertexPositions[1] = point(_position.GetX() +_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Right
+	_vertexPositions[2] = point(_position.GetX() -_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Left
 
 	//Verticies of triangle 2
-	_vertexPositions[3] = point(_position.x +_halfWidth, _position.y -_halfHeight, _position.z); //Bottom Right
-	_vertexPositions[4] = point(_position.x +_halfWidth, _position.y +_halfHeight, _position.z); //Top Right
-	_vertexPositions[5] = point(_position.x -_halfWidth, _position.y +_halfHeight, _position.z); //Top Left
+	_vertexPositions[3] = point(_position.GetX() +_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Right
+	_vertexPositions[4] = point(_position.GetX() +_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Right
+	_vertexPositions[5] = point(_position.GetX() -_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Left
 }
 
 //------------------------------------------------------------------------------------------------

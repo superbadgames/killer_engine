@@ -32,11 +32,11 @@ void Renderer::AddCell(Cell &cell) {
 	if(_batchSize + cell.TotalVertices() > _maxVerticies) { Render(); }
 
 	for(U32 i = 0; i < cell.TotalPositions(); i++) {
-		_verticies[_batchSize] = cell.VertexPositions()[i].x;
-		_verticies[_batchSize+1] = cell.VertexPositions()[i].y;
-		_verticies[_batchSize+2] = cell.VertexPositions()[i].z;
-		_colors[_batchSize]    = cell.VertexColors()[i].Red;
-		_colors[_batchSize+1]	   = cell.VertexColors()[i].Green;
+		_verticies[_batchSize]   = cell.VertexPositions()[i].GetX();
+		_verticies[_batchSize+1] = cell.VertexPositions()[i].GetY();
+		_verticies[_batchSize+2] = cell.VertexPositions()[i].GetZ();
+		_colors[_batchSize]      = cell.VertexColors()[i].Red;
+		_colors[_batchSize+1]	 = cell.VertexColors()[i].Green;
 		_colors[_batchSize+2]    = cell.VertexColors()[i].Blue;
 	}
 }
