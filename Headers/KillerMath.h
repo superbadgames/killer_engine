@@ -11,6 +11,7 @@ Written by Maxwell Miller
 #define KILLER_MATH_H
 //A "holder" header that will contain all the math classes added to the library
 #include <Vector.hpp>
+#include <Matrix.hpp>
 
 
 #endif

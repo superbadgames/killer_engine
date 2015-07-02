@@ -42,6 +42,7 @@ private:
 	static const GLchar* _fragmentShaderSource[];
 
 	GLuint _CompileShaders(void);
+	void   _SetOrthoProjection(void);
 
 protected:
 	Renderer(void);

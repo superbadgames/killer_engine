@@ -52,7 +52,7 @@ public:
 
 	void InitWindow(void);
 	void ProcessWndEvents(void);
-	void BufferSwap(void) { SwapBuffers(_hdc); }
+	void BufferSwap(void) { glFlush(); SwapBuffers(_hdc); }
 	
 	static LRESULT CALLBACK StaticWndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	LRESULT CALLBACK WndProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam);

@@ -11,6 +11,7 @@ Renderer::Renderer(void): _maxVerticies(1000) {
 	_renderingProgram = _CompileShaders();
 	glGenVertexArrays(1, &_vertexArrayObject);
 	glBindVertexArray(_vertexArrayObject);
+
 }
 
 //=======================================================================================================
@@ -29,7 +30,10 @@ Renderer* Renderer::Instance(void) {
 //AddCell
 //=======================================================================================================
 void Renderer::AddCell(Cell &cell) {
-	if(_batchSize + cell.TotalVertices() > _maxVerticies) { Render(); }
+	if(_batchSize + cell.TotalVertices() > _maxVerticies) { 
+		Render(); 
+		_batchSize = 0; 
+	}
 
 	for(U32 i = 0; i < cell.TotalPositions(); i++) {
 		_verticies[_batchSize]   = cell.VertexPositions()[i].GetX();
@@ -39,6 +43,7 @@ void Renderer::AddCell(Cell &cell) {
 		_colors[_batchSize+1]	 = cell.VertexColors()[i].Green;
 		_colors[_batchSize+2]    = cell.VertexColors()[i].Blue;
 	}
+	_batchSize += 6;
 }
 
 //=======================================================================================================
@@ -77,12 +82,12 @@ void Renderer::SetPointers(void) {
 
 	 glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	 glBufferData(GL_ARRAY_BUFFER, sizeof(_verticies), _verticies, GL_STATIC_DRAW);
-	 glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+	 glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 	 glEnableVertexAttribArray(0);
 
 	 glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
 	 glBufferData(GL_ARRAY_BUFFER, sizeof(_colors), _colors, GL_STATIC_DRAW);
-	 glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+	 glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 	 glEnableVertexAttribArray(1);
 
 }
@@ -126,13 +131,14 @@ GLuint Renderer::_CompileShaders(void){
 	static const GLchar* _vertexShaderSource[] = {
 		"#version 430 core																\n"
 		"																				\n"
-		"layout (location = 0) in vec4 position;										\n"
-		"layout (location = 1) in vec4 color; 											\n"
+		"layout (location = 0) in mat4 VIEW;								 			\n"
+		"layout (location = 1) in vec4 position;										\n"
+		"layout (location = 2) in vec4 color; 											\n"
 		"																				\n"
 		"out vec4 vs_color;																\n"
 		"																				\n"
 		"void main(void){																\n"
-		"	gl_Position = position;														\n"
+		"	gl_Position = VIEW * position;												\n"
 		"	vs_color = color; 															\n"
 		"}																				\n"
 	};
@@ -216,6 +222,19 @@ GLuint Renderer::_CompileShaders(void){
 
 	return finalProgram;
 }
+
+//====================================================
+//_SetOrthoProjection
+//====================================================
+void Renderer::_SetOrthoProjection(void) {
+	matrix M1{};
+	M1.MakeOrthographic(1072, 768, 200);
+
+	const F32* projection = M1.GetElems();
+
+	glUniformMatrix4fv(0, 1, GL_FALSE, projection);
+}
+
 
 //=======================================================================================================
 //ShutDown

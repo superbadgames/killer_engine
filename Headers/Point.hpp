@@ -37,7 +37,7 @@ public:
 	T GetW() const { return _w; }
 
 //=====Operators=====
-
+	//Copy
 	Point<T>& operator =(const Point<T>& p) {
 		_x = p.GetX();
 		_y = p.GetY();
@@ -46,8 +46,8 @@ public:
 		return *this;
 	}
 
-
-	Point operator+(const Point<T>& p) {
+	//Add to Point
+	Point operator +(const Point<T>& p) {
 		return Point<T>(_x + p.GetX(),
 						_y + p.GetY(),
 						_z + p.GetZ(),

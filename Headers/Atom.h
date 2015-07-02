@@ -44,6 +44,9 @@ typedef double F64;
 //text type 
 typedef std::string text;
 
+//Matrix type
+typedef Matrix4<F32> matrix;
+
 //Vector type
 typedef Vector<F32> vec;
 
