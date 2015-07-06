@@ -1,9 +1,22 @@
 /*========================================================================
-The Game Object is the abstract class that all objects that will be
-placed in the game will inherit from. It will hold and define the 
-cell, and will include all calls for updating and rendering. There
-will be a component map which will hold anything that the object will
-need in the game. 
+The Game Object is the abstract class, (PURE VIRTUAL) that all objects that 
+will be placed in the game will inherit from. It will hold and define the 
+cell, and will include all calls for updating and rendering. Therewill be a 
+component map which will hold anything that the object will need in the game. 
+
+All of the functions in this class are inlined becuase they are all 
+trivial. The virtual functions are there so that the interface can
+be the same for all derived classes. By doing this, the world manager
+will be able to have a map of GameObjects to be rendered in a specific
+world. 
+
+The GameObject itself is an interface to generic functions that each obj-
+ect that will be rendered will need to be drawn to the screen. The GameObj-
+ect holds a private Cell member that will contain all the logic for which
+rendering algorithm is used. 
+
+Accessors are created for the derived classes to access the cell, but the 
+cell is to be accessed directly only by the GameObject itself. 
 
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
@@ -13,39 +26,47 @@ Written by Maxwell Miller
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-//User defined includes
+//=====Engine Includes======
 #include <Atom.h>
 #include <Cell.h>
 #include <Point.hpp>
 #include <Color.hpp>
 
-//3rd party and system includes
-
 class GameObject{
-protected:
+private:
 	Cell _cell;
+	bool _active;
 
 public:
-	GameObject(void){  }
-	virtual ~GameObject(void){  }
+	//=====Constructors=====
+	GameObject(void) : _cell(), _active(true) {  }
+	GameObject(const Cell& cell) : _cell(cell), _active(true) {  }
+	GameObject(bool active) : _cell(), _active(active) {  }
+	GameObject(const Cell& cell, bool active) : _cell(cell), _active(active) {  }
+
+	//=====Desctructor=====
+	//virtual ~GameObject(void){  }
 
 	//virtual void v_ShutDown(void);
 
 	//Accessors
-	void SetPosition(Point<> p) { _cell.SetPosition(p); }
-	void SetColor(Color<> c)    { _cell.SetColor(c); }
-	void SetScale(F32 s)		{ _cell.SetEvenScale(s); }
+	void SetPosition(point& p) { _cell.SetPosition(p); }
+	void SetColor(color& c)    { _cell.SetColor(c); }
+	void SetDimension(F32 w, F32 h)	   { _cell.SetDimensions(w, h); }
 
 
-	Point<> GetPosition(void) { return _cell.CellPosition(); }
-	Color<> GetColor(void)    { return _cell.CellColor(); }
-	F32     GetScale(void)    { return _cell.GetEvenScale(); }
+	const point& GetPosition(void) { return _cell.GetPosition(); }
+	const color& GetColor(void)    { return _cell.GetColor(); }
+	const F32    GetWidth(void)    { return _cell.GetWidth(); }
+	const bool   GetActive(void) 	 { return _active; }
 
-	virtual void v_Update(void) {  }
-	void         v_Render(void) { _cell.Render(); }
+	
+	//=====Virtual functions=====
+	virtual void v_Update(void)=0;
+	virtual void v_Render(void)=0;
 
-	void SetActive(void)   {  }
-	void SetInactive(void) {  }
+	void SetActive(void)   { _active = true; }
+	void SetInactive(void) { _active = false; }
 };
 
 #endif

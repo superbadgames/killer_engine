@@ -21,17 +21,27 @@ Written by Maxwell Miller
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <wglext.h>
+
+//=====STD Includes=====
+#include <vector>
+
 //Predefine class
 class Cell;
 
 class Renderer {
-private:	
-	U32		 _maxVerticies;
-	//Point<>* _verticies;
-	//Color<>* _colors;
-	F32*     _verticies;
-	F32*     _colors;
-	GLfloat* _uvs;
+private:
+	static Renderer* _instance;
+	
+	U32 _maxBatchSize;
+	U32 _totalVerticesInBatch;
+
+	std::vector<F32> _triVerticies;
+	std::vector<F32> _triColors;
+	std::vector<F32> _sqrVertices;
+	std::vector<F32> _sqrColors;
+	std::vector<F32> _hexVertices;
+	std::vector<F32> _hexColors;	
+	
 	GLuint   _renderingProgram;
 	GLuint   _vertexArrayObject;
 
@@ -48,19 +58,14 @@ protected:
 	Renderer(void);
 
 public:
-	U32		 _batchSize;
-	
-	~Renderer(void){  };
-
-	static Renderer* _instance;
+	~Renderer(void){ };
 	static Renderer* Instance(void);
 
-	void AddCell(Cell &cell);
-	void ManualAddData(F32* vertices, U32 numVertices);
-	void ManualAddData(F32* vertices, F32* colors, U32 numVertices);
-	void SetPointers(void);
-	void Render(void);
-	void ShutDown(void);
+	void AddTri(const Cell& cell);
+	void AddSqr(const Cell& cell);
+	void AddHex(const Cell& cell);
+	void Draw(void);
+	//void ShutDown(void);
 };
 
 #endif

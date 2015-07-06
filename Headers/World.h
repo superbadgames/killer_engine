@@ -45,10 +45,10 @@ protected:
 	ErrorManager* 			   _errorManager;
 	std::map<U32, GameObject*> _worldObjects;
 	
-	Color<> _bgColor;
-	S32     _nextID;
-	S32 	_mapWidth;
-	S32 	_mapHeight;
+	color _bgColor;
+	S32   _nextID;
+	S32   _mapWidth;
+	S32   _mapHeight;
 };
 
 #endif

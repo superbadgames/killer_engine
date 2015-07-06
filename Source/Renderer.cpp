@@ -1,24 +1,20 @@
 #include <Renderer.h>
 
 //=======================================================================================================
+//
 //Constructor
+//
 //=======================================================================================================
-Renderer::Renderer(void): _maxVerticies(1000) {
-	_verticies    	  = new F32[_maxVerticies];
-	_colors       	  = new F32[_maxVerticies];
-	_uvs          	  = new GLfloat[_maxVerticies];
-	_batchSize    	  = 0;
-	_renderingProgram = _CompileShaders();
-	glGenVertexArrays(1, &_vertexArrayObject);
-	glBindVertexArray(_vertexArrayObject);
-
-}
+Renderer::Renderer(void): _maxBatchSize(1000), _totalVerticesInBatch(0), _renderingProgram(_CompileShaders()) 
+{  }
 
 //=======================================================================================================
+//
 //Instance
+//
 //=======================================================================================================
 //=====Static Member Declaration=====
-Renderer* Renderer::_instance = NULL;
+Renderer* Renderer::_instance;
 
 Renderer* Renderer::Instance(void) {
 	if(_instance == NULL) { _instance = new Renderer(); }
@@ -27,93 +23,330 @@ Renderer* Renderer::Instance(void) {
 }
 
 //=======================================================================================================
-//AddCell
-//=======================================================================================================
-void Renderer::AddCell(Cell &cell) {
-	if(_batchSize + cell.TotalVertices() > _maxVerticies) { 
-		Render(); 
-		_batchSize = 0; 
-	}
-
-	for(U32 i = 0; i < cell.TotalPositions(); i++) {
-		_verticies[_batchSize]   = cell.VertexPositions()[i].GetX();
-		_verticies[_batchSize+1] = cell.VertexPositions()[i].GetY();
-		_verticies[_batchSize+2] = cell.VertexPositions()[i].GetZ();
-		_colors[_batchSize]      = cell.VertexColors()[i].Red;
-		_colors[_batchSize+1]	 = cell.VertexColors()[i].Green;
-		_colors[_batchSize+2]    = cell.VertexColors()[i].Blue;
-	}
-	_batchSize += 6;
-}
-
-//=======================================================================================================
-//Manual Add functions
 //
-//These are potentially temporary functions that are meant to allow the user to manually add vertex or
-//Color data to the buffer objects.
+//Add*
+//
+//There is an Add function for Triangles, Squares and Hexagons. These are:
+//AddTri()
+//AddSqr()
+//AddHex()
+//
+//These take the position of a cell, then create F32 points, storing them in an std::vector, which is 
+//passed to OGL during the Draw().  
 //
 //=======================================================================================================
-/*void Renderer::ManualAddData(F32* vertices, U32 numVertices) {
-	if(_batchSize + numVertices > _maxVerticies) { Render(); }
+void Renderer::AddTri(const Cell& cell) {
+	if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
-	for(U32 i = 0; i < numVertices; i++) {
-		_verticies[_batchSize] = vertices[i];
-		_colors[_batchSize] = 0.5f;
-		_batchSize++;
-	}
-}
+	point pos = cell.GetPosition();
+	color col = cell.GetColor();
 
-void Renderer::ManualAddData(F32* vertices, F32* colors, U32 numVertices) {
-	if(_batchSize + numVertices > _maxVerticies) { Render(); }
-
-	for(U32 i = 0; i < numVertices; i++) {
-		_verticies[_batchSize] = vertices[i];
-		_colors[_batchSize] = colors[i];
-		_batchSize++;
-	}
-}
-*/
-//=======================================================================================================
-//SetPointers
-//=======================================================================================================
-void Renderer::SetPointers(void) {
-	 GLuint buffers[2];
-	 glGenBuffers(2, buffers);
-
-	 glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-	 glBufferData(GL_ARRAY_BUFFER, sizeof(_verticies), _verticies, GL_STATIC_DRAW);
-	 glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-	 glEnableVertexAttribArray(0);
-
-	 glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-	 glBufferData(GL_ARRAY_BUFFER, sizeof(_colors), _colors, GL_STATIC_DRAW);
-	 glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-	 glEnableVertexAttribArray(1);
-
-}
-
-//=======================================================================================================
-//Render
-//=======================================================================================================
-void Renderer::Render(void) {
-	if(_batchSize == 0) { return; } //End if there are no verticies to draw
+	//First Vertext
+	_triVerticies.push_back(pos.GetX());
+	_triVerticies.push_back(pos.GetY() + cell.GetTop());
+	_triVerticies.push_back(pos.GetZ());
+	_triVerticies.push_back(pos.GetW());
 	
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
-	glClearBufferfv(GL_COLOR, 0, color);
+	_triColors.push_back(col.GetRed());
+	_triColors.push_back(col.GetGreen());
+	_triColors.push_back(col.GetBlue());
+	_triColors.push_back(col.GetAlpha());
 
-    glUseProgram(_renderingProgram);
+	++_totalVerticesInBatch;
 
-    SetPointers();
-    //view port set up
-    //glTranslatef(0.0f, 0.0f, -20.0f);
+	//Second Vertex
+	_triVerticies.push_back(pos.GetX() - cell.GetLeft());
+	_triVerticies.push_back(pos.GetY() - cell.GetBottom());
+	_triVerticies.push_back(pos.GetZ());
+	_triVerticies.push_back(pos.GetW());
 	
-	glDrawArrays(GL_TRIANGLES, 0, _batchSize);
+	_triColors.push_back(col.GetRed());
+	_triColors.push_back(col.GetGreen());
+	_triColors.push_back(col.GetBlue());
+	_triColors.push_back(col.GetAlpha());
 
-	//glDisableClientState(GL_VERTEX_ARRAY);
-	//glDisableClientState(GL_COLOR_ARRAY);
+	++_totalVerticesInBatch;
 
-	_batchSize = 0;
+	//Third Vertex
+	_triVerticies.push_back(pos.GetX() + cell.GetRight());
+	_triVerticies.push_back(pos.GetY() - cell.GetBottom());
+	_triVerticies.push_back(pos.GetZ());
+	_triVerticies.push_back(pos.GetW());
+	
+	_triColors.push_back(col.GetRed());
+	_triColors.push_back(col.GetGreen());
+	_triColors.push_back(col.GetBlue());
+	_triColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+}
+
+void Renderer::AddSqr(const Cell& cell) {
+	if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
+
+	point pos = cell.GetPosition();
+	color col = cell.GetColor();
+
+	//First Vertex
+	_sqrVertices.push_back(pos.GetX() - cell.GetLeft());
+	_sqrVertices.push_back(pos.GetY() - cell.GetBottom());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Second Vertex
+	_sqrVertices.push_back(pos.GetX() + cell.GetRight());
+	_sqrVertices.push_back(pos.GetY() - cell.GetBottom());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Third Vertex
+	_sqrVertices.push_back(pos.GetX() - cell.GetLeft());
+	_sqrVertices.push_back(pos.GetY() + cell.GetTop());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Fourth Vertex
+	_sqrVertices.push_back(pos.GetX() + cell.GetRight());
+	_sqrVertices.push_back(pos.GetY() + cell.GetTop());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Fifth Vertex
+	_sqrVertices.push_back(pos.GetX() + cell.GetRight());
+	_sqrVertices.push_back(pos.GetY() - cell.GetBottom());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Sixth Vertex
+	_sqrVertices.push_back(pos.GetX() - cell.GetLeft());
+	_sqrVertices.push_back(pos.GetY() + cell.GetTop());
+	_sqrVertices.push_back(pos.GetZ());
+	_sqrVertices.push_back(pos.GetW());
+
+	_sqrColors.push_back(col.GetRed());
+	_sqrColors.push_back(col.GetGreen());
+	_sqrColors.push_back(col.GetBlue());
+	_sqrColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+}
+
+void Renderer::AddHex(const Cell& cell) {
+	if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
+
+	point pos = cell.GetPosition();
+	color col = cell.GetColor();
+
+	//Center Vertex
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//First Vertex
+	_hexVertices.push_back(pos.GetX() + cell.GetRight());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Second Vertex
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Third Vertex
+	_hexVertices.push_back(pos.GetX() - (cell.GetLeft() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Fourth Vertex
+	_hexVertices.push_back(pos.GetX() - cell.GetLeft());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Fifth Vertex
+	_hexVertices.push_back(pos.GetX() - (cell.GetLeft() / 2));
+	_hexVertices.push_back(pos.GetY() - cell.GetBottom());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+	//Sixth Vertex
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() - cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	++_totalVerticesInBatch;
+
+}
+
+//=======================================================================================================
+//
+//Draw
+//
+//=======================================================================================================
+void Renderer::Draw(void) {
+	if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
+	
+	 if(_triVerticies.size() > 0) {
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, color);
+
+	    glUseProgram(_renderingProgram);
+
+		GLuint buffers[2];
+		glGenBuffers(2, buffers);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, _triVerticies.size(), _triVerticies.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, _triColors.size(), _triColors.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(1);
+
+		
+		glDrawArrays(GL_TRIANGLES, 0, _triVerticies.size());
+	}
+
+	if(_sqrVertices.size() > 0) {
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, color);
+
+	    glUseProgram(_renderingProgram);
+
+		GLuint buffers[2];
+		glGenBuffers(2, buffers);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, _sqrVertices.size(), _sqrVertices.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, _sqrColors.size(), _sqrColors.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(1);
+		
+		glDrawArrays(GL_TRIANGLES, 0, _sqrVertices.size());
+	}
+
+	if(_hexVertices.size() > 0) {
+		
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, color);
+
+	    glUseProgram(_renderingProgram);
+
+		GLuint buffers[2];
+		glGenBuffers(2, buffers);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, _hexVertices.size(), _hexVertices.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, _hexColors.size(), _hexColors.data(), GL_STATIC_DRAW);
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(1);
+		
+		glDrawArrays(GL_TRIANGLE_FAN, 0, _hexVertices.size());
+	}
+
+	//Reset Batch count
+		_totalVerticesInBatch = 0;
 }
 
 //====================================================
@@ -176,14 +409,14 @@ GLuint Renderer::_CompileShaders(void){
 
 	//=====Fragment Shader=====
 	static const GLchar* _fragmentShaderSource[] = {
-		"#version 430 core								\n"
-		"												\n"
-		"in vec4 vs_color;								\n"
-		"out vec4 color;								\n"
-		"												\n"
-		"void main(void) {								\n"
-		"	color = vs_color;							\n"
-		"}												\n"
+		"#version 430 core																\n"
+		"																				\n"
+		"in vec4 vs_color;																\n"
+		"out vec4 color;																\n"
+		"																				\n"
+		"void main(void) {																\n"
+		"	color = vs_color;															\n"
+		"}																				\n"
 	};
 
 	//=====Create and compile vertext shader=====
@@ -239,12 +472,9 @@ void Renderer::_SetOrthoProjection(void) {
 //=======================================================================================================
 //ShutDown
 //=======================================================================================================
-void Renderer::ShutDown(void) {
-	delete _verticies;
-	delete _colors;
-	delete _uvs;
+/*void Renderer::ShutDown(void) {
 	delete _instance;
 	glDeleteVertexArrays(1, &_vertexArrayObject);
 	glDeleteProgram(_renderingProgram);
 	glDeleteVertexArrays(1, &_vertexArrayObject);
-}
+}*/

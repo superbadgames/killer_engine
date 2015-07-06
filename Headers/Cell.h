@@ -4,6 +4,16 @@ game object or entity that is to be rendered will have. It will be the
 OGL verticies that make up the position on the screen. While it will
 never be called on its own, it will be part of the rendered game objects.
 
+Based on which RenderAs* function is call, the cell is be rendered as the 
+called primitive. The Cell is not responsible for setting this up, the 
+Renderer is. The Cell will just need to get its position to the Renderer
+and the Renderer will set up all the point for OGL, and will then store
+them in a container until the scene is drawn. 
+
+The Cell will also hold the texture information, once that is added to the
+system. Basically it will hold all the data that needs to be given to the
+Renderer in order for the Renderer to give that information to OGL. 
+
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
@@ -23,59 +33,71 @@ Written by Maxwell Miller
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-//Predefined classes
+
+//=====Predefined classes=====
 class Renderer;
 
 class Cell {	
+private:	
 	Renderer* _renderer;
 	point     _position;
 	color     _color;
 
-	point*	  _vertexPositions = NULL;
-	color*	  _vertexColors = NULL;
-
-	F32		  _width;
-	F32		  _halfWidth;
-	F32		  _height;
-	F32		  _halfHeight;
-
-	U32		  _totalPositions = 6;
-	U32		  _totalVertices = _totalPositions * 3; //Triangles for this one, making squares
+	F32 _totalWidth;
+	F32	_right;
+	F32	_left;
+	
+	F32	_totalHeight;
+	F32	_top;
+	F32 _bottom;
 
 public:
+	//=====Constructors=====
 	Cell(void);
-	Cell(F32 w, F32 h);
-	Cell(F32 w, F32 h, point& p, color& c);
+	Cell(const F32 w, const F32 h);
+	Cell(const F32 w, const F32 h, const point& p, const color& c);
+	Cell(const Cell& cell);
 
-	~Cell(void){  }
+	//~Cell(void){  }
 
-	//operators
-	void operator =(const Cell* cell);
+	//=====operators======
+	Cell& operator=(const Cell& cell);
 
-	void ShutDown(void);
+	//void ShutDown(void);
 
-	void Render(void);
-	//Accessors
-	void SetPosition(point& p) { _position = p; }
-	void SetColor(color& c)    { _color = c; }
-	void SetEvenScale(F32 scale);
-
-	point CellPosition(void)  { return _position; }
-	color CellColor(void)     { return _color; }
-	F32     GetEvenScale(void)  { return _width; }
+	void RenderAsTri(void);
+	void RenderAsSqr(void);
+	void RenderAsHex(void);
 	
-	//Rendering stuff
-	point* VertexPositions(void) { return _vertexPositions; }
-	color* VertexColors(void)    { return _vertexColors; }
+	//=====Accessors=====
+	void SetPosition(const point& p) { _position = p; }
+	void SetColor(const color& c)    { _color = c; }
+	
+	void SetWidth(const F32 w) {
+		_totalWidth = w;
+		_right 		= w / 2;
+		_left  		= -w / 2;
+	}
 
-	U32 TotalPositions(void){ return _totalPositions; }
-	U32 TotalVertices(void) { return _totalVertices; }
+	void SetHeight(const F32 h) {
+		_totalHeight = h;
+		_top 		 = h / 2;
+		_bottom 	 = -h / 2;
+	}
 
-private:
-	void _InitVertexPositions(void);
-	void _InitVertexColors(void);
+	void SetDimensions(const F32 w, const F32 h) {
+		SetWidth(w);
+		SetHeight(h);
+	}
 
-
+	const point& GetPosition(void) const { return _position; }
+	const color& GetColor(void)    const { return _color; }
+	const F32    GetWidth(void)    const { return _totalWidth; }
+	const F32 	 GetRight(void)	   const { return _right; }
+	const F32    GetLeft(void) 	   const { return _left; }
+ 	const F32    GetHeight(void)   const { return _totalHeight; }
+ 	const F32	 GetTop(void) 	   const { return _top; }
+ 	const F32	 GetBottom(void)   const { return _bottom; }
 };
 
 #endif

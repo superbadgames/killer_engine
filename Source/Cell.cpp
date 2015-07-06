@@ -1,109 +1,51 @@
 #include <Cell.h>
 
-//------------------------------------------------------------------------------------------------
+//==========================================================================================================================
+//
 //Constructors
-//------------------------------------------------------------------------------------------------
+//
+//==========================================================================================================================
 //Default
-Cell::Cell(void) {
-	_vertexPositions = new point[_totalPositions];
-	_vertexColors    = new color[_totalPositions];
-
-	_renderer = Renderer::Instance();
-}
+Cell::Cell(void) : _renderer(Renderer::Instance()), _position(), _color(), 
+				   _totalWidth(1.0f), _right(0.5f), _left(-0.5f),
+				   _totalHeight(1.0f), _top(0.5f), _bottom(-0.5f)  {  }
 
 //Width and Height only
-Cell::Cell(F32 w, F32 h) {
-	_width  	= w;
-	_halfWidth  = w / 2;
-	_height 	= h;
-	_halfHeight = h / 2;
-
-	_vertexPositions = new point[_totalPositions];
-	_vertexColors	 = new color[_totalPositions];
-
-	_renderer = Renderer::Instance();
-}
+Cell::Cell(F32 w, F32 h): _renderer(Renderer::Instance()), _position(), _color(),
+						  _totalWidth(w), _right(w / 2), _left(-w / 2),
+						  _totalHeight(h), _top(h / 2), _bottom(-h / 2) {  }
 
 //Width, Height, Position, Color
-Cell::Cell(F32 w, F32 h, point& p, color& c) {
-	_width 		= w;
-	_halfWidth  = w / 2;
-	_height 	= h;
-	_halfHeight = h / 2;
+Cell::Cell(const F32 w, const F32 h, const point& p, const color& c) : _renderer(Renderer::Instance()), _position(p), _color(c),
+											   _totalWidth(w), _right(w / 2), _left(-w / 2),
+						  					   _totalHeight(h), _top(h / 2), _bottom(-h / 2) {  }
 
-	_position = p;
-	_color    = c;
-
-	_vertexPositions = new point[_totalPositions];
-	_vertexColors	 = new color[_totalPositions];
-
-	_renderer = Renderer::Instance();
-}
-
-//------------------------------------------------------------------------------------------------
+//==========================================================================================================================
 //ShutDown
-//------------------------------------------------------------------------------------------------
-void Cell::ShutDown(void) {
-	delete[] _vertexPositions;
-	delete[] _vertexColors;
-}
+//==========================================================================================================================
+//Implement later, when I understand more about what needs to happen her.
 
-//---------------------------------------------------------------------------------------------------------
+//==========================================================================================================================
+//
 //Operators
-//---------------------------------------------------------------------------------------------------------
-void Cell::operator=(const Cell* cell) {
-	_renderer   	= Renderer::Instance();
-	_position   	= cell->_position;
-	_color      	= cell->_color;
-	_width      	= cell->_width;
-	_halfWidth  	= cell->_halfWidth;
-	_height     	= cell->_height;
-	_halfHeight 	= cell->_halfHeight;
-	_totalPositions = cell->_totalPositions;
-	_totalVertices  = cell->_totalVertices;
+//
+//==========================================================================================================================
+Cell& Cell::operator=(const Cell& cell) {
+	_position   	= cell.GetPosition();
+	_color      	= cell.GetColor();
+	SetDimensions	(cell.GetWidth(), cell.GetHeight());
+
+	return *this;
 }
 
-//------------------------------------------------------------------------------------------------
-//Render
-//------------------------------------------------------------------------------------------------
-void Cell::Render(void) {
-	_InitVertexPositions();
-	_InitVertexColors();
-
-	_renderer->AddCell(*this);
-}
-
-//------------------------------------------------------------------------------------------------
-//SetEvenScale
-//------------------------------------------------------------------------------------------------
-void Cell::SetEvenScale(F32 scale) {
-	_width      = scale;
-	_height     = scale;
-	_halfWidth  = scale / 2;
-	_halfHeight = scale / 2;
-}
-
-
-//------------------------------------------------------------------------------------------------
-//_InitVertexPositions
-//------------------------------------------------------------------------------------------------
-void Cell::_InitVertexPositions(void) {
-	//Vertices of triangle 1
-	_vertexPositions[0] = point(_position.GetX() -_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Left
-	_vertexPositions[1] = point(_position.GetX() +_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Right
-	_vertexPositions[2] = point(_position.GetX() -_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Left
-
-	//Verticies of triangle 2
-	_vertexPositions[3] = point(_position.GetX() +_halfWidth, _position.GetY() -_halfHeight, _position.GetZ()); //Bottom Right
-	_vertexPositions[4] = point(_position.GetX() +_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Right
-	_vertexPositions[5] = point(_position.GetX() -_halfWidth, _position.GetY() +_halfHeight, _position.GetZ()); //Top Left
-}
-
-//------------------------------------------------------------------------------------------------
-//_InitVertexColors
-//------------------------------------------------------------------------------------------------
-void Cell::_InitVertexColors(void) {
-	for(U32 i = 0; i < _totalPositions; i++) {
-		_vertexColors[i] = _color;
-	}
-}
+//==========================================================================================================================
+//
+//RenderAs* 
+//
+//This is a group of functions that will be used to decide the ultimate end shape of the cell on the screen. This are imple-
+//mented directly in the Renderer. 
+//
+//==========================================================================================================================
+void Cell::RenderAsTri(void) { _renderer->AddTri(*this); }
+void Cell::RenderAsSqr(void) { _renderer->AddSqr(*this); }
+void Cell::RenderAsHex(void) { _renderer->AddHex(*this); }

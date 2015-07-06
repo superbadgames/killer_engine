@@ -25,5 +25,5 @@ void World::AddObjectToWorld(GameObject* obj){
 //SetBackgroundColor
 //--------------------------------------------------------------
 void World::SetBackgroundColor() {
-	glClearColor(_bgColor.Red, _bgColor.Green, _bgColor.Blue, _bgColor.Alpha);
+	glClearColor(_bgColor.GetRed(), _bgColor.GetGreen(), _bgColor.GetBlue(), _bgColor.GetAlpha());
 }
