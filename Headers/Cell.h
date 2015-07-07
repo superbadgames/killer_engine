@@ -91,13 +91,24 @@ public:
 	}
 
 	const point& GetPosition(void) const { return _position; }
-	const color& GetColor(void)    const { return _color; }
-	const F32    GetWidth(void)    const { return _totalWidth; }
-	const F32 	 GetRight(void)	   const { return _right; }
-	const F32    GetLeft(void) 	   const { return _left; }
- 	const F32    GetHeight(void)   const { return _totalHeight; }
- 	const F32	 GetTop(void) 	   const { return _top; }
- 	const F32	 GetBottom(void)   const { return _bottom; }
+	
+	const F32*   GetPositionArray(void) const { return _position.Get(); }
+	
+	const color& GetColor(void) const { return _color; }
+	
+	const F32* GetColorArray(void) const { return _color.Get(); }
+	
+	const F32 GetWidth(void) const { return _totalWidth; }
+	
+	const F32 GetRight(void) const { return _right; }
+	
+	const F32 GetLeft(void) const { return _left; }
+ 	
+ 	const F32 GetHeight(void) const { return _totalHeight; }
+ 	
+ 	const F32 GetTop(void) const { return _top; }
+ 	
+ 	const F32 GetBottom(void) const { return _bottom; }
 };
 
 #endif

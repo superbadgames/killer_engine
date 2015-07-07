@@ -49,8 +49,8 @@ struct Color {
 	}
 	
 	//=====Accessors=====
-	const T* Get(void) 	 	const { return _values; 	 }
-	const T  GetRed(void)   const { return _values[0];  }
+	const T* Get(void) 	 	const { return _values; }
+	const T  GetRed(void)   const { return _values[0]; }
 	const T  GetGreen(void) const { return _values[1]; }
 	const T  GetBlue(void)  const { return _values[2]; }
 	const T  GetAlpha(void) const { return _values[3]; }

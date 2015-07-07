@@ -37,6 +37,10 @@ private:
 	Cell _cell;
 	bool _active;
 
+protected:
+	
+
+ 
 public:
 	//=====Constructors=====
 	GameObject(void) : _cell(), _active(true) {  }
@@ -49,21 +53,24 @@ public:
 
 	//virtual void v_ShutDown(void);
 
+	void RenderTriCell(void) { _cell.RenderAsTri(); }
+	void RenderSqrCell(void) { _cell.RenderAsSqr(); }
+	void RenderHexCell(void) { _cell.RenderAsHex(); }
+
 	//Accessors
-	void SetPosition(point& p) { _cell.SetPosition(p); }
-	void SetColor(color& c)    { _cell.SetColor(c); }
-	void SetDimension(F32 w, F32 h)	   { _cell.SetDimensions(w, h); }
+	void SetPosition(const point& p) { _cell.SetPosition(p); }
+	void SetColor(const color& c)    { _cell.SetColor(c); }
+	void SetDimensions(const F32 w, const F32 h)	   { _cell.SetDimensions(w, h); }
 
 
 	const point& GetPosition(void) { return _cell.GetPosition(); }
 	const color& GetColor(void)    { return _cell.GetColor(); }
 	const F32    GetWidth(void)    { return _cell.GetWidth(); }
-	const bool   GetActive(void) 	 { return _active; }
-
+	const bool   GetActive(void)   { return _active; }
 	
 	//=====Virtual functions=====
-	virtual void v_Update(void)=0;
-	virtual void v_Render(void)=0;
+	virtual void Update(void)=0;
+	virtual void Render(void)=0;
 
 	void SetActive(void)   { _active = true; }
 	void SetInactive(void) { _active = false; }

@@ -34,6 +34,9 @@ private:
 	
 	U32 _maxBatchSize;
 	U32 _totalVerticesInBatch;
+	U32 _triBatch;
+	U32 _sqrBatch;
+	U32 _hexBatch;
 
 	std::vector<F32> _triVerticies;
 	std::vector<F32> _triColors;

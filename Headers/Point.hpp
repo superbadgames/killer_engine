@@ -21,14 +21,14 @@ private:
 
 public:
 	Point(void) { 
-		_p[0] = _p[1] = _p[2] = 0;
-		_p[3] = 1;
+		_p[0] = _p[1] = 0;
+		_p[2] = _p[3] = 1;
 	}
 	
 	Point(T xT, T yT) { 
 		_p[0] = xT;
 		_p[1] = yT;
-		_p[2] = 0;
+		_p[2] = 1;
 		_p[3] = 1;
 	}
 	Point(T xT, T yT, T zT) {
