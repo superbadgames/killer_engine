@@ -42,12 +42,12 @@ bool WorldManager::SetActiveWorld(text worldID) {
 //Update
 //--------------------------------------------------------------
 void WorldManager::Update(void) {
-	_activeWorld->v_Update();
+	_activeWorld->Update();
 }
 
 //--------------------------------------------------------------
 //Render
 //--------------------------------------------------------------
 void WorldManager::Render(void) {
-	_activeWorld->v_Render();
+	_activeWorld->Render();
 }

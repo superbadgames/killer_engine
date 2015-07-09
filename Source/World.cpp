@@ -1,13 +1,17 @@
 #include <World.h>
+
+World::World(void): _errorManager(ErrorManager::Instance()),
+					_nextID(1),
+					_mapWidth(0),
+					_mapHeight(0) {  }
+
 //--------------------------------------------------------------
 //InitWorld
 //--------------------------------------------------------------
-void World::InitWorld(S32 w, S32 h) {
-	_errorManager->Instance();
-	_nextID    = 1;
-	_mapWidth  = w;
-	_mapHeight = h;
-}
+/*void World::InitWorld(S32 w, S32 h) { 
+	 _mapWidth  = w;
+	 _mapHeight = h; 
+ }*/
 
 //--------------------------------------------------------------
 //AddObjectToWorld

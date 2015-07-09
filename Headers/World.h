@@ -24,13 +24,11 @@ Written by Maxwell Miller
 
 class World{
 public:
-	World(void)  {  }
+	World(void);
 	~World(void) {  }
 
-	void InitWorld(S32 w, S32 h);
-
-	virtual void v_Update(void) {  }
-	virtual void v_Render(void)	{  }
+	virtual void Update(void)=0;
+	virtual void Render(void)=0;
 
 	void AddObjectToWorld(GameObject* obj);
 	void SetBackgroundColor();

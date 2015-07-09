@@ -36,7 +36,7 @@ void Timer::Update(void) {
 		_curCycles  = _QueryHiResTimer();
 		_deltaTime  = (_curCycles - _pastCycles) / _frequency * _timeScale;
 		_pastCycles = _curCycles;
-		if (_deltaTime < 0 || _deltaTime > 1.0f) { _deltaTime = 0.33f; }
+		if (_deltaTime < 0.0f || _deltaTime > 1.0f) { _deltaTime = 0.33f; }
 		_totalTime += _deltaTime;
 	}
 }

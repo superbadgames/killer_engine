@@ -19,6 +19,7 @@ Written by Maxwell Miller
 //==========User defined includes==========
 #include <Atom.h>
 #include <ErrorManager.h>
+#include <Controller.h>
 
 //=====OGL includes=====
 #include <GL/gl.h>
@@ -28,13 +29,16 @@ Written by Maxwell Miller
 class ProgramWindow{
 private:
 	bool _isFullScreen;
-	static S32  _width;
-	static S32  _height;
-	static S32  _halfWidth;
-	static S32  _halfHeight;
+	static S32  _totalWidth;
+	static S32  _totalHeight;
+	static S32  _right;
+	static S32  _left;
+	static S32  _top;
+	static S32  _bottom;
 	text _wndName;
 
 	ErrorManager* _errorManager;
+	Controller* _controller;
 
 	//=====Windows Variables=====
 	HWND _hwnd;
@@ -60,10 +64,14 @@ public:
 	HWND      GetHWND(void)      { return _hwnd; }
 	HINSTANCE GetHINSTANCE(void) { return _wndClass.hInstance; }
 	
-	static S32 GetWidth(void)	   { return _width; }
-	static S32 GetHalfWidth(void)  { return _halfWidth; }
-	static S32 GetHeight(void) 	   { return _height; }
-	static S32 GetHalfHeight(void) { return _halfHeight; }
+	static S32 GetWidth(void)	   { return _totalWidth; }
+	static S32 GetHalfWidth(void)  { return _right; }
+	static S32 GetRight(void) 		{ return _right; }
+	static S32 GetLeft(void)		{ return _left; }
+	static S32 GetHeight(void) 	   { return _totalHeight; }
+	static S32 GetHalfHeight(void) { return _top; }
+	static S32 GetTop(void) 		{ return _top; }
+	static S32 GetBottom(void) 		{ return _bottom; }
 };
 
 #endif

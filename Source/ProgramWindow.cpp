@@ -3,16 +3,27 @@
 //========================================================================================================
 //Constructors
 //========================================================================================================
+S32 ProgramWindow::_totalWidth      = 0;
+S32 ProgramWindow::_totalHeight     = 0;
+S32 ProgramWindow::_right  = 0;
+S32 ProgramWindow::_left  = 0;
+S32 ProgramWindow::_top = 0;
+S32 ProgramWindow::_bottom = 0;
+
 ProgramWindow::ProgramWindow(): _isFullScreen(false),
 								_wndName("ProgramWindow"),
 								_hwnd(NULL),
-                                _hglrc(NULL)
+                                _hglrc(NULL),
+                                _errorManager(ErrorManager::Instance()),
+                                _controller(Controller::Instance())
 {
-	_width 		  = 800;
-	_height 	  = 600;
-	_halfWidth    = _width / 2;
-	_halfHeight   = _halfHeight / 2;
-    _errorManager = ErrorManager::Instance();
+	_totalWidth 		  = 800;
+	_totalHeight 	  = 600;
+	_right    = _totalWidth / 2;
+    _left       = -_totalWidth / 2;
+	_top   = _totalHeight / 2;
+    _bottom = -_totalHeight / 2;
+    
 	
     _errorManager->SetError(EC_OpenGL, "Called Default Constructor for ProgramWindow");
 }
@@ -21,22 +32,22 @@ ProgramWindow::ProgramWindow(bool isFullScreen, S32 width, S32 height, text wndN
 	_isFullScreen(isFullScreen),
 	_wndName(wndName),
 	_hwnd(NULL),
-    _hglrc(NULL)
+    _hglrc(NULL),
+    _errorManager(ErrorManager::Instance()),
+    _controller(Controller::Instance())
 {
-    _width 		  = width;
-    _height       = height;
-    _halfWidth    = _width / 2;
-    _halfHeight   = _halfHeight / 2;
-    _errorManager = ErrorManager::Instance(); 	
+    _totalWidth           = width;
+    _totalHeight      = height;
+    _right    = width / 2;
+    _left       = -width / 2;
+    _top   = height / 2;
+    _bottom = -height / 2;
 }
 
 //========================================================================================================
 //Init Window
 //========================================================================================================
-S32 ProgramWindow::_width      = 0;
-S32 ProgramWindow::_height     = 0;
-S32 ProgramWindow::_halfWidth  = 0;
-S32 ProgramWindow::_halfHeight = 0;
+
 
 void ProgramWindow::InitWindow(void) {
     //=========Window Class registration and creation===========
@@ -61,7 +72,7 @@ void ProgramWindow::InitWindow(void) {
 				   		   WS_CLIPSIBLINGS 	   | WS_CLIPCHILDREN |  //Window Styles
 				   		   WS_OVERLAPPEDWINDOW | WS_VISIBLE,		//^           ^
 				   	  	   0,0,										//position of window
-				   		   _width, _height,							//Dimensions
+				   		   _totalWidth, _totalHeight,				//Dimensions
 				   		   NULL, 									//Parent Window
 				   		   NULL, 									//Window Menu
 				   		   _wndClass.hInstance,						//hInstance,
@@ -74,6 +85,8 @@ void ProgramWindow::InitWindow(void) {
 
     ShowWindow(_hwnd, SW_SHOW);
     UpdateWindow(_hwnd);
+
+    _controller->Init(_wndClass.hInstance, _hwnd);
 }
 
 //========================================================================================================

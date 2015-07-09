@@ -17,13 +17,13 @@ Written by Maxwell Miller
 
 class Timer { 
 private:
-			F32  _deltaTime;
-			F32  _timeScale;
-			F64  _totalTime;
-			U64  _pastCycles;
-			U64  _curCycles;
-	  F32  _frequency;
-			bool _paused;
+	F32  _deltaTime;
+	F32  _timeScale;
+	F64  _totalTime;
+	U64  _pastCycles;
+	U64  _curCycles;
+	F32  _frequency;
+	bool _paused;
 
 	static Timer* _instance;
 	

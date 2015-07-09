@@ -43,8 +43,8 @@ protected:
  
 public:
 	//=====Constructors=====
-	GameObject(void) : _cell(), _active(true) {  }
-	GameObject(const Cell& cell) : _cell(cell), _active(true) {  }
+	GameObject(void) : _cell(), _active(false) {  }
+	GameObject(const Cell& cell) : _cell(cell), _active(false) {  }
 	GameObject(bool active) : _cell(), _active(active) {  }
 	GameObject(const Cell& cell, bool active) : _cell(cell), _active(active) {  }
 
@@ -57,7 +57,7 @@ public:
 	void RenderSqrCell(void) { _cell.RenderAsSqr(); }
 	void RenderHexCell(void) { _cell.RenderAsHex(); }
 
-	//Accessors
+	//=====Accessors=====
 	void SetPosition(const point& p) { _cell.SetPosition(p); }
 	void SetColor(const color& c)    { _cell.SetColor(c); }
 	void SetDimensions(const F32 w, const F32 h)	   { _cell.SetDimensions(w, h); }
@@ -67,13 +67,13 @@ public:
 	const color& GetColor(void)    { return _cell.GetColor(); }
 	const F32    GetWidth(void)    { return _cell.GetWidth(); }
 	const bool   GetActive(void)   { return _active; }
-	
-	//=====Virtual functions=====
-	virtual void Update(void)=0;
-	virtual void Render(void)=0;
 
 	void SetActive(void)   { _active = true; }
 	void SetInactive(void) { _active = false; }
+
+	//=====Virtual functions=====
+	virtual void Update(void)=0;
+	virtual void Render(void)=0;
 };
 
 #endif

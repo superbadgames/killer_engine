@@ -9,6 +9,7 @@ Renderer::Renderer(void): _maxBatchSize(1000), _totalVerticesInBatch(0) {
 	_renderingProgram = _CompileShaders();
 	glGenVertexArrays(1, &_vertexArrayObject);
 	glBindVertexArray(_vertexArrayObject);
+	_SetOrthoProjection();
 }
 
 //=======================================================================================================
@@ -199,6 +200,159 @@ void Renderer::AddHex(const Cell& cell) {
 	point pos = cell.GetPosition();
 	color col = cell.GetColor();
 
+	//Triangle 1
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetLeft() / 2 ));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	//Triangle 2
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + cell.GetRight());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	//Triangle 3
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + cell.GetRight());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetBottom());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	//Triangle 4
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetRight() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetBottom());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetLeft() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetBottom());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	//Triangle 5
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetLeft() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetBottom());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + cell.GetLeft());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	//Triangle 6
+	_hexVertices.push_back(pos.GetX());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + cell.GetLeft());
+	_hexVertices.push_back(pos.GetY());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+
+	_hexVertices.push_back(pos.GetX() + (cell.GetLeft() / 2));
+	_hexVertices.push_back(pos.GetY() + cell.GetTop());
+	_hexVertices.push_back(pos.GetZ());
+	_hexVertices.push_back(pos.GetW());
+
+	++_totalVerticesInBatch;
+	++_hexBatch;
+	
+/*
+	This is a version that will only work after I learn how to use draw multi array
+
 	//Center Vertex
 	_hexVertices.push_back(pos.GetX());
 	_hexVertices.push_back(pos.GetY());
@@ -278,48 +432,105 @@ void Renderer::AddHex(const Cell& cell) {
 	_hexColors.push_back(col.GetBlue());
 	_hexColors.push_back(col.GetAlpha());
 
-	//First color
-	_hexColors.push_back(col.GetRed());
-	_hexColors.push_back(col.GetGreen());
-	_hexColors.push_back(col.GetBlue());
-	_hexColors.push_back(col.GetAlpha());
-	
-	//Second Color
-	_hexColors.push_back(col.GetRed());
-	_hexColors.push_back(col.GetGreen());
-	_hexColors.push_back(col.GetBlue());
-	_hexColors.push_back(col.GetAlpha());
-	
-	//Third Color
-	_hexColors.push_back(col.GetRed());
-	_hexColors.push_back(col.GetGreen());
-	_hexColors.push_back(col.GetBlue());
-	_hexColors.push_back(col.GetAlpha());
-	
-	//Fourth Color
-	_hexColors.push_back(col.GetRed());
-	_hexColors.push_back(col.GetGreen());
-	_hexColors.push_back(col.GetBlue());
-	_hexColors.push_back(col.GetAlpha());
-	
-	//Fifth Color
-	_hexColors.push_back(col.GetRed());
-	_hexColors.push_back(col.GetGreen());
-	_hexColors.push_back(col.GetBlue());
-	_hexColors.push_back(col.GetAlpha());
-	
-	//Sixth Color
+*/
+
+	//=====Colors=====
+
+	//First Triangle color
 	_hexColors.push_back(col.GetRed());
 	_hexColors.push_back(col.GetGreen());
 	_hexColors.push_back(col.GetBlue());
 	_hexColors.push_back(col.GetAlpha());
 
-	//Sixth Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
 	_hexColors.push_back(col.GetRed());
 	_hexColors.push_back(col.GetGreen());
 	_hexColors.push_back(col.GetBlue());
 	_hexColors.push_back(col.GetAlpha());
 	
+	//Second Triangle Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+	
+	//Third Triangle Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+	
+	//Fourth Triangle Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+	
+	//Fifth Triangle Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+	
+	//Sixth Triangel Color
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
+
+	_hexColors.push_back(col.GetRed());
+	_hexColors.push_back(col.GetGreen());
+	_hexColors.push_back(col.GetBlue());
+	_hexColors.push_back(col.GetAlpha());
 }
 
 //=======================================================================================================
@@ -399,11 +610,21 @@ void Renderer::Draw(void) {
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 		glEnableVertexAttribArray(1);
 		
-		glDrawArrays(GL_TRIANGLE_FAN, 0, _hexBatch);
+		glDrawArrays(GL_TRIANGLES, 0, _hexBatch);
 	}
 
-	//Reset Batch count
+	//=====Reset All Containers and Counters=====
+		_triVerticies.clear();
+		_triColors.clear();
+		_sqrVertices.clear();
+		_sqrColors.clear();
+		_hexVertices.clear();
+		_hexColors.clear();
+
 		_totalVerticesInBatch = 0;
+		_triBatch = 0;
+		_sqrBatch = 0;
+		_hexBatch = 0; 
 }
 
 //====================================================
@@ -420,17 +641,19 @@ GLuint Renderer::_CompileShaders(void){
 	//=====Vertex Shader=====
 	//=====Vertex Shader=====
 	static const GLchar* _vertexShaderSource[] = {
-		"#version 430 core													\n"
-		"																	\n"
-		"layout (location = 0) in vec4 position;							\n"
-		"layout (location = 1) in vec4 color; 								\n"
-		"																	\n"
-		"out vec4 vs_color;													\n"
-		"																	\n"
-		"void main(void){													\n"
-		"	gl_Position = position;											\n"
-		"	vs_color = color; 												\n"
-		"}																	\n"
+		"#version 430 core																\n"
+		"																				\n"
+		"layout (location = 0) in vec4 position;										\n"
+		"layout (location = 1) in vec4 color; 											\n"
+		"layout (location = 2) uniform mat4 proj_mat;									\n"
+		"layout (location = 3) uniform mat4 model_mat;									\n"
+		"																				\n"
+		"out vec4 vs_color;																\n"
+		"																				\n"
+		"void main(void){																\n"
+		"	gl_Position = proj_mat * model_mat * position;											\n"
+		"	vs_color = color; 															\n"
+		"}																				\n"
 	};
 
 	//=====Tesselsation Control Shader=====
@@ -466,14 +689,14 @@ GLuint Renderer::_CompileShaders(void){
 
 	//=====Fragment Shader=====
 	static const GLchar* _fragmentShaderSource[] = {
-		"#version 430 core								\n"
-		"												\n"
-		"in vec4 vs_color;								\n"
-		"out vec4 color;								\n"
-		"												\n"
-		"void main(void) {								\n"
-		"	color = vs_color;							\n"
-		"}												\n"
+		"#version 430 core																\n"
+		"																				\n"
+		"in vec4 vs_color;																\n"
+		"out vec4 color;																\n"
+		"																				\n"
+		"void main(void) {																\n"
+		"	color = vs_color;															\n"
+		"}																				\n"
 	};
 
 
@@ -521,9 +744,21 @@ void Renderer::_SetOrthoProjection(void) {
 	matrix M1{};
 	M1.MakeOrthographic(1072, 768, 200);
 
-	const F32* projection = M1.GetElems();
+	matrix M2(0.01f, 0.0f, 0.0f, 0.0f,
+			  0.0f, 0.01f, 0.0f, 0.0f,
+			  0.0f, 0.0f, 0.01f, 0.0f,
+			  0.0f, 0.0f, 0.0f, 0.01f);
+	//M1 *= M2;
 
-	glUniformMatrix4fv(0, 1, GL_FALSE, projection);
+	matrix M3(1.0f);
+
+	const F32* projection = M1.GetElems();
+	const F32* model = M3.GetElems();
+
+	glUseProgram(_renderingProgram);
+
+	glUniformMatrix4fv(2, 1, GL_FALSE, projection);
+	glUniformMatrix4fv(3, 1, GL_FALSE, model);
 }
 
 

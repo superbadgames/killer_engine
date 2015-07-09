@@ -44,7 +44,7 @@ public:
 	void Render(void);
 
 protected:
-	WorldManager(void){  }
+	WorldManager(void) {  }
 
 };
 

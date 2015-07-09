@@ -130,9 +130,9 @@ public:
 		_m[15] = 1;
 
 		//Transform "Vector"
-		_m[3] = (left + right) / (left - right);
-		_m[7] = (bottom + top) / (bottom - top);
-		_m[15] = (near + far)   / (far - near);
+		_m[12] = (left + right) / (left - right);
+		_m[13] = (bottom + top) / (bottom - top);
+		_m[14] = (near + far)   / (far - near);
 
 	}
 

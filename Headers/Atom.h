@@ -16,14 +16,24 @@ Written by Maxwell Miller
 #define ATOM_H
 
 //Includes. These will be the files that everything will need to have access to
-//User defined Includes
+//=====Killer1 Engine Includes=====
 #include <KillerMath.h>
 #include <Point.hpp>
 #include <Color.hpp>
-//Sytem and library includes
+
+//=====OGL Includes=====
 #include <GL/gl3w.h>
+
+//=====Windows Includes=====
 #include <windows.h>
+
+//=====STD Includes=====
 #include <string>
+#include <memory>
+
+//=====Global usings=====
+//template<typename T>
+//using shared_prt = std::shared_prt<T>;
 
 //Signed Typedefs
 typedef signed __int8   S8;

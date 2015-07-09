@@ -72,14 +72,14 @@ public:
 	const Point<T> operator +(const Point<T>& p) {
 		return Point<T>(_p[0] + p.GetX(),
 			_p[1] + p.GetY(),
-			_p[2] + p.GetZ(),
+			_p[2], //+ p.GetZ(),
 			_p[3]);
 	}
 
 	Point<T>& operator +=(const Point<T>& p) {
 		_p[0] += p.GetX();
 		_p[1] += p.GetY();
-		_p[2] += p.GetZ();
+		//_p[2] += p.GetZ();
 
 		return *this;
 	}
