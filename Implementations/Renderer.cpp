@@ -1,11 +1,11 @@
-#include <Renderer.h>
+#include <Engine/Renderer.h>
 
 //=======================================================================================================
 //
 //Constructor
 //
 //=======================================================================================================
-Renderer::Renderer(void): _maxBatchSize(1000), _totalVerticesInBatch(0) { 
+Renderer::Renderer(void): _maxBatchSize(1000), _totalVerticesInBatch(0), _errorManager(ErrorManager::Instance()) { 
 	_renderingProgram = _CompileShaders();
 	glGenVertexArrays(1, &_vertexArrayObject);
 	glBindVertexArray(_vertexArrayObject);
@@ -540,12 +540,43 @@ void Renderer::AddHex(const Cell& cell) {
 //=======================================================================================================
 void Renderer::Draw(void) {
 	if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
+
+	ILuint imageName;
+
+	ilGenImages(1, &imageName);
+	ilBindImage(imageName);
+	
+	const char* firstBoxPath = "../Assets/first_box.png";
+	const char* visibleBoxFullPath = "../Assets/visible_box_full.png";
+
+	if(!ilLoadImage(visibleBoxFullPath)) { _errorManager->SetError(EC_DevIL, "ilLoadImage returned false"); }
+	else {
+		if(!ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE)) { _errorManager->SetError(EC_DevIL, "ilConvertImage returned false"); }
+		else {
+			GLuint texture;
+			glGenTextures(1, &texture);
+			glBindTexture(GL_TEXTURE_2D, texture);
+
+			glTexImage2D
+			(
+				GL_TEXTURE_2D,					//target 
+				0, 								//first mipmap level
+				ilGetInteger(IL_IMAGE_BPP), 	//internal format
+				ilGetInteger(IL_IMAGE_WIDTH),	//width
+     			ilGetInteger(IL_IMAGE_HEIGHT),  //height
+     			0, 								//border
+     			ilGetInteger(IL_IMAGE_FORMAT),  //format
+     			GL_UNSIGNED_BYTE,				//type
+     			ilGetData()						//date pointer
+     		);
+		}
+	}
+
+	ilDeleteImages(1, &imageName);
+
+	glClearBufferfv(GL_COLOR, 0, _bgColor);
 	
 	 if(_triBatch > 0) {
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, color);
-
 	    glUseProgram(_renderingProgram);
 
 		GLuint buffers[2];
@@ -567,10 +598,6 @@ void Renderer::Draw(void) {
 	}
 
 	if(_sqrBatch > 0) {
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, color);
-
 	    glUseProgram(_renderingProgram);
 
 		GLuint buffers[2];
@@ -590,11 +617,6 @@ void Renderer::Draw(void) {
 	}
 
 	if(_hexBatch > 0) {
-		
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		const GLfloat color[] = { 0.5, 0.5, 0.5, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, color);
-
 	    glUseProgram(_renderingProgram);
 
 		GLuint buffers[2];
@@ -632,6 +654,15 @@ void Renderer::Draw(void) {
 //====================================================
 
 GLuint Renderer::_CompileShaders(void){
+
+//========================================================================
+/*
+	ilInit();
+	iluInit();
+	ilutRenderer(ILUT_OPENGL);
+*/
+//=========================================================================	
+
 	GLuint vertexShaderProgram;
 	GLuint tessControlProgram;
 	GLuint tessEvalProgram;
@@ -645,14 +676,14 @@ GLuint Renderer::_CompileShaders(void){
 		"																				\n"
 		"layout (location = 0) in vec4 position;										\n"
 		"layout (location = 1) in vec4 color; 											\n"
-		"layout (location = 2) uniform mat4 proj_mat;									\n"
-		"layout (location = 3) uniform mat4 model_mat;									\n"
+		"uniform mat4 proj_mat;															\n"
+		"uniform mat4 model_mat;														\n"
 		"																				\n"
 		"out vec4 vs_color;																\n"
 		"																				\n"
-		"void main(void){																\n"
+		"void main(void) {																\n"
 		"	gl_Position = proj_mat * model_mat * position;								\n"
-		"	vs_color = color; 															\n"
+		"	vs_color = color;															\n"
 		"}																				\n"
 	};
 
@@ -663,7 +694,7 @@ GLuint Renderer::_CompileShaders(void){
 		"layout (vertices = 3) out;			 											\n"
 		"																				\n"
 		"void main(void) {																\n"	
-		"	if(gl_InvocationID == 0) {													\n"
+		"	i(gl_InvocationID == 0) {													\n"
 		"		gl_TessLevelInner[0] = 5.0;		 										\n"
 		"		gl_TessLevelOuter[0] = 5.0;												\n"
 		"		gl_TessLevelOuter[1] = 5.0;												\n"
@@ -691,10 +722,13 @@ GLuint Renderer::_CompileShaders(void){
 	static const GLchar* _fragmentShaderSource[] = {
 		"#version 430 core																\n"
 		"																				\n"
+		"uniform sampler2D sampler;														\n"
 		"in vec4 vs_color;																\n"
 		"out vec4 color;																\n"
 		"																				\n"
 		"void main(void) {																\n"
+		//=====test for textures, failed finish later=====
+		//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
 		"	color = vs_color;															\n"
 		"}																				\n"
 	};
@@ -742,23 +776,25 @@ GLuint Renderer::_CompileShaders(void){
 //====================================================
 void Renderer::_SetOrthoProjection(void) {
 	matrix M1{};
-	M1.MakeOrthographic(1072, 768, 200);
+	M1.MakeOrthographic(1024, 768, 200);
 
-	matrix M2(0.01f, 0.0f, 0.0f, 0.0f,
-			  0.0f, 0.01f, 0.0f, 0.0f,
-			  0.0f, 0.0f, 0.01f, 0.0f,
-			  0.0f, 0.0f, 0.0f, 0.01f);
-	//M1 *= M2;
+	//matrix M2(1.0f, 0.0f, 0.0f, 0.0f,
+	//		  0.0f, 1.0f, 0.0f, 0.0f,
+	//		  0.0f, 0.0f, 1.0f, 0.0f,
+	//		  0.0f, 0.0f, 0.0f, 1.0f);
 
-	matrix M3(1.0f);
+	matrix M2(1.0f);
 
 	const F32* projection = M1.GetElems();
-	const F32* model = M3.GetElems();
+	const F32* model = M2.GetElems();
 
 	glUseProgram(_renderingProgram);
 
-	glUniformMatrix4fv(2, 1, GL_FALSE, projection);
-	glUniformMatrix4fv(3, 1, GL_FALSE, model);
+	GLint proj_location  = glGetUniformLocation(_renderingProgram, "proj_mat");
+	GLint model_location = glGetUniformLocation(_renderingProgram, "model_mat");
+
+	glUniformMatrix4fv(proj_location, 1, GL_FALSE, projection);
+	glUniformMatrix4fv(model_location, 1, GL_FALSE, model);
 }
 
 

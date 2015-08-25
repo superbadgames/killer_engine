@@ -1,0 +1,68 @@
+/*========================================================================
+A world is what the different states of game will be. Each world re-
+presents  
+
+This is not free to use, and cannot be used without the express permission
+of KillerWave.
+
+Written by Maxwell Miller
+========================================================================*/
+#ifndef WORLD_H
+#define WORLD_H
+
+//Killer1 Includes
+#include <Engine/Atom.h>
+#include <Engine/ErrorManager.h>
+#include <Engine/GameObject.hpp>
+#include <Engine/Renderer.h>
+
+//STL Includes
+#include <map>
+
+//ExLib Headers
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+class World{
+private:
+	ErrorManager* 			   _errorManager;
+	Renderer* 				   _renderer;
+	std::map<text, GameObject*> _worldObjects;
+	
+	S32   _mapWidth;
+	S32   _mapHeight;
+	color _bgColor;
+
+public:
+	World(void): _errorManager(ErrorManager::Instance()),
+				 _renderer(Renderer::Instance()),
+				 _mapWidth(0),
+				 _mapHeight(0),
+				 _bgColor() {  }
+	
+	~World(void) {  }
+
+	virtual void InitWorld(S32 w, S32 h, color& c)=0;
+	virtual void Update(void)=0;
+	virtual void Render(void)=0;
+
+	//======Accessors=====
+	void AddObjectToWorld(text objId, GameObject* obj);
+	void RenderObjects(void) {
+		for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
+		i->second->Render();
+	}
+	}
+	void SetBackgroundColor(color& c) { _bgColor = c; }
+	void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
+	S32  GetMapWidth(void)   { return _mapWidth; }
+	S32  GetMapHeight(void)  { return _mapHeight; }
+	void SetMapWidth(S32 w)  { _mapWidth = w; }
+	void SetMapHeight(S32 h) { _mapHeight = h; }
+	void SetMapDimensions(S32 w, S32 h) {
+		_mapWidth  = w;
+		_mapHeight = h;
+	}
+};
+
+#endif

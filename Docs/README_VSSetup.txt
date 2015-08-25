@@ -39,14 +39,13 @@ Configutation Properties -> General
 
 C/C++ -> Precompiled Headers -> Precompiled Header File : $(IntDir)$(TargetName).pch *usually set by default
 
-
 -> General -> Additional Include Directories : $(ProjectDir)..\..\Headers\
-
--> Also include : 			       $(ProjectDir)..\..\ExLib\Headers\
 
 -> Output Files : $(IntDir) for Asm List Location, Object Filename and Program Database File, this is usually set by default.
 
-Linker -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetName).pdb
+Librarian -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetName).pdb
+
+->General -> Additional Library Directories: $(ProjectDir)..\..\Lib\
 
 -> Debugging -> Map File : $(TargetDir)$(TargetName).map [May have to enable the file to even be made]
 
