@@ -11,42 +11,71 @@ Written by Maxwell Miller
 #ifndef ERROR_MANAGER_H
 #define ERROR_MANAGER_H
 
-//Killer1 Includes
+//=====Killer1 Includes=====
 #include <Engine/Atom.h>
 
-//=====STD includes=====
+//=====STL includes=====
 #include <map>
+using std::map;
 
-//Error Codes Enum
-enum ErrorCode {
-	EC_NoError = 0,
-	EC_Unknown,
-	EC_Game,
-	EC_KillerEngine,
-	EC_Windows,
-	EC_OpenGL,
-	EC_DirectInput,
-	EC_DevIL
-};
+namespace KillerEngine {
+	
+//==========================================================================================================================
+//
+//Enum Error codes
+//
+//==========================================================================================================================
+	enum ErrorCode {
+		EC_NoError = 0,
+		EC_Unknown,
+		EC_Game,
+		EC_KillerEngine,
+		EC_Windows,
+		EC_OpenGL,
+		EC_DirectInput,
+		EC_DevIL
+	};
 
-class ErrorManager {
-private:
-	U32       			 	  _numErrors;
-	std::map<U32, ErrorCode>  _errorCodes;
-	std::map<U32, text>       _errorMessages;
+	class ErrorManager {
+	private:
+		U32       			 _numErrors;
+		map<U32, ErrorCode>  _errorCodes;
+		map<U32, text>       _errorMessages;
+		static ErrorManager* _instance;
 
-	static ErrorManager* _instance;
+	public:
+//==========================================================================================================================
+//
+//Destructor
+//
+//==========================================================================================================================
+		~ErrorManager(void) {  }
 
-public:
-	~ErrorManager(void) {  }
+//==========================================================================================================================
+//
+//Singleton Functions
+//
+//==========================================================================================================================		
+		static ErrorManager* Instance(void);
 
-	static ErrorManager* Instance(void);
+//==========================================================================================================================
+//
+//ErrorManager Functions
+//
+//==========================================================================================================================
+		void SetError(ErrorCode code, text message);
+		
+		void DisplayErrors(void);
 
-	void SetError(ErrorCode code, text message);
-	void DisplayErrors(void);
+	protected:
+//==========================================================================================================================
+//
+//Constructor
+//
+//==========================================================================================================================
+		ErrorManager(void): _numErrors(0) {  }
+	};
 
-protected:
-	ErrorManager(void): _numErrors(0) {  }
-};
+}//End namespace
 
 #endif

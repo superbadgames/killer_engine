@@ -15,8 +15,16 @@ Written by Maxwell Miller
 #ifndef TEXTURE_MANAGER_H
 #define TEXTURE_MANAGER_H
 
+//=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
+#include <Engine/Texture.hpp>
+
+//=====STL includes=====
+#include <map>
+using std::map;
+
+//=====DevIL includes=====
 #include <IL/il.h>
 #include <IL/ilu.h>
 #include <IL/ilut.h>
@@ -26,21 +34,42 @@ Written by Maxwell Miller
 #include <GL/glu.h>
 #include <GL/wglext.h>
 
+namespace KillerEngine {
 
-class TextureManager{
-private:
-	static TextureManager* _instance;
+	class TextureManager{
+	private:
+		static TextureManager* _instance;
+		ErrorManager*   	   _errorManager;
+		Texture 			   _currentTexture;
+		map<text, Texture>	   _loadedTextures;
 
-	ErrorManager* _errorManager;
+	public:
+//==========================================================================================================================
+//
+//Singleton Functions
+//
+//==========================================================================================================================
+		static TextureManager* Instance(void);
+		void Shutdown(void);
+		
+//==========================================================================================================================
+//
+//TextureManager Functions
+//
+//==========================================================================================================================
+		void LoadTexture(text path, text name);
+		Texture& GetTexture(text name) { return _loadedTextures.find(name)->second; }
 
-public:
-	static TextureManager* Instance();
-	void AddImage();
+	protected:
+//==========================================================================================================================
+//
+//Constructors
+//
+//==========================================================================================================================		
+		TextureManager(void);
+		~TextureManager(void) {  }
 
-protected:
-	TextureManager(void);
-	~TextureManager(void) {  }
-
-};
+	};
+}//End namespace
 
 #endif

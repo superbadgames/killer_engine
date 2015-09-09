@@ -1,5 +1,9 @@
 #include <Engine/World.h>
 
+namespace KillerEngine {
+
+
+
 //--------------------------------------------------------------
 //AddObjectToWorld
 //--------------------------------------------------------------
@@ -8,3 +12,5 @@ void World::AddObjectToWorld(text objId, GameObject* obj){
 	
 	if(_worldObjects.find(objId) == _worldObjects.end()) { _errorManager->SetError(EC_KillerEngine, "Unable to AddWorld to _worldObjects"); }
 }
+
+}//End namespace

@@ -29,9 +29,9 @@ Written by Maxwell Miller
 //=====Engine Includes======
 #include <Engine/Atom.h>
 #include <Engine/Cell.h>
-#include <Engine/Point.hpp>
-#include <Engine/Color.hpp>
 
+namespace KillerEngine {
+	
 class GameObject{
 private:
 	Cell _cell;
@@ -75,5 +75,7 @@ public:
 	virtual void Update(void)=0;
 	virtual void Render(void)=0;
 };
+
+}//End namespace
 
 #endif

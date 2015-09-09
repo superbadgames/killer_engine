@@ -17,7 +17,8 @@ Written by Maxwell Miller
 
 //Includes. These will be the files that everything will need to have access to
 //=====Killer1 Engine Includes=====
-#include <Engine/KillerMath.h>
+#include <Engine/Vector.hpp>
+#include <Engine/Matrix.hpp>
 #include <Engine/Point.hpp>
 #include <Engine/Color.hpp>
 
@@ -55,15 +56,15 @@ typedef double F64;
 typedef std::string text;
 
 //Matrix type
-typedef Matrix4<F32> matrix;
+typedef KillerEngine::Matrix4<F32> matrix;
 
 //Vector type
-typedef Vector<F32> vec;
+typedef KillerEngine::Vector<F32> vec;
 
 //Point typedef
-typedef Point<F32> point;
+typedef KillerEngine::Point<F32> point;
 
 //Color typedef
-typedef Color<F32> color;
+typedef KillerEngine::Color<F32> color;
 
 #endif

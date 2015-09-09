@@ -16,12 +16,14 @@ Written by Maxwell Miller
 #ifndef WORLD_MANAGER_H
 #define WORLD_MANAGER_H
 
-//Killer1 includes
+//=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/World.h>
 
-//3rd party includes
+//=====STL includes=====
 #include <map>
+
+namespace KillerEngine {
 
 class WorldManager{
 private:
@@ -53,5 +55,6 @@ protected:
 
 };
 
+}//End namespace
 
 #endif

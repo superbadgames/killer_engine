@@ -1,5 +1,7 @@
 #include <Engine/WorldManager.h>
 
+namespace KillerEngine {
+
 //--------------------------------------------------------------
 //Instance
 //--------------------------------------------------------------
@@ -51,3 +53,5 @@ void WorldManager::Update(void) {
 void WorldManager::Render(void) {
 	_activeWorld->Render();
 }
+
+}//End namsepace

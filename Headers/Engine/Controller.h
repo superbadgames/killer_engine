@@ -11,42 +11,55 @@ Written by Maxwell Miller
 #define CONTROLLER_H
 #define DIRECTINPUT_VERSION 0x0800
 
-//Engine includes
+//=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
 #include <Engine/Vector.hpp>
 
-//3rd party includes
+//=====DirectInput includes=====
 #include <dinput.h>
 
-class Controller {
-private:
-	IDirectInput8*    	 _directInput;
-	IDirectInputDevice8* _keyboard;
-	unsigned char 		 _keyboardState[256];
+namespace KillerEngine {
+	
+	class Controller {
+	private:
+		IDirectInput8*    	 _directInput;
+		IDirectInputDevice8* _keyboard;
+		unsigned char 		 _keyboardState[256];
+		static Controller*   _instance;
+		ErrorManager* 		 _errorManager;
 
-	static Controller* _instance;
-	ErrorManager* _errorManager;
+	public:
+//==========================================================================================================================
+//
+//Singleton Functions
+//
+//==========================================================================================================================
+		static Controller* Instance();
 
+		 void Init(HINSTANCE hInstance, HWND hwnd);
+		 
+		 void ShutDown(void);
 
-protected:
-	explicit Controller(void);
+//==========================================================================================================================
+//
+//Controller Functions
+//
+//==========================================================================================================================
+		void UpdateKeyboard(void);
 
+		unsigned char* GetKeyboardState(void) { return _keyboardState; }
 
-public:
-	static Controller* Instance();
+		Controller* operator =(Controller& c) { return &c; }
 
-	 void Init(HINSTANCE hInstance, HWND hwnd);
-	 void ShutDown(void);
-
-	void UpdateKeyboard(void);
-
-	unsigned char* GetKeyboardState(void);
-
-	Controller* operator =(Controller& c) {
-		return &c;
-	}
-};
-
+	protected:
+//==========================================================================================================================
+//
+//Constructor
+//
+//==========================================================================================================================
+		explicit Controller(void);		
+	};
+}//End namespace
 
 #endif

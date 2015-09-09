@@ -10,18 +10,20 @@ Written by Maxwell Miller
 #ifndef WORLD_H
 #define WORLD_H
 
-//Killer1 Includes
+//===Killer1 includes===
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
 #include <Engine/GameObject.hpp>
 #include <Engine/Renderer.h>
 
-//STL Includes
+//=====STL includes=====
 #include <map>
 
-//ExLib Headers
+//=====OGL includes
 #include <GL/gl.h>
 #include <GL/glu.h>
+
+namespace KillerEngine {
 
 class World{
 private:
@@ -64,5 +66,6 @@ public:
 		_mapHeight = h;
 	}
 };
+}//End namespace
 
 #endif

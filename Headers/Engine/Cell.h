@@ -23,92 +23,121 @@ Written by Maxwell Miller
 #ifndef CELL_H
 #define CELL_H
 
-//Killer1 inlucdes
+//=====Killer1 inlucdes=====
 #include <Engine/Atom.h>
-#include <Engine/Point.hpp>
 #include <Engine/Color.hpp>
 #include <Engine/Renderer.h>
 
-//3rd party and system includes
+//=====OGL includes=====
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+namespace KillerEngine {
 
-//=====Predefined classes=====
-class Renderer;
+//=====Foreward delcaration=====
+	class Renderer;
 
-class Cell {	
-private:	
-	Renderer* _renderer;
-	point     _position;
-	color     _color;
+	class Cell {	
+	private:	
+		Renderer* _renderer;
+		point     _position;
+		color     _color;
 
-	F32 _totalWidth;
-	F32	_right;
-	F32	_left;
-	
-	F32	_totalHeight;
-	F32	_top;
-	F32 _bottom;
+		F32 _totalWidth;
+		F32	_right;
+		F32	_left;
+		
+		F32	_totalHeight;
+		F32	_top;
+		F32 _bottom;
 
-public:
-	//=====Constructors=====
-	Cell(void);
-	Cell(const F32 w, const F32 h);
-	Cell(const F32 w, const F32 h, const point& p, const color& c);
-	Cell(const Cell& cell);
+	public:
+//==========================================================================================================================
+//
+//Constructors
+//
+//==========================================================================================================================
+		Cell(void);
+		
+		Cell(const F32 w, const F32 h);
+		
+		Cell(const F32 w, const F32 h, const point& p, const color& c);
+		
+		Cell(const Cell& cell);
 
-	//~Cell(void){  }
+		~Cell(void){  }
 
-	//=====operators======
-	Cell& operator=(const Cell& cell);
+//==========================================================================================================================
+//
+//Operator Overloads
+//
+//==========================================================================================================================
+		Cell& operator=(const Cell& cell) {
+			_position = cell.GetPosition();
+			_color 	  = cell.GetColor();
+			SetDimensions(cell.GetWidth(), cell.GetHeight());
 
-	//void ShutDown(void);
+			return *this;
+		}
+		
+//==========================================================================================================================
+//
+//Accessors
+//
+//==========================================================================================================================
+		void SetPosition(const point& p) { _position = p; }
+		
+		void SetColor(const color& c)    { _color = c; }
+		
+		void SetWidth(const F32 w) {
+			_totalWidth = w;
+			_right 		= w / 2;
+			_left  		= -w / 2;
+		}
 
-	void RenderAsTri(void);
-	void RenderAsSqr(void);
-	void RenderAsHex(void);
-	
-	//=====Accessors=====
-	void SetPosition(const point& p) { _position = p; }
-	void SetColor(const color& c)    { _color = c; }
-	
-	void SetWidth(const F32 w) {
-		_totalWidth = w;
-		_right 		= w / 2;
-		_left  		= -w / 2;
-	}
+		void SetHeight(const F32 h) {
+			_totalHeight = h;
+			_top 		 = h / 2;
+			_bottom 	 = -h / 2;
+		}
 
-	void SetHeight(const F32 h) {
-		_totalHeight = h;
-		_top 		 = h / 2;
-		_bottom 	 = -h / 2;
-	}
+		void SetDimensions(const F32 w, const F32 h) {
+			SetWidth(w);
+			SetHeight(h);
+		}
 
-	void SetDimensions(const F32 w, const F32 h) {
-		SetWidth(w);
-		SetHeight(h);
-	}
+		const point& GetPosition(void) const { return _position; }
+		
+		const F32*   GetPositionArray(void) const { return _position.Get(); }
+		
+		const color& GetColor(void) const { return _color; }
+		
+		const F32* GetColorArray(void) const { return _color.Get(); }
+		
+		const F32 GetWidth(void) const { return _totalWidth; }
+		
+		const F32 GetRight(void) const { return _right; }
+		
+		const F32 GetLeft(void) const { return _left; }
+	 	
+	 	const F32 GetHeight(void) const { return _totalHeight; }
+	 	
+	 	const F32 GetTop(void) const { return _top; }
+	 	
+	 	const F32 GetBottom(void) const { return _bottom; }
 
-	const point& GetPosition(void) const { return _position; }
-	
-	const F32*   GetPositionArray(void) const { return _position.Get(); }
-	
-	const color& GetColor(void) const { return _color; }
-	
-	const F32* GetColorArray(void) const { return _color.Get(); }
-	
-	const F32 GetWidth(void) const { return _totalWidth; }
-	
-	const F32 GetRight(void) const { return _right; }
-	
-	const F32 GetLeft(void) const { return _left; }
- 	
- 	const F32 GetHeight(void) const { return _totalHeight; }
- 	
- 	const F32 GetTop(void) const { return _top; }
- 	
- 	const F32 GetBottom(void) const { return _bottom; }
-};
+//==========================================================================================================================
+//
+//Cell Functions
+//
+//==========================================================================================================================
+
+		void RenderAsTri(void);
+		
+		void RenderAsSqr(void);
+		
+		void RenderAsHex(void);
+	};
+}//End namespace
 
 #endif
