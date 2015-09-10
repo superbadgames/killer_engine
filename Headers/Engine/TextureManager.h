@@ -4,8 +4,8 @@ textures are added to memory from the disc. In order to make this process
 as easy as possible the functions written to control how this works uses
 the DevIL library. See http://openil.sourceforge.net/about.php for details.
 
-DevIL uses the GNU liscense, which is included in the documentation for 
-reference. 
+SOIL is the library used to actually load the images from the hard drive 
+and use the image data to create the OGL texture.  
 
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
@@ -24,10 +24,9 @@ Written by Maxwell Miller
 #include <map>
 using std::map;
 
-//=====DevIL includes=====
-#include <IL/il.h>
-#include <IL/ilu.h>
-#include <IL/ilut.h>
+
+//=====SOIL includes=====
+#include <SOIL/SOIL.h>
 
 //=====OGL includes=====
 #include <GL/gl.h>
@@ -57,7 +56,7 @@ namespace KillerEngine {
 //TextureManager Functions
 //
 //==========================================================================================================================
-		void LoadTexture(text path, text name);
+		void LoadTexture(text path, text name, S32 width, S32 height);
 		Texture& GetTexture(text name) { return _loadedTextures.find(name)->second; }
 
 	protected:
@@ -66,7 +65,7 @@ namespace KillerEngine {
 //Constructors
 //
 //==========================================================================================================================		
-		TextureManager(void);
+		TextureManager(void): _errorManager(ErrorManager::Instance()) {  }
 		~TextureManager(void) {  }
 
 	};

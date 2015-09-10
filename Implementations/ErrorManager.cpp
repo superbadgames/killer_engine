@@ -62,8 +62,8 @@ namespace KillerEngine {
 					MessageBox(NULL, _errorMessages[i].c_str(), "DIRECT_INPUT", MB_ICONERROR | MB_OK);
 					break;
 				}
-				case EC_DevIL: {
-					MessageBox(NULL, _errorMessages[i].c_str(), "DEVIL", MB_ICONERROR | MB_OK);						
+				case EC_TextureManager: {
+					MessageBox(NULL, _errorMessages[i].c_str(), "TEXTURE_MANAGER", MB_ICONERROR | MB_OK);						
 				}
 				default: break;
 				}

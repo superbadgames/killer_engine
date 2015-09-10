@@ -11,15 +11,6 @@ namespace KillerEngine {
 //_CompileShaders
 //=======================================================================================================
 	GLuint Renderer::_CompileShaders(void){
-
-	//========================================================================
-	/*
-		ilInit();
-		iluInit();
-		ilutRenderer(ILUT_OPENGL);
-	*/
-	//=========================================================================	
-
 		GLuint vertexShaderProgram;
 		GLuint tessControlProgram;
 		GLuint tessEvalProgram;
@@ -146,7 +137,6 @@ namespace KillerEngine {
 
 		glUniformMatrix4fv(transform_loc, 1, GL_FALSE, data);
 	}
-
 
 //==========================================================================================================================
 //

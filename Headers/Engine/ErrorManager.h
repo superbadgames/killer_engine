@@ -33,7 +33,7 @@ namespace KillerEngine {
 		EC_Windows,
 		EC_OpenGL,
 		EC_DirectInput,
-		EC_DevIL
+		EC_TextureManager
 	};
 
 	class ErrorManager {

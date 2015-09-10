@@ -32,10 +32,8 @@ Written by Maxwell Miller
 #include <GL/glu.h>
 #include <GL/wglext.h>
 
-//=====DevIL includes=====
-#include <IL/il.h>
-#include <IL/ilu.h>
-#include <IL/ilut.h>
+//=====SOIL includes=====
+#include <SOIL/SOIL.h>
 
 
 //=====STL Includes=====
