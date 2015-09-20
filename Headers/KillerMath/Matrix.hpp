@@ -46,9 +46,9 @@ Written by Maxwell Miller
 #define MATRIX_H
 
 //=====Killer1 includes=====
-#include <Engine/Atom.h>
+#include <KillerMath/Atom.h>
 
-namespace KillerEngine {
+namespace KillerMath {
 
 	template<typename T>
 	class Matrix4 {

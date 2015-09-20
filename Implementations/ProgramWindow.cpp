@@ -99,42 +99,35 @@ namespace KillerEngine {
                                     _errorManager(ErrorManager::Instance()),
                                     _controller(Controller::Instance())
     {
-    	_totalWidth 	= 800;
-    	_totalHeight 	= 600;
-    	_right			= _totalWidth / 2;
-        _left			= -_totalWidth / 2;
-    	_top			= _totalHeight / 2;
-        _bottom			= -_totalHeight / 2;
-        
     	
-        _errorManager->SetError(EC_OpenGL, "Called Default Constructor for ProgramWindow");
     }
-
-    ProgramWindow::ProgramWindow(bool isFullScreen, S32 width, S32 height, text wndName):
-    	_isFullScreen(isFullScreen),
-    	_wndName(wndName),
-    	_hwnd(NULL),
-        _hglrc(NULL),
-        _errorManager(ErrorManager::Instance()),
-        _controller(Controller::Instance())
-    {
-        _totalWidth     = width;
-        _totalHeight    = height;
-        _right          = width / 2;
-        _left           = -width / 2;
-        _top            = height / 2;
-        _bottom         = -height / 2;
-    }
-
 //==========================================================================================================================
 //
 //ProgramWindow Functions
 //
 //==========================================================================================================================
 //=======================================================================================================
+//Instance
+//=======================================================================================================
+    ProgramWindow* ProgramWindow::_instance = NULL;
+
+    ProgramWindow* ProgramWindow::Instance(void) {
+        if(_instance == NULL) { _instance = new ProgramWindow; }
+
+        return _instance;
+    }
+
+//=======================================================================================================
 //InitWindow
 //=======================================================================================================    
-    void ProgramWindow::InitWindow(void) {
+    void ProgramWindow::Init(S32 width, S32 height, text wndName, bool isFullScreen) {
+        _totalWidth     = width;
+        _totalHeight    = height;
+        _right          = _totalWidth / 2;
+        _left           = -_totalWidth / 2;
+        _top            = _totalHeight / 2;
+        _bottom         = -_totalHeight / 2;
+
         //=========Window Class registration and creation===========
     	_wndClass.cbSize        = sizeof(WNDCLASSEX);
         _wndClass.style 		= CS_HREDRAW | CS_VREDRAW | CS_OWNDC; //Window Style

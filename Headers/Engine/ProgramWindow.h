@@ -30,6 +30,7 @@ namespace KillerEngine {
 
 	class ProgramWindow{
 	private:
+		static ProgramWindow* _instance;
 		bool 		  _isFullScreen;
 		static S32    _totalWidth;
 		static S32    _totalHeight;
@@ -40,6 +41,7 @@ namespace KillerEngine {
 		text 		  _wndName;
 		ErrorManager* _errorManager;
 		Controller*   _controller;
+		GLfloat 	  _bgColor[4];
 
 		//=====Windows Variables=====
 		HWND _hwnd;
@@ -56,15 +58,13 @@ namespace KillerEngine {
 		
 		void _SetPixelFormat(void);
 		
-	public:
+public:
 //==========================================================================================================================
 //
 //Constructors
 //
 //==========================================================================================================================
 		ProgramWindow(void);
-		
-		ProgramWindow(bool isFullScreen, S32 width, S32 height, text wndName);
 		
 		~ProgramWindow(void) {  }
 
@@ -95,11 +95,24 @@ namespace KillerEngine {
 //ProgramWindow Functions
 //
 //==========================================================================================================================
-		void InitWindow(void);
+		static ProgramWindow* Instance(void);
+
+		void Init(S32 width, S32 height, text wndName, bool isFullScreen);
 		
 		void ProcessWndEvents(void);
 		
-		void BufferSwap(void) { glFlush(); SwapBuffers(_hdc); }
+		void BufferSwap(void) { 
+			glFlush(); 
+			SwapBuffers(_hdc); 
+			glClearBufferfv(GL_COLOR, 0, _bgColor);
+		}
+
+		void SetBackgroundColor(color& c) {
+			_bgColor[0] = c.GetRed();
+			_bgColor[1] = c.GetGreen();
+			_bgColor[2] = c.GetBlue();
+			_bgColor[3] = c.GetAlpha();
+		}
 		
 //==========================================================================================================================
 //

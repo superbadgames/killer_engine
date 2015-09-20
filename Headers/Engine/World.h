@@ -45,22 +45,32 @@ public:
 	~World(void) {  }
 
 	virtual void InitWorld(S32 w, S32 h, color& c)=0;
+	
 	virtual void Update(void)=0;
+	
 	virtual void Render(void)=0;
 
 	//======Accessors=====
 	void AddObjectToWorld(text objId, GameObject* obj);
+	
 	void RenderObjects(void) {
 		for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
-		i->second->Render();
+			i->second->vRender();
+		}
 	}
-	}
+	
 	void SetBackgroundColor(color& c) { _bgColor = c; }
+	
 	void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
+	
 	S32  GetMapWidth(void)   { return _mapWidth; }
+	
 	S32  GetMapHeight(void)  { return _mapHeight; }
+	
 	void SetMapWidth(S32 w)  { _mapWidth = w; }
+	
 	void SetMapHeight(S32 h) { _mapHeight = h; }
+	
 	void SetMapDimensions(S32 w, S32 h) {
 		_mapWidth  = w;
 		_mapHeight = h;

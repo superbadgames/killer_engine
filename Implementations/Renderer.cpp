@@ -23,14 +23,17 @@ namespace KillerEngine {
 			"#version 430 core																\n"
 			"																				\n"
 			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec4 color; 											\n"					
+			//"layout (location = 1) in vec4 color; 											\n"					
+			"layout (location = 1) in vec2 tex_coord; 											\n"					
 			"uniform mat4 transform_mat;													\n"
 			"																				\n"
-			"out vec4 vs_color;																\n"
+			//"out vec4 vs_color;																\n"
+			"out vec2 vs_tex_coord;																\n"
 			"																				\n"
 			"void main(void) {																\n"
 			"	gl_Position = transform_mat * position;										\n"
-			"	vs_color = color;															\n"
+			//"	vs_color = color;															\n"
+			"	vs_tex_coord = vec2(tex_coord.x, 1.0f - tex_coord.y);						\n"
 			"}																				\n"
 		};
 
@@ -69,14 +72,16 @@ namespace KillerEngine {
 		static const GLchar* _fragmentShaderSource[] = {
 			"#version 430 core																\n"
 			"																				\n"
-			"uniform sampler2D sampler;														\n"
-			"in vec4 vs_color;																\n"
+			"uniform sampler2D ourTexture;														\n"
+			//"in vec4 vs_color;																\n"
+			"in vec2 vs_tex_coord;																\n"
 			"out vec4 color;																\n"
 			"																				\n"
 			"void main(void) {																\n"
 			//=====test for textures, failed finish later=====
 			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
-			"	color = vs_color;															\n"
+			//"	color = vs_color;															\n"
+			"	color = texture(ourTexture, vs_tex_coord);															\n"
 			"}																				\n"
 		};
 
@@ -178,7 +183,7 @@ namespace KillerEngine {
 		point pos = cell.GetPosition();
 		color col = cell.GetColor();
 
-		//First Vertext
+		//=====First Vertext=====
 		_triVerticies.push_back(pos.GetX() + cell.GetLeft());
 		_triVerticies.push_back(pos.GetY() + cell.GetBottom());
 		_triVerticies.push_back(pos.GetZ());
@@ -187,7 +192,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_triBatch;
 		
-		//Second Vertex
+		//=====Second Vertex=====
 		_triVerticies.push_back(pos.GetX() + cell.GetRight());
 		_triVerticies.push_back(pos.GetY() + cell.GetBottom());
 		_triVerticies.push_back(pos.GetZ());
@@ -196,7 +201,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_triBatch;
 
-		//Third Vertex
+		//=====Third Vertex=====
 		_triVerticies.push_back(pos.GetX());
 		_triVerticies.push_back(pos.GetY() + cell.GetTop());
 		_triVerticies.push_back(pos.GetZ());
@@ -205,19 +210,19 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_triBatch;
 
-		//First Color
+		//=====First Color=====
 		_triColors.push_back(col.GetRed());
 		_triColors.push_back(col.GetGreen());
 		_triColors.push_back(col.GetBlue());
 		_triColors.push_back(col.GetAlpha());
 
-		//Second Color
+		//=====Second Color=====
 		_triColors.push_back(col.GetRed());
 		_triColors.push_back(col.GetGreen());
 		_triColors.push_back(col.GetBlue());
 		_triColors.push_back(col.GetAlpha());
 		
-		//Third Color
+		//=====Third Color=====
 		_triColors.push_back(col.GetRed());
 		_triColors.push_back(col.GetGreen());
 		_triColors.push_back(col.GetBlue());
@@ -235,7 +240,7 @@ namespace KillerEngine {
 		point pos = cell.GetPosition();
 		color col = cell.GetColor();
 
-		//First Vertex
+		//=====First Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetLeft());
 		_sqrVertices.push_back(pos.GetY() + cell.GetBottom());
 		_sqrVertices.push_back(pos.GetZ());
@@ -244,7 +249,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//Second Vertex
+		//=====Second Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetRight());
 		_sqrVertices.push_back(pos.GetY() + cell.GetBottom());
 		_sqrVertices.push_back(pos.GetZ());
@@ -253,7 +258,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//Third Vertex
+		//=====Third Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetLeft());
 		_sqrVertices.push_back(pos.GetY() + cell.GetTop());
 		_sqrVertices.push_back(pos.GetZ());
@@ -262,7 +267,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//Fourth Vertex
+		//=====Fourth Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetRight());
 		_sqrVertices.push_back(pos.GetY() + cell.GetTop());
 		_sqrVertices.push_back(pos.GetZ());
@@ -271,7 +276,7 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//Fifth Vertex
+		//=====Fifth Verte=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetRight());
 		_sqrVertices.push_back(pos.GetY() + cell.GetBottom());
 		_sqrVertices.push_back(pos.GetZ());
@@ -281,7 +286,7 @@ namespace KillerEngine {
 		++_sqrBatch;
 
 
-		//Sixth Vertex
+		//=====Sixth Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetLeft());
 		_sqrVertices.push_back(pos.GetY() + cell.GetTop());
 		_sqrVertices.push_back(pos.GetZ());
@@ -290,37 +295,37 @@ namespace KillerEngine {
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//First Color
+		//=====First Color=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		//Second Color
+		//=====Second Color=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		//Third Color
+		//=====Third Color=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		//Fourth Color	
+		//=====Fourth Color	=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		//Fifth Color	
+		//=====Fifth Color=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		//Sixth Color	
+		//=====Sixth Color	=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
@@ -577,7 +582,7 @@ namespace KillerEngine {
 
 		//=====Colors=====
 
-		//First Triangle color
+		//=====First Triangle color=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -593,7 +598,7 @@ namespace KillerEngine {
 		_hexColors.push_back(col.GetBlue());
 		_hexColors.push_back(col.GetAlpha());
 		
-		//Second Triangle Color
+		//=====Second Triangle Color=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -609,7 +614,7 @@ namespace KillerEngine {
 		_hexColors.push_back(col.GetBlue());
 		_hexColors.push_back(col.GetAlpha());
 		
-		//Third Triangle Color
+		//=====Third Triangle Color=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -625,7 +630,7 @@ namespace KillerEngine {
 		_hexColors.push_back(col.GetBlue());
 		_hexColors.push_back(col.GetAlpha());
 		
-		//Fourth Triangle Color
+		//=====Fourth Triangle Color=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -641,7 +646,7 @@ namespace KillerEngine {
 		_hexColors.push_back(col.GetBlue());
 		_hexColors.push_back(col.GetAlpha());
 		
-		//Fifth Triangle Color
+		//=====Fifth Triangle Colo=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -657,7 +662,7 @@ namespace KillerEngine {
 		_hexColors.push_back(col.GetBlue());
 		_hexColors.push_back(col.GetAlpha());
 		
-		//Sixth Triangel Color
+		//=====Sixth Triangel Color=====
 		_hexColors.push_back(col.GetRed());
 		_hexColors.push_back(col.GetGreen());
 		_hexColors.push_back(col.GetBlue());
@@ -675,86 +680,177 @@ namespace KillerEngine {
 	}
 
 //=======================================================================================================
+//AddTexturedTri
+//=======================================================================================================
+	void Renderer::AddTexturedTri(const Cell& cell, const Texture& texture) {
+		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
+
+		GLuint currentTextureId = _textureManager->GetCurrentTextureId();
+
+		if(texture.GetId() != currentTextureId) { _textureManager->SetCurrentTextureId(texture.GetId()); }
+
+		AddTri(cell);
+
+		//=====Bottom Left=====
+		_triUVs.push_back(0.0f);
+		_triUVs.push_back(0.0f);
+
+		//=====Bottom Right=====
+		_triUVs.push_back(1.0f);
+		_triUVs.push_back(0.0f);
+
+		//=====Top=====
+		_triUVs.push_back(0.5f);
+		_triUVs.push_back(1.0f);
+	}
+
+//=======================================================================================================
+//AddTexturedSqr
+//=======================================================================================================
+	void Renderer::AddTexturedSqr(const Cell& cell, const Texture& texture) {
+		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
+
+		GLuint currentTextureId = _textureManager->GetCurrentTextureId();
+
+		if(texture.GetId() != currentTextureId) { 
+			Draw();
+			_textureManager->SetCurrentTextureId(texture.GetId()); 
+		}
+
+		AddSqr(cell);
+
+		//=====UVs=====
+		//=====Bottom Left=====
+		_sqrUVs.push_back(0.0f);
+		_sqrUVs.push_back(0.0f);
+
+		//=====Bottom Right=====
+		_sqrUVs.push_back(1.0f);
+		_sqrUVs.push_back(0.0f);
+
+		//=====Top Left=====
+		_sqrUVs.push_back(0.0f);
+		_sqrUVs.push_back(1.0f);
+		
+		//=====Top Right=====
+		_sqrUVs.push_back(1.0f);
+		_sqrUVs.push_back(1.0f);
+
+		//=====Bottom Right=====
+		_sqrUVs.push_back(1.0f);
+		_sqrUVs.push_back(0.0f);
+
+		//=====Top Left=====
+		_sqrUVs.push_back(0.0f);
+		_sqrUVs.push_back(1.0f);
+
+	}
+
+//=======================================================================================================
+//AddTexturedHex
+//=======================================================================================================
+	void Renderer::AddTexturedHex(const Cell& cell, const Texture& texture) {
+		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
+
+		AddHex(cell);
+	}
+
+//=======================================================================================================
 //Draw
 //=======================================================================================================
 	void Renderer::Draw(void) {
 		if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
 
-/*
-		ILuint imageName;
-
-		ilGenImages(1, &imageName);
-		ilBindImage(imageName);
+		//glClearBufferfv(GL_COLOR, 0, _bgColor);		
 		
-		const char* firstBoxPath = "../Assets/first_box.png";
-		const char* visibleBoxFullPath = "../Assets/visible_box_full.png";
+		 if(_triBatch > 0) {
+		    
+		    if(_triUVs.size() <= 0) {
 
-		if(!ilLoadImage(visibleBoxFullPath)) { _errorManager->SetError(EC_DevIL, "ilLoadImage returned false"); }
-		else {
-			if(!ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE)) { _errorManager->SetError(EC_DevIL, "ilConvertImage returned false"); }
-			else {
-				GLuint texture;
-				glGenTextures(1, &texture);
-				glBindTexture(GL_TEXTURE_2D, texture);
+			    glUseProgram(_renderingProgram);
 
-				glTexImage2D
-				(
-					GL_TEXTURE_2D,					//target 
-					0, 								//first mipmap level
-					ilGetInteger(IL_IMAGE_BPP), 	//internal format
-					ilGetInteger(IL_IMAGE_WIDTH),	//width
-	     			ilGetInteger(IL_IMAGE_HEIGHT),  //height
-	     			0, 								//border
-	     			ilGetInteger(IL_IMAGE_FORMAT),  //format
-	     			GL_UNSIGNED_BYTE,				//type
-	     			ilGetData()						//date pointer
-	     		);
+				GLuint buffers[2];
+
+				glGenBuffers(2, buffers);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triVerticies.size()), &_triVerticies[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(0);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triColors.size()), &_triColors[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(1);
+
+				
+				glDrawArrays(GL_TRIANGLES, 0, _triBatch);
+			}
+			else if(_triUVs.size() >= 1) {
+				glUseProgram(_renderingProgram);
+
+				GLuint buffers[2];
+
+				glGenBuffers(2, buffers);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triVerticies.size()), &_triVerticies[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(0);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triUVs.size()), &_triUVs[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(1);
+
+				glDrawArrays(GL_TRIANGLES, 0, _triBatch);
 			}
 		}
 
-		ilDeleteImages(1, &imageName);
-
-*/
-		glClearBufferfv(GL_COLOR, 0, _bgColor);
-		
-		 if(_triBatch > 0) {
-		    glUseProgram(_renderingProgram);
-
-			GLuint buffers[2];
-
-			glGenBuffers(2, buffers);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triVerticies.size()), &_triVerticies[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triColors.size()), &_triColors[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(1);
-
-			
-			glDrawArrays(GL_TRIANGLES, 0, _triBatch);
-		}
-
 		if(_sqrBatch > 0) {
-		    glUseProgram(_renderingProgram);
+		    
+		    if(_sqrUVs.size() <= 1) {
 
-			GLuint buffers[2];
-			glGenBuffers(2, buffers);
+			    glUseProgram(_renderingProgram);
 
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrVertices.size()), &_sqrVertices[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(0);
+				GLuint buffers[2];
+				glGenBuffers(2, buffers);
 
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrColors.size()), &_sqrColors[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(1);
-			
-			glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrVertices.size()), &_sqrVertices[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(0);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrColors.size()), &_sqrColors[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(1);
+				
+				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
+			}
+
+			else if(_sqrUVs.size() >= 1) {
+
+				glUseProgram(_renderingProgram);
+
+				GLuint buffers[2];
+				glGenBuffers(2, buffers);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrVertices.size()), &_sqrVertices[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(0);
+
+				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrUVs.size()), &_sqrUVs[0], GL_STATIC_DRAW);
+				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+				glEnableVertexAttribArray(1);
+
+				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
+
+				glDeleteBuffers(2, buffers);
+
+			}	
 		}
 
 		if(_hexBatch > 0) {
@@ -776,11 +872,15 @@ namespace KillerEngine {
 			glDrawArrays(GL_TRIANGLES, 0, _hexBatch);
 		}
 
+
+
 		//=====Reset All Containers and Counters=====
 			_triVerticies.clear();
 			_triColors.clear();
+			_triUVs.clear();
 			_sqrVertices.clear();
 			_sqrColors.clear();
+			_sqrUVs.clear();
 			_hexVertices.clear();
 			_hexColors.clear();
 
@@ -795,7 +895,14 @@ namespace KillerEngine {
 //Constructor
 //
 //=======================================================================================================
-	Renderer::Renderer(void): _maxBatchSize(1000), _totalVerticesInBatch(0), _errorManager(ErrorManager::Instance()) { 
+	Renderer::Renderer(void): _maxBatchSize(1000), 
+							  _totalVerticesInBatch(0),
+							  _triBatch(0),
+							  _sqrBatch(0),
+							  _hexBatch(0), 
+							  _errorManager(ErrorManager::Instance()),
+							  _textureManager(TextureManager::Instance()),
+							  _programWindow(ProgramWindow::Instance()) { 
 		_renderingProgram = _CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);
 		glBindVertexArray(_vertexArrayObject);

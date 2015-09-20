@@ -67,11 +67,6 @@ namespace KillerEngine {
 //Constructor
 //
 //==========================================================================================================================
-	Controller::Controller(void) {
-		_errorManager->Instance();
-
-		_directInput = 0;
-		_keyboard    = 0;
-	}
+	Controller::Controller(void) : _errorManager(ErrorManager::Instance()), _directInput(0), _keyboard(0) {	}
 
 }//End namespace	

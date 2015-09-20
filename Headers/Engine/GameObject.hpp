@@ -29,51 +29,102 @@ Written by Maxwell Miller
 //=====Engine Includes======
 #include <Engine/Atom.h>
 #include <Engine/Cell.h>
+#include <Engine/Texture.hpp>
 
 namespace KillerEngine {
 	
 class GameObject{
 private:
-	Cell _cell;
-	bool _active;
+	text 	_id;
+	Cell 	_cell;
+	Texture _texture;
+	bool 	_active;
 
 protected:
 	
 
  
 public:
-	//=====Constructors=====
-	GameObject(void) : _cell(), _active(false) {  }
-	GameObject(const Cell& cell) : _cell(cell), _active(false) {  }
-	GameObject(bool active) : _cell(), _active(active) {  }
-	GameObject(const Cell& cell, bool active) : _cell(cell), _active(active) {  }
+//==========================================================================================================================
+//
+//Constructors
+//
+//==========================================================================================================================
+	GameObject(void) : _id(), _cell(), _texture(), _active(false) {  }
+	
+	GameObject(const text id, const Cell& cell) : _id(id), _cell(cell), _texture(), _active(false) {  }
+	
+	GameObject(const text id, const Cell& cell, bool active) : _id(id), _cell(cell), _texture(), _active(active) {  }
+	
+	GameObject(const text id, const Cell& cell, const Texture& texture) : _id(id), _cell(cell), _texture(texture), _active(false) {  }
+	
+	GameObject(const text id, const Cell& cell, const Texture& texture, bool active) : _id(id), _cell(cell), _texture(texture), _active(active) {  }
 
-	//=====Desctructor=====
 	//virtual ~GameObject(void){  }
 
 	//virtual void v_ShutDown(void);
 
-	void RenderTriCell(void) { _cell.RenderAsTri(); }
-	void RenderSqrCell(void) { _cell.RenderAsSqr(); }
-	void RenderHexCell(void) { _cell.RenderAsHex(); }
+//==========================================================================================================================
+//
+//Accessors
+//
+//==========================================================================================================================
+	const text GetId(void) { return _id; }
 
-	//=====Accessors=====
-	void SetPosition(const point& p) { _cell.SetPosition(p); }
-	void SetColor(const color& c)    { _cell.SetColor(c); }
-	void SetDimensions(const F32 w, const F32 h)	   { _cell.SetDimensions(w, h); }
+	void SetId(text id) { _id = id; }
+
+	const color& GetColor(void) { return _cell.GetColor(); }
+
+	void SetColor(const color& c) { _cell.SetColor(c); }
+
+
+	const Texture& GetTexture(void) { return _texture; }
+
+	void SetTexture(const Texture& texture) { _texture = texture; }
 
 
 	const point& GetPosition(void) { return _cell.GetPosition(); }
-	const color& GetColor(void)    { return _cell.GetColor(); }
-	const F32    GetWidth(void)    { return _cell.GetWidth(); }
+	
+	void SetPosition(const point& p) { _cell.SetPosition(p); }
+	
+	
+	const F32 GetWidth(void) { return _cell.GetWidth(); }
+
+	void SetDimensions(const F32 w, const F32 h) { _cell.SetDimensions(w, h); }
+	
+	
 	const bool   GetActive(void)   { return _active; }
 
 	void SetActive(void)   { _active = true; }
+	
 	void SetInactive(void) { _active = false; }
 
-	//=====Virtual functions=====
-	virtual void Update(void)=0;
-	virtual void Render(void)=0;
+//==========================================================================================================================
+//
+//GameObject Functions
+//
+//==========================================================================================================================
+	void RenderTriCell(void) { _cell.RenderAsTri(); }
+	
+	void RenderSqrCell(void) { _cell.RenderAsSqr(); }
+	
+	void RenderHexCell(void) { _cell.RenderAsHex(); }
+
+	void RenderTexturedTriCell(void) { _cell.RenderTexturedTri(_texture); }
+	
+	void RenderTexturedSqrCell(void) { _cell.RenderTexturedSqr(_texture); }
+	
+	void RenderTexturedHexCell(void) { _cell.RenderTexturedHex(_texture); }
+
+
+//==========================================================================================================================
+//
+//virtual functions
+//
+//==========================================================================================================================
+	virtual void vUpdate(void)=0;
+	
+	virtual void vRender(void)=0;
 };
 
 }//End namespace

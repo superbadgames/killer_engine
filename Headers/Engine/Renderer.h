@@ -25,6 +25,9 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/Cell.h>
+#include <Engine/ProgramWindow.h>
+#include <Engine/TextureManager.h>
+#include <Engine/Texture.hpp>
 #include <Engine/ErrorManager.h>
 
 //=====OGL includes=====
@@ -48,7 +51,8 @@ namespace KillerEngine {
 	private:
 		static Renderer* 	 _instance;
 		ErrorManager* 		 _errorManager;
-		GLfloat 			 _bgColor[4];
+		ProgramWindow* 		 _programWindow;
+		TextureManager* 	 _textureManager;
 		U32 				 _maxBatchSize;
 		U32 				 _totalVerticesInBatch;
 		U32 				 _triBatch;
@@ -56,10 +60,13 @@ namespace KillerEngine {
 		U32 				 _hexBatch;
 		std::vector<F32> 	 _triVerticies;
 		std::vector<F32> 	 _triColors;
+		std::vector<F32>     _triUVs;
 		std::vector<F32> 	 _sqrVertices;
 		std::vector<F32> 	 _sqrColors;
+		std::vector<F32> 	 _sqrUVs;
 		std::vector<F32> 	 _hexVertices;
-		std::vector<F32> 	 _hexColors;	
+		std::vector<F32> 	 _hexColors;
+		std::vector<F32>	 _hexUvs;	
 		GLuint   			 _renderingProgram;
 		GLuint   			 _vertexArrayObject;
 		static const GLchar* _vertexShaderSource[];
@@ -74,6 +81,7 @@ namespace KillerEngine {
 //
 //==========================================================================================================================
 		GLuint _CompileShaders(void);
+		
 		void   _SetOrthoProjection(void);
 
 	public:
@@ -98,18 +106,19 @@ namespace KillerEngine {
 //Renderer Funtions
 //
 //==========================================================================================================================
-		void SetBackgroundColor(color& c) {
-			_bgColor[0] = (GLfloat)c.GetRed();
-			_bgColor[1] = (GLfloat)c.GetGreen();
-			_bgColor[2] = (GLfloat)c.GetBlue();
-			_bgColor[3] = (GLfloat)c.GetAlpha();
-		}
+		void SetBackgroundColor(color& c) { _programWindow->SetBackgroundColor(c); }
 
 		void AddTri(const Cell& cell);
 		
 		void AddSqr(const Cell& cell);
 		
 		void AddHex(const Cell& cell);
+
+		void AddTexturedTri(const Cell& cell, const Texture& texture);
+		
+		void AddTexturedSqr(const Cell& cell, const Texture& texture);
+		
+		void AddTexturedHex(const Cell& cell, const Texture& texture);
 		
 		void Draw(void);
 		

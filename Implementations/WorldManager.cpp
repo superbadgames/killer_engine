@@ -15,29 +15,26 @@ WorldManager* WorldManager::Instance(void) {
 //--------------------------------------------------------------
 //AddWorld
 //--------------------------------------------------------------
-bool WorldManager::AddWorld(text worldID, World* world) {
-	_worlds[worldID] = world;
-	return true;
+void WorldManager::AddWorld(const text worldID, World* world) {
+	_worlds[worldID] = world; 
 }
 
 //--------------------------------------------------------------
 //RemoveWorld
 //--------------------------------------------------------------
-bool WorldManager::RemoveWorld(text worldID) {
+void WorldManager::RemoveWorld(text worldID) {
 	auto w = _worlds.find(worldID);
 	_worlds.erase(w);
-	return true;
 }
 
 //--------------------------------------------------------------
 //SetActiveWorld
 //--------------------------------------------------------------
-bool WorldManager::SetActiveWorld(text worldID) {
+void WorldManager::SetActiveWorld(text worldID) {
 	_activeWorldID = worldID;
 	auto w = _worlds.find(worldID);
 	_activeWorld = w->second;
 	_activeWorld->ActivateBackgroundColor();
-	return true;
 }
 
 //--------------------------------------------------------------

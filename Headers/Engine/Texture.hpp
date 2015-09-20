@@ -43,22 +43,24 @@ namespace KillerEngine {
 
 		Texture(GLuint id, S32 width, S32 height) : _id(id), _width(width), _height(height) {  }
 
-		Texture(Texture& T) : _id(T.GetId()), _width(T.GetWidth()), _height(T.GetHeight()) {  }
+		Texture(const Texture& T) : _id(T.GetId()), _width(T.GetWidth()), _height(T.GetHeight()) {  }
+
+		Texture(const Texture* T) : _id(T->GetId()), _width(T->GetWidth()), _height(T->GetHeight()) {  }
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		 GLuint GetId(void) { return _id; }
+		GLuint GetId(void) const { return _id; }
 
 		void SetId(GLuint id) { _id = id; }
 
-		S32 GetWidth(void) { return _width; }
+		S32 GetWidth(void) const { return _width; }
 
 		void SetWidth(S32 w) { _width = w; }
 
-		S32 GetHeight(void) { return _height; }
+		S32 GetHeight(void) const { return _height; }
 
 		void SetHeight(S32 h) { _height = h; }
 
@@ -67,10 +69,10 @@ namespace KillerEngine {
 //Operator Overload
 //
 //==========================================================================================================================
-		Texture& operator=(Texture* T) {
-			_id = T->GetId();
-			_width = T->GetWidth();
-			_height = T->GetHeight();
+		Texture& operator=(const Texture& T) {
+			_id = T.GetId();
+			_width = T.GetWidth();
+			_height = T.GetHeight();
 
 			return *this;
 		}

@@ -14,7 +14,7 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
-#include <Engine/Vector.hpp>
+#include <KillerMath/Vector.hpp>
 
 //=====DirectInput includes=====
 #include <dinput.h>

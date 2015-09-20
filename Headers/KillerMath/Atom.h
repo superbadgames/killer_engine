@@ -15,29 +15,6 @@ Written by Maxwell Miller
 #ifndef ATOM_H
 #define ATOM_H
 
-//Includes. These will be the files that everything will need to have access to
-//=====Killer1 Engine Includes=====
-#include <Engine/Color.hpp>
-
-//=====KillerMath Includes=====
-#include <KillerMath/Vector.hpp>
-#include <KillerMath/Matrix.hpp>
-#include <KillerMath/Point.hpp>
-
-//=====OGL Includes=====
-#include <GL/gl3w.h>
-
-//=====Windows Includes=====
-#include <windows.h>
-
-//=====STD Includes=====
-#include <string>
-#include <memory>
-
-//=====Global usings=====
-//template<typename T>
-//using shared_prt = std::shared_prt<T>;
-
 //Signed Typedefs
 typedef signed __int8   S8;
 typedef signed __int16  S16;
@@ -53,22 +30,5 @@ typedef unsigned __int64 U64;
 //Floating types
 typedef float  F32;
 typedef double F64;
-
-//text type 
-typedef std::string text;
-
-//Color typedef
-typedef KillerEngine::Color<F32> color;
-
-//Matrix type
-typedef KillerMath::Matrix4<F32> matrix;
-
-//Vector type
-typedef KillerMath::Vector<F32> vec;
-
-//Point typedef
-typedef KillerMath::Point<F32> point;
-
-
 
 #endif

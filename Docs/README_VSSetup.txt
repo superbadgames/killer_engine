@@ -49,3 +49,7 @@ Librarian -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetN
 
 -> Debugging -> Map File : $(TargetDir)$(TargetName).map [May have to enable the file to even be made]
 
+Build Events -> Pre Build Events -> 
+
+del $(ProjectDir)..\..\Headers\KillerMath /S /Q
+xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y

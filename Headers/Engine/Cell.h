@@ -26,6 +26,7 @@ Written by Maxwell Miller
 //=====Killer1 inlucdes=====
 #include <Engine/Atom.h>
 #include <Engine/Color.hpp>
+#include <Engine/Texture.hpp>
 #include <Engine/Renderer.h>
 
 //=====OGL includes=====
@@ -128,7 +129,7 @@ namespace KillerEngine {
 
 //==========================================================================================================================
 //
-//Cell Functions
+//Cell Functions 	 	
 //
 //==========================================================================================================================
 
@@ -137,6 +138,11 @@ namespace KillerEngine {
 		void RenderAsSqr(void);
 		
 		void RenderAsHex(void);
+		void RenderTexturedTri(const Texture& texture);
+		
+		void RenderTexturedSqr(const Texture& texture);
+		
+		void RenderTexturedHex(const Texture& texture);
 	};
 }//End namespace
 

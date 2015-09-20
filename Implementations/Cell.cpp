@@ -25,19 +25,25 @@ namespace KillerEngine {
 //==========================================================================================================================
 //Implement later, when I understand more about what needs to happen here.
 
-
 //==========================================================================================================================
 //
-//RenderAs* 
-//
+//Cell Functions
 //This is a group of functions that will be used to decide the ultimate end shape of the cell on the screen. This are imple-
-//mented directly in the Renderer. 
-//
+//mented directly in the Renderer.
+//							  					 
 //==========================================================================================================================
+
 	void Cell::RenderAsTri(void) { _renderer->AddTri(*this); }
-	
+
 	void Cell::RenderAsSqr(void) { _renderer->AddSqr(*this); }
-	
+		
 	void Cell::RenderAsHex(void) { _renderer->AddHex(*this); }
+
+	void Cell::RenderTexturedTri(const Texture& texture) { _renderer->AddTexturedTri(*this, texture); }
+		
+	void Cell::RenderTexturedSqr(const Texture& texture) { _renderer->AddTexturedSqr(*this, texture); }
+		
+	void Cell::RenderTexturedHex(const Texture& texture) { _renderer->AddTexturedHex(*this, texture); }
+
 
 } //End namespace

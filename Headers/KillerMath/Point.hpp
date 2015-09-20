@@ -12,9 +12,9 @@ Written by Maxwell Miller
 #define POINT_HPP
 
 //User defined includes
-#include <Engine/Atom.h>
+#include <KillerMath/Atom.h>
 
-namespace KillerEngine {
+namespace KillerMath {
 
 	template <typename T=F32>
 	struct Point {

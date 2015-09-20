@@ -39,9 +39,9 @@ public:
 	static WorldManager* Instance();
 
 	//=====Accessors=====
-	bool AddWorld(text worldID, World* world);
-	bool RemoveWorld(text worldID);
-	bool SetActiveWorld(text worldID);
+	void AddWorld(const text worldID, World* world);
+	void RemoveWorld(text worldID);
+	void SetActiveWorld(text worldID);
 	
 	text GetActiveWorldID(void) { return _activeWorldID; }
 	void SetRunning(bool r) { _running = r; }

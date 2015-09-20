@@ -39,7 +39,7 @@ namespace KillerEngine {
 	private:
 		static TextureManager* _instance;
 		ErrorManager*   	   _errorManager;
-		Texture 			   _currentTexture;
+		GLuint 			   	   _currentTextureId;
 		map<text, Texture>	   _loadedTextures;
 
 	public:
@@ -53,11 +53,25 @@ namespace KillerEngine {
 		
 //==========================================================================================================================
 //
+//Accessors
+//
+//==========================================================================================================================
+		GLuint GetCurrentTextureId(void) { return _currentTextureId; }
+		
+		void SetCurrentTextureId(GLuint textureId) { 
+			_currentTextureId = textureId; 
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, _currentTextureId);
+		}
+
+//==========================================================================================================================
+//
 //TextureManager Functions
 //
 //==========================================================================================================================
 		void LoadTexture(text path, text name, S32 width, S32 height);
 		Texture& GetTexture(text name) { return _loadedTextures.find(name)->second; }
+		//Texture& GetTexture(text name) { return _currentTexture; }
 
 	protected:
 //==========================================================================================================================
@@ -65,7 +79,7 @@ namespace KillerEngine {
 //Constructors
 //
 //==========================================================================================================================		
-		TextureManager(void): _errorManager(ErrorManager::Instance()) {  }
+		TextureManager(void): _errorManager(ErrorManager::Instance()), _currentTextureId(0) {  }
 		~TextureManager(void) {  }
 
 	};

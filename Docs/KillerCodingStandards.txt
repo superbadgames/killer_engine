@@ -11,8 +11,12 @@ example:
 /*========================================================================
 Explaination of interface and design here
 
-credit here
-========================================================================/*
+credit here:
+This is not free to use, and cannot be used without the express permission
+of KillerWave.
+
+Written by Maxwell Miller
+========================================================================*/
 
 Function group comments. These are placed to at the start of a group of functions so that it is easy to identify what a related group of functions are for. 
 

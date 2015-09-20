@@ -1,6 +1,7 @@
 #include <Engine/TextureManager.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 //==========================================================================================================================
 //
@@ -8,14 +9,21 @@ namespace KillerEngine {
 //
 //==========================================================================================================================
 	TextureManager* TextureManager::_instance = NULL;
-	TextureManager* TextureManager::Instance(void) {
-		if(_instance == NULL) { _instance = new TextureManager(); }
+	
+	TextureManager* TextureManager::Instance(void) 
+	{
+		if(_instance == NULL) 
+			{ _instance = new TextureManager(); }
+		
 		return _instance;
 	}
 
-	void TextureManager::Shutdown(void) {
+	void TextureManager::Shutdown(void) 
+	{
 		map<text, Texture>::iterator i;
-		for(i = _loadedTextures.begin(); i != _loadedTextures.end(); ++i) {
+		
+		for(i = _loadedTextures.begin(); i != _loadedTextures.end(); ++i) 
+		{
 			GLuint texture = i->second.GetId();
 			glDeleteTextures(1, &texture);
 		}
@@ -26,15 +34,19 @@ namespace KillerEngine {
 //TextureManager Functions
 //
 //=====================================================================================================
-	void TextureManager::LoadTexture(text path, text name, S32 width, S32 height) {
+	void TextureManager::LoadTexture(text path, text name, S32 width, S32 height) 
+	{
 
 		unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
-		if(image == 0) {
+		if(image == 0) 
+		{
 			text errorMessage = text("SOIL_load_image failed to load image: ") + path;
 			_errorManager->SetError(EC_TextureManager, errorMessage);
 		}
-		else {
+		
+		else 
+		{
 			GLuint texture;
 			glGenTextures(1, &texture);
 			glBindTexture(GL_TEXTURE_2D, texture);
