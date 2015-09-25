@@ -29,6 +29,18 @@ namespace KillerEngine
 		}
 	}
 
+//==========================================================================================================================
+//
+//Accessors
+//
+//==========================================================================================================================
+	void TextureManager::SetCurrentTextureId(GLuint textureId)
+	{ 
+		_currentTextureId = textureId; 
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _currentTextureId);
+	}
+
 //====================================================================================================
 //
 //TextureManager Functions

@@ -1,6 +1,7 @@
 #include <Engine/Cell.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 //==========================================================================================================================
 //
 //Constructors

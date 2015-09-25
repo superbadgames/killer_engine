@@ -1,6 +1,7 @@
 #include <Engine/Renderer.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 //==========================================================================================================================
 //
@@ -10,78 +11,50 @@ namespace KillerEngine {
 //=======================================================================================================
 //_CompileShaders
 //=======================================================================================================
-	GLuint Renderer::_CompileShaders(void){
+	GLuint Renderer::_CompileShaders(void)
+	{
 		GLuint vertexShaderProgram;
-		GLuint tessControlProgram;
-		GLuint tessEvalProgram;
 		GLuint fragmentShaderProgram;
 		GLuint finalProgram;
 
 		//=====Vertex Shader=====
 		//=====Vertex Shader=====
-		static const GLchar* _vertexShaderSource[] = {
+		static const GLchar* _vertexShaderSource[] = 
+		{
 			"#version 430 core																\n"
 			"																				\n"
 			"layout (location = 0) in vec4 position;										\n"
-			//"layout (location = 1) in vec4 color; 											\n"					
-			"layout (location = 1) in vec2 tex_coord; 											\n"					
+			//"layout (location = 1) in vec4 color; 										\n"					
+			"layout (location = 1) in vec2 tex_coord; 										\n"					
 			"uniform mat4 transform_mat;													\n"
 			"																				\n"
-			//"out vec4 vs_color;																\n"
-			"out vec2 vs_tex_coord;																\n"
+			//"out vec4 vs_color;															\n"
+			"out vec2 vs_tex_coord;															\n"
 			"																				\n"
-			"void main(void) {																\n"
+			"void main(void) 																\n"
+			"{																				\n"
 			"	gl_Position = transform_mat * position;										\n"
 			//"	vs_color = color;															\n"
 			"	vs_tex_coord = vec2(tex_coord.x, 1.0f - tex_coord.y);						\n"
 			"}																				\n"
 		};
 
-		//=====Tesselsation Control Shader=====
-		static const GLchar* _tessControlSource[] = {
-			"#version 430 core 																\n"
-			"																				\n"
-			"layout (vertices = 3) out;			 											\n"
-			"																				\n"
-			"void main(void) {																\n"	
-			"	i(gl_InvocationID == 0) {													\n"
-			"		gl_TessLevelInner[0] = 5.0;		 										\n"
-			"		gl_TessLevelOuter[0] = 5.0;												\n"
-			"		gl_TessLevelOuter[1] = 5.0;												\n"
-			"		gl_TessLevelOuter[2] = 5.0;												\n"
-			"	} 																			\n"
-			"	gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position; 	\n"
-			"} 																				\n"
-			
-		};
-
-		//=====Tesselsation Evaluation Shader=====
-		static const GLchar* _tessEvalShaderSource[] = {
-			"#version 430 core 																\n"
-			"																				\n"
-			"layout (triangles, equal_spacing, cw) in; 										\n"
-			"																				\n"
-			"void main(void) {																\n"
-			"	gl_Position = (gl_TessCoord.x * gl_in[0].gl_Position +						\n"
-			"				   gl_TessCoord.y * gl_in[1].gl_Position +						\n"
-			"				   gl_TessCoord.z * gl_in[2].gl_Position);						\n"
-			"}																			 	\n"
-		};
-
 		//=====Fragment Shader=====
-		static const GLchar* _fragmentShaderSource[] = {
+		static const GLchar* _fragmentShaderSource[] = 
+		{
 			"#version 430 core																\n"
 			"																				\n"
-			"uniform sampler2D ourTexture;														\n"
-			//"in vec4 vs_color;																\n"
-			"in vec2 vs_tex_coord;																\n"
+			"uniform sampler2D ourTexture;													\n"
+			//"in vec4 vs_color;															\n"
+			"in vec2 vs_tex_coord;															\n"
 			"out vec4 color;																\n"
 			"																				\n"
-			"void main(void) {																\n"
+			"void main(void) 																\n"
+			"{																				\n"
 			//=====test for textures, failed finish later=====
 			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
 			//"	color = vs_color;															\n"
-			"	color = texture(ourTexture, vs_tex_coord);															\n"
+			"	color = texture(ourTexture, vs_tex_coord);									\n"
 			"}																				\n"
 		};
 
@@ -91,16 +64,6 @@ namespace KillerEngine {
 		glShaderSource(vertexShaderProgram, 1, _vertexShaderSource, NULL);
 		glCompileShader(vertexShaderProgram);
 
-		//=====Create and compile tessellation control shader=====
-		tessControlProgram = glCreateShader(GL_TESS_CONTROL_SHADER);
-		glShaderSource(tessControlProgram, 1, _tessControlSource, NULL);
-		glCompileShader(tessControlProgram);
-
-		//======Create and comple tessellation evaluation shader=====
-		tessEvalProgram = glCreateShader(GL_TESS_EVALUATION_SHADER);
-		glShaderSource(tessEvalProgram, 1, _tessEvalShaderSource, NULL);
-		glCompileShader(tessEvalProgram);
-
 		//=====Create and compile fragment shader=====
 		fragmentShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShaderProgram, 1, _fragmentShaderSource, NULL);
@@ -109,15 +72,11 @@ namespace KillerEngine {
 		//=====Create program, attach shader to it and link it=====
 		finalProgram = glCreateProgram();
 		glAttachShader(finalProgram, vertexShaderProgram);
-		//glAttachShader(finalProgram, tessControlProgram);
-		//glAttachShader(finalProgram, tessEvalProgram);
 		glAttachShader(finalProgram, fragmentShaderProgram);
 		glLinkProgram(finalProgram);
 
 		//=====Delete the sahders as the program now has them=====
 		glDeleteShader(vertexShaderProgram);
-		glDeleteShader(tessControlProgram);
-		glDeleteShader(tessEvalProgram);
 		glDeleteShader(fragmentShaderProgram);
 
 		return finalProgram;
@@ -126,7 +85,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //_SetOrthoProjection
 //=======================================================================================================
-	void Renderer::_SetOrthoProjection(void) {
+	void Renderer::_SetOrthoProjection(void) 
+	{
 		matrix projection{};
 		projection.MakeOrthographic(1024, 768, 200);
 
@@ -153,9 +113,9 @@ namespace KillerEngine {
 //=======================================================================================================
 	Renderer* Renderer::_instance = NULL;
 
-	Renderer* Renderer::Instance(void) {
+	Renderer* Renderer::Instance(void) 
+	{
 		if(_instance == NULL) { _instance = new Renderer(); }
-
 		return _instance;
 	}
 
@@ -177,7 +137,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddTri
 //=======================================================================================================
-	void Renderer::AddTri(const Cell& cell) {
+	void Renderer::AddTri(const Cell& cell) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		point pos = cell.GetPosition();
@@ -234,7 +195,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddSqr
 //=======================================================================================================
-	void Renderer::AddSqr(const Cell& cell) {
+	void Renderer::AddSqr(const Cell& cell) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		point pos = cell.GetPosition();
@@ -338,7 +300,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddHex
 //=======================================================================================================
-	void Renderer::AddHex(const Cell& cell) {
+	void Renderer::AddHex(const Cell& cell) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		point pos = cell.GetPosition();
@@ -682,7 +645,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddTexturedTri
 //=======================================================================================================
-	void Renderer::AddTexturedTri(const Cell& cell, const Texture& texture) {
+	void Renderer::AddTexturedTri(const Cell& cell, const Texture& texture) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		GLuint currentTextureId = _textureManager->GetCurrentTextureId();
@@ -707,12 +671,14 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddTexturedSqr
 //=======================================================================================================
-	void Renderer::AddTexturedSqr(const Cell& cell, const Texture& texture) {
+	void Renderer::AddTexturedSqr(const Cell& cell, const Texture& texture) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		GLuint currentTextureId = _textureManager->GetCurrentTextureId();
 
-		if(texture.GetId() != currentTextureId) { 
+		if(texture.GetId() != currentTextureId) 
+		{ 
 			Draw();
 			_textureManager->SetCurrentTextureId(texture.GetId()); 
 		}
@@ -749,7 +715,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //AddTexturedHex
 //=======================================================================================================
-	void Renderer::AddTexturedHex(const Cell& cell, const Texture& texture) {
+	void Renderer::AddTexturedHex(const Cell& cell, const Texture& texture) 
+	{
 		if(_totalVerticesInBatch >= _maxBatchSize) { Draw(); }
 
 		AddHex(cell);
@@ -758,14 +725,17 @@ namespace KillerEngine {
 //=======================================================================================================
 //Draw
 //=======================================================================================================
-	void Renderer::Draw(void) {
+	void Renderer::Draw(void) 
+	{
 		if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
 
 		//glClearBufferfv(GL_COLOR, 0, _bgColor);		
 		
-		 if(_triBatch > 0) {
+		 if(_triBatch > 0) 
+		 {
 		    
-		    if(_triUVs.size() <= 0) {
+		    if(_triUVs.size() <= 0) 
+		    {
 
 			    glUseProgram(_renderingProgram);
 
@@ -786,7 +756,8 @@ namespace KillerEngine {
 				
 				glDrawArrays(GL_TRIANGLES, 0, _triBatch);
 			}
-			else if(_triUVs.size() >= 1) {
+			else if(_triUVs.size() >= 1) 
+			{
 				glUseProgram(_renderingProgram);
 
 				GLuint buffers[2];
@@ -807,9 +778,11 @@ namespace KillerEngine {
 			}
 		}
 
-		if(_sqrBatch > 0) {
+		if(_sqrBatch > 0) 
+		{
 		    
-		    if(_sqrUVs.size() <= 1) {
+		    if(_sqrUVs.size() <= 1) 
+		    {
 
 			    glUseProgram(_renderingProgram);
 
@@ -829,7 +802,8 @@ namespace KillerEngine {
 				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
 			}
 
-			else if(_sqrUVs.size() >= 1) {
+			else if(_sqrUVs.size() >= 1) 
+			{
 
 				glUseProgram(_renderingProgram);
 
@@ -853,7 +827,8 @@ namespace KillerEngine {
 			}	
 		}
 
-		if(_hexBatch > 0) {
+		if(_hexBatch > 0) 
+		{
 		    glUseProgram(_renderingProgram);
 
 			GLuint buffers[2];
@@ -902,7 +877,8 @@ namespace KillerEngine {
 							  _hexBatch(0), 
 							  _errorManager(ErrorManager::Instance()),
 							  _textureManager(TextureManager::Instance()),
-							  _programWindow(ProgramWindow::Instance()) { 
+							  _programWindow(ProgramWindow::Instance()) 
+	{ 
 		_renderingProgram = _CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);
 		glBindVertexArray(_vertexArrayObject);

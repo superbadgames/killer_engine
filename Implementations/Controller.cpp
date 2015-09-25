@@ -1,6 +1,7 @@
 #include <Engine/Controller.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 	
 //==========================================================================================================================
 //
@@ -12,12 +13,14 @@ namespace KillerEngine {
 //=======================================================================================================
 	Controller* Controller::_instance = NULL;
 
-	Controller* Controller::Instance(void) {
+	Controller* Controller::Instance(void) 
+	{
 		if (_instance == NULL) { _instance = new Controller(); }
 		return _instance;
 	}
 
-	void Controller::Init(HINSTANCE hInstance, HWND hwnd) {
+	void Controller::Init(HINSTANCE hInstance, HWND hwnd) 
+	{
 		HRESULT result;
 
 		result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&_directInput, NULL);
@@ -39,8 +42,10 @@ namespace KillerEngine {
 //=======================================================================================================
 //Shutdown
 //=======================================================================================================
-	void Controller::ShutDown(void) {
-		if(_keyboard) {
+	void Controller::ShutDown(void) 
+	{
+		if(_keyboard) 
+		{
 			_keyboard->Unacquire();
 			_keyboard->Release();
 			_keyboard = 0;
@@ -52,11 +57,14 @@ namespace KillerEngine {
 //Controller Functions
 //
 //==========================================================================================================================
-	void Controller::UpdateKeyboard(void) {
+	void Controller::UpdateKeyboard(void) 
+	{
 		HRESULT result;
 
 		result = _keyboard->GetDeviceState(sizeof(_keyboardState), (void*)&_keyboardState);
-		if(FAILED(result)) {
+		
+		if(FAILED(result)) 
+		{
 			if((result == DIERR_INPUTLOST) || (result == DIERR_NOTACQUIRED)) { _keyboard->Acquire(); }
 			else { _errorManager->SetError(EC_DirectInput, "Failed to Get keyboard state, and failed to Re-Aquire"); }
 		}					

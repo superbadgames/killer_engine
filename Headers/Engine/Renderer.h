@@ -42,12 +42,14 @@ Written by Maxwell Miller
 //=====STL Includes=====
 #include <vector>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 	//=====Foreward delcaration=====
 	class Cell;
 
-	class Renderer {
+	class Renderer 
+	{
 	private:
 		static Renderer* 	 _instance;
 		ErrorManager* 		 _errorManager;

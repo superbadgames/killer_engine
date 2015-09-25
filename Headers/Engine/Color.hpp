@@ -31,26 +31,30 @@ namespace KillerEngine{
 //Constructors
 //
 //==========================================================================================================================
-		Color(void) {
+		Color(void) 
+		{
 			_values[0] = _values[1] = _values[2] = 0.0f;
 			_values[3] = 1.0f;
 		}
 		
-		Color(T red, T green, T blue) {
+		Color(T red, T green, T blue) 
+		{
 			_values[0] = red;
 			_values[1] = green;
 			_values[2] = blue;
 			_values[3] = 1.0f;
 		}
 		
-		Color(T red, T green, T blue, T alpha) {
+		Color(T red, T green, T blue, T alpha) 
+		{
 			_values[0] = red;
 			_values[1] = green;
 			_values[2] = blue;
 			_values[3] = alpha;
 		}
 		
-		Color(const Color<T>& c) {
+		Color(const Color<T>& c) 
+		{
 			_values[0] = c.GetRed();
 			_values[1] = c.GetGreen();
 			_values[2] = c.GetBlue();
@@ -63,7 +67,8 @@ namespace KillerEngine{
 //Operator overloads
 //
 //==========================================================================================================================
-		Color& operator=(const Color& c) {
+		Color& operator=(const Color& c) 
+		{
 			_values[0] = c.GetRed();
 			_values[1] = c.GetGreen();
 			_values[2] = c.GetBlue();

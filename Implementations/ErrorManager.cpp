@@ -1,6 +1,7 @@
 #include <Engine/ErrorManager.h>
 	
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 //==========================================================================================================================
 //
@@ -9,7 +10,8 @@ namespace KillerEngine {
 //==========================================================================================================================
 	ErrorManager* ErrorManager::_instance = NULL;
 
-	ErrorManager* ErrorManager::Instance(void) {
+	ErrorManager* ErrorManager::Instance(void) 
+	{
 		if(_instance == NULL) { _instance = new ErrorManager(); }
 		return _instance;
 	}
@@ -22,7 +24,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //SetError
 //=======================================================================================================	
-	void ErrorManager::SetError(ErrorCode code, text message) {
+	void ErrorManager::SetError(ErrorCode code, text message) 
+	{
 		_errorCodes[_numErrors]	   = code;
 		_errorMessages[_numErrors] = message;
 		_numErrors++;
@@ -31,10 +34,14 @@ namespace KillerEngine {
 //=======================================================================================================
 //DisplayErrors
 //=======================================================================================================
-	void ErrorManager::DisplayErrors(void) {
-		if (_numErrors > 0) {
-			for (U32 i = 0; i < _numErrors; i++) {
-				switch (_errorCodes[i]) {
+	void ErrorManager::DisplayErrors(void) 
+	{
+		if (_numErrors > 0) 
+		{
+			for (U32 i = 0; i < _numErrors; i++) 
+			{
+				switch (_errorCodes[i]) 
+				{
 				case EC_NoError: {
 									 //later, it will print to a log file, maybe
 				}

@@ -1,6 +1,7 @@
 #include <Engine/Timer.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 //==========================================================================================================================
 //
@@ -11,7 +12,8 @@ namespace KillerEngine {
 //_QueryHiResTimer
 //===============================================================================
 //=====Windows only implemenation=====
-	U64 Timer::_QueryHiResTimer(void) { 
+	U64 Timer::_QueryHiResTimer(void) 
+	{ 
 		static LARGE_INTEGER _cycles;
 		QueryPerformanceCounter(&_cycles);
 		return _cycles.QuadPart;
@@ -21,7 +23,8 @@ namespace KillerEngine {
 //_QueryFrequence
 //===============================================================================
 //=====Windows only implemenation=====
-	F32 Timer::_QueryFrequency(void) { 
+	F32 Timer::_QueryFrequency(void) 
+	{ 
 		static LARGE_INTEGER _freq;
 		QueryPerformanceFrequency(&_freq); 
 		return F32(_freq.QuadPart);
@@ -36,9 +39,9 @@ namespace KillerEngine {
 //Instance
 //===============================================================================
 	Timer* Timer::_instance = NULL;
-	Timer* Timer::Instance(void) {
+	Timer* Timer::Instance(void) 
+	{
 		if(_instance == NULL) { _instance = new Timer(); }
-
 		return _instance;
 	}
 
@@ -50,8 +53,10 @@ namespace KillerEngine {
 //===============================================================================
 //Update
 //===============================================================================
-	void Timer::Update(void) {
-		if(!_paused) {
+	void Timer::Update(void) 
+	{
+		if(!_paused) 
+		{
 			_curCycles  = _QueryHiResTimer();
 			_deltaTime  = (_curCycles - _pastCycles) / _frequency * _timeScale;
 			_pastCycles = _curCycles;
@@ -63,8 +68,10 @@ namespace KillerEngine {
 //===============================================================================
 //SingleStep
 //===============================================================================
-	void Timer::SingleStep(void) {
-		if(!_paused) {
+	void Timer::SingleStep(void) 
+	{
+		if(!_paused) 
+		{
 			U64 oneStep = _SecondsToCycles((1.0f/30.0f) * _timeScale);
 
 			_deltaTime = _CyclesToSeconds(oneStep);
@@ -79,21 +86,13 @@ namespace KillerEngine {
 //Constructor
 //
 //==========================================================================================================================
-	Timer::Timer() {
-		_frequency  = _QueryFrequency();
-		_deltaTime  = 0.0f;
-		_timeScale  = 1.0f;
-		_totalTime  = 0.0f;
-		_pastCycles = _QueryHiResTimer();
-		_curCycles  = _paused;
-		_paused     = false;
-	}
-
-
-
-
-
-
-
+	Timer::Timer() : _frequency(_QueryFrequency()),
+					 _deltaTime(0.0f),
+					 _timeScale(1.0f),
+					 _totalTime(0.0f),
+					 _pastCycles(_QueryHiResTimer()),
+					 _curCycles(_pastCycles),
+					 _paused(false) 
+	{  }
 
 }//End namespace

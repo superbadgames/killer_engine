@@ -33,9 +33,11 @@ using std::map;
 #include <GL/glu.h>
 #include <GL/wglext.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-	class TextureManager{
+	class TextureManager
+	{
 	private:
 		static TextureManager* _instance;
 		ErrorManager*   	   _errorManager;
@@ -58,11 +60,8 @@ namespace KillerEngine {
 //==========================================================================================================================
 		GLuint GetCurrentTextureId(void) { return _currentTextureId; }
 		
-		void SetCurrentTextureId(GLuint textureId) { 
-			_currentTextureId = textureId; 
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, _currentTextureId);
-		}
+		void SetCurrentTextureId(GLuint textureId); 
+
 
 //==========================================================================================================================
 //

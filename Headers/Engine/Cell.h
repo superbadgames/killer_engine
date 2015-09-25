@@ -33,12 +33,14 @@ Written by Maxwell Miller
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
 //=====Foreward delcaration=====
 	class Renderer;
 
-	class Cell {	
+	class Cell 
+	{	
 	private:	
 		Renderer* _renderer;
 		point     _position;
@@ -73,7 +75,8 @@ namespace KillerEngine {
 //Operator Overloads
 //
 //==========================================================================================================================
-		Cell& operator=(const Cell& cell) {
+		Cell& operator=(const Cell& cell) 
+		{
 			_position = cell.GetPosition();
 			_color 	  = cell.GetColor();
 			SetDimensions(cell.GetWidth(), cell.GetHeight());
@@ -90,19 +93,22 @@ namespace KillerEngine {
 		
 		void SetColor(const color& c)    { _color = c; }
 		
-		void SetWidth(const F32 w) {
+		void SetWidth(const F32 w) 
+		{
 			_totalWidth = w;
 			_right 		= w / 2;
 			_left  		= -w / 2;
 		}
 
-		void SetHeight(const F32 h) {
+		void SetHeight(const F32 h) 
+		{
 			_totalHeight = h;
 			_top 		 = h / 2;
 			_bottom 	 = -h / 2;
 		}
 
-		void SetDimensions(const F32 w, const F32 h) {
+		void SetDimensions(const F32 w, const F32 h) 
+		{
 			SetWidth(w);
 			SetHeight(h);
 		}
@@ -138,6 +144,7 @@ namespace KillerEngine {
 		void RenderAsSqr(void);
 		
 		void RenderAsHex(void);
+		
 		void RenderTexturedTri(const Texture& texture);
 		
 		void RenderTexturedSqr(const Texture& texture);

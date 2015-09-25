@@ -18,14 +18,16 @@ Written by Maxwell Miller
 #include <map>
 using std::map;
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 	
 //==========================================================================================================================
 //
 //Enum Error codes
 //
 //==========================================================================================================================
-	enum ErrorCode {
+	enum ErrorCode 
+	{
 		EC_NoError = 0,
 		EC_Unknown,
 		EC_Game,
@@ -36,7 +38,8 @@ namespace KillerEngine {
 		EC_TextureManager
 	};
 
-	class ErrorManager {
+	class ErrorManager 
+	{
 	private:
 		U32       			 _numErrors;
 		map<U32, ErrorCode>  _errorCodes;

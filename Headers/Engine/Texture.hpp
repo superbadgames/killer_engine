@@ -25,9 +25,11 @@ Written by Maxwell Miller
 //=====OGL includes=====
 
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-	class Texture {
+	class Texture 
+	{
 	private:	
 		GLuint _id;
 		S32    _width;
@@ -69,7 +71,8 @@ namespace KillerEngine {
 //Operator Overload
 //
 //==========================================================================================================================
-		Texture& operator=(const Texture& T) {
+		Texture& operator=(const Texture& T) 
+		{
 			_id = T.GetId();
 			_width = T.GetWidth();
 			_height = T.GetHeight();

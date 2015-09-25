@@ -22,9 +22,11 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-	class Timer { 
+	class Timer 
+	{ 
 	private:
 		F32  		  _deltaTime;
 		F32  		  _timeScale;

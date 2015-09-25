@@ -23,57 +23,59 @@ Written by Maxwell Miller
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-class World{
-private:
-	ErrorManager* 			   _errorManager;
-	Renderer* 				   _renderer;
-	std::map<text, GameObject*> _worldObjects;
-	
-	S32   _mapWidth;
-	S32   _mapHeight;
-	color _bgColor;
+	class World
+	{
+	private:
+		ErrorManager* 			   _errorManager;
+		Renderer* 				   _renderer;
+		std::map<text, GameObject*> _worldObjects;
+		
+		S32   _mapWidth;
+		S32   _mapHeight;
+		color _bgColor;
 
-public:
-	World(void): _errorManager(ErrorManager::Instance()),
-				 _renderer(Renderer::Instance()),
-				 _mapWidth(0),
-				 _mapHeight(0),
-				 _bgColor() {  }
-	
-	~World(void) {  }
+	public:
+		World(void): _errorManager(ErrorManager::Instance()),
+					 _renderer(Renderer::Instance()),
+					 _mapWidth(0),
+					 _mapHeight(0),
+					 _bgColor() {  }
+		
+		~World(void) {  }
 
-	virtual void InitWorld(S32 w, S32 h, color& c)=0;
-	
-	virtual void Update(void)=0;
-	
-	virtual void Render(void)=0;
+		virtual void InitWorld(S32 w, S32 h, color& c)=0;
+		
+		virtual void Update(void)=0;
+		
+		virtual void Render(void)=0;
 
-	//======Accessors=====
-	void AddObjectToWorld(text objId, GameObject* obj);
-	
-	void RenderObjects(void) {
-		for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
-			i->second->vRender();
+		//======Accessors=====
+		void AddObjectToWorld(text objId, GameObject* obj);
+		
+		void RenderObjects(void) {
+			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
+				i->second->vRender();
+			}
 		}
-	}
-	
-	void SetBackgroundColor(color& c) { _bgColor = c; }
-	
-	void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
-	
-	S32  GetMapWidth(void)   { return _mapWidth; }
-	
-	S32  GetMapHeight(void)  { return _mapHeight; }
-	
-	void SetMapWidth(S32 w)  { _mapWidth = w; }
-	
-	void SetMapHeight(S32 h) { _mapHeight = h; }
-	
-	void SetMapDimensions(S32 w, S32 h) {
-		_mapWidth  = w;
-		_mapHeight = h;
+		
+		void SetBackgroundColor(color& c) { _bgColor = c; }
+		
+		void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
+		
+		S32  GetMapWidth(void)   { return _mapWidth; }
+		
+		S32  GetMapHeight(void)  { return _mapHeight; }
+		
+		void SetMapWidth(S32 w)  { _mapWidth = w; }
+		
+		void SetMapHeight(S32 h) { _mapHeight = h; }
+		
+		void SetMapDimensions(S32 w, S32 h) {
+			_mapWidth  = w;
+			_mapHeight = h;
 	}
 };
 }//End namespace

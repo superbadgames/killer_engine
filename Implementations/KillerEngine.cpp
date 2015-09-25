@@ -1,6 +1,7 @@
 #include <Engine/KillerEngine.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 //==========================================================================================================================
 //
 //Interface
@@ -9,7 +10,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //Init
 //=======================================================================================================
-	void KillerEngine::Init(const S32 width, const S32 height, const text title, const bool fullscreen) {
+	void KillerEngine::Init(const S32 width, const S32 height, const text title, const bool fullscreen) 
+	{
 		_errorManager = ErrorManager::Instance();
 		_timer = Timer::Instance();
 		_worldManager = WorldManager::Instance();
@@ -29,7 +31,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //Update
 //=======================================================================================================
-	void KillerEngine::Update(void) {
+	void KillerEngine::Update(void) 
+	{
 		_programWindow->ProcessWndEvents();
 
 		_timer->Update();
@@ -42,7 +45,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //FunctionName
 //=======================================================================================================
-	void KillerEngine::Render(void) {
+	void KillerEngine::Render(void) 
+	{
 		_worldManager->Render();
 
 		_renderer->Draw();
@@ -59,7 +63,8 @@ namespace KillerEngine {
 //==========================================================================================================================
 	KillerEngine* KillerEngine::_instance = NULL;
 
-	KillerEngine* KillerEngine::Instance(void) {
+	KillerEngine* KillerEngine::Instance(void) 
+	{
 		if(_instance == NULL) { _instance = new KillerEngine(); }
 
 		return _instance;

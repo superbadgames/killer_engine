@@ -31,90 +31,92 @@ Written by Maxwell Miller
 #include <Engine/Cell.h>
 #include <Engine/Texture.hpp>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 	
-class GameObject{
-private:
-	text 	_id;
-	Cell 	_cell;
-	Texture _texture;
-	bool 	_active;
+	class GameObject
+	{
+	private:
+		text 	_id;
+		Cell 	_cell;
+		Texture _texture;
+		bool 	_active;
 
-protected:
-	
+	protected:
+		
 
- 
-public:
+	 
+	public:
 //==========================================================================================================================
 //
 //Constructors
 //
 //==========================================================================================================================
-	GameObject(void) : _id(), _cell(), _texture(), _active(false) {  }
-	
-	GameObject(const text id, const Cell& cell) : _id(id), _cell(cell), _texture(), _active(false) {  }
-	
-	GameObject(const text id, const Cell& cell, bool active) : _id(id), _cell(cell), _texture(), _active(active) {  }
-	
-	GameObject(const text id, const Cell& cell, const Texture& texture) : _id(id), _cell(cell), _texture(texture), _active(false) {  }
-	
-	GameObject(const text id, const Cell& cell, const Texture& texture, bool active) : _id(id), _cell(cell), _texture(texture), _active(active) {  }
+		GameObject(void) : _id(), _cell(), _texture(), _active(false) {  }
+		
+		GameObject(const text id, const Cell& cell) : _id(id), _cell(cell), _texture(), _active(false) {  }
+		
+		GameObject(const text id, const Cell& cell, bool active) : _id(id), _cell(cell), _texture(), _active(active) {  }
+		
+		GameObject(const text id, const Cell& cell, const Texture& texture) : _id(id), _cell(cell), _texture(texture), _active(false) {  }
+		
+		GameObject(const text id, const Cell& cell, const Texture& texture, bool active) : _id(id), _cell(cell), _texture(texture), _active(active) {  }
 
-	//virtual ~GameObject(void){  }
+		//virtual ~GameObject(void){  }
 
-	//virtual void v_ShutDown(void);
+		//virtual void v_ShutDown(void);
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-	const text GetId(void) { return _id; }
+		const text GetId(void) { return _id; }
 
-	void SetId(text id) { _id = id; }
+		void SetId(text id) { _id = id; }
 
-	const color& GetColor(void) { return _cell.GetColor(); }
+		const color& GetColor(void) { return _cell.GetColor(); }
 
-	void SetColor(const color& c) { _cell.SetColor(c); }
-
-
-	const Texture& GetTexture(void) { return _texture; }
-
-	void SetTexture(const Texture& texture) { _texture = texture; }
+		void SetColor(const color& c) { _cell.SetColor(c); }
 
 
-	const point& GetPosition(void) { return _cell.GetPosition(); }
-	
-	void SetPosition(const point& p) { _cell.SetPosition(p); }
-	
-	
-	const F32 GetWidth(void) { return _cell.GetWidth(); }
+		const Texture& GetTexture(void) { return _texture; }
 
-	void SetDimensions(const F32 w, const F32 h) { _cell.SetDimensions(w, h); }
-	
-	
-	const bool   GetActive(void)   { return _active; }
+		void SetTexture(const Texture& texture) { _texture = texture; }
 
-	void SetActive(void)   { _active = true; }
-	
-	void SetInactive(void) { _active = false; }
+
+		const point& GetPosition(void) { return _cell.GetPosition(); }
+		
+		void SetPosition(const point& p) { _cell.SetPosition(p); }
+		
+		
+		const F32 GetWidth(void) { return _cell.GetWidth(); }
+
+		void SetDimensions(const F32 w, const F32 h) { _cell.SetDimensions(w, h); }
+		
+		
+		const bool   GetActive(void)   { return _active; }
+
+		void SetActive(void)   { _active = true; }
+		
+		void SetInactive(void) { _active = false; }
 
 //==========================================================================================================================
 //
 //GameObject Functions
 //
 //==========================================================================================================================
-	void RenderTriCell(void) { _cell.RenderAsTri(); }
-	
-	void RenderSqrCell(void) { _cell.RenderAsSqr(); }
-	
-	void RenderHexCell(void) { _cell.RenderAsHex(); }
+		void RenderTriCell(void) { _cell.RenderAsTri(); }
+		
+		void RenderSqrCell(void) { _cell.RenderAsSqr(); }
+		
+		void RenderHexCell(void) { _cell.RenderAsHex(); }
 
-	void RenderTexturedTriCell(void) { _cell.RenderTexturedTri(_texture); }
-	
-	void RenderTexturedSqrCell(void) { _cell.RenderTexturedSqr(_texture); }
-	
-	void RenderTexturedHexCell(void) { _cell.RenderTexturedHex(_texture); }
+		void RenderTexturedTriCell(void) { _cell.RenderTexturedTri(_texture); }
+		
+		void RenderTexturedSqrCell(void) { _cell.RenderTexturedSqr(_texture); }
+		
+		void RenderTexturedHexCell(void) { _cell.RenderTexturedHex(_texture); }
 
 
 //==========================================================================================================================
@@ -122,10 +124,10 @@ public:
 //virtual functions
 //
 //==========================================================================================================================
-	virtual void vUpdate(void)=0;
-	
-	virtual void vRender(void)=0;
-};
+		virtual void vUpdate(void)=0;
+		
+		virtual void vRender(void)=0;
+	};
 
 }//End namespace
 

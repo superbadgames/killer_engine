@@ -10,7 +10,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //_SetTempPixelFormat
 //=======================================================================================================
-    void ProgramWindow::_SetTempPixelFormat(void) {
+    void ProgramWindow::_SetTempPixelFormat(void) 
+    {
         S32 pixelFormat;
 
         PIXELFORMATDESCRIPTOR pfd =
@@ -43,7 +44,8 @@ namespace KillerEngine {
 //=======================================================================================================
 //_SetPixelFormat
 //=======================================================================================================
-    void ProgramWindow::_SetPixelFormat(void) {
+    void ProgramWindow::_SetPixelFormat(void) 
+    {
         bool worked = true;
 
         //PFNWGLGETEXTENSIONSSTRINGARBPROC wglGetExtensionstextARB = NULL; 
@@ -111,16 +113,17 @@ namespace KillerEngine {
 //=======================================================================================================
     ProgramWindow* ProgramWindow::_instance = NULL;
 
-    ProgramWindow* ProgramWindow::Instance(void) {
+    ProgramWindow* ProgramWindow::Instance(void) 
+    {
         if(_instance == NULL) { _instance = new ProgramWindow; }
-
         return _instance;
     }
 
 //=======================================================================================================
 //InitWindow
 //=======================================================================================================    
-    void ProgramWindow::Init(S32 width, S32 height, text wndName, bool isFullScreen) {
+    void ProgramWindow::Init(S32 width, S32 height, text wndName, bool isFullScreen) 
+    {
         _totalWidth     = width;
         _totalHeight    = height;
         _right          = _totalWidth / 2;
@@ -170,15 +173,26 @@ namespace KillerEngine {
 //=======================================================================================================
 //ProcessWndEvents
 //=======================================================================================================
-    void ProgramWindow::ProcessWndEvents(void) {
+    void ProgramWindow::ProcessWndEvents(void) 
+    {
         MSG msg;
 
-        while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+        while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) 
+        {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
     }
 
+//=======================================================================================================
+//BufferSwap
+//=======================================================================================================
+    void ProgramWindow::BufferSwap(void)
+    { 
+        glFlush(); 
+        SwapBuffers(_hdc); 
+        glClearBufferfv(GL_COLOR, 0, _bgColor);
+    }
 //==========================================================================================================================
 //
 //System Windows Functions
@@ -187,15 +201,18 @@ namespace KillerEngine {
 //=======================================================================================================
 //StaticWndProc
 //=======================================================================================================    
-    LRESULT CALLBACK ProgramWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    LRESULT CALLBACK ProgramWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+    {
     	ProgramWindow* window = NULL;
 
-        if(uMsg == WM_CREATE) {
+        if(uMsg == WM_CREATE) 
+        {
             window = (ProgramWindow*)((LPCREATESTRUCT)lParam)->lpCreateParams;
 
             SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)window);
         }
-        else {
+        else 
+        {
             window = (ProgramWindow*)GetWindowLongPtr(hWnd, GWL_USERDATA);
 
     		if (!window) { DefWindowProc(hWnd, uMsg, wParam, lParam); }
@@ -207,9 +224,12 @@ namespace KillerEngine {
 //=======================================================================================================
 //WndProc
 //=======================================================================================================    
-    LRESULT ProgramWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-        switch(uMsg) {
-            case WM_CREATE: {
+    LRESULT ProgramWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+    {
+        switch(uMsg) 
+        {
+            case WM_CREATE: 
+            {
     			_hdc = GetDC(hWnd);
     		    
     			//=====Create temporary context=====
@@ -243,7 +263,8 @@ namespace KillerEngine {
 
                 break;
             }
-            case WM_DESTROY: {
+            case WM_DESTROY: 
+            {
                 _hdc = GetDC(hWnd);
                 wglMakeCurrent(_hdc, NULL); 
     			wglDeleteContext(_hglrc); 

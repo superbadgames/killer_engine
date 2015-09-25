@@ -19,9 +19,11 @@ Written by Maxwell Miller
 //=====DirectInput includes=====
 #include <dinput.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 	
-	class Controller {
+	class Controller 
+	{
 	private:
 		IDirectInput8*    	 _directInput;
 		IDirectInputDevice8* _keyboard;

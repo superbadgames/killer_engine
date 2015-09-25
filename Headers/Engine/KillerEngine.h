@@ -28,11 +28,13 @@ Written by Maxwell Miller
 #include <Engine/TextureManager.h>
 
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-	class KillerEngine {
+	class KillerEngine 
+	{
 
-public:
+	public:
 //==========================================================================================================================
 //
 //Interface
@@ -42,7 +44,8 @@ public:
 
 		bool Running(void) { return _worldManager->GetRunning(); }
 
-		void LoadTexture(const text path, const text name, const S32 width, const S32 height) { 
+		void LoadTexture(const text path, const text name, const S32 width, const S32 height) 
+		{ 
 			_textureManager->LoadTexture(path, name, width, height); 
 		}
 		
@@ -60,7 +63,7 @@ public:
 //==========================================================================================================================
 		static KillerEngine* Instance();		
 
-protected:
+	protected:
 //==========================================================================================================================
 //
 //Constructor
@@ -68,7 +71,7 @@ protected:
 //==========================================================================================================================		
 		KillerEngine(void);
 
-private:
+	private:
 //==========================================================================================================================
 //
 //Members

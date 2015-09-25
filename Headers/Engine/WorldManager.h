@@ -23,37 +23,48 @@ Written by Maxwell Miller
 //=====STL includes=====
 #include <map>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-class WorldManager{
-private:
-	std::map<text, World*> _worlds;
-	World* 				   _activeWorld;
-	text 				   _activeWorldID;
-	bool				   _running;			
-	static WorldManager*   _instance;
+	class WorldManager
+	{
+	private:
+		std::map<text, World*> _worlds;
+		World* 				   _activeWorld;
+		text 				   _activeWorldID;
+		bool				   _running;			
+		static WorldManager*   _instance;
 
-public:
-	~WorldManager(void) {  }
+	public:
+		~WorldManager(void) {  }
 
-	static WorldManager* Instance();
+		static WorldManager* Instance();
 
-	//=====Accessors=====
-	void AddWorld(const text worldID, World* world);
-	void RemoveWorld(text worldID);
-	void SetActiveWorld(text worldID);
-	
-	text GetActiveWorldID(void) { return _activeWorldID; }
-	void SetRunning(bool r) { _running = r; }
-	bool GetRunning(void) { return _running; } 
+//==========================================================================================================================
+//
+//Accessors
+//
+//==========================================================================================================================
+		void AddWorld(const text worldID, World* world);
+		
+		void RemoveWorld(text worldID);
+		
+		void SetActiveWorld(text worldID);
+		
+		text GetActiveWorldID(void) { return _activeWorldID; }
+		
+		void SetRunning(bool r) { _running = r; }
+		
+		bool GetRunning(void) { return _running; } 
 
-	void Update(void);
-	void Render(void);
+		void Update(void);
+		
+		void Render(void);
 
-protected:
-	WorldManager(void) : _running(true) {  }
+	protected:
+		WorldManager(void) : _running(true) {  }
 
-};
+	};
 
 }//End namespace
 

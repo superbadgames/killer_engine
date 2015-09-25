@@ -26,9 +26,11 @@ Written by Maxwell Miller
 #include <GL/glu.h>
 #include <GL/wglext.h>
 
-namespace KillerEngine {
+namespace KillerEngine 
+{
 
-	class ProgramWindow{
+	class ProgramWindow
+	{
 	private:
 		static ProgramWindow* _instance;
 		bool 		  _isFullScreen;
@@ -101,13 +103,10 @@ public:
 		
 		void ProcessWndEvents(void);
 		
-		void BufferSwap(void) { 
-			glFlush(); 
-			SwapBuffers(_hdc); 
-			glClearBufferfv(GL_COLOR, 0, _bgColor);
-		}
+		void BufferSwap(void);
 
-		void SetBackgroundColor(color& c) {
+		void SetBackgroundColor(color& c) 
+		{
 			_bgColor[0] = c.GetRed();
 			_bgColor[1] = c.GetGreen();
 			_bgColor[2] = c.GetBlue();
