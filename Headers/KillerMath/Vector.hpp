@@ -3,10 +3,13 @@ A Vector class that will follow the rules of Mathematics. The equations
 that the Vectors use for each operation were taken from 3D Math Primer 
 for Graphics and Game Development by Dunn and Parberry. 
 
-It is called Vector because it will only support 3D vectors. For any 2D 
-work, simply adapt by not using the z axis (although you should not that
-there will be some operations that will not support this, such as the 
-cross multiplication operation. 
+There are two classes that are created in this file. They are the Vector2
+and the Vector3. The difference is whether the z can be changed or not. In
+a Vector2, once it is created the z will stay the same no matter what, where
+in the Vector3, the z will change dynamically as expected. 
+
+Both have 4 elements, but the difference is how the elements are allowed 
+to be changed throughout the life of the object. 
 
 w is a special value that is used for computations convience. It is there
 so that the vector can be transformed by a 4x4 matrix. As such, it will 
@@ -25,15 +28,14 @@ Written by Maxwell Miller
 
 #include <KillerMath/Atom.h>
 
-namespace KillerMath {
+namespace KillerMath 
+{
 
 	template<typename T>
-	class Vector {
+	class Vector2 
+	{
 	private:
-		T _x;
-		T _y;
-		T _z;
-		T _w;
+		T _v[4];
 
 	public:
 //==========================================================================================================================
@@ -41,23 +43,60 @@ namespace KillerMath {
 //Constructors
 //
 //==========================================================================================================================
-		Vector()				       : _x(T(0)), _y(T(0)), _z(T(0)), _w(T(1)) 			       	{  }
-		Vector(T xT, T yT)			   : _x(xT), _y(yT), _z(T(0)), _w(T(1))							{  }
-		Vector(T xT, T yT, T zT) 	   : _x(xT), _y(yT), _z(zT), _w(T(1))    						{  }
-		Vector(T xT, T yT, T zT, T wT) : _x(xT), _y(yT), _z(zT), _w(wT) 							{  }
-		Vector(const Vector<T>& vT)	   : _x(vT.GetX()), _y(vT.GetY()), _z(vT.GetZ()), _w(vT.GetW()) {  }
+		Vector2()
+		{
+			_v[0] = 0;
+			_v[1] = 0;
+			_v[2] = 0;
+			_v[3] = 1;
+		}
 		
-		~Vector<T>(){  }
+		Vector2(T x, T y)
+		{
+			_v[0] = x;
+			_v[1] = y;
+			_v[2] = 0;
+			_v[3] = 1;
+		}
+		
+		Vector2(T x, T y, T z)
+		{
+			_v[0] = x;
+			_v[1] = y;
+			_v[2] = z;
+			_v[3] = 1;
+		}
+		
+		Vector2(T x, T y, T z, T w)
+		{
+			_v[0] = x;
+			_v[1] = y;
+			_v[2] = z;
+			_v[3] = w;
+		}
+		
+		Vector2(const Vector2<T>& V)
+		{
+			_v[0] = V.GetX();
+			_v[1] = V.GetY();
+			_v[2] = V.GetZ();
+			_v[3] = V.GetW();
+		}
+			
+		~Vector2<T>() {	 }
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		T GetX() const { return _x; }
-		T GetY() const { return _y; }
-		T GetZ() const { return _z; }
-		T GetW() const { return _w; }
+		T GetX() const { return _v[0]; }
+		
+		T GetY() const { return _v[1]; }
+		
+		T GetZ() const { return _v[2]; }
+		
+		T GetW() const { return _v[3]; }
 	 
 //==========================================================================================================================
 //
@@ -65,142 +104,150 @@ namespace KillerMath {
 //
 //==========================================================================================================================
 		//=====Copy assignment=====
-		Vector<T>& operator =(const Vector<T>& v) {
-			_x = v.GetX();
-			_y = v.GetY();
-			_z = v.GetX();
-			_w = v.GetW();
+		Vector2<T>& operator =(const Vector2<T>& V) 
+		{
+			_v[0] = V.GetX();
+			_v[1] = V.GetY();
+			_v[2] = V.GetX();
+			_v[3] = V.GetW();
 
 			return *this;
 		}
 
 		//=====Add by vector=====
-		Vector<T> operator +(const Vector<T>& a) {
-			return Vector<T>(_x + a.GetX(),
-							 _y + a.GetY(),
-							 _z + a.GetZ(),
-							 _w );
+		Vector2<T> operator +(const Vector2<T>& V) 
+		{
+			return Vector2<T>( _v[0] + V.GetX(),
+							   _v[1] + V.GetY(),
+							   _v[2], _v[3] );
 		}
 
-		Vector<T>& operator +=(const Vector<T>& a) {
-			_x += a.GetX();
-			_y += a.GetY();
-			_z += a.GetZ();
+		Vector2<T>& operator +=(const Vector2<T>& V) 
+		{
+			_v[0] += V.GetX();
+			_v[1] += V.GetY();
 
 			return *this;
 		}
 
 		//=====Add by scalar=====
-		Vector<T> operator +(const T& a) {
-			return Vector<T>(_x + a,
-							 _y + a,
-							 _z + a,
-							 _w );
+		Vector2<T> operator +(const T& a) 
+		{
+			return Vector2<T>( _v[0] + a,
+							   _v[1] + a,
+							   _v[2], _v[3] );
 		}
 
-		Vector<T>& operator +=(const T& a) {
-			_x += a;
-			_y += a;
-			_z += a;
+		Vector2<T>& operator +=(const T& a) 
+		{
+			_v[0] += a;
+			_v[1] += a;
 
 			return *this;
 		}
 
 		//=====Minus from vector=====
-		Vector<T> operator-(const Vector<T>& s) {
-			return Vector<T>(_x - s.GetX(),
-							 _y - s.GetY(),
-							 _z - s.GetZ(),
-							 _w );
+		Vector2<T> operator-(const Vector2<T>& V) 
+		{
+			return Vector2<T>( _v[0] - V.GetX(),
+							   _v[1] - V.GetY(),
+							   _v[2], _v[3] );
 		}
 
-		Vector<T>& operator -=(const Vector<T>& s) {
-			_x -= s.GetX();
-			_y -= s.GetY();
-			_z -= s.GetZ();
+		Vector2<T>& operator -=(const Vector2<T>& V) 
+		{
+			_v[0] -= V.GetX();
+			_v[1] -= V.GetY();
 
 			return *this;
 		}
 
 		//=====Minus from scalar=====
-		Vector<T> operator-(const T& s) {
-			return Vector<T>(_x - s,
-							 _y - s,
-							 _z - s,
-							 _w );
+		Vector2<T> operator-(const T& s) 
+		{
+			return Vector2<T>( _v[0] - s,
+							   _v[1] - s,
+							   _v[2], _v[3] );
 		}
 
-		Vector<T>& operator-=(const T& s) {
-			_x -= s;
-			_y -= s;
-			_z -= s;
-
+		Vector2<T>& operator-=(const T& s) 
+		{
+			_v[0] -= s;
+			_v[1] -= s;
+			
 			return *this;
 		}
 
 		//=====Multiply by a scalar=====
-		Vector<T> operator*(const T m) {
-			return Vector<T>(_x * m,
-							 _y * m,
-							 _z * m,
-							 _w );
+		Vector2<T> operator*(const T m) 
+		{
+			return Vector2<T>( _v[0] * m,
+							   _v[1] * m,
+							   _v[2], _v[3] );
 		}
 
-		Vector<T>& operator *=(const T m) {
-			_x *= m;
-			_y *= m;
-			_z *= m;
+		Vector2<T>& operator *=(const T m) 
+		{
+			_v[0] *= m;
+			_v[1] *= m;
 			
 			return *this;
 		}
 
 		//=====Dot Product=====
-		T DotProduct(const Vector<T>& V) {
-			return _x * V.GetX() +
-			       _y * V.GetY() +
-			       _z * V.GetZ();
+		T DotProduct(const Vector2<T>& V) 
+		{
+			return _v[0] * V.GetX() +
+			       _v[1] * V.GetY() +
+			       _v[2] * V.GetZ();
 		}
 
-		T operator *(const Vector<T>& V) {
-			return DotProduct(V);
-		} 
+		T operator *(const Vector2<T>& V) { return DotProduct(V); } 
 
 		//====Cross Product=====
-		Vector<T> CrossProduct(const Vector<T>& V) { return Vector<T>( _y * V.GetZ() - _z * V.GetY(), 
-															  	   	   _z * V.GetX() - _x * V.GetZ(), 
-															   	   	   _x * V.GetY() - _y * V.GetX(),
-															       	   _w ); 
+		Vector2<T> CrossProduct(const Vector2<T>& V) 
+		{ 
+			return Vector2<T>( _v[1] * V.GetZ() - _v[2] * V.GetY(), 
+							   _v[2] * V.GetX() - _v[0] * V.GetZ(), 
+							   _v[0] * V.GetY() - _v[1] * V.GetX(),
+							   _v[3] ); 
 	    }
 
-	    Vector<T> operator%(const Vector<T>& V) { return CrossProduct(V); }
+	    Vector2<T> operator%(const Vector2<T>& V) { return CrossProduct(V); }
 
-	    Vector<T>& operator%=(const Vector<T>& V) {
-	    	_y *= V.GetZ() - _z * V.GetY(); 
-			_z *= V.GetX() - _x * V.GetZ(); 
-			_x *= V.GetY() - _y * V.GetX();
+	    Vector2<T>& operator%=(const Vector2<T>& V) 
+	    {
+	    	_v[1] *= V.GetZ() - _v[2] * V.GetY(); 
+			_v[2] *= V.GetX() - _v[0] * V.GetZ(); 
+			_v[0] *= V.GetY() - _v[1] * V.GetX();
 			
 			return *this;
 	    }
 
 		//=====Division by scalar=====
-		Vector<T> operator /(const T d) {
+		Vector2<T> operator /(const T d) 
+		{
 			if(d == 0) { return *this; }
 
-			return Vector<T>(_x / d,
-							 _y / d,
-							 _z / d,
-							 _w );
+			return Vector2<T>(_v[0] / d,
+							 _v[1] / d,
+							 _v[2], _v[3] );
 		}
 
-		Vector<T>& operator /=(const T d) {
-			if (d == 0) { 
+		Vector2<T>& operator /=(const T d) 
+		{
+			if (d == 0) 
+			{ 
 				//do nothing  ----------------------Needs to make error for this in error system 
+				return *this;
 			}
-			else {
-				_x /= d;
-				_y /= d;
-				_z /= d;
+			
+			else 
+			{
+				_v[0] /= d;
+				_v[1] /= d;
 			}
+
 			return *this;
 		}
 
@@ -209,17 +256,19 @@ namespace KillerMath {
 //Vector Functions
 //
 //==========================================================================================================================
-		T Magnitude(void) { return sqrt(_x*_x + _y*_y + _z*_z); }
+		T Magnitude(void) { return sqrt(_v[0]*_v[0] + _v[1]*_v[1] + _v[2]*_v[2]); }
 		
-		T SqrMagnitude(void) { return _x*_x + _y*_y + _z*_z; }
+		T SqrMagnitude(void) { return _v[0]*_v[0] + _v[1]*_v[1] + _v[2]*_v[2]; }
 
-		void Normalize(void) {
+		void Normalize(void) 
+		{
 			T mag = Magnitude();
 
 			if(mag > 0) { (*this) *= T(1)/mag; } 
 		}
 
-		void MakeOrthonormalBasis(const Vector<T>& A, const Vector<T>& B, const Vector<T>& C) {
+		void MakeOrthonormalBasis(const Vector2<T>& A, const Vector2<T>& B, const Vector2<T>& C) 
+		{
 			A.Normalize();
 
 			C = A % B;
@@ -232,17 +281,18 @@ namespace KillerMath {
 		}
 		
 		//=====Component Mulitplication=====
-		Vector<T> ComponentProduct(const Vector<T>& V) {
-			return Vector<T>( _x * V.GetX(),
-							  _y * V.GetY(),
-							  _z * V.GetZ(),
-							  _w );
+		Vector2<T> ComponentProduct(const Vector2<T>& V) 
+		{
+			return Vector2<T>( _v[0] * V.GetX(),
+							  _v[1] * V.GetY(),
+							  _v[2] * V.GetZ(),
+							  _v[3] );
 		}
 
-		void ComponentProductUpdate(const Vector<T>& V) {
-			_x *= V.GetX();
-			_y *= V.GetY();
-			_z *= V.GetZ();
+		void ComponentProductUpdate(const Vector2<T>& V) {
+			_v[0] *= V.GetX();
+			_v[1] *= V.GetY();
+			_v[2] *= V.GetZ();
 		}
 
 	};

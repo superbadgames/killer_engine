@@ -64,7 +64,7 @@ typedef KillerEngine::Color<F32> color;
 typedef KillerMath::Matrix4<F32> matrix;
 
 //Vector type
-typedef KillerMath::Vector<F32> vec;
+typedef KillerMath::Vector2<F32> vec;
 
 //Point typedef
 typedef KillerMath::Point<F32> point;
