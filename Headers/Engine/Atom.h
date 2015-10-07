@@ -20,9 +20,9 @@ Written by Maxwell Miller
 #include <Engine/Color.hpp>
 
 //=====KillerMath Includes=====
-#include <KillerMath/Vector.hpp>
-#include <KillerMath/Matrix.hpp>
-#include <KillerMath/Point.hpp>
+#include <Math/Vector.hpp>
+#include <Math/Matrix.hpp>
+#include <Math/Point.hpp>
 
 //=====OGL Includes=====
 #include <GL/gl3w.h>

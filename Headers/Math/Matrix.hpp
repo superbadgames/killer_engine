@@ -46,7 +46,7 @@ Written by Maxwell Miller
 #define MATRIX_H
 
 //=====Killer1 includes=====
-#include <KillerMath/Atom.h>
+#include <Math/Atom.h>
 
 namespace KillerMath {
 

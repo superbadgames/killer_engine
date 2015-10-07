@@ -51,5 +51,7 @@ Librarian -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetN
 
 Build Events -> Pre Build Events -> 
 
-del $(ProjectDir)..\..\Headers\KillerMath /S /Q
+del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
+del $(ProjectDir)..\..\Headers\Math\ /S /Q
+xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
 xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y

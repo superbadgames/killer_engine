@@ -12,7 +12,7 @@ Written by Maxwell Miller
 #define POINT_HPP
 
 //User defined includes
-#include <KillerMath/Atom.h>
+#include <Math/Atom.h>
 
 namespace KillerMath {
 
