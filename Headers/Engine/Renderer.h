@@ -69,8 +69,8 @@ namespace KillerEngine
 		std::vector<F32> 	 _hexVertices;
 		std::vector<F32> 	 _hexColors;
 		std::vector<F32>	 _hexUvs;	
-		GLuint				 _renderingProgramColored;
-		GLuint   			 _renderingProgramTextured;
+		GLuint				 _renderingProgramColor;
+		GLuint   			 _renderingProgramTexture;
 		GLuint   			 _vertexArrayObject;
 		static const GLchar* _vertexShaderSourceColor[];
 		static const GLchar* _vertexShaderSourceTexture[];

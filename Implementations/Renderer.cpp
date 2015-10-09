@@ -119,16 +119,16 @@ namespace KillerEngine
 		glCompileShader(fragmentShaderProgramTexture);
 
 		//=====Create Color Shader, attach shader to it and link it=====
-		_renderingProgramColored = glCreateProgram();
-		glAttachShader(_renderingProgramColored, vertexShaderProgramColor);
-		glAttachShader(_renderingProgramColored, fragmentShaderProgramColor);
-		glLinkProgram(_renderingProgramColored);
+		_renderingProgramColor = glCreateProgram();
+		glAttachShader(_renderingProgramColor, vertexShaderProgramColor);
+		glAttachShader(_renderingProgramColor, fragmentShaderProgramColor);
+		glLinkProgram(_renderingProgramColor);
 
 		//=====Create Texture Shader, attach shader to it and link it=====
-		_renderingProgramTextured = glCreateProgram();
-		glAttachShader(_renderingProgramTextured, vertexShaderProgramColor);
-		glAttachShader(_renderingProgramTextured, fragmentShaderProgramColor);
-		glLinkProgram(_renderingProgramTextured);
+		_renderingProgramTexture = glCreateProgram();
+		glAttachShader(_renderingProgramTexture, vertexShaderProgramTexture);
+		glAttachShader(_renderingProgramTexture, fragmentShaderProgramTexture);
+		glLinkProgram(_renderingProgramTexture);
 
 		//=====Delete the sahders as the program now has them=====
 		glDeleteShader(vertexShaderProgramColor);
@@ -151,11 +151,23 @@ namespace KillerEngine
 
 		const F32* data = final.GetElems();
 
-		glUseProgram(_renderingProgram);
+		//=====Color Shader setup=====
+		glUseProgram(_renderingProgramColor);
 
-		GLint transform_loc = glGetUniformLocation(_renderingProgram, "transform_mat");
+		GLint transform1 = glGetUniformLocation(_renderingProgramColor, "transform_mat");
 
-		glUniformMatrix4fv(transform_loc, 1, GL_FALSE, data);
+		glUniformMatrix4fv(transform1, 1, GL_FALSE, data);
+
+		glUseProgram(0);
+
+		//=====Texture Shader setup=====
+		glUseProgram(_renderingProgramTexture);
+
+		GLint transform2 = glGetUniformLocation(_renderingProgramTexture, "transform_mat");
+
+		glUniformMatrix4fv(transform2, 1, GL_FALSE, data);
+
+		glUseProgram(0);
 	}
 
 //==========================================================================================================================
@@ -784,7 +796,7 @@ namespace KillerEngine
 	{
 		if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
 
-		//glClearBufferfv(GL_COLOR, 0, _bgColor);		
+		glUseProgram(0);	
 		
 		 if(_triBatch > 0) 
 		 {
@@ -792,7 +804,7 @@ namespace KillerEngine
 		    if(_triUVs.size() <= 0) 
 		    {
 
-			    glUseProgram(_renderingProgram);
+			    glUseProgram(_renderingProgramColor);
 
 				GLuint buffers[2];
 
@@ -813,7 +825,7 @@ namespace KillerEngine
 			}
 			else if(_triUVs.size() >= 1) 
 			{
-				glUseProgram(_renderingProgram);
+				glUseProgram(_renderingProgramTexture);
 
 				GLuint buffers[2];
 
@@ -836,10 +848,9 @@ namespace KillerEngine
 		if(_sqrBatch > 0) 
 		{
 		    
-		    if(_sqrUVs.size() <= 1) 
+		    if(_sqrUVs.size() == 0) 
 		    {
-
-			    glUseProgram(_renderingProgram);
+			    glUseProgram(_renderingProgramColor);
 
 				GLuint buffers[2];
 				glGenBuffers(2, buffers);
@@ -860,7 +871,7 @@ namespace KillerEngine
 			else if(_sqrUVs.size() >= 1) 
 			{
 
-				glUseProgram(_renderingProgram);
+				glUseProgram(_renderingProgramTexture);
 
 				GLuint buffers[2];
 				glGenBuffers(2, buffers);
@@ -884,7 +895,7 @@ namespace KillerEngine
 
 		if(_hexBatch > 0) 
 		{
-		    glUseProgram(_renderingProgram);
+		    glUseProgram(_renderingProgramColor);
 
 			GLuint buffers[2];
 			glGenBuffers(2, buffers);

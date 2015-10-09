@@ -20,7 +20,8 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 
-namespace KillerEngine{
+namespace KillerEngine
+{
 	
 	template <typename T>
 	struct Color {
