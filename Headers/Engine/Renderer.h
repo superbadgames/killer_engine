@@ -69,20 +69,20 @@ namespace KillerEngine
 		std::vector<F32> 	 _hexVertices;
 		std::vector<F32> 	 _hexColors;
 		std::vector<F32>	 _hexUvs;	
-		GLuint   			 _renderingProgram;
+		GLuint				 _renderingProgramColored;
+		GLuint   			 _renderingProgramTextured;
 		GLuint   			 _vertexArrayObject;
-		static const GLchar* _vertexShaderSource[];
-		static const GLchar* _tessControlShaderSource[];
-		static const GLchar* _tessEvalShaderSource[];
-		static const GLchar* _geometryShaderSource[];
-		static const GLchar* _fragmentShaderSource[];
+		static const GLchar* _vertexShaderSourceColor[];
+		static const GLchar* _vertexShaderSourceTexture[];
+		static const GLchar* _fragmentShaderSourceColor[];
+		static const GLchar* _fragmentShaderSourceTexture[];
 
 //==========================================================================================================================
 //
 //Private Renderer Functions
 //
 //==========================================================================================================================
-		GLuint _CompileShaders(void);
+		void _CompileShaders(void);
 		
 		void   _SetOrthoProjection(void);
 

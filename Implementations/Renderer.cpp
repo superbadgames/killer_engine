@@ -11,41 +11,74 @@ namespace KillerEngine
 //=======================================================================================================
 //_CompileShaders
 //=======================================================================================================
-	GLuint Renderer::_CompileShaders(void)
+	void Renderer::_CompileShaders(void)
 	{
-		GLuint vertexShaderProgram;
-		GLuint fragmentShaderProgram;
-		GLuint finalProgram;
-
-		//=====Vertex Shader=====
-		//=====Vertex Shader=====
-		static const GLchar* _vertexShaderSource[] = 
+		//=====Vertex Shaders=====
+		//=====Color Shader=====
+		//This is used when only colors, not textures are used to render
+		//a pirmitive
+		static const GLchar* _vertexShaderSourceColor[] = 
 		{
 			"#version 430 core																\n"
 			"																				\n"
 			"layout (location = 0) in vec4 position;										\n"
-			//"layout (location = 1) in vec4 color; 										\n"					
+			"layout (location = 1) in vec4 color; 										\n"					
+			"uniform mat4 transform_mat;													\n"
+			"																				\n"
+			"out vec4 vs_color;															\n"
+			"																				\n"
+			"void main(void) 																\n"
+			"{																				\n"
+			"	gl_Position = transform_mat * position;										\n"
+			"	vs_color = color;															\n"
+			"}																				\n"
+		};
+
+		//=====Texture Shader=====
+		//This is used when the pirmitive to be drawn has a texture
+		//to be drawn with it
+		static const GLchar* _vertexShaderSourceTexture[] =
+		{
+			"#version 430 core																\n"
+			"																				\n"
+			"layout (location = 0) in vec4 position;										\n"
 			"layout (location = 1) in vec2 tex_coord; 										\n"					
 			"uniform mat4 transform_mat;													\n"
 			"																				\n"
-			//"out vec4 vs_color;															\n"
 			"out vec2 vs_tex_coord;															\n"
 			"																				\n"
 			"void main(void) 																\n"
 			"{																				\n"
 			"	gl_Position = transform_mat * position;										\n"
-			//"	vs_color = color;															\n"
 			"	vs_tex_coord = vec2(tex_coord.x, 1.0f - tex_coord.y);						\n"
 			"}																				\n"
 		};
 
-		//=====Fragment Shader=====
-		static const GLchar* _fragmentShaderSource[] = 
+		//=====Fragment Shaders=====
+		//=====Color Shader=====
+		//This is used when only colors, not textures are used to render
+		//a pirmitive
+		static const GLchar* _fragmentShaderSourceColor[] = 
+		{
+			"#version 430 core																\n"
+			"																				\n"
+			"in vec4 vs_color;															\n"
+			"out vec4 color;																\n"
+			"																				\n"
+			"void main(void) 																\n"
+			"{																				\n"
+			"	color = vs_color;															\n"
+			"}																				\n"
+		};
+
+		//=====Texture Shader=====
+		//This is used when the pirmitive to be drawn has a texture
+		//to be drawn with it
+		static const GLchar* _fragmentShaderSourceTexture[] =
 		{
 			"#version 430 core																\n"
 			"																				\n"
 			"uniform sampler2D ourTexture;													\n"
-			//"in vec4 vs_color;															\n"
 			"in vec2 vs_tex_coord;															\n"
 			"out vec4 color;																\n"
 			"																				\n"
@@ -53,33 +86,55 @@ namespace KillerEngine
 			"{																				\n"
 			//=====test for textures, failed finish later=====
 			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
-			//"	color = vs_color;															\n"
 			"	color = texture(ourTexture, vs_tex_coord);									\n"
 			"}																				\n"
 		};
 
-
 		//=====Create and compile vertext shader=====
-		vertexShaderProgram = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShaderProgram, 1, _vertexShaderSource, NULL);
-		glCompileShader(vertexShaderProgram);
+		GLuint vertexShaderProgramColor;
+		GLuint vertexShaderProgramTexture;
+		GLuint fragmentShaderProgramColor;
+		GLuint fragmentShaderProgramTexture;
 
-		//=====Create and compile fragment shader=====
-		fragmentShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShaderProgram, 1, _fragmentShaderSource, NULL);
-		glCompileShader(fragmentShaderProgram);
+		//=====Compiled vertex shaders=====
+		//=====Color=====
+		vertexShaderProgramColor = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertexShaderProgramColor, 1, _vertexShaderSourceColor, NULL);
+		glCompileShader(vertexShaderProgramColor);
 
-		//=====Create program, attach shader to it and link it=====
-		finalProgram = glCreateProgram();
-		glAttachShader(finalProgram, vertexShaderProgram);
-		glAttachShader(finalProgram, fragmentShaderProgram);
-		glLinkProgram(finalProgram);
+		//=====Texutre=====
+		vertexShaderProgramTexture = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertexShaderProgramTexture, 1, _vertexShaderSourceTexture, NULL);
+		glCompileShader(vertexShaderProgramTexture);
+
+		//=====Compile fragment shaders=====
+		//=====Color=====
+		fragmentShaderProgramColor = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragmentShaderProgramColor, 1, _fragmentShaderSourceColor, NULL);
+		glCompileShader(fragmentShaderProgramColor);
+
+		//=====Texture=====
+		fragmentShaderProgramTexture = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragmentShaderProgramTexture, 1, _fragmentShaderSourceTexture, NULL);
+		glCompileShader(fragmentShaderProgramTexture);
+
+		//=====Create Color Shader, attach shader to it and link it=====
+		_renderingProgramColored = glCreateProgram();
+		glAttachShader(_renderingProgramColored, vertexShaderProgramColor);
+		glAttachShader(_renderingProgramColored, fragmentShaderProgramColor);
+		glLinkProgram(_renderingProgramColored);
+
+		//=====Create Texture Shader, attach shader to it and link it=====
+		_renderingProgramTextured = glCreateProgram();
+		glAttachShader(_renderingProgramTextured, vertexShaderProgramColor);
+		glAttachShader(_renderingProgramTextured, fragmentShaderProgramColor);
+		glLinkProgram(_renderingProgramTextured);
 
 		//=====Delete the sahders as the program now has them=====
-		glDeleteShader(vertexShaderProgram);
-		glDeleteShader(fragmentShaderProgram);
-
-		return finalProgram;
+		glDeleteShader(vertexShaderProgramColor);
+		glDeleteShader(fragmentShaderProgramColor);
+		glDeleteShader(vertexShaderProgramTexture);
+		glDeleteShader(fragmentShaderProgramTexture);
 	}
 
 //=======================================================================================================
@@ -879,7 +934,7 @@ namespace KillerEngine
 							  _textureManager(TextureManager::Instance()),
 							  _programWindow(ProgramWindow::Instance()) 
 	{ 
-		_renderingProgram = _CompileShaders();
+		_CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);
 		glBindVertexArray(_vertexArrayObject);
 		_SetOrthoProjection();
