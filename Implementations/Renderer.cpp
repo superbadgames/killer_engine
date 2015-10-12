@@ -275,6 +275,12 @@ namespace KillerEngine
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
 
+		//=====First Color=====
+		_sqrColors.push_back(col.GetRed());
+		_sqrColors.push_back(col.GetGreen());
+		_sqrColors.push_back(col.GetBlue());
+		_sqrColors.push_back(col.GetAlpha());
+
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
@@ -283,6 +289,12 @@ namespace KillerEngine
 		_sqrVertices.push_back(pos.GetY() + cell.GetBottom());
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
+
+		//=====Second Color=====
+		_sqrColors.push_back(col.GetRed());
+		_sqrColors.push_back(col.GetGreen());
+		_sqrColors.push_back(col.GetBlue());
+		_sqrColors.push_back(col.GetAlpha());
 		
 		++_totalVerticesInBatch;
 		++_sqrBatch;
@@ -293,6 +305,12 @@ namespace KillerEngine
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
 
+		//=====Third Color=====
+		_sqrColors.push_back(col.GetRed());
+		_sqrColors.push_back(col.GetGreen());
+		_sqrColors.push_back(col.GetBlue());
+		_sqrColors.push_back(col.GetAlpha());
+
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
@@ -302,14 +320,26 @@ namespace KillerEngine
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
 
+		//=====Fourth Color	=====
+		_sqrColors.push_back(col.GetRed());
+		_sqrColors.push_back(col.GetGreen());
+		_sqrColors.push_back(col.GetBlue());
+		_sqrColors.push_back(col.GetAlpha());
+
 		++_totalVerticesInBatch;
 		++_sqrBatch;
 
-		//=====Fifth Verte=====
+		//=====Fifth Vertex=====
 		_sqrVertices.push_back(pos.GetX() + cell.GetRight());
 		_sqrVertices.push_back(pos.GetY() + cell.GetBottom());
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
+
+		//=====Fifth Color=====
+		_sqrColors.push_back(col.GetRed());
+		_sqrColors.push_back(col.GetGreen());
+		_sqrColors.push_back(col.GetBlue());
+		_sqrColors.push_back(col.GetAlpha());
 
 		++_totalVerticesInBatch;
 		++_sqrBatch;
@@ -321,47 +351,14 @@ namespace KillerEngine
 		_sqrVertices.push_back(pos.GetZ());
 		_sqrVertices.push_back(pos.GetW());
 
-		++_totalVerticesInBatch;
-		++_sqrBatch;
-
-		//=====First Color=====
-		_sqrColors.push_back(col.GetRed());
-		_sqrColors.push_back(col.GetGreen());
-		_sqrColors.push_back(col.GetBlue());
-		_sqrColors.push_back(col.GetAlpha());
-
-		//=====Second Color=====
-		_sqrColors.push_back(col.GetRed());
-		_sqrColors.push_back(col.GetGreen());
-		_sqrColors.push_back(col.GetBlue());
-		_sqrColors.push_back(col.GetAlpha());
-
-		//=====Third Color=====
-		_sqrColors.push_back(col.GetRed());
-		_sqrColors.push_back(col.GetGreen());
-		_sqrColors.push_back(col.GetBlue());
-		_sqrColors.push_back(col.GetAlpha());
-
-		//=====Fourth Color	=====
-		_sqrColors.push_back(col.GetRed());
-		_sqrColors.push_back(col.GetGreen());
-		_sqrColors.push_back(col.GetBlue());
-		_sqrColors.push_back(col.GetAlpha());
-
-		//=====Fifth Color=====
-		_sqrColors.push_back(col.GetRed());
-		_sqrColors.push_back(col.GetGreen());
-		_sqrColors.push_back(col.GetBlue());
-		_sqrColors.push_back(col.GetAlpha());
-
 		//=====Sixth Color	=====
 		_sqrColors.push_back(col.GetRed());
 		_sqrColors.push_back(col.GetGreen());
 		_sqrColors.push_back(col.GetBlue());
 		_sqrColors.push_back(col.GetAlpha());
 
-		
-
+		++_totalVerticesInBatch;
+		++_sqrBatch;
 	}
 
 //=======================================================================================================
@@ -862,7 +859,7 @@ namespace KillerEngine
 
 				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
 				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrColors.size()), &_sqrColors[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+				glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 				glEnableVertexAttribArray(1);
 				
 				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
