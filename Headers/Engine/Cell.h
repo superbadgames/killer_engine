@@ -33,6 +33,9 @@ Written by Maxwell Miller
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+//=====STD includes=====
+#include <vector>
+
 namespace KillerEngine 
 {
 
@@ -41,35 +44,7 @@ namespace KillerEngine
 
 	class Cell 
 	{	
-	private:	
-		Renderer* _renderer;
-		point     _position;
-		color     _color;
-
-		F32 _totalWidth;
-		F32	_right;
-		F32	_left;
-		
-		F32	_totalHeight;
-		F32	_top;
-		F32 _bottom;
-
-	public:
-//==========================================================================================================================
-//
-//Constructors
-//
-//==========================================================================================================================
-		Cell(void);
-		
-		Cell(const F32 w, const F32 h);
-		
-		Cell(const F32 w, const F32 h, const point& p, const color& c);
-		
-		Cell(const Cell& cell);
-
-		~Cell(void){  }
-
+		public:
 //==========================================================================================================================
 //
 //Operator Overloads
@@ -77,10 +52,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		Cell& operator=(const Cell& cell) 
 		{
-			_position = cell.GetPosition();
-			_color 	  = cell.GetColor();
-			SetDimensions(cell.GetWidth(), cell.GetHeight());
-
+			
 			return *this;
 		}
 		
@@ -89,67 +61,84 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void SetPosition(const point& p) { _position = p; }
-		
-		void SetColor(const color& c)    { _color = c; }
-		
-		void SetWidth(const F32 w) 
-		{
-			_totalWidth = w;
-			_right 		= w / 2;
-			_left  		= -w / 2;
-		}
+//=====Vertices=====		
+		virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
+		virtual void v_SetVertexColors( const color& c) = 0;
+		virtual void v_SetVertexUvs(void) = 0;
 
-		void SetHeight(const F32 h) 
-		{
-			_totalHeight = h;
-			_top 		 = h / 2;
-			_bottom 	 = -h / 2;
-		}
-
-		void SetDimensions(const F32 w, const F32 h) 
-		{
-			SetWidth(w);
-			SetHeight(h);
+//=====Position=====	
+		void SetPosition(const point& p) 
+		{ 
+			_position = p; 
+			v_SetVertexPositions(_position, _width, _height);
 		}
 
 		const point& GetPosition(void) const { return _position; }
+
+		const F32* GetPositionArray(void) const { return _position.Get(); }
 		
-		const F32*   GetPositionArray(void) const { return _position.Get(); }
-		
+//=====Color=====		
+		void SetColor(const color& c) 
+		{ 
+			_color = c; 
+			v_SetVertexColors(_color);
+		}
+
 		const color& GetColor(void) const { return _color; }
-		
+
 		const F32* GetColorArray(void) const { return _color.Get(); }
 		
-		const F32 GetWidth(void) const { return _totalWidth; }
-		
-		const F32 GetRight(void) const { return _right; }
-		
-		const F32 GetLeft(void) const { return _left; }
-	 	
-	 	const F32 GetHeight(void) const { return _totalHeight; }
-	 	
-	 	const F32 GetTop(void) const { return _top; }
-	 	
-	 	const F32 GetBottom(void) const { return _bottom; }
+//=====Width=====				
+		void SetWidth(const F32 w) 
+		{ 
+			_width = w;
+			v_SetVertexPositions(_position, _width, _height);
+		}
+
+		F32 GetWidth(void) { return _width; }
+
+//=====Height=====
+		void SetHeight(const F32 h) 
+		{
+			_height = h;
+			v_SetVertexPositions(_position, _width, _height); 
+		}
+
+		F32 GetHeight(void) { return _height; }
+
+//=====Width, Height=====
+		void SetWidthHeight(const F32 w, const F32 h) 
+		{
+			_width = w;
+			_height = h;
+			v_SetVertexPositions(_position, _width, _height);
+		}	
 
 //==========================================================================================================================
 //
 //Cell Functions 	 	
 //
 //==========================================================================================================================
+	protected:
+		point     		 _position;
+		color     		 _color;
+		F32		  		 _width;
+		F32		  		 _height;
+		std::vector<F32> _vertexPositions;
+		std::vector<F32> _vertexColors;
+		std::vector<F32> _vertexUvs;
 
-		void RenderAsTri(void);
-		
-		void RenderAsSqr(void);
-		
-		void RenderAsHex(void);
-		
-		void RenderTexturedTri(const Texture& texture);
-		
-		void RenderTexturedSqr(const Texture& texture);
-		
-		void RenderTexturedHex(const Texture& texture);
+	private:	
+		Renderer* 		 _renderer;
+
+//==========================================================================================================================
+//
+//Constructors
+//
+//==========================================================================================================================
+		Cell(void);
+
+
 	};
 }//End namespace
 

@@ -38,7 +38,7 @@ namespace KillerEngine
 	{
 	private:
 		text 	_id;
-		Cell 	_cell;
+		Cell& 	_cell;
 		Texture _texture;
 		bool 	_active;
 
@@ -52,6 +52,10 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================
+/*
+
+need to re-define this. 
+
 		GameObject(void) : _id(), _cell(), _texture(), _active(false) {  }
 		
 		GameObject(const text id, const Cell& cell) : _id(id), _cell(cell), _texture(), _active(false) {  }
@@ -61,6 +65,8 @@ namespace KillerEngine
 		GameObject(const text id, const Cell& cell, const Texture& texture) : _id(id), _cell(cell), _texture(texture), _active(false) {  }
 		
 		GameObject(const text id, const Cell& cell, const Texture& texture, bool active) : _id(id), _cell(cell), _texture(texture), _active(active) {  }
+
+
 
 		//virtual ~GameObject(void){  }
 
@@ -117,7 +123,7 @@ namespace KillerEngine
 		void RenderTexturedSqrCell(void) { _cell.RenderTexturedSqr(_texture); }
 		
 		void RenderTexturedHexCell(void) { _cell.RenderTexturedHex(_texture); }
-
+*/
 
 //==========================================================================================================================
 //

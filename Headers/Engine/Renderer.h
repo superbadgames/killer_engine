@@ -84,7 +84,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		void _CompileShaders(void);
 		
-		void   _SetOrthoProjection(void);
+		void  _SetOrthoProjection(void);
 
 	public:
 //==========================================================================================================================
@@ -109,18 +109,6 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		void SetBackgroundColor(color& c) { _programWindow->SetBackgroundColor(c); }
-
-		void AddTri(const Cell& cell);
-		
-		void AddSqr(const Cell& cell);
-		
-		void AddHex(const Cell& cell);
-
-		void AddTexturedTri(const Cell& cell, const Texture& texture);
-		
-		void AddTexturedSqr(const Cell& cell, const Texture& texture);
-		
-		void AddTexturedHex(const Cell& cell, const Texture& texture);
 		
 		void Draw(void);
 		
