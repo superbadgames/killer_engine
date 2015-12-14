@@ -197,147 +197,54 @@ namespace KillerEngine
 	}*/
 
 
+//=======================================================================================================
+//AddToBatch
+//=======================================================================================================
+	void Renderer::AddToBatch(std::vector<F32> ver, std::vector<F32> col)
+	{
+		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
+		
+		_vertices.reserve(_vertices.size() + ver.size());
+		_vertices.insert(_vertices.end(), ver.begin(), ver.end());
+		_currentBatchSize += ver.size();
+
+		_colors.reserve(_colors.size() + col.size());
+		_colors.insert(_colors.end(), col.begin(), col.end());
+
+	}
 
 //=======================================================================================================
 //Draw
 //=======================================================================================================
 	void Renderer::Draw(void) 
 	{
-		if(_totalVerticesInBatch == 0) { return; } //End if there are no verticies to draw
+		if(_currentBatchSize == 0) { return; } //End if there are no verticies to draw
 
 		glUseProgram(0);	
-		
-		 if(_triBatch > 0) 
-		 {
-		    
-		    if(_triUVs.size() <= 0) 
-		    {
-
-			    glUseProgram(_renderingProgramColor);
-
-				GLuint buffers[2];
-
-				glGenBuffers(2, buffers);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triVerticies.size()), &_triVerticies[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triColors.size()), &_triColors[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(1);
-
-				
-				glDrawArrays(GL_TRIANGLES, 0, _triBatch);
-			}
-			else if(_triUVs.size() >= 1) 
-			{
-				glUseProgram(_renderingProgramTexture);
-
-				GLuint buffers[2];
-
-				glGenBuffers(2, buffers);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triVerticies.size()), &_triVerticies[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _triUVs.size()), &_triUVs[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(1);
-
-				glDrawArrays(GL_TRIANGLES, 0, _triBatch);
-			}
-		}
-
-		if(_sqrBatch > 0) 
-		{
-		    
-		    if(_sqrUVs.size() == 0) 
-		    {
-			    glUseProgram(_renderingProgramColor);
-
-				GLuint buffers[2];
-				glGenBuffers(2, buffers);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrVertices.size()), &_sqrVertices[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrColors.size()), &_sqrColors[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(1);
-				
-				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
-			}
-
-			else if(_sqrUVs.size() >= 1) 
-			{
-
-				glUseProgram(_renderingProgramTexture);
-
-				GLuint buffers[2];
-				glGenBuffers(2, buffers);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrVertices.size()), &_sqrVertices[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-				glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _sqrUVs.size()), &_sqrUVs[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-				glEnableVertexAttribArray(1);
-
-				glDrawArrays(GL_TRIANGLES, 0, _sqrBatch);
-
-				glDeleteBuffers(2, buffers);
-
-			}	
-		}
-
-		if(_hexBatch > 0) 
-		{
-		    glUseProgram(_renderingProgramColor);
-
-			GLuint buffers[2];
-			glGenBuffers(2, buffers);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _hexVertices.size()), &_hexVertices[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _hexColors.size()), &_hexColors[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(1);
 			
-			glDrawArrays(GL_TRIANGLES, 0, _hexBatch);
-		}
+	    glUseProgram(_renderingProgramColor);
 
+		GLuint buffers[2];
+		glGenBuffers(2, buffers);
 
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		glEnableVertexAttribArray(1);
+		
+		glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+	
 
 		//=====Reset All Containers and Counters=====
-			_triVerticies.clear();
-			_triColors.clear();
-			_triUVs.clear();
-			_sqrVertices.clear();
-			_sqrColors.clear();
-			_sqrUVs.clear();
-			_hexVertices.clear();
-			_hexColors.clear();
-
-			_totalVerticesInBatch = 0;
-			_triBatch = 0;
-			_sqrBatch = 0;
-			_hexBatch = 0; 
+			_vertices.clear();
+			_colors.clear();
+			_uvs.clear();
+			_currentBatchSize = 0;
 	}
 
 //=======================================================================================================
@@ -346,10 +253,7 @@ namespace KillerEngine
 //
 //=======================================================================================================
 	Renderer::Renderer(void): _maxBatchSize(1000), 
-							  _totalVerticesInBatch(0),
-							  _triBatch(0),
-							  _sqrBatch(0),
-							  _hexBatch(0), 
+							  _currentBatchSize(0),
 							  _errorManager(ErrorManager::Instance()),
 							  _textureManager(TextureManager::Instance()),
 							  _programWindow(ProgramWindow::Instance()) 

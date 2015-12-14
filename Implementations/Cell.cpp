@@ -7,11 +7,7 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================
-	Cell::Cell(void) :  _position(0,0),
-						_color(0,0,0),
-						_width(NULL),
-						_height(NULL),
-						_vertexPositions(NULL),
+	Cell::Cell(void) :  _vertexPositions(NULL),
 						_vertexColors(NULL),
 						_vertexUvs(NULL)
 	{ _renderer = Renderer::Instance(); }

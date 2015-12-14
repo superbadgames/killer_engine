@@ -13,7 +13,7 @@ Written by Maxwell Miller
 //===Killer1 includes===
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
-#include <Engine/GameObject.hpp>
+#include <Engine/GameObject.h>
 #include <Engine/Renderer.h>
 
 //=====STL includes=====
@@ -57,7 +57,7 @@ namespace KillerEngine
 		
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
-				i->second->vRender();
+				i->second->v_Render();
 			}
 		}
 		

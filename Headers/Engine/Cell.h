@@ -25,7 +25,6 @@ Written by Maxwell Miller
 
 //=====Killer1 inlucdes=====
 #include <Engine/Atom.h>
-#include <Engine/Color.hpp>
 #include <Engine/Texture.hpp>
 #include <Engine/Renderer.h>
 
@@ -58,86 +57,38 @@ namespace KillerEngine
 		
 //==========================================================================================================================
 //
-//Accessors
+//Virtual
 //
 //==========================================================================================================================
-//=====Vertices=====		
-		virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
-		virtual void v_SetVertexColors( const color& c) = 0;
-		virtual void v_SetVertexUvs(void) = 0;
-
-//=====Position=====	
-		void SetPosition(const point& p) 
-		{ 
-			_position = p; 
-			v_SetVertexPositions(_position, _width, _height);
-		}
-
-		const point& GetPosition(void) const { return _position; }
-
-		const F32* GetPositionArray(void) const { return _position.Get(); }
-		
-//=====Color=====		
-		void SetColor(const color& c) 
-		{ 
-			_color = c; 
-			v_SetVertexColors(_color);
-		}
-
-		const color& GetColor(void) const { return _color; }
-
-		const F32* GetColorArray(void) const { return _color.Get(); }
-		
-//=====Width=====				
-		void SetWidth(const F32 w) 
-		{ 
-			_width = w;
-			v_SetVertexPositions(_position, _width, _height);
-		}
-
-		F32 GetWidth(void) { return _width; }
-
-//=====Height=====
-		void SetHeight(const F32 h) 
-		{
-			_height = h;
-			v_SetVertexPositions(_position, _width, _height); 
-		}
-
-		F32 GetHeight(void) { return _height; }
-
-//=====Width, Height=====
-		void SetWidthHeight(const F32 w, const F32 h) 
-		{
-			_width = w;
-			_height = h;
-			v_SetVertexPositions(_position, _width, _height);
-		}	
+		virtual void v_RenderCell(const point& pos, F32 w, F32 h, const color& col)=0;	
 
 //==========================================================================================================================
 //
 //Cell Functions 	 	
 //
 //==========================================================================================================================
+		
+
 	protected:
-		point     		 _position;
-		color     		 _color;
-		F32		  		 _width;
-		F32		  		 _height;
+		Renderer* 		 _renderer;
 		std::vector<F32> _vertexPositions;
 		std::vector<F32> _vertexColors;
 		std::vector<F32> _vertexUvs;
 
-	private:	
-		Renderer* 		 _renderer;
+		//virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
+		virtual void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col) = 0;
+		
+		virtual void v_SetVertexColors( const color& c) = 0;
+		
+		virtual void v_SetVertexUvs(void) = 0;
 
 //==========================================================================================================================
 //
 //Constructors
 //
 //==========================================================================================================================
-		Cell(void);
 
+		Cell(void);
 
 	};
 }//End namespace

@@ -36,103 +36,85 @@ namespace KillerEngine
 	
 	class GameObject
 	{
-	private:
-		text 	_id;
-		Cell& 	_cell;
-		Texture _texture;
-		bool 	_active;
-
-	protected:
-		
-
-	 
 	public:
 //==========================================================================================================================
 //
 //Constructors
 //
 //==========================================================================================================================
-/*
-
-need to re-define this. 
-
-		GameObject(void) : _id(), _cell(), _texture(), _active(false) {  }
-		
-		GameObject(const text id, const Cell& cell) : _id(id), _cell(cell), _texture(), _active(false) {  }
-		
-		GameObject(const text id, const Cell& cell, bool active) : _id(id), _cell(cell), _texture(), _active(active) {  }
-		
-		GameObject(const text id, const Cell& cell, const Texture& texture) : _id(id), _cell(cell), _texture(texture), _active(false) {  }
-		
-		GameObject(const text id, const Cell& cell, const Texture& texture, bool active) : _id(id), _cell(cell), _texture(texture), _active(active) {  }
+		//GameObject(void);
 
 
+		//~GameObject(void);
 
-		//virtual ~GameObject(void){  }
-
-		//virtual void v_ShutDown(void);
+		//void v_ShutDown(void);
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		const text GetId(void) { return _id; }
+//=====ID=====		
+		const text GetId(void) { return __id; }
 
-		void SetId(text id) { _id = id; }
+		void SetId(text id) { __id = id; }
 
-		const color& GetColor(void) { return _cell.GetColor(); }
-
-		void SetColor(const color& c) { _cell.SetColor(c); }
-
-
-		const Texture& GetTexture(void) { return _texture; }
-
-		void SetTexture(const Texture& texture) { _texture = texture; }
-
-
-		const point& GetPosition(void) { return _cell.GetPosition(); }
+//=====Position=====
+		const point& GetPosition(void) { return __position; }
 		
-		void SetPosition(const point& p) { _cell.SetPosition(p); }
-		
-		
-		const F32 GetWidth(void) { return _cell.GetWidth(); }
+		void SetPosition(const point& pos) { __position = pos; }
 
-		void SetDimensions(const F32 w, const F32 h) { _cell.SetDimensions(w, h); }
-		
-		
-		const bool   GetActive(void)   { return _active; }
+		void SetPosition(F32 x, F32 y) { __position = point(x, y); }
 
-		void SetActive(void)   { _active = true; }
+//=====Dimensions=====
+		const F32 GetWidth(void) { return __width; }
+
+		void SetWidth(F32 w) { __width = w; }
+
+		const F32 GetHeight(void) { return __height; }
+
+		void SetHeight(F32 h) { __height = h; }
+
+		void SetDimensions(const F32 w, const F32 h) 
+		{
+			__width = w;
+			__height = h;
+		}
+
+//=====Color=====
+		const color& GetColor(void) { return __color; }
+
+		void SetColor(const color& col) { __color = col; }
+
+//=====Texture=====
+		const Texture& GetTexture(void) { return __texture; }
+
+		void SetTexture(const Texture& texture) { __texture = texture; }
+
+//=====Active=====
+		const bool GetActive(void)   { return __active; }
+
+		void SetActive(void)   { __active = true; }
 		
-		void SetInactive(void) { _active = false; }
+		void SetInactive(void) { __active = false; }
 
 //==========================================================================================================================
 //
 //GameObject Functions
 //
 //==========================================================================================================================
-		void RenderTriCell(void) { _cell.RenderAsTri(); }
+		virtual void v_Update(void)=0;
 		
-		void RenderSqrCell(void) { _cell.RenderAsSqr(); }
-		
-		void RenderHexCell(void) { _cell.RenderAsHex(); }
+		virtual void v_Render(void)=0; 
 
-		void RenderTexturedTriCell(void) { _cell.RenderTexturedTri(_texture); }
-		
-		void RenderTexturedSqrCell(void) { _cell.RenderTexturedSqr(_texture); }
-		
-		void RenderTexturedHexCell(void) { _cell.RenderTexturedHex(_texture); }
-*/
-
-//==========================================================================================================================
-//
-//virtual functions
-//
-//==========================================================================================================================
-		virtual void vUpdate(void)=0;
-		
-		virtual void vRender(void)=0;
+	protected:
+		text 	__id;
+		point   __position;
+		F32     __width;
+		F32     __height;
+		color   __color;
+		Texture __texture;
+		bool 	__active;
 	};
 
 }//End namespace

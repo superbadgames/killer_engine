@@ -50,42 +50,6 @@ namespace KillerEngine
 
 	class Renderer 
 	{
-	private:
-		static Renderer* 	 _instance;
-		ErrorManager* 		 _errorManager;
-		ProgramWindow* 		 _programWindow;
-		TextureManager* 	 _textureManager;
-		U32 				 _maxBatchSize;
-		U32 				 _totalVerticesInBatch;
-		U32 				 _triBatch;
-		U32 				 _sqrBatch;
-		U32 				 _hexBatch;
-		std::vector<F32> 	 _triVerticies;
-		std::vector<F32> 	 _triColors;
-		std::vector<F32>     _triUVs;
-		std::vector<F32> 	 _sqrVertices;
-		std::vector<F32> 	 _sqrColors;
-		std::vector<F32> 	 _sqrUVs;
-		std::vector<F32> 	 _hexVertices;
-		std::vector<F32> 	 _hexColors;
-		std::vector<F32>	 _hexUvs;	
-		GLuint				 _renderingProgramColor;
-		GLuint   			 _renderingProgramTexture;
-		GLuint   			 _vertexArrayObject;
-		static const GLchar* _vertexShaderSourceColor[];
-		static const GLchar* _vertexShaderSourceTexture[];
-		static const GLchar* _fragmentShaderSourceColor[];
-		static const GLchar* _fragmentShaderSourceTexture[];
-
-//==========================================================================================================================
-//
-//Private Renderer Functions
-//
-//==========================================================================================================================
-		void _CompileShaders(void);
-		
-		void  _SetOrthoProjection(void);
-
 	public:
 //==========================================================================================================================
 //
@@ -109,6 +73,8 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		void SetBackgroundColor(color& c) { _programWindow->SetBackgroundColor(c); }
+
+		void AddToBatch(std::vector<F32> v, std::vector<F32> c);
 		
 		void Draw(void);
 		
@@ -119,6 +85,33 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		Renderer(void);
+
+	private:
+		static Renderer* 	 _instance;
+		ErrorManager* 		 _errorManager;
+		ProgramWindow* 		 _programWindow;
+		TextureManager* 	 _textureManager;
+		U32 				 _maxBatchSize;
+		U32 				 _currentBatchSize;
+		std::vector<F32> 	 _vertices;
+		std::vector<F32> 	 _colors;
+		std::vector<F32>     _uvs;	
+		GLuint				 _renderingProgramColor;
+		GLuint   			 _renderingProgramTexture;
+		GLuint   			 _vertexArrayObject;
+		static const GLchar* _vertexShaderSourceColor[];
+		static const GLchar* _vertexShaderSourceTexture[];
+		static const GLchar* _fragmentShaderSourceColor[];
+		static const GLchar* _fragmentShaderSourceTexture[];
+
+//==========================================================================================================================
+//
+//Private Renderer Functions
+//
+//==========================================================================================================================
+		void _CompileShaders(void);
+		
+		void  _SetOrthoProjection(void);
 	};
 
 }//End namespace
