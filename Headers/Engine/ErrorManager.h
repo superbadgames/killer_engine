@@ -43,7 +43,7 @@ namespace KillerEngine
 	private:
 		U32       			 _numErrors;
 		map<U32, ErrorCode>  _errorCodes;
-		map<U32, text>       _errorMessages;
+		map<U32, string>       _errorMessages;
 		static ErrorManager* _instance;
 
 	public:
@@ -66,7 +66,7 @@ namespace KillerEngine
 //ErrorManager Functions
 //
 //==========================================================================================================================
-		void SetError(ErrorCode code, text message);
+		void SetError(ErrorCode code, string message);
 		
 		void DisplayErrors(void);
 

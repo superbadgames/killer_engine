@@ -40,7 +40,7 @@ namespace KillerEngine
 		static S32    _left;
 		static S32    _top;
 		static S32    _bottom;
-		text 		  _wndName;
+		string 		  _wndName;
 		ErrorManager* _errorManager;
 		Controller*   _controller;
 		GLfloat 	  _bgColor[4];
@@ -99,7 +99,7 @@ public:
 //==========================================================================================================================
 		static ProgramWindow* Instance(void);
 
-		void Init(S32 width, S32 height, text wndName, bool isFullScreen);
+		void Init(S32 width, S32 height, string wndName, bool isFullScreen);
 		
 		void ProcessWndEvents(void);
 		

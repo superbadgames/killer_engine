@@ -6,7 +6,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //AddObjectToWorld
 //--------------------------------------------------------------
-	void World::AddObjectToWorld(text objId, GameObject* obj)
+	void World::AddObjectToWorld(string objId, GameObject* obj)
 	{
 		_worldObjects[objId] = obj;
 		

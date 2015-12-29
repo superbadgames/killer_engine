@@ -29,9 +29,9 @@ namespace KillerEngine
 	class WorldManager
 	{
 	private:
-		std::map<text, World*> _worlds;
+		std::map<string, World*> _worlds;
 		World* 				   _activeWorld;
-		text 				   _activeWorldID;
+		string 				   _activeWorldID;
 		bool				   _running;			
 		static WorldManager*   _instance;
 
@@ -45,13 +45,13 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void AddWorld(const text worldID, World* world);
+		void AddWorld(const string worldID, World* world);
 		
-		void RemoveWorld(text worldID);
+		void RemoveWorld(string worldID);
 		
-		void SetActiveWorld(text worldID);
+		void SetActiveWorld(string worldID);
 		
-		text GetActiveWorldID(void) { return _activeWorldID; }
+		string GetActiveWorldID(void) { return _activeWorldID; }
 		
 		void SetRunning(bool r) { _running = r; }
 		

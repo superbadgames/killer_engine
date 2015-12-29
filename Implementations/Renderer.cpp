@@ -214,30 +214,73 @@ namespace KillerEngine
 	}
 
 //=======================================================================================================
+//AddTextureToBatch
+//=======================================================================================================
+	void Renderer::AddTextureToBatch(std::vector<F32> ver, std::vector<F32> uv)
+	{
+		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
+		
+		_vertices.reserve(_vertices.size() + ver.size());
+		_vertices.insert(_vertices.end(), ver.begin(), ver.end());
+		_currentBatchSize += ver.size();
+
+		_uvs.reserve(_uvs.size() + uv.size());
+		_uvs.insert(_uvs.end(), uv.begin(), uv.end());
+
+	}
+
+//=======================================================================================================
 //Draw
 //=======================================================================================================
 	void Renderer::Draw(void) 
 	{
 		if(_currentBatchSize == 0) { return; } //End if there are no verticies to draw
 
-		glUseProgram(0);	
+		if(_uvs.size() <= 0)
+		{
+			glUseProgram(0);	
 			
-	    glUseProgram(_renderingProgramColor);
+		    glUseProgram(_renderingProgramColor);
 
-		GLuint buffers[2];
-		glGenBuffers(2, buffers);
+			GLuint buffers[2];
+			glGenBuffers(2, buffers);
 
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-		glEnableVertexAttribArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+			glEnableVertexAttribArray(0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-		glEnableVertexAttribArray(1);
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
+			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+			glEnableVertexAttribArray(1);
+			
+			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+		}
+
+		if(_uvs.size() >= 1 )
+		{
+			glUseProgram(0);	
+			
+		    glUseProgram(_renderingProgramTexture);
+
+			GLuint buffers[2];
+			glGenBuffers(2, buffers);
+
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+			glEnableVertexAttribArray(0);
+
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvs.size()), &_uvs[0], GL_STATIC_DRAW);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+			glEnableVertexAttribArray(1);
+			
+			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+		}	
+
 		
-		glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
 	
 
 		//=====Reset All Containers and Counters=====

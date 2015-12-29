@@ -40,18 +40,18 @@ namespace KillerEngine
 //Interface
 //
 //==========================================================================================================================
-		void Init(const S32 width, const S32 height, const text title, const bool fullscreen);
+		void Init(const S32 width, const S32 height, const string title, const bool fullscreen);
 
 		bool Running(void) { return _worldManager->GetRunning(); }
 
-		void LoadTexture(const text path, const text name, const S32 width, const S32 height) 
+		void LoadTexture(const string path, const string name, const S32 width, const S32 height) 
 		{ 
 			_textureManager->LoadTexture(path, name, width, height); 
 		}
 		
-		void AddWorldToManager(const text id, World* world) { _worldManager->AddWorld(id, world); }
+		void AddWorldToManager(const string id, World* world) { _worldManager->AddWorld(id, world); }
 
-		void SetActiveWorld(const text id) { _worldManager->SetActiveWorld(id); }
+		void SetActiveWorld(const string id) { _worldManager->SetActiveWorld(id); }
 
 		void Update(void);
 

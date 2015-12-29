@@ -20,7 +20,7 @@ namespace KillerEngine
 
 	void TextureManager::Shutdown(void) 
 	{
-		map<text, Texture>::iterator i;
+		map<string, Texture>::iterator i;
 		
 		for(i = _loadedTextures.begin(); i != _loadedTextures.end(); ++i) 
 		{
@@ -46,14 +46,14 @@ namespace KillerEngine
 //TextureManager Functions
 //
 //=====================================================================================================
-	void TextureManager::LoadTexture(text path, text name, S32 width, S32 height) 
+	void TextureManager::LoadTexture(string path, string name, S32 width, S32 height) 
 	{
 
 		unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
 		if(image == 0) 
 		{
-			text errorMessage = text("SOIL_load_image failed to load image: ") + path;
+			string errorMessage = string("SOIL_load_image failed to load image: ") + path;
 			_errorManager->SetError(EC_TextureManager, errorMessage);
 		}
 		

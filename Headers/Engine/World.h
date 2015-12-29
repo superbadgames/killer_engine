@@ -31,7 +31,7 @@ namespace KillerEngine
 	private:
 		ErrorManager* 			   _errorManager;
 		Renderer* 				   _renderer;
-		std::map<text, GameObject*> _worldObjects;
+		std::map<string, GameObject*> _worldObjects;
 		
 		S32   _mapWidth;
 		S32   _mapHeight;
@@ -53,7 +53,7 @@ namespace KillerEngine
 		virtual void Render(void)=0;
 
 		//======Accessors=====
-		void AddObjectToWorld(text objId, GameObject* obj);
+		void AddObjectToWorld(string objId, GameObject* obj);
 		
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {

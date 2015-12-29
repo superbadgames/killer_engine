@@ -55,9 +55,9 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=====ID=====		
-		const text GetId(void) { return __id; }
+		const string GetId(void) { return __id; }
 
-		void SetId(text id) { __id = id; }
+		void SetId(string id) { __id = id; }
 
 //=====Position=====
 		const point& GetPosition(void) { return __position; }
@@ -108,7 +108,7 @@ namespace KillerEngine
 		virtual void v_Render(void)=0; 
 
 	protected:
-		text 	__id;
+		string 	__id;
 		point   __position;
 		F32     __width;
 		F32     __height;

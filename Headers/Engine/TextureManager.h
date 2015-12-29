@@ -42,7 +42,7 @@ namespace KillerEngine
 		static TextureManager* _instance;
 		ErrorManager*   	   _errorManager;
 		GLuint 			   	   _currentTextureId;
-		map<text, Texture>	   _loadedTextures;
+		map<string, Texture>   _loadedTextures;
 
 	public:
 //==========================================================================================================================
@@ -68,9 +68,9 @@ namespace KillerEngine
 //TextureManager Functions
 //
 //==========================================================================================================================
-		void LoadTexture(text path, text name, S32 width, S32 height);
-		Texture& GetTexture(text name) { return _loadedTextures.find(name)->second; }
-		//Texture& GetTexture(text name) { return _currentTexture; }
+		void LoadTexture(string path, string name, S32 width, S32 height);
+		Texture& GetTexture(string name) { return _loadedTextures.find(name)->second; }
+		//Texture& GetTexture(string name) { return _currentTexture; }
 
 	protected:
 //==========================================================================================================================

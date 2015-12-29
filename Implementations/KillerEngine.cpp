@@ -10,7 +10,7 @@ namespace KillerEngine
 //=======================================================================================================
 //Init
 //=======================================================================================================
-	void KillerEngine::Init(const S32 width, const S32 height, const text title, const bool fullscreen) 
+	void KillerEngine::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
 	{
 		_errorManager = ErrorManager::Instance();
 		_timer = Timer::Instance();

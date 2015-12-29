@@ -24,7 +24,7 @@ namespace KillerEngine
 //=======================================================================================================
 //SetError
 //=======================================================================================================	
-	void ErrorManager::SetError(ErrorCode code, text message) 
+	void ErrorManager::SetError(ErrorCode code, string message) 
 	{
 		_errorCodes[_numErrors]	   = code;
 		_errorMessages[_numErrors] = message;

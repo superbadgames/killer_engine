@@ -22,7 +22,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //AddWorld
 //--------------------------------------------------------------
-	void WorldManager::AddWorld(const text worldID, World* world) 
+	void WorldManager::AddWorld(const string worldID, World* world) 
 	{
 		_worlds[worldID] = world; 
 	}
@@ -30,7 +30,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //RemoveWorld
 //--------------------------------------------------------------
-	void WorldManager::RemoveWorld(text 
+	void WorldManager::RemoveWorld(string 
 		worldID) {
 		auto w = _worlds.find(worldID);
 		_worlds.erase(w);
@@ -39,7 +39,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //SetActiveWorld
 //--------------------------------------------------------------
-	void WorldManager::SetActiveWorld(text worldID) 
+	void WorldManager::SetActiveWorld(string worldID) 
 	{
 		_activeWorldID = worldID;
 		auto w = _worlds.find(worldID);

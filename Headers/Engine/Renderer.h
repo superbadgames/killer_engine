@@ -75,6 +75,8 @@ namespace KillerEngine
 		void SetBackgroundColor(color& c) { _programWindow->SetBackgroundColor(c); }
 
 		void AddToBatch(std::vector<F32> v, std::vector<F32> c);
+
+		void AddTextureToBatch(std::vector<F32> v, std::vector<F32> uv);
 		
 		void Draw(void);
 		
@@ -111,7 +113,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		void _CompileShaders(void);
 		
-		void  _SetOrthoProjection(void);
+		void _SetOrthoProjection(void);
 	};
 
 }//End namespace

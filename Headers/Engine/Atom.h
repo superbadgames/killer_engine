@@ -55,7 +55,7 @@ typedef float  F32;
 typedef double F64;
 
 //text type 
-typedef std::string text;
+typedef std::string string;
 
 //Color typedef
 typedef KillerEngine::Color<F32> color;

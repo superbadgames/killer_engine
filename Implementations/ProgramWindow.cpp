@@ -122,7 +122,7 @@ namespace KillerEngine {
 //=======================================================================================================
 //InitWindow
 //=======================================================================================================    
-    void ProgramWindow::Init(S32 width, S32 height, text wndName, bool isFullScreen) 
+    void ProgramWindow::Init(S32 width, S32 height, string wndName, bool isFullScreen) 
     {
         _totalWidth     = width;
         _totalHeight    = height;

@@ -49,6 +49,8 @@ Written by Maxwell Miller
 //=====Killer1 Includes=====
 #include <Engine/Atom.h>
 #include <Engine/Cell.h>
+#include <Engine/Texture.hpp>
+#include <Engine/TextureManager.h>
 
 namespace KillerEngine
 {
@@ -69,13 +71,16 @@ namespace KillerEngine
 //==========================================================================================================================
 		void v_RenderCell(const point& pos, F32 w, F32 h, const color& col);
 
-		void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col);
+		void RenderTexture(const point& pos, F32 w, F32 h, const color& colo, Texture& tex);
+
+		void v_SetVertexPositions(const point& p, const F32 w, const F32 h);
 		
-		void v_SetVertexColors( const color& c) {  }
+		void v_SetVertexColors( const color& c);
 		
 		void v_SetVertexUvs(void);
 
 	private:
+		TextureManager* _textureManager;
 
 	};
 }

@@ -75,8 +75,8 @@ namespace KillerEngine
 		std::vector<F32> _vertexColors;
 		std::vector<F32> _vertexUvs;
 
-		//virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
-		virtual void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col) = 0;
+		virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
+		//virtual void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col) = 0;
 		
 		virtual void v_SetVertexColors( const color& c) = 0;
 		
