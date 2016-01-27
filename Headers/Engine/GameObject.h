@@ -12,7 +12,7 @@ world.
 
 The GameObject itself is an interface to generic functions that each obj-
 ect that will be rendered will need to be drawn to the screen. The GameObj-
-ect holds a private Cell member that will contain all the logic for which
+ect holds a private Sprite member that will contain all the logic for which
 rendering algorithm is used. 
 
 Accessors are created for the derived classes to access the cell, but the 
@@ -28,7 +28,7 @@ Written by Maxwell Miller
 
 //=====Engine Includes======
 #include <Engine/Atom.h>
-#include <Engine/Cell.h>
+#include <Engine/Sprite.h>
 #include <Engine/Texture.hpp>
 
 namespace KillerEngine 

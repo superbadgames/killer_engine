@@ -1,6 +1,6 @@
 /*==========================================================================
 The main Rendering framework for the Engine. A Singleton with a batch
-system intregrated into it. It will be called from the Cell class, or
+system intregrated into it. It will be called from the Sprite class, or
 from the main loop at the end of a frame, to make sure that everything
 is drawn as it should be.
 
@@ -24,7 +24,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
-#include <Engine/Cell.h>
+#include <Engine/Sprite.h>
 #include <Engine/ProgramWindow.h>
 #include <Engine/TextureManager.h>
 #include <Engine/Texture.hpp>
@@ -46,7 +46,7 @@ namespace KillerEngine
 {
 
 	//=====Foreward delcaration=====
-	class Cell;
+	class Sprite;
 
 	class Renderer 
 	{

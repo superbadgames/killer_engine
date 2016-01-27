@@ -12,21 +12,21 @@ of KillerWave.
 Written by Maxwell Miller
 ========================================================================*/
 
-#ifndef TEXT_CELL_H
-#define TEXT_CELL_H
+#ifndef TEXT_SPRITE_H
+#define TEXT_SPRITE_H
 
 //=====Killer1 Includes=====
 #include <Engine/Atom.h>
-#include <Engine/Cell.h>
+#include <Engine/Sprite.h>
 #include <Engine/Texture.hpp>
 #include <Engine/TextureManager.h>
 
 namespace KillerEngine
 {
-	class TextCell : public Cell
+	class TextSprite : public Sprite
 	{
 	public:
-		TextCell(void);
+		TextSprite(void);
 
 		void SetCharacterData(const F32 u, const F32 v, const F32 w, const F32 h);
 
@@ -37,11 +37,13 @@ namespace KillerEngine
 		F32 _height;
 		TextureManager* _textureManager;
 
-		void v_RenderCell(const point& pos, F32 w, F32 h, const color& col);
+		void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col) {  }
+
+		void TextSprite::v_RenderSprite(const point& pos, F32 w, F32 h, const color& col, const Texture& tex);
 
 		void v_SetVertexPositions(const point& p, const F32 w, const F32 h);
 
-		void v_SetVertexColors(const color& c);
+		void v_SetVertexColors( const color& col);
 
 		void v_SetVertexUvs(void) {  }
 

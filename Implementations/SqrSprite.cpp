@@ -1,29 +1,40 @@
-#include <Engine/TextCell.h>
+#include <Engine/SqrSprite.h>
 
 namespace KillerEngine
 {
-	TextCell::TextCell(void)
+	SqrSprite::SqrSprite(void)
+	{ _textureManager = TextureManager::Instance(); }
+
+//==========================================================================================================================
+//
+//Virtual Functions 	 	
+//
+//==========================================================================================================================
+	void SqrSprite::v_RenderSprite(const point& pos, F32 w, F32 h, const color& col)
 	{
-		_textureManager = TextureManager::Instance();
+		v_SetVertexPositions(pos, w, h);
+		v_SetVertexColors(col);
+
+		_renderer->AddToBatch(_vertexPositions, _vertexColors);
 	}
 
-	void TextCell::v_RenderCell(const point& pos, F32 w, F32 h, const color& col, const Texture& tex)
+	void SqrSprite::RenderTexture(const point& pos, F32 w, F32 h, const color& col, Texture& tex)
 	{
+		//Make sure texture is loaded into memory
 		if(_textureManager->GetCurrentTextureId() != tex.GetId())
 		{
-			_render->Draw();
-			_textureManager->SetCurrentTextureId(text.GetId());
+			_renderer->Draw();
+			_textureManager->SetCurrentTextureId(tex.GetId());
 		}
 
 		v_SetVertexPositions(pos, w, h);
 		v_SetVertexUvs();
 
-		_render->AddToBatch(_vertexPositions, _vertexUvs);
+		_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
 	}
 
-	void TextCell::v_SetVertexPositions(const point& p, const F32 w, const F32 h)
+	void SqrSprite::v_SetVertexPositions(const point& p, const F32 w, const F32 h)
 	{
-		//=====This is the same Algorithm from an SqrCell=====
 		F32 halfW = w / 2;
 		F32 halfH = h / 2;
 		F32 X = p.GetX();
@@ -75,11 +86,11 @@ namespace KillerEngine
 		_vertexPositions.push_back(Y - halfH);	//y
 		_vertexPositions.push_back(Z);			//z
 		_vertexPositions.push_back(W);			//w
-	}
 
-	void v_SetVertexColors(const color& c)
+	}
+	
+	void SqrSprite::v_SetVertexColors( const color& col)
 	{
-		//=====This is the same Algorithm from an SqrCell=====
 		F32 R = col.GetRed();
 		F32 G = col.GetGreen();
  		F32 B = col.GetBlue();
@@ -126,23 +137,35 @@ namespace KillerEngine
 		_vertexColors.push_back(A);
 	}
 
-	void v_SetVertexUvs(const Texture& text)
+	void SqrSprite::v_SetVertexUvs(void)
 	{
 		_vertexUvs.clear();
 
 		//=====Vertices=====
 		//=====Triangle1=====
 		//top right
+		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(1.0f);
 
 		//bottom right
+		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(0.0f);
 
 		//bottom left
+		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(0.0f);
 
 		//=====Triangle2=====
 		//top right
+		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(1.0f);
 
 		//top left
+		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(1.0f);
 
 		//bottom left
+		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(0.0f);
 	}
 }

@@ -1,5 +1,5 @@
 /*========================================================================
-A structure to hold basic colors for all Cells to sent to OGL in order
+A structure to hold basic colors for all Sprites to sent to OGL in order
 to render things
 
 There will be 4 values per color so that it can be sent to a vec4 in OGL

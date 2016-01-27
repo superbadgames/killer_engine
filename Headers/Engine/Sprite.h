@@ -1,16 +1,16 @@
 /*========================================================================
-The Cell, or rendering cell is the basic Geometric perimitive that any
+The Sprite, or rendering cell is the basic Geometric perimitive that any
 game object or entity that is to be rendered will have. It will be the 
 OGL verticies that make up the position on the screen. While it will
 never be called on its own, it will be part of the rendered game objects.
 
 Based on which RenderAs* function is call, the cell is be rendered as the 
-called primitive. The Cell is not responsible for setting this up, the 
-Renderer is. The Cell will just need to get its position to the Renderer
+called primitive. The Sprite is not responsible for setting this up, the 
+Renderer is. The Sprite will just need to get its position to the Renderer
 and the Renderer will set up all the point for OGL, and will then store
 them in a container until the scene is drawn. 
 
-The Cell will also hold the texture information, once that is added to the
+The Sprite will also hold the texture information, once that is added to the
 system. Basically it will hold all the data that needs to be given to the
 Renderer in order for the Renderer to give that information to OGL. 
 
@@ -20,8 +20,8 @@ of KillerWave.
 Written by Maxwell Miller
 ========================================================================*/
 
-#ifndef CELL_H
-#define CELL_H
+#ifndef SPRITE_H
+#define SPRITE_H
 
 //=====Killer1 inlucdes=====
 #include <Engine/Atom.h>
@@ -41,7 +41,7 @@ namespace KillerEngine
 //=====Foreward delcaration=====
 	class Renderer;
 
-	class Cell 
+	class Sprite 
 	{	
 		public:
 //==========================================================================================================================
@@ -49,7 +49,7 @@ namespace KillerEngine
 //Operator Overloads
 //
 //==========================================================================================================================
-		Cell& operator=(const Cell& cell) 
+		Sprite& operator=(const Sprite& cell) 
 		{
 			
 			return *this;
@@ -60,11 +60,13 @@ namespace KillerEngine
 //Virtual
 //
 //==========================================================================================================================
-		virtual void v_RenderCell(const point& pos, F32 w, F32 h, const color& col)=0;	
+		virtual void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col)=0;
+
+		virtual void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col, const Texture& tex) {  }
 
 //==========================================================================================================================
 //
-//Cell Functions 	 	
+//Sprite Functions 	 	
 //
 //==========================================================================================================================
 
@@ -77,7 +79,7 @@ namespace KillerEngine
 		virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
 		//virtual void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col) = 0;
 		
-		virtual void v_SetVertexColors( const color& c) = 0;
+		virtual void v_SetVertexColors( const color& col) = 0;
 		
 		virtual void v_SetVertexUvs(void) = 0;
 
@@ -87,7 +89,7 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-		Cell(void);
+		Sprite(void);
 
 	};
 }//End namespace

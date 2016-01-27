@@ -1,26 +1,14 @@
-#include <Engine/SqrCell.h>
+#include <Engine/TextSprite.h>
 
 namespace KillerEngine
 {
-	SqrCell::SqrCell(void)
-	{ _textureManager = TextureManager::Instance(); }
-
-//==========================================================================================================================
-//
-//Virtual Functions 	 	
-//
-//==========================================================================================================================
-	void SqrCell::v_RenderCell(const point& pos, F32 w, F32 h, const color& col)
+	TextSprite::TextSprite(void)
 	{
-		v_SetVertexPositions(pos, w, h);
-		v_SetVertexColors(col);
-
-		_renderer->AddToBatch(_vertexPositions, _vertexColors);
+		_textureManager = TextureManager::Instance();
 	}
 
-	void SqrCell::RenderTexture(const point& pos, F32 w, F32 h, const color& col, Texture& tex)
+	void TextSprite::v_RenderSprite(const point& pos, F32 w, F32 h, const color& col, const Texture& tex)
 	{
-		//Make sure texture is loaded into memory
 		if(_textureManager->GetCurrentTextureId() != tex.GetId())
 		{
 			_renderer->Draw();
@@ -30,11 +18,12 @@ namespace KillerEngine
 		v_SetVertexPositions(pos, w, h);
 		v_SetVertexUvs();
 
-		_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
+		_renderer->AddToBatch(_vertexPositions, _vertexUvs);
 	}
 
-	void SqrCell::v_SetVertexPositions(const point& p, const F32 w, const F32 h)
+	void TextSprite::v_SetVertexPositions(const point& p, const F32 w, const F32 h)
 	{
+		//=====This is the same Algorithm from an SqrSprite=====
 		F32 halfW = w / 2;
 		F32 halfH = h / 2;
 		F32 X = p.GetX();
@@ -86,11 +75,11 @@ namespace KillerEngine
 		_vertexPositions.push_back(Y - halfH);	//y
 		_vertexPositions.push_back(Z);			//z
 		_vertexPositions.push_back(W);			//w
-
 	}
-	
-	void SqrCell::v_SetVertexColors( const color& col)
+
+	void TextSprite::v_SetVertexColors( const color& col)
 	{
+		//=====This is the same Algorithm from an SqrSprite=====
 		F32 R = col.GetRed();
 		F32 G = col.GetGreen();
  		F32 B = col.GetBlue();
@@ -137,35 +126,23 @@ namespace KillerEngine
 		_vertexColors.push_back(A);
 	}
 
-	void SqrCell::v_SetVertexUvs(void)
+	void TextSprite::v_SetVertexUvs(const Texture& text)
 	{
 		_vertexUvs.clear();
 
 		//=====Vertices=====
 		//=====Triangle1=====
 		//top right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(1.0f);
 
 		//bottom right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(0.0f);
 
 		//bottom left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(0.0f);
 
 		//=====Triangle2=====
 		//top right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(1.0f);
 
 		//top left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(1.0f);
 
 		//bottom left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(0.0f);
 	}
 }

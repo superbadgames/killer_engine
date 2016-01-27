@@ -43,18 +43,18 @@ of KillerWave.
 Written by Maxwell Miller
 ========================================================================*/
 
-#ifndef SQRCELL_H
-#define SQRCELL_H
+#ifndef SQRSPRITE_H
+#define SQRSPRITE_H
 
 //=====Killer1 Includes=====
 #include <Engine/Atom.h>
-#include <Engine/Cell.h>
+#include <Engine/Sprite.h>
 #include <Engine/Texture.hpp>
 #include <Engine/TextureManager.h>
 
 namespace KillerEngine
 {
-	class SqrCell: public Cell
+	class SqrSprite: public Sprite
 	{
 	public:
 //==========================================================================================================================
@@ -62,14 +62,14 @@ namespace KillerEngine
 //Constructors	 	
 //
 //==========================================================================================================================		
-		SqrCell(void);
+		SqrSprite(void);
 
 //==========================================================================================================================
 //
 //Virtual Functions 	 	
 //
 //==========================================================================================================================
-		void v_RenderCell(const point& pos, F32 w, F32 h, const color& col);
+		void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col);
 
 		void RenderTexture(const point& pos, F32 w, F32 h, const color& colo, Texture& tex);
 

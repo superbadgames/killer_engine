@@ -1,4 +1,4 @@
-#include <Engine/Cell.h>
+#include <Engine/Sprite.h>
 
 namespace KillerEngine 
 {
@@ -7,7 +7,7 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================
-	Cell::Cell(void) :  _vertexPositions(NULL),
+	Sprite::Sprite(void) :  _vertexPositions(NULL),
 						_vertexColors(NULL),
 						_vertexUvs(NULL)
 	{ _renderer = Renderer::Instance(); }
