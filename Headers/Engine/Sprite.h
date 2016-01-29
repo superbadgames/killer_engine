@@ -7,7 +7,7 @@ never be called on its own, it will be part of the rendered game objects.
 Based on which RenderAs* function is call, the cell is be rendered as the 
 called primitive. The Sprite is not responsible for setting this up, the 
 Renderer is. The Sprite will just need to get its position to the Renderer
-and the Renderer will set up all the point for OGL, and will then store
+and the Renderer will set up all the Vec for OGL, and will then store
 them in a container until the scene is drawn. 
 
 The Sprite will also hold the texture information, once that is added to the
@@ -60,9 +60,9 @@ namespace KillerEngine
 //Virtual
 //
 //==========================================================================================================================
-		virtual void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col)=0;
+		virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col)=0;
 
-		virtual void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col, const Texture& tex) {  }
+		virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const Texture& tex) {  }
 
 //==========================================================================================================================
 //
@@ -76,10 +76,10 @@ namespace KillerEngine
 		std::vector<F32> _vertexColors;
 		std::vector<F32> _vertexUvs;
 
-		virtual void v_SetVertexPositions(const point& p, const F32 w, const F32 h) = 0;
-		//virtual void v_SetVertexData(const point& p, const F32 w, const F32 h, const color& col) = 0;
+		virtual void v_SetVertexPositions(const Vec& p, const F32 w, const F32 h) = 0;
+		//virtual void v_SetVertexData(const Vec& p, const F32 w, const F32 h, const color& col) = 0;
 		
-		virtual void v_SetVertexColors( const color& col) = 0;
+		virtual void v_SetVertexColors( const Col& col) = 0;
 		
 		virtual void v_SetVertexUvs(void) = 0;
 

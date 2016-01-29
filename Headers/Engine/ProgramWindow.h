@@ -105,7 +105,7 @@ public:
 		
 		void BufferSwap(void);
 
-		void SetBackgroundColor(color& c) 
+		void SetBackgroundColor(Col& c) 
 		{
 			_bgColor[0] = c.GetRed();
 			_bgColor[1] = c.GetGreen();

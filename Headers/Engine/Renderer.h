@@ -11,7 +11,7 @@ AddTri()
 AddSqr()
 AddHex()
 
-These take the position of a cell, then create F32 points, storing them in an std::vector, which is 
+These take the position of a cell, then create F32 Vecs, storing them in an std::vector, which is 
 passed to OGL during the Draw().  
 
 This is not free to use, and cannot be used without the express permission
@@ -72,7 +72,7 @@ namespace KillerEngine
 //Renderer Funtions
 //
 //==========================================================================================================================
-		void SetBackgroundColor(color& c) { _programWindow->SetBackgroundColor(c); }
+		void SetBackgroundColor(Col& c) { _programWindow->SetBackgroundColor(c); }
 
 		void AddToBatch(std::vector<F32> v, std::vector<F32> c);
 

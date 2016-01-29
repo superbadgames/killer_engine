@@ -2,9 +2,9 @@
 Subclass of the cell. Used to provide implemenation specific information 
 for the specific shape of a square. 
 
-_vertexPosition : This std::vector will contain all of the point that make up a square. 
+_vertexPosition : This std::vector will contain all of the Vec that make up a square. 
 
-Here is how the points are found: 
+Here is how the Vecs are found: 
 
 Position = Place in the world. 
 Widht = length of the x axis.
@@ -69,13 +69,13 @@ namespace KillerEngine
 //Virtual Functions 	 	
 //
 //==========================================================================================================================
-		void v_RenderSprite(const point& pos, F32 w, F32 h, const color& col);
+		void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col);
 
-		void RenderTexture(const point& pos, F32 w, F32 h, const color& colo, Texture& tex);
+		void RenderTexture(const Vec& pos, F32 w, F32 h, const Col& col, Texture& tex);
 
-		void v_SetVertexPositions(const point& p, const F32 w, const F32 h);
+		void v_SetVertexPositions(const Vec& p, const F32 w, const F32 h);
 		
-		void v_SetVertexColors( const color& c);
+		void v_SetVertexColors( const Col& c);
 		
 		void v_SetVertexUvs(void);
 

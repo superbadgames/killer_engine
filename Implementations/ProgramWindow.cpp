@@ -50,11 +50,11 @@ namespace KillerEngine {
 
         //PFNWGLGETEXTENSIONSSTRINGARBPROC wglGetExtensionstextARB = NULL; 
         //wglGetExtensionstextARB = (PFNWGLGETEXTENSIONSSTRINGARBPROC)wglGetProcAddress("wglGetExtensionstextARB");
-        //if (!wglGetExtensionstextARB){ worked = false; } //{ _errorManager->SetError(EC_OpenGL, "Unable to get wglGetExtensionstextARB function pointer"); }
+        //if (!wglGetExtensionstextARB){ worked = false; } //{ _errorManager->SetError(EC_OpenGL, "Unable to get wglGetExtensionstextARB function Vecer"); }
 
         PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = NULL;
         wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
-        if (!wglChoosePixelFormatARB){ worked = false; } //{ _errorManager->SetError(EC_OpenGL, "Unable to get wglChoosePixelFormatARB function pointer"); }
+        if (!wglChoosePixelFormatARB){ worked = false; } //{ _errorManager->SetError(EC_OpenGL, "Unable to get wglChoosePixelFormatARB function Vecer"); }
 
         int pixCount    = 0;
         int pixelFormat = 0;
@@ -242,7 +242,7 @@ namespace KillerEngine {
                 
     			PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = NULL;
                 wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-                if(!wglCreateContextAttribsARB) { _errorManager->SetError(EC_OpenGL, "Unable to get wglCreateContextAttribsARB function pointer"); }
+                if(!wglCreateContextAttribsARB) { _errorManager->SetError(EC_OpenGL, "Unable to get wglCreateContextAttribsARB function Vecer"); }
 
                 GLint contextARBS[] = 
                 {

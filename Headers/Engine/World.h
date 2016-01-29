@@ -35,7 +35,7 @@ namespace KillerEngine
 		
 		S32   _mapWidth;
 		S32   _mapHeight;
-		color _bgColor;
+		Col _bgColor;
 
 	public:
 		World(void): _errorManager(ErrorManager::Instance()),
@@ -46,7 +46,7 @@ namespace KillerEngine
 		
 		~World(void) {  }
 
-		virtual void InitWorld(S32 w, S32 h, color& c)=0;
+		virtual void InitWorld(S32 w, S32 h, Col& c)=0;
 		
 		virtual void Update(void)=0;
 		
@@ -61,7 +61,7 @@ namespace KillerEngine
 			}
 		}
 		
-		void SetBackgroundColor(color& c) { _bgColor = c; }
+		void SetBackgroundColor(Col& c) { _bgColor = c; }
 		
 		void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
 		

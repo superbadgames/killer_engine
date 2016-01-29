@@ -60,11 +60,11 @@ namespace KillerEngine
 		void SetId(string id) { __id = id; }
 
 //=====Position=====
-		const point& GetPosition(void) { return __position; }
+		const Vec& GetPosition(void) { return __position; }
 		
-		void SetPosition(const point& pos) { __position = pos; }
+		void SetPosition(const Vec& pos) { __position = pos; }
 
-		void SetPosition(F32 x, F32 y) { __position = point(x, y); }
+		void SetPosition(F32 x, F32 y) { __position = Vec(x, y); }
 
 //=====Dimensions=====
 		const F32 GetWidth(void) { return __width; }
@@ -82,9 +82,9 @@ namespace KillerEngine
 		}
 
 //=====Color=====
-		const color& GetColor(void) { return __color; }
+		const Col& GetColor(void) { return __color; }
 
-		void SetColor(const color& col) { __color = col; }
+		void SetColor(const Col& col) { __color = col; }
 
 //=====Texture=====
 		const Texture& GetTexture(void) { return __texture; }
@@ -109,10 +109,10 @@ namespace KillerEngine
 
 	protected:
 		string 	__id;
-		point   __position;
+		Vec   __position;
 		F32     __width;
 		F32     __height;
-		color   __color;
+		Col   __color;
 		Texture __texture;
 		bool 	__active;
 	};

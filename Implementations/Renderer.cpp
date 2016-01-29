@@ -142,12 +142,12 @@ namespace KillerEngine
 //=======================================================================================================
 	void Renderer::_SetOrthoProjection(void) 
 	{
-		matrix projection{};
+		Mat projection{};
 		projection.MakeOrthographic(1024, 768, 200);
 
-		matrix model(1.0f);
+		Mat model(1.0f);
 
-		matrix final = projection * model;
+		Mat final = projection * model;
 
 		const F32* data = final.GetElems();
 

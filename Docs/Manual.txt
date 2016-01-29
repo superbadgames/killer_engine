@@ -17,15 +17,15 @@ xcopy "$(TargetDir)$(TargetName).lib" "C:\Projects\OpenGL_Tests\ExLib\" /s /i /y
 xcopy "$(ProjectDir)..\..\..\Headers\*.h" "C:\Projects\OpenGL_Tests\Exlib\Headers" /s /i /y
 
 ------------------------------------------------------------------------------------------------------------------
-The Entry Point
+The Entry Vec
 ------------------------------------------------------------------------------------------------------------------
 There are 2 models that come to mind as I begin the design of the engine itself. 
 
 Model 1:
-In this model, the engine is a .lib file, which has no entry point. The engine will act as a series of functions to compliement another project. This means that in order to make a game, there will need to be a c++ project that will have to call the library, and this will then call any external scripts ect. to run. 
+In this model, the engine is a .lib file, which has no entry Vec. The engine will act as a series of functions to compliement another project. This means that in order to make a game, there will need to be a c++ project that will have to call the library, and this will then call any external scripts ect. to run. 
 
 Model 2: 
-In this model, the entry point will be in the engine, and the engine will act not just as a library, but as a framework for building games. The scripting language will then interact with the engine, and the engine will be less controlled, and more something that you use. 
+In this model, the entry Vec will be in the engine, and the engine will act not just as a library, but as a framework for building games. The scripting language will then interact with the engine, and the engine will be less controlled, and more something that you use. 
 
 I am not sure which is the best design for where the project is heading. For now, I will go with model one. I am going to do this for a few reasons. First, because I know how. Second, because it is much easier. 
 
@@ -48,15 +48,15 @@ S32 = unsigned __int32
 S64 = unsigned __int64
 
 ------------------------------------------------------------------------------------------------------------------
-Points
+Vecs
 ------------------------------------------------------------------------------------------------------------------
-The Point construct it meant to represent positions in the Cartesian Coordinate plane that is the rendering view field. As such, the operators needed for the point are more limited. Here are the operators that will be used: 
+The Vec construct it meant to represent positions in the Cartesian Coordinate plane that is the rendering view field. As such, the operators needed for the Vec are more limited. Here are the operators that will be used: 
 
-= : This is used to assigne one point to another. It is written to support both a Point and a Point*
+= : This is used to assigne one Vec to another. It is written to support both a Vec and a Vec*
 
-+ : Used to Add one Point to another. It would looke like this. PointC = PointA + PointB;
++ : Used to Add one Vec to another. It would looke like this. VecC = VecA + VecB;
 
-+= : Used to Add one Point to another, in a short hand version. PointA += PointB;
++= : Used to Add one Vec to another, in a short hand version. VecA += VecB;
 
 The multiplication and division operators were not added because I do not see where they would ever be used. If in the future, when working on more aspects of the game, I could find that this would be useful, and if I do, I will add these operators. 
 

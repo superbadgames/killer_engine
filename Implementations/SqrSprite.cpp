@@ -10,7 +10,7 @@ namespace KillerEngine
 //Virtual Functions 	 	
 //
 //==========================================================================================================================
-	void SqrSprite::v_RenderSprite(const point& pos, F32 w, F32 h, const color& col)
+	void SqrSprite::v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col)
 	{
 		v_SetVertexPositions(pos, w, h);
 		v_SetVertexColors(col);
@@ -18,7 +18,7 @@ namespace KillerEngine
 		_renderer->AddToBatch(_vertexPositions, _vertexColors);
 	}
 
-	void SqrSprite::RenderTexture(const point& pos, F32 w, F32 h, const color& col, Texture& tex)
+	void SqrSprite::RenderTexture(const Vec& pos, F32 w, F32 h, const Col& col, Texture& tex)
 	{
 		//Make sure texture is loaded into memory
 		if(_textureManager->GetCurrentTextureId() != tex.GetId())
@@ -33,7 +33,7 @@ namespace KillerEngine
 		_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
 	}
 
-	void SqrSprite::v_SetVertexPositions(const point& p, const F32 w, const F32 h)
+	void SqrSprite::v_SetVertexPositions(const Vec& p, const F32 w, const F32 h)
 	{
 		F32 halfW = w / 2;
 		F32 halfH = h / 2;
@@ -89,7 +89,7 @@ namespace KillerEngine
 
 	}
 	
-	void SqrSprite::v_SetVertexColors( const color& col)
+	void SqrSprite::v_SetVertexColors( const Col& col)
 	{
 		F32 R = col.GetRed();
 		F32 G = col.GetGreen();

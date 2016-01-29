@@ -22,7 +22,6 @@ Written by Maxwell Miller
 //=====KillerMath Includes=====
 #include <Math/Vector.hpp>
 #include <Math/Matrix.hpp>
-#include <Math/Point.hpp>
 
 //=====OGL Includes=====
 #include <GL/gl3w.h>
@@ -58,17 +57,13 @@ typedef double F64;
 typedef std::string string;
 
 //Color typedef
-typedef KillerEngine::Color<F32> color;
+typedef KillerEngine::Color<F32> Col;
 
 //Matrix type
-typedef KillerMath::Matrix4<F32> matrix;
+typedef KillerMath::Matrix4<F32> Mat;
 
 //Vector type
-typedef KillerMath::Vector2<F32> vec;
-
-//Point typedef
-typedef KillerMath::Point<F32> point;
-
+typedef KillerMath::Vector2<F32> Vec;
 
 
 #endif

@@ -123,7 +123,7 @@ namespace KillerMath
 		{
 			_v[0] = V.GetX();
 			_v[1] = V.GetY();
-			_v[2] = V.GetX();
+			_v[2] = V.GetZ();
 			_v[3] = V.GetW();
 
 			return *this;
@@ -134,7 +134,8 @@ namespace KillerMath
 		{
 			return Vector2<T>( _v[0] + V.GetX(),
 							   _v[1] + V.GetY(),
-							   _v[2], _v[3] );
+							   _v[2], 
+							   _v[3] );
 		}
 
 		Vector2<T>& operator +=(const Vector2<T>& V) 
@@ -150,7 +151,8 @@ namespace KillerMath
 		{
 			return Vector2<T>( _v[0] + a,
 							   _v[1] + a,
-							   _v[2], _v[3] );
+							   _v[2], 
+							   _v[3] );
 		}
 
 		Vector2<T>& operator +=(const T& a) 
@@ -205,7 +207,18 @@ namespace KillerMath
 		{
 			_v[0] *= m;
 			_v[1] *= m;
+			_v[2] = 0;
 			
+			return *this;
+		}
+
+		//=====Straight Multiply by Vector2=====
+		Vector2<T>& operator *=(const Vector2<T> v)
+		{
+			_v[0] *= v.GetX();
+			_v[1] *= v.GetY();
+			_v[2] = 0;
+
 			return *this;
 		}
 
