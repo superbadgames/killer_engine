@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{3ca84441-1454-44f0-8660-cbe4fd34d65c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{2fb575ef-8782-421c-af4b-14c5752c3494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Controller">
+      <UniqueIdentifier>{ba40f580-d916-42a4-8799-4138a7b4cd08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ProgramWindow">
+      <UniqueIdentifier>{cdb72cc2-32c2-47cf-8342-e128e95357c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Timer">
+      <UniqueIdentifier>{07d1666e-d143-4c45-8410-964f3df62be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ErrorManager">
+      <UniqueIdentifier>{fa5205ef-09ea-4211-a5bb-891f3726deea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\WorldManager">
+      <UniqueIdentifier>{4b6ab6c2-a50d-4713-9dd9-d502525bd5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Renderer">
+      <UniqueIdentifier>{e164ab85-c959-4fd7-9502-eafa3c9ff6bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Cell/GameObj">
+      <UniqueIdentifier>{ba53e703-a4ba-4d6a-b24a-d1b6f86fcd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\KillerEngine">
+      <UniqueIdentifier>{1ae6f1b4-4011-4a70-8fb0-62fa5131325e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TextureManager">
+      <UniqueIdentifier>{849d1ac2-3dc2-471a-abe0-69276efae828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\World">
+      <UniqueIdentifier>{baa5f291-e719-454b-b291-a0640542870e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Color">
+      <UniqueIdentifier>{6a7cbe8c-b51d-48b1-ba21-3b45a4dd97bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestAssets">
+      <UniqueIdentifier>{a3aad44f-003b-47c6-8c73-2b29efe607e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Font">
+      <UniqueIdentifier>{757f95e0-1401-42fe-955a-ca2508d11d64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
+      <Filter>Components\KillerEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Atom.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Color.hpp">
+      <Filter>Components\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Controller.h">
+      <Filter>Components\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ErrorManager.h">
+      <Filter>Components\ErrorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h">
+      <Filter>Components\ProgramWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Renderer.h">
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Texture.hpp">
+      <Filter>Components\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\TextureManager.h">
+      <Filter>Components\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Timer.h">
+      <Filter>Components\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\World.h">
+      <Filter>Components\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\WorldManager.h">
+      <Filter>Components\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject.h">
+      <Filter>Components\Cell/GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
+      <Filter>Components\Cell/GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\SqrSprite.h">
+      <Filter>Components\Cell/GameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Font.h">
+      <Filter>Components\Font</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Implementations\Controller.cpp">
+      <Filter>Components\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ErrorManager.cpp">
+      <Filter>Components\ErrorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\KillerEngine.cpp">
+      <Filter>Components\KillerEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp">
+      <Filter>Components\ProgramWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Renderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Timer.cpp">
+      <Filter>Components\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\World.cpp">
+      <Filter>Components\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\WorldManager.cpp">
+      <Filter>Components\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\TextureManager.cpp">
+      <Filter>Components\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Sprite.cpp">
+      <Filter>Components\Cell/GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
+      <Filter>Components\Cell/GameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Font.cpp">
+      <Filter>Components\Font</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Docs\Manual.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="..\..\Docs\KillerCodingStandards.txt">
+      <Filter>Docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\Fonts\default_font_data.fnt">
+      <Filter>TestAssets</Filter>
+    </None>
+  </ItemGroup>
+</Project>
