@@ -15,30 +15,24 @@ namespace KillerEngine
 
 	void Font::CreateFont(void)
 	{
-		//std::ifstream file;
+		std::ifstream file;
 
-		//file.open(_fontFile.c_str());
+		file.open(_fontFile.c_str());
 
-		FILE * file = fopen(_fontFile.c_str(), "r");
-
-		//if(!file.is_open())
-		if(file == NULL)
+		if(!file.is_open())
 		{
 			std::cout << "Failed to open file!\n" << _fontFile << std::endl; 
 		}
 		else
 		{
-			//string line;
-			char line[1024];
+			string line;
 
-			 //while(getline(file, line))
-			 while(fgets(line, 1024, file))
+			 while(getline(file, line))
 			 {
 			 	std::cout << line << "\n";
 			 }
 
-			 //file.close();
-			 fclose(file);
+			 file.close();
 		}
 			
 	}
