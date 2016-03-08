@@ -11,10 +11,14 @@
 [Dd]ebug/
 [Rr]elease/
 x64/
-[Bb]uild/
 [Bb]in/
 [Oo]bj/
-[Tt]emp/*
+[Tt]emp/
+
+#exclude vs files
+.vs/
+*.VC.opendb
+*.sdf
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
