@@ -38,6 +38,7 @@ Configutation Properties -> General
 -> Debugging-> Working Directory : $(ProjectDir)..\..\Bin\
 
 C/C++ -> Precompiled Headers -> Precompiled Header File : $(IntDir)$(TargetName).pch *usually set by default
+			     -> PreprocessorDefinitions add _CRT_SECURE_NO_WARNINGS
 
 -> General -> Additional Include Directories : $(ProjectDir)..\..\Headers\
 
