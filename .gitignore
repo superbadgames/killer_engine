@@ -17,7 +17,8 @@
 .vs/
 *.VC.opendb
 *.sdf
-!*.vcxproj*
+!*.vcxproj
+!*.vcxproj.filters
 !*.props
 !*.sln
 

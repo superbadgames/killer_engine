@@ -25,9 +25,6 @@
     <Filter Include="Components\Renderer">
       <UniqueIdentifier>{e164ab85-c959-4fd7-9502-eafa3c9ff6bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Cell/GameObj">
-      <UniqueIdentifier>{ba53e703-a4ba-4d6a-b24a-d1b6f86fcd49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\KillerEngine">
       <UniqueIdentifier>{1ae6f1b4-4011-4a70-8fb0-62fa5131325e}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,18 @@
     </Filter>
     <Filter Include="Components\Font">
       <UniqueIdentifier>{757f95e0-1401-42fe-955a-ca2508d11d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObject">
+      <UniqueIdentifier>{ba53e703-a4ba-4d6a-b24a-d1b6f86fcd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites">
+      <UniqueIdentifier>{36bd90a4-fdd9-4c35-84e7-8af58bac9d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\Sprite">
+      <UniqueIdentifier>{e5d90d39-8a25-481c-9b25-1df51795bc92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\SqrSprite">
+      <UniqueIdentifier>{496afa50-ea3d-411f-b706-a8d02bc0200f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,16 +94,16 @@
       <Filter>Components\WorldManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\GameObject.h">
-      <Filter>Components\Cell/GameObj</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
-      <Filter>Components\Cell/GameObj</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\SqrSprite.h">
-      <Filter>Components\Cell/GameObj</Filter>
+      <Filter>Components\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Font.h">
       <Filter>Components\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\SqrSprite.h">
+      <Filter>Components\Sprites\SqrSprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,14 +134,14 @@
     <ClCompile Include="..\..\Implementations\TextureManager.cpp">
       <Filter>Components\TextureManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\Sprite.cpp">
-      <Filter>Components\Cell/GameObj</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
-      <Filter>Components\Cell/GameObj</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Implementations\Font.cpp">
       <Filter>Components\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Sprite.cpp">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
+      <Filter>Components\Sprites\SqrSprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

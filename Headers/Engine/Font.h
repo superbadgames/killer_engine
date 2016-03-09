@@ -18,6 +18,7 @@ Written by Maxwell Miller
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 namespace KillerEngine
 {
@@ -59,6 +60,8 @@ namespace KillerEngine
 		string _fontFile;
 
 		string _fontName;
+
+		U32    _headerSize = 26;
 
 	};
 }
