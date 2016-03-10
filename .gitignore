@@ -8,19 +8,26 @@
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
+
 [Bb]in/
 [Oo]bj/
-Temp/
+[Tt]emp/
+
+#exclude vs files
+.vs/
+*.VC.opendb
+*.sdf
+!*.vcxproj
+!*.vcxproj.filters
+!*.props
+!*.sln
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+
 
 *_i.c
 *_p.c

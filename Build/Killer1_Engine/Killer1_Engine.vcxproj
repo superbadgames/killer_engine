@@ -13,7 +13,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{68D60B4E-1A95-4381-975B-BFAEAD853890}</ProjectGuid>
     <RootNamespace>Killer1_Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -33,9 +32,11 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="KillerComons.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="KillerComons.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -54,7 +55,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Headers\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Headers\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,16 +66,16 @@
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Lib>
-      <AdditionalDependencies>dinput8.lib;GL3W.lib;SOIL.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PreBuildEvent>
       <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
 del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
+xcopy C:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
+xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,7 +85,8 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Headers\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\ExLib\Headers\;$(ProjectDir)..\..\Headers\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -95,46 +98,35 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Lib>
-      <AdditionalDependencies>dinput8.lib;GL3W.lib;SOIL.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
-    </Lib>
-    <PreBuildEvent>
-      <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
-del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h" />
-    <ClInclude Include="..\..\Headers\Engine\Sprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Color.hpp" />
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
+    <ClInclude Include="..\..\Headers\Engine\Font.h" />
     <ClInclude Include="..\..\Headers\Engine\GameObject.h" />
     <ClInclude Include="..\..\Headers\Engine\KillerEngine.h" />
     <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h" />
     <ClInclude Include="..\..\Headers\Engine\Renderer.h" />
+    <ClInclude Include="..\..\Headers\Engine\Sprite.h" />
     <ClInclude Include="..\..\Headers\Engine\SqrSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Texture.hpp" />
     <ClInclude Include="..\..\Headers\Engine\TextureManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Timer.h" />
     <ClInclude Include="..\..\Headers\Engine\World.h" />
     <ClInclude Include="..\..\Headers\Engine\WorldManager.h" />
-    <ClInclude Include="..\..\Headers\GL\gl3w.h" />
-    <ClInclude Include="..\..\Headers\GL\glcorearb.h" />
-    <ClInclude Include="..\..\Headers\GL\glxext.h" />
-    <ClInclude Include="..\..\Headers\GL\wglext.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
+    <ClCompile Include="..\..\Implementations\Font.cpp" />
     <ClCompile Include="..\..\Implementations\KillerEngine.cpp" />
     <ClCompile Include="..\..\Implementations\ProgramWindow.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />
+    <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />
     <ClCompile Include="..\..\Implementations\Timer.cpp" />
@@ -144,6 +136,9 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
   <ItemGroup>
     <Text Include="..\..\Docs\KillerCodingStandards.txt" />
     <Text Include="..\..\Docs\Manual.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\Fonts\default_font_data.fnt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
