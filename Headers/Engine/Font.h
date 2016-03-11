@@ -16,12 +16,26 @@ Written by Maxwell Miller
 //=====STL includes=====
 #include <fstream>
 #include <iostream>
+#include <istream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <map>
 
 namespace KillerEngine
 {
+	struct CharacterData
+	{
+		U32 id;
+		U32 x;
+		U32 y;
+		U32 width;
+		U32 height;
+		U32 xoffset;
+		U32 yoffset;
+		U32 xadvance;
+	};
+
 	class Font
 	{
 	public:
@@ -48,6 +62,8 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
+		char GetCharacter(char wanted);
+
 		void SetFontFile(string fontFile) { _fontFile = fontFile; }
 
 		string GetFontFile(void) 		  { return _fontFile; }
@@ -63,6 +79,11 @@ namespace KillerEngine
 
 		U32    _headerSize = 26;
 
+		std::map<U32, CharacterData> _fontCharData;
+
+		void _AddNewCharacter(string id,      string x, 		string y,
+							  string width,   string height,   string xoffset,
+							  string yoffset, string xadvance);
 	};
 }
 
