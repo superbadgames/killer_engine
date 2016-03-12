@@ -12,16 +12,29 @@ Written by Maxwell Miller
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
+#include <Engine/Texture.hpp>
 
 //=====STL includes=====
 #include <fstream>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+#include <istream>
 #include <vector>
+#include <map>
 
 namespace KillerEngine
 {
+	struct CharacterData
+	{
+		U32 id;
+		U32 x;
+		U32 y;
+		U32 width;
+		U32 height;
+		U32 xoffset;
+		U32 yoffset;
+		U32 xadvance;
+	};
+
 	class Font
 	{
 	public:
@@ -32,22 +45,20 @@ namespace KillerEngine
 //==========================================================================================================================		
 		Font(void);
 
-		Font(string fontName);
-
-		Font(string fontName, string fontFile);
-
 //==========================================================================================================================
 //
 //Font Functions
 //
 //==========================================================================================================================
-		void CreateFont(void);
+		void InitFont(string fontName, string fontFile);
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
+		void CreateRenderText(string text);
+
 		void SetFontFile(string fontFile) { _fontFile = fontFile; }
 
 		string GetFontFile(void) 		  { return _fontFile; }
@@ -57,12 +68,15 @@ namespace KillerEngine
 		string GetFontName(void) 		  { return _fontName; }
 
 	private:
-		string _fontFile;
+		Texture 					 _texture;
+		string  					 _fontFile;
+		string  					 _fontName;
+		U32     					 _headerSize = 26;
+		std::map<U32, CharacterData> _fontCharData;
 
-		string _fontName;
-
-		U32    _headerSize = 26;
-
+		void _AddNewCharacterData(string id,      string x, 		string y,
+							  	  string width,   string height,   string xoffset,
+							  	  string yoffset, string xadvance);
 	};
 }
 
