@@ -2,19 +2,15 @@
 
 namespace KillerEngine
 {
-	Font::Font(void)
+	Font::Font(void) : _fontName(), _fontFile()
 	{  }
 
-	Font::Font(string fontName) : _fontName(fontName)
-	{  }
-	
-
-	Font::Font(string fontName, string fontFile) : _fontName(fontName),
-												   _fontFile(fontFile)
-	{  }
-
-	void Font::CreateFont(void)
+	void Font::InitFont(string fontName, string fontFile)
 	{
+		_fontName = fontName;
+
+		_fontFile = fontFile;
+
 		std::ifstream file;
 
 		file.open(_fontFile.c_str());
@@ -65,7 +61,7 @@ namespace KillerEngine
 
 			 		string xadvance = results[7];
 
-			 		_AddNewCharacter(id, x, y, width, height, xoffset, yoffset, xadvance);
+			 		_AddNewCharacterData(id, x, y, width, height, xoffset, yoffset, xadvance);
 
 				 	results.erase(results.begin(), results.begin()+9);
 				 	continue;
@@ -88,7 +84,7 @@ namespace KillerEngine
 
 		 		string xadvance = results[8];
 
-		 		_AddNewCharacter(id, x, y, width, height, xoffset, yoffset, xadvance);
+		 		_AddNewCharacterData(id, x, y, width, height, xoffset, yoffset, xadvance);
 		 
 			 	results.erase(results.begin(), results.begin() + 10);
 			 }
@@ -98,13 +94,17 @@ namespace KillerEngine
 			
 	}//CreateFont
 
-	char Font::GetCharacter(char wanted)
+	void Font::CreateRenderText(string text)
 	{
-		U32 intWanted = U32(wanted);
-		return (char)intWanted;
+		for(U32 i = 0; i <= text.length(); ++i)
+		{
+			U32 stringIndex = (int)text[i];
+			std::cout << (char)_fontCharData[stringIndex].id;
+		}
+		std::cout << '\n';
 	}
 
-	void Font::_AddNewCharacter(string id,      string x, 		string y,
+	void Font::_AddNewCharacterData(string id,      string x, 		string y,
 							    string width,   string height,   string xoffset,
 							    string yoffset, string xadvance)
 	{

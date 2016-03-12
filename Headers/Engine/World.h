@@ -13,7 +13,7 @@ Written by Maxwell Miller
 //===Killer1 includes===
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
-#include <Engine/GameObject.h>
+#include <Engine/GameObject.hpp>
 #include <Engine/Renderer.h>
 
 //=====STL includes=====

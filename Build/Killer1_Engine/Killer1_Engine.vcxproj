@@ -107,10 +107,11 @@ xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Font.h" />
-    <ClInclude Include="..\..\Headers\Engine\GameObject.h" />
+    <ClInclude Include="..\..\Headers\Engine\GameObject.hpp" />
     <ClInclude Include="..\..\Headers\Engine\KillerEngine.h" />
     <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h" />
     <ClInclude Include="..\..\Headers\Engine\Renderer.h" />
+    <ClInclude Include="..\..\Headers\Engine\RenderText.h" />
     <ClInclude Include="..\..\Headers\Engine\Sprite.h" />
     <ClInclude Include="..\..\Headers\Engine\SqrSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Texture.hpp" />
@@ -126,6 +127,7 @@ xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <ClCompile Include="..\..\Implementations\KillerEngine.cpp" />
     <ClCompile Include="..\..\Implementations\ProgramWindow.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />
+    <ClCompile Include="..\..\Implementations\RenderText.cpp" />
     <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />

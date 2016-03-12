@@ -109,10 +109,10 @@ namespace KillerEngine
 
 	protected:
 		string 	__id;
-		Vec   __position;
+		Vec     __position;
 		F32     __width;
 		F32     __height;
-		Col   __color;
+		Col     __color;
 		Texture __texture;
 		bool 	__active;
 	};
