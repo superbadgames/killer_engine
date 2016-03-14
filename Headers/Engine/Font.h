@@ -13,6 +13,7 @@ Written by Maxwell Miller
 //=====Engine includes=====
 #include <Engine/Atom.h>
 #include <Engine/Texture.hpp>
+#include <Engine/SqrSprite.h>
 
 //=====STL includes=====
 #include <fstream>
@@ -20,6 +21,7 @@ Written by Maxwell Miller
 #include <istream>
 #include <vector>
 #include <map>
+#include <list>
 
 namespace KillerEngine
 {
@@ -57,7 +59,7 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void CreateRenderText(string text);
+		std::list<SqrSprite&> CreateRenderText(string text);
 
 		void SetFontFile(string fontFile) { _fontFile = fontFile; }
 
@@ -67,8 +69,12 @@ namespace KillerEngine
 
 		string GetFontName(void) 		  { return _fontName; }
 
+		void SetFontTexture(const Texture& texture) { _texture = texture }
+
+		Texture& GetFontTexture(void) { return _texture; }
+
 	private:
-		Texture 					 _texture;
+		Texture& 					 _texture;
 		string  					 _fontFile;
 		string  					 _fontName;
 		U32     					 _headerSize = 26;

@@ -62,7 +62,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col)=0;
 
-		virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const Texture& tex) {  }
+		//virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const Texture& tex) {  }
 
 //==========================================================================================================================
 //
@@ -81,7 +81,7 @@ namespace KillerEngine
 		
 		virtual void v_SetVertexColors( const Col& col) = 0;
 		
-		virtual void v_SetVertexUvs(void) = 0;
+		virtual void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left) = 0;
 
 //==========================================================================================================================
 //

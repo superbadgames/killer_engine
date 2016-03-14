@@ -94,14 +94,23 @@ namespace KillerEngine
 			
 	}//CreateFont
 
-	void Font::CreateRenderText(string text)
+	std::list<SqrSprite&> Font::CreateRenderText(string text)
 	{
+		std::list<SqrSprite&> returnList;
+
+		F32 fontWidth = _texture.GetWidth();
+
+		F32 fontHeight = _texture.GetHeight();
+
 		for(U32 i = 0; i <= text.length(); ++i)
 		{
 			U32 stringIndex = (int)text[i];
-			std::cout << (char)_fontCharData[stringIndex].id;
+			
+			SqrSprite sprite();
+
+			sprite.v_Uvs(_fontCharData[stringIndex].x, )
 		}
-		std::cout << '\n';
+		
 	}
 
 	void Font::_AddNewCharacterData(string id,      string x, 		string y,

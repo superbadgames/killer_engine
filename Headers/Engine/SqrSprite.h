@@ -77,7 +77,7 @@ namespace KillerEngine
 		
 		void v_SetVertexColors( const Col& c);
 		
-		void v_SetVertexUvs(void);
+		void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left);
 
 	private:
 		TextureManager* _textureManager;

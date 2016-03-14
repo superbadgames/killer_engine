@@ -13,10 +13,10 @@ namespace KillerEngine
 	void SqrSprite::v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col)
 	{
 		v_SetVertexPositions(pos, w, h);
-		v_SetVertexColors(col);
 
 		_renderer->AddToBatch(_vertexPositions, _vertexColors);
 	}
+
 
 	void SqrSprite::RenderTexture(const Vec& pos, F32 w, F32 h, const Col& col, Texture& tex)
 	{
@@ -28,10 +28,10 @@ namespace KillerEngine
 		}
 
 		v_SetVertexPositions(pos, w, h);
-		v_SetVertexUvs();
 
 		_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
 	}
+
 
 	void SqrSprite::v_SetVertexPositions(const Vec& p, const F32 w, const F32 h)
 	{
@@ -137,35 +137,35 @@ namespace KillerEngine
 		_vertexColors.push_back(A);
 	}
 
-	void SqrSprite::v_SetVertexUvs(void)
+	void SqrSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
 	{
-		_vertexUvs.clear();
+		//_vertexUvs.clear();
 
 		//=====Vertices=====
 		//=====Triangle1=====
 		//top right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
 
 		//bottom right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(bottom);
 
 		//bottom left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
 
 		//=====Triangle2=====
 		//top right
-		_vertexUvs.push_back(1.0f);
-		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
 
 		//top left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(1.0f);
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(top);
 
 		//bottom left
-		_vertexUvs.push_back(0.0f);
-		_vertexUvs.push_back(0.0f);
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
 	}
 }
