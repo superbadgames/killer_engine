@@ -56,7 +56,7 @@ namespace KillerEngine
 		void AddObjectToWorld(string objId, GameObject* obj);
 		
 		void RenderObjects(void) {
-			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); i++) {
+			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {
 				i->second->v_Render();
 			}
 		}

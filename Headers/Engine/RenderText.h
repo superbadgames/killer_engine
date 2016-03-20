@@ -18,10 +18,10 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/GameObject.hpp>
 #include <Engine/Font.h>
-#include <Engine/SqrSprite.h>
+#include <Engine/CharSprite.h>
 
 //=====STL includes=====
-#include <list>
+#include <vector>
 
 namespace KillerEngine
 {
@@ -34,6 +34,10 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		RenderText(void);
+
+		RenderText(Font* font);
+		
+		RenderText(string text, Font* font);
 
 //==========================================================================================================================
 //
@@ -51,12 +55,12 @@ namespace KillerEngine
 //==========================================================================================================================		
 		void AddText(string text);
 
-		void SetFont(Font font) { _font = font; }
+		void SetFont(Font* font) { _font = font; }
 
 	private:
 		string _text;
-		Font   _font;
-		std::list<SqrSprite> _spriteList;
+		Font*   _font;
+		std::vector<CharSprite*> _spriteList;
 	};
 }
 

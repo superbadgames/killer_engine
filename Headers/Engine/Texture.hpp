@@ -73,9 +73,18 @@ namespace KillerEngine
 //==========================================================================================================================
 		Texture& operator=(const Texture& T) 
 		{
-			_id = T.GetId();
-			_width = T.GetWidth();
+			_id     = T.GetId();
+			_width  = T.GetWidth();
 			_height = T.GetHeight();
+
+			return *this;
+		}
+
+		Texture& operator=(Texture* T)
+		{
+			_id     = T->GetId();
+			_width  = T->GetWidth();
+			_height = T->GetHeight();
 
 			return *this;
 		}

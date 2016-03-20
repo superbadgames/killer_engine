@@ -74,8 +74,8 @@
     <PreBuildEvent>
       <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
 del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy C:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
+xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
+xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,9 +100,16 @@ xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <Lib>
       <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <PreBuildEvent>
+      <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
+del $(ProjectDir)..\..\Headers\Math\ /S /Q
+xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
+xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h" />
+    <ClInclude Include="..\..\Headers\Engine\CharSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Color.hpp" />
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
@@ -121,6 +128,7 @@ xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <ClInclude Include="..\..\Headers\Engine\WorldManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Implementations\CharSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
     <ClCompile Include="..\..\Implementations\Font.cpp" />

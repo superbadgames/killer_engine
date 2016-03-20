@@ -42,19 +42,22 @@ of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-
-#ifndef SQRSPRITE_H
-#define SQRSPRITE_H
+#ifndef CHAR_SPRITE_H
+#define CHAR_SPRITE_H
 
 //=====Killer1 Includes=====
 #include <Engine/Atom.h>
 #include <Engine/Sprite.h>
 #include <Engine/Texture.hpp>
 #include <Engine/TextureManager.h>
+#include <Engine/Font.h>
 
 namespace KillerEngine
 {
-	class SqrSprite: public Sprite
+	//Forward declar font
+	class Font;
+
+	class CharSprite: public Sprite
 	{
 	public:
 //==========================================================================================================================
@@ -62,7 +65,49 @@ namespace KillerEngine
 //Constructors	 	
 //
 //==========================================================================================================================		
-		SqrSprite(void);
+		CharSprite(void);
+
+		CharSprite(F32 x, F32 y, F32 width, F32 height, F32 xoffset, F32 yoffset, F32 xadvance);
+
+//==========================================================================================================================
+//
+//CharSprite Accessors
+//
+//==========================================================================================================================
+
+
+//==========================================================================================================================
+//
+//CharacterData Accessors
+//
+//==========================================================================================================================		
+		F32 GetX(void) 			{ return _x; }
+
+		void SetX(F32 x) 		{ _x =  x; }
+
+		F32 GetY(void) 			{ return _y; }
+
+		void SetY(F32 y) 		{ _y =  y; }
+
+		F32 GetWidth(void) 		{ return _width; }
+
+		void SetWidth(F32 w) 	{ _width =  w; }
+
+		F32 GetHeight(void) 	{ return _height; }
+
+		void SetHeight(F32 h) 	{ _height =  h; }
+
+		F32 GetXOffset(void) 	{ return _xoffset; }
+
+		void SetXOffset(F32 x) 	{ _xoffset =  x; }
+
+		F32 GetYOffset(void) 	{ return _yoffset; }
+
+		void SetYOffset(F32 y) 	{ _yoffset =  y; }
+
+		F32 GetXAdvance(void) 	{ return _xadvance; }
+
+		void SetXAdvance(F32 x) { _xadvance =  x; }
 
 //==========================================================================================================================
 //
@@ -84,10 +129,16 @@ namespace KillerEngine
 		void SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left);
 
 	private:
-		TextureManager* _textureManager;
-
+		TextureManager* 	_textureManager;
+		F32 				_id;
+		F32 				_x;
+		F32 				_y;
+		F32 				_width;
+		F32 				_height;
+		F32 				_xoffset;
+		F32 				_yoffset;
+		F32 				_xadvance;
 	};
 }
-
 
 #endif

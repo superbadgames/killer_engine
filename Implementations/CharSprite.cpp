@@ -1,8 +1,12 @@
-#include <Engine/SqrSprite.h>
+#include <Engine/CharSprite.h>
 
 namespace KillerEngine
 {
-	SqrSprite::SqrSprite(void)
+	CharSprite::CharSprite(void) : _x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
+	{ _textureManager = TextureManager::Instance(); }
+
+	CharSprite::CharSprite(F32 x, F32 y, F32 width, F32 height, F32 xoffset, F32 yoffset, F32 xadvance) 
+						     :_x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
 	{ _textureManager = TextureManager::Instance(); }
 
 //==========================================================================================================================
@@ -10,10 +14,10 @@ namespace KillerEngine
 //Virtual Functions 	 	
 //
 //==========================================================================================================================
-	void SqrSprite::v_RenderSprite(void)
+	void CharSprite::v_RenderSprite(void)
 	{
-		//if(_vertexUvs.size() > 0)
-		//{
+		if(_vertexUvs.size() > 0)
+		{
 			//Make sure texture is loaded into OGL
 			if(_textureManager->GetCurrentTextureId() != _texture.GetId())
 			{
@@ -22,24 +26,23 @@ namespace KillerEngine
 			}
 
 			_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
-		//}
+		}
 		
-		//else if(_vertexColors.size() > 0)
-		//	v_SetVertexPositions();
-			//_renderer->AddToBatch(_vertexPositions, _vertexColors);
+		else if(_vertexColors.size() > 0)
+			_renderer->AddToBatch(_vertexPositions, _vertexColors);
 	}
 
 
-	void SqrSprite::v_SetVertexPositions(void)
+	void CharSprite::v_SetVertexPositions(void)
 	{
-		_vertexPositions.clear();
-
 		F32 halfW = _width / 2;
 		F32 halfH = _height / 2;
 		F32 X = _position.GetX();
 		F32 Y = _position.GetY();
 		F32 Z = _position.GetZ();
 		F32 W = _position.GetW();
+
+ 		_vertexPositions.clear();
 
 		//=====Triangle1=====
 		//=====top right=====
@@ -86,14 +89,14 @@ namespace KillerEngine
 
 	}
 	
-	void SqrSprite::v_SetVertexColors(void)
+	void CharSprite::v_SetVertexColors(void)
 	{
-		_vertexColors.clear();
-
 		F32 R = _color.GetRed();
 		F32 G = _color.GetGreen();
  		F32 B = _color.GetBlue();
  		F32 A = _color.GetAlpha();
+
+ 		_vertexColors.clear();
 
  		//=====Triangle1=====
 		//=====top right=====
@@ -134,7 +137,7 @@ namespace KillerEngine
 		_vertexColors.push_back(A);
 	}
 
-	void SqrSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
+	void CharSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
 	{
 		_vertexUvs.clear();
 
@@ -166,22 +169,21 @@ namespace KillerEngine
 		_vertexUvs.push_back(bottom);
 	}
 
-
-	void SqrSprite::SetPosition(Vec2& position)
+	void CharSprite::SetPosition(Vec2& position)
 	{
 		_position = position;
 
 		v_SetVertexPositions();
 	}
 
-	void SqrSprite::SetColor(Col& col)
+	void CharSprite::SetColor(Col& col)
 	{
 		_color = col;
 
 		v_SetVertexColors();
 	}
 
-	void SqrSprite::SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left)
+	void CharSprite::SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left)
 	{
 		_texture = texture;
 

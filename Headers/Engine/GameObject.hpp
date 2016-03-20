@@ -64,41 +64,45 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=====ID=====		
-		const string GetId(void) { return __id; }
+		const string GetID(void) { return __id; }
 
-		void SetId(string id) { __id = id; }
+		void SetID(string id) { __id = id; }
 
 //=====Position=====
-		const Vec& GetPosition(void) { return __position; }
+		const Vec2& GetPosition(void) { return __position; }
 		
-		void SetPosition(const Vec& pos) { __position = pos; }
+		void SetPosition(Vec2& pos) { __position = pos; }
 
-		void SetPosition(F32 x, F32 y) { __position = Vec(x, y); }
+		void SetPosition(F32 x, F32 y) { __position = Vec2(x, y); }
 
 //=====Dimensions=====
+//Settings are virtual so that each GameObject
+//Can make sure to update its sprite, if it has one
+//with a default version in the case of no sprite.
+		
 		const F32 GetWidth(void) { return __width; }
 
-		void SetWidth(F32 w) { __width = w; }
+		virtual void SetWidth(F32 w) { __width = w; }
 
 		const F32 GetHeight(void) { return __height; }
 
-		void SetHeight(F32 h) { __height = h; }
+		virtual void SetHeight(F32 h) { __height = h; }
 
-		void SetDimensions(const F32 w, const F32 h) 
+		virtual void SetDimensions(const F32 w, const F32 h) 
 		{
 			__width = w;
 			__height = h;
 		}
 
 //=====Color=====
-		const Col& GetColor(void) { return __color; }
+		const Col* GetColor(void) { return &__color; }
 
-		void SetColor(const Col& col) { __color = col; }
+		void SetColor(Col& col) { __color = col; }
 
 //=====Texture=====
-		const Texture& GetTexture(void) { return __texture; }
+		const Texture* GetTexture(void) { return &__texture; }
 
-		void SetTexture(const Texture& texture) { __texture = texture; }
+		void SetTexture(Texture& texture) { __texture = texture; }
 
 //=====Active=====
 		const bool GetActive(void)   { return __active; }
@@ -110,13 +114,13 @@ namespace KillerEngine
 
 
 	protected:
-		string 	__id;
-		Vec     __position;
-		F32     __width;
-		F32     __height;
-		Col     __color;
-		Texture __texture;
-		bool 	__active;
+		string 	 __id;
+		Vec2     __position;
+		F32      __width;
+		F32      __height;
+		Col      __color;
+		Texture  __texture;
+		bool 	 __active;
 	};
 
 }//End namespace

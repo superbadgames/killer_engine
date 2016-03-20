@@ -58,6 +58,9 @@
     <Filter Include="Components\GameObjects\RenderText">
       <UniqueIdentifier>{64159164-e185-489c-89b1-62eff8e5d34d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Sprites\CharSprite">
+      <UniqueIdentifier>{4a801a09-234d-4df0-bf0c-a7ae6e79f74e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="..\..\Headers\Engine\RenderText.h">
       <Filter>Components\GameObjects\RenderText</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\CharSprite.h">
+      <Filter>Components\Sprites\CharSprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\Controller.cpp">
@@ -151,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\RenderText.cpp">
       <Filter>Components\GameObjects\RenderText</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\CharSprite.cpp">
+      <Filter>Components\Sprites\CharSprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

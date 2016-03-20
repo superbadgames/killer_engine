@@ -2,6 +2,8 @@
 The Font class is used to open a .fnt file, extract the needed character
 data, and then save that for text processing later on.
 
+CreateCharacter is a CharSprite Factory. This may be important to know.
+
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
@@ -13,7 +15,7 @@ Written by Maxwell Miller
 //=====Engine includes=====
 #include <Engine/Atom.h>
 #include <Engine/Texture.hpp>
-#include <Engine/SqrSprite.h>
+#include <Engine/CharSprite.h>
 
 //=====STL includes=====
 #include <fstream>
@@ -28,14 +30,17 @@ namespace KillerEngine
 	struct CharacterData
 	{
 		U32 id;
-		U32 x;
-		U32 y;
-		U32 width;
-		U32 height;
-		U32 xoffset;
-		U32 yoffset;
-		U32 xadvance;
+		F32 x;
+		F32 y;
+		F32 width;
+		F32 height;
+		F32 xoffset;
+		F32 yoffset;
+		F32 xadvance;
 	};
+
+	//Forward declare CharSprite
+	class CharSprite;
 
 	class Font
 	{
@@ -45,7 +50,7 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================		
-		Font(void);
+		Font(Texture* texture);
 
 //==========================================================================================================================
 //
@@ -54,13 +59,15 @@ namespace KillerEngine
 //==========================================================================================================================
 		void InitFont(string fontName, string fontFile);
 
+		CharacterData* GetDataForCharacter(char c);
+
+		CharSprite* CreateCharacter(char character);
+
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		std::list<SqrSprite&> CreateRenderText(string text);
-
 		void SetFontFile(string fontFile) { _fontFile = fontFile; }
 
 		string GetFontFile(void) 		  { return _fontFile; }
@@ -69,16 +76,16 @@ namespace KillerEngine
 
 		string GetFontName(void) 		  { return _fontName; }
 
-		void SetFontTexture(const Texture& texture) { _texture = texture }
+		void SetFontTexture(Texture& texture) { _texture = texture; }
 
-		Texture& GetFontTexture(void) { return _texture; }
+		Texture& GetTexture(void) { return _texture; }
 
 	private:
-		Texture& 					 _texture;
+		Texture 					 _texture;
 		string  					 _fontFile;
 		string  					 _fontName;
 		U32     					 _headerSize = 26;
-		std::map<U32, CharacterData> _fontCharData;
+		std::map<U32, CharacterData*> _fontCharData;
 
 		void _AddNewCharacterData(string id,      string x, 		string y,
 							  	  string width,   string height,   string xoffset,
