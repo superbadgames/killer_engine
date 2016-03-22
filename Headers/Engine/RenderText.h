@@ -35,16 +35,16 @@ namespace KillerEngine
 //==========================================================================================================================
 		RenderText(void);
 
-		RenderText(Font* font);
+		RenderText(Font& font);
 		
-		RenderText(string text, Font* font);
+		RenderText(string text, Font& font);
 
 //==========================================================================================================================
 //
 //Virtual Functions
 //
 //==========================================================================================================================
-		void v_Update(void) {  }
+		void v_Update(void);
 
 		void v_Render(void);
 
@@ -55,12 +55,20 @@ namespace KillerEngine
 //==========================================================================================================================		
 		void AddText(string text);
 
-		void SetFont(Font* font) { _font = font; }
+		void SetCharacterWidth(F32 w) { _charWidth = w; }
+
+		void SetCharacterHeight(F32 h) { _charHeight = h; }
+
+		void SetCharacterDimensions(const F32 w, const F32 h) { _charWidth = w; _charHeight = h; }
+
+		void SetFont(Font& font) { _font = font; }
 
 	private:
 		string _text;
-		Font*   _font;
+		Font   _font;
 		std::vector<CharSprite*> _spriteList;
+		F32 _charWidth;
+		F32 _charHeight;
 	};
 }
 

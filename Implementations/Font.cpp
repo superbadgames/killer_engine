@@ -2,7 +2,10 @@
 
 namespace KillerEngine
 {
-	Font::Font(Texture* texture) : _fontName(), _fontFile(), _texture(texture)
+	Font::Font(void) : _texture(), _fontFile(), _fontName(), _textureManager(TextureManager::Instance())
+	{  }
+
+	Font::Font(Texture* texture) : _texture(texture), _fontFile(), _fontName(), _textureManager(TextureManager::Instance())
 	{  }
 
 	void Font::InitFont(string fontName, string fontFile)
@@ -17,7 +20,8 @@ namespace KillerEngine
 
 		if(!file.is_open())
 		{
-			std::cout << "Failed to open file!\n" << _fontFile << std::endl; 
+			//Add error manager, set error
+			//std::cout << "Failed to open file!\n" << _fontFile << std::endl; 
 		}
 		else
 		{
@@ -40,6 +44,7 @@ namespace KillerEngine
 			 //for(U32 i = 0; i <= results.size(); ++i )
 			 while(results.size() > 1)
 			 {		
+
 			 	if(first)
 			 	{
 			 		first = false;
@@ -105,14 +110,17 @@ namespace KillerEngine
 	{
 		U32 id = U32(character);
 
-		CharSprite* charSprite = new CharSprite(_fontCharData[id]->x, 
-											    _fontCharData[id]->y, 
-											    _fontCharData[id]->width, 
-											    _fontCharData[id]->height, 
-											    _fontCharData[id]->xoffset, 
-											    _fontCharData[id]->yoffset, 
-											    _fontCharData[id]->xadvance );
+		CharSprite* charSprite = new CharSprite();
 
+		charSprite->SetCharID(id);
+		charSprite->SetCharX(_fontCharData[id]->x); 
+	    charSprite->SetCharY(_fontCharData[id]->y); 
+	    charSprite->SetCharWidth(_fontCharData[id]->width); 
+	    charSprite->SetCharHeight(_fontCharData[id]->height); 
+	    charSprite->SetXOffset(_fontCharData[id]->xoffset); 
+	    charSprite->SetYOffset(_fontCharData[id]->yoffset); 
+	    charSprite->SetXAdvance(_fontCharData[id]->xadvance);
+		
 		return charSprite;	 		
 	}
 
@@ -125,28 +133,30 @@ namespace KillerEngine
  		
  		U32 charID = std::stoi(id);
 
+ 		_fontCharData.insert(std::pair<U32, CharacterData*>(charID, new CharacterData()));
+
  		//Create CharacterData for the given character
  		_fontCharData[charID]->id = std::stoi(id);
 
  		x.erase(x.begin(), x.begin() + x.find_first_of("=")+1);
- 		_fontCharData[charID]->x = std::stof(x);
+ 		_fontCharData[charID]->x = std::stoi(x);
  		
  		y.erase(y.begin(), y.begin() + y.find_first_of("=")+1);
- 		_fontCharData[charID]->y = std::stof(y);
+ 		_fontCharData[charID]->y = std::stoi(y);
  		
  		width.erase(width.begin(), width.begin() + width.find_first_of("=")+1);
- 		_fontCharData[charID]->width = std::stof(width);
+ 		_fontCharData[charID]->width = std::stoi(width);
  		
  		height.erase(height.begin(), height.begin() + height.find_first_of("=")+1);
- 		_fontCharData[charID]->height = std::stof(height);
+ 		_fontCharData[charID]->height = std::stoi(height);
  		
  		xoffset.erase(xoffset.begin(), xoffset.begin() + xoffset.find_first_of("=")+1);
- 		_fontCharData[charID]->xoffset = std::stof(xoffset);
+ 		_fontCharData[charID]->xoffset = std::stoi(xoffset);
  		
  		yoffset.erase(yoffset.begin(), yoffset.begin() + yoffset.find_first_of("=")+1);
- 		_fontCharData[charID]->yoffset = std::stof(yoffset);
+ 		_fontCharData[charID]->yoffset = std::stoi(yoffset);
  		
  		xadvance.erase(xadvance.begin(), xadvance.begin() + xadvance.find_first_of("=")+1);
- 		_fontCharData[charID]->xadvance = std::stof(xadvance);
+ 		_fontCharData[charID]->xadvance = std::stoi(xadvance);
 	}
 }

@@ -16,6 +16,7 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/Texture.hpp>
 #include <Engine/CharSprite.h>
+#include <Engine/TextureManager.h>
 
 //=====STL includes=====
 #include <fstream>
@@ -30,13 +31,13 @@ namespace KillerEngine
 	struct CharacterData
 	{
 		U32 id;
-		F32 x;
-		F32 y;
-		F32 width;
-		F32 height;
-		F32 xoffset;
-		F32 yoffset;
-		F32 xadvance;
+		U32 x;
+		U32 y;
+		U32 width;
+		U32 height;
+		U32 xoffset;
+		U32 yoffset;
+		U32 xadvance;
 	};
 
 	//Forward declare CharSprite
@@ -50,6 +51,8 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================		
+		Font(void);
+
 		Font(Texture* texture);
 
 //==========================================================================================================================
@@ -61,24 +64,52 @@ namespace KillerEngine
 
 		CharacterData* GetDataForCharacter(char c);
 
+		std::map<U32, CharacterData*> GetDataMap(void) { return _fontCharData; }
+
 		CharSprite* CreateCharacter(char character);
+
+//==========================================================================================================================
+//
+//Operators
+//
+//==========================================================================================================================
+
+		Font& operator=(Font* font)
+		{
+			_texture = font->GetTexture();
+			_fontFile = font->GetFile();
+			_fontName = font->GetName();
+			_fontCharData = font->GetDataMap();
+
+			return *this;
+		}
+
+		Font& operator=(Font& font)
+		{
+			_texture = font.GetTexture();
+			_fontFile = font.GetFile();
+			_fontName = font.GetName();
+			_fontCharData = font.GetDataMap();
+
+			return *this;
+		}		
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		void SetFontFile(string fontFile) { _fontFile = fontFile; }
+		void SetFile(string fontFile) 	  { _fontFile = fontFile; }
 
-		string GetFontFile(void) 		  { return _fontFile; }
+		string GetFile(void) 		  	  { return _fontFile; }
 
-		void SetFontName(string fontName) { _fontName = fontName; }
+		void SetName(string fontName) 	  { _fontName = fontName; }
 
-		string GetFontName(void) 		  { return _fontName; }
+		string GetName(void) 		  	  { return _fontName; }
 
-		void SetFontTexture(Texture& texture) { _texture = texture; }
+		void SetTexture(string fontTexture) { _texture = _textureManager->GetTexture(fontTexture); }
 
-		Texture& GetTexture(void) { return _texture; }
+		Texture& GetTexture(void) 		  { return _texture; }
 
 	private:
 		Texture 					 _texture;
@@ -86,6 +117,7 @@ namespace KillerEngine
 		string  					 _fontName;
 		U32     					 _headerSize = 26;
 		std::map<U32, CharacterData*> _fontCharData;
+		TextureManager*				  _textureManager;
 
 		void _AddNewCharacterData(string id,      string x, 		string y,
 							  	  string width,   string height,   string xoffset,

@@ -55,7 +55,9 @@ namespace KillerEngine
 
 			void SetHeight(F32 h) { _height = h; }
 
-			F32 GetHeight(void)   { return _height; }			
+			F32 GetHeight(void)   { return _height; }
+
+			void SetDimensions(F32 w, F32 h) { _width = w; _height = h; }			
 
 			Vec2& GetPosition(void) { return _position; }
 

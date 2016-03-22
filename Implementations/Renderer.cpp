@@ -22,10 +22,10 @@ namespace KillerEngine
 			"#version 430 core																\n"
 			"																				\n"
 			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec4 color; 										\n"					
+			"layout (location = 1) in vec4 color; 											\n"					
 			"uniform mat4 transform_mat;													\n"
 			"																				\n"
-			"out vec4 vs_color;															\n"
+			"out vec4 vs_color;																\n"
 			"																				\n"
 			"void main(void) 																\n"
 			"{																				\n"
@@ -50,7 +50,7 @@ namespace KillerEngine
 			"void main(void) 																\n"
 			"{																				\n"
 			"	gl_Position = transform_mat * position;										\n"
-			"	vs_tex_coord = vec2(tex_coord.x, 1.0f - tex_coord.y);						\n"
+			"	vs_tex_coord = vec2(tex_coord.x, tex_coord.y);								\n"
 			"}																				\n"
 		};
 
@@ -62,7 +62,7 @@ namespace KillerEngine
 		{
 			"#version 430 core																\n"
 			"																				\n"
-			"in vec4 vs_color;															\n"
+			"in vec4 vs_color;																\n"
 			"out vec4 color;																\n"
 			"																				\n"
 			"void main(void) 																\n"

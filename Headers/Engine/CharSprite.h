@@ -67,7 +67,7 @@ namespace KillerEngine
 //==========================================================================================================================		
 		CharSprite(void);
 
-		CharSprite(F32 x, F32 y, F32 width, F32 height, F32 xoffset, F32 yoffset, F32 xadvance);
+		CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance);
 
 //==========================================================================================================================
 //
@@ -81,33 +81,35 @@ namespace KillerEngine
 //CharacterData Accessors
 //
 //==========================================================================================================================		
-		F32 GetX(void) 			{ return _x; }
+		void SetCharID(U32 id)          { _id = id; }
 
-		void SetX(F32 x) 		{ _x =  x; }
+		U32 GetCharX(void) 				{ return _x; }
 
-		F32 GetY(void) 			{ return _y; }
+		void SetCharX(U32 x) 			{ _x =  x; }
 
-		void SetY(F32 y) 		{ _y =  y; }
+		U32 GetCharY(void) 				{ return _y; }
 
-		F32 GetWidth(void) 		{ return _width; }
+		void SetCharY(U32 y) 			{ _y =  y; }
 
-		void SetWidth(F32 w) 	{ _width =  w; }
+		U32 GetCharWidth(void) 		{ return _width; }
 
-		F32 GetHeight(void) 	{ return _height; }
+		void SetCharWidth(U32 w) 	{ _width =  w; }
 
-		void SetHeight(F32 h) 	{ _height =  h; }
+		U32 GetCharHeight(void) 	{ return _height; }
 
-		F32 GetXOffset(void) 	{ return _xoffset; }
+		void SetCharHeight(U32 h) 	{ _height =  h; }
 
-		void SetXOffset(F32 x) 	{ _xoffset =  x; }
+		U32 GetXOffset(void) 		{ return _xoffset; }
 
-		F32 GetYOffset(void) 	{ return _yoffset; }
+		void SetXOffset(U32 x) 		{ _xoffset =  x; }
 
-		void SetYOffset(F32 y) 	{ _yoffset =  y; }
+		U32 GetYOffset(void) 		{ return _yoffset; }
 
-		F32 GetXAdvance(void) 	{ return _xadvance; }
+		void SetYOffset(U32 y) 		{ _yoffset =  y; }
 
-		void SetXAdvance(F32 x) { _xadvance =  x; }
+		U32 GetXAdvance(void) 		{ return _xadvance; }
+
+		void SetXAdvance(U32 x) 	{ _xadvance =  x; }
 
 //==========================================================================================================================
 //
@@ -130,14 +132,14 @@ namespace KillerEngine
 
 	private:
 		TextureManager* 	_textureManager;
-		F32 				_id;
-		F32 				_x;
-		F32 				_y;
-		F32 				_width;
-		F32 				_height;
-		F32 				_xoffset;
-		F32 				_yoffset;
-		F32 				_xadvance;
+		U32 				_id;
+		U32 				_x;
+		U32 				_y;
+		U32 				_width;
+		U32 				_height;
+		U32 				_xoffset;
+		U32 				_yoffset;
+		U32 				_xadvance;
 	};
 }
 

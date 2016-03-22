@@ -5,7 +5,7 @@ namespace KillerEngine
 	CharSprite::CharSprite(void) : _x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
 	{ _textureManager = TextureManager::Instance(); }
 
-	CharSprite::CharSprite(F32 x, F32 y, F32 width, F32 height, F32 xoffset, F32 yoffset, F32 xadvance) 
+	CharSprite::CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance) 
 						     :_x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
 	{ _textureManager = TextureManager::Instance(); }
 
@@ -16,8 +16,8 @@ namespace KillerEngine
 //==========================================================================================================================
 	void CharSprite::v_RenderSprite(void)
 	{
-		if(_vertexUvs.size() > 0)
-		{
+		//if(_vertexUvs.size() > 0)
+		//{
 			//Make sure texture is loaded into OGL
 			if(_textureManager->GetCurrentTextureId() != _texture.GetId())
 			{
@@ -26,23 +26,23 @@ namespace KillerEngine
 			}
 
 			_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
-		}
+		//}
 		
-		else if(_vertexColors.size() > 0)
-			_renderer->AddToBatch(_vertexPositions, _vertexColors);
+		//else if(_vertexColors.size() > 0)
+		//	_renderer->AddToBatch(_vertexPositions, _vertexColors);
 	}
 
 
 	void CharSprite::v_SetVertexPositions(void)
 	{
+		_vertexPositions.clear();
+
 		F32 halfW = _width / 2;
 		F32 halfH = _height / 2;
 		F32 X = _position.GetX();
 		F32 Y = _position.GetY();
 		F32 Z = _position.GetZ();
 		F32 W = _position.GetW();
-
- 		_vertexPositions.clear();
 
 		//=====Triangle1=====
 		//=====top right=====
@@ -91,12 +91,12 @@ namespace KillerEngine
 	
 	void CharSprite::v_SetVertexColors(void)
 	{
+		_vertexColors.clear();
+
 		F32 R = _color.GetRed();
 		F32 G = _color.GetGreen();
  		F32 B = _color.GetBlue();
  		F32 A = _color.GetAlpha();
-
- 		_vertexColors.clear();
 
  		//=====Triangle1=====
 		//=====top right=====

@@ -164,6 +164,7 @@ namespace KillerEngine
 		//bottom left
 		_vertexUvs.push_back(left);
 		_vertexUvs.push_back(bottom);
+
 	}
 
 
