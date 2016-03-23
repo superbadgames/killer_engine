@@ -61,6 +61,9 @@
     <Filter Include="Components\Sprites\CharSprite">
       <UniqueIdentifier>{4a801a09-234d-4df0-bf0c-a7ae6e79f74e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Test">
+      <UniqueIdentifier>{694706e0-edd3-4e2f-85cd-3ef87d01dce0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
@@ -117,6 +120,12 @@
     <ClInclude Include="..\..\Headers\Engine\CharSprite.h">
       <Filter>Components\Sprites\CharSprite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Test.h">
+      <Filter>Components\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\test2.h">
+      <Filter>Components\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\Controller.cpp">
@@ -160,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
       <Filter>Components\Sprites\CharSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Headers\Engine\test.cpp">
+      <Filter>Components\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
