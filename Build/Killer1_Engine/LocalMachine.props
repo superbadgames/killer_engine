@@ -7,8 +7,8 @@
     <PreBuildEvent>
       <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
 del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy C:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy C:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
+xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
+xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />

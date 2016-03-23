@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Killer1_Engine", "Killer1_Engine.vcxproj", "{68D60B4E-1A95-4381-975B-BFAEAD853890}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KillerMath", "..\..\..\Killer_Math\Build\KillerMath\KillerMath.vcxproj", "{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,12 +19,6 @@ Global
 		{68D60B4E-1A95-4381-975B-BFAEAD853890}.Release|Win32.ActiveCfg = Release|Win32
 		{68D60B4E-1A95-4381-975B-BFAEAD853890}.Release|Win32.Build.0 = Release|Win32
 		{68D60B4E-1A95-4381-975B-BFAEAD853890}.Release|x64.ActiveCfg = Release|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Debug|Win32.ActiveCfg = Debug|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Debug|Win32.Build.0 = Debug|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Debug|x64.ActiveCfg = Debug|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Release|Win32.ActiveCfg = Release|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Release|Win32.Build.0 = Release|Win32
-		{65EC3B77-F46D-4AFE-91FB-84D56CA4E662}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
