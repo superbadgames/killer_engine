@@ -113,6 +113,8 @@
     <ClInclude Include="..\..\Headers\Engine\RenderText.h" />
     <ClInclude Include="..\..\Headers\Engine\Sprite.h" />
     <ClInclude Include="..\..\Headers\Engine\SqrSprite.h" />
+    <ClInclude Include="..\..\Headers\Engine\Test.h" />
+    <ClInclude Include="..\..\Headers\Engine\test2.h" />
     <ClInclude Include="..\..\Headers\Engine\Texture.hpp" />
     <ClInclude Include="..\..\Headers\Engine\TextureManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Timer.h" />
@@ -120,6 +122,7 @@
     <ClInclude Include="..\..\Headers\Engine\WorldManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Headers\Engine\test.cpp" />
     <ClCompile Include="..\..\Implementations\CharSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
