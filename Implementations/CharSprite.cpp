@@ -2,11 +2,11 @@
 
 namespace KillerEngine
 {
-	CharSprite::CharSprite(void) : _x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
+	CharSprite::CharSprite(void) : _charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
 	{ _textureManager = TextureManager::Instance(); }
 
 	CharSprite::CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance) 
-						     :_x(0), _y(0), _width(0), _height(0), _xoffset(0), _yoffset(0), _xadvance(0)
+						     :_charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
 	{ _textureManager = TextureManager::Instance(); }
 
 //==========================================================================================================================
@@ -37,8 +37,8 @@ namespace KillerEngine
 	{
 		_vertexPositions.clear();
 
-		F32 halfW = _width / 2;
-		F32 halfH = _height / 2;
+		F32 halfW = F32(_width / 2);
+		F32 halfH = F32(_height / 2);
 		F32 X = _position.GetX();
 		F32 Y = _position.GetY();
 		F32 Z = _position.GetZ();

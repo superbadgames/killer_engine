@@ -55,20 +55,28 @@ namespace KillerEngine
 //==========================================================================================================================		
 		void AddText(string text);
 
-		void SetCharacterWidth(F32 w) { _charWidth = w; }
+		void SetTextPosition(Vec2& pos);
 
-		void SetCharacterHeight(F32 h) { _charHeight = h; }
+		void SetWidthScaleFactor(F32 w) { _widthScaleFactor = w; }
 
-		void SetCharacterDimensions(const F32 w, const F32 h) { _charWidth = w; _charHeight = h; }
+		void SetHeightScaleFactor(F32 h) { _heightScaleFactor = h; }
+
+		void SetScaleFactors(const F32 w, const F32 h) { _widthScaleFactor = w; _heightScaleFactor = h; }
 
 		void SetFont(Font& font) { _font = font; }
+
+		F32 GetTotalWidth(void) { return _totalWidth; }
+
+		F32 GetTotalHeight(void) { return _totalHeight; }
 
 	private:
 		string _text;
 		Font   _font;
 		std::vector<CharSprite*> _spriteList;
-		F32 _charWidth;
-		F32 _charHeight;
+		F32 _widthScaleFactor;
+		F32 _heightScaleFactor;
+		F32 _totalWidth;
+		F32 _totalHeight;
 	};
 }
 

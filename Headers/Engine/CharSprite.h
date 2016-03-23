@@ -81,23 +81,23 @@ namespace KillerEngine
 //CharacterData Accessors
 //
 //==========================================================================================================================		
-		void SetCharID(U32 id)          { _id = id; }
+		void SetCharID(U32 id)          { _charID = id; }
 
-		U32 GetCharX(void) 				{ return _x; }
+		U32 GetCharX(void) 				{ return _charX; }
 
-		void SetCharX(U32 x) 			{ _x =  x; }
+		void SetCharX(U32 x) 			{ _charX =  x; }
 
-		U32 GetCharY(void) 				{ return _y; }
+		U32 GetCharY(void) 				{ return _charY; }
 
-		void SetCharY(U32 y) 			{ _y =  y; }
+		void SetCharY(U32 y) 			{ _charY =  y; }
 
-		U32 GetCharWidth(void) 		{ return _width; }
+		U32 GetCharWidth(void) 		{ return _charWidth; }
 
-		void SetCharWidth(U32 w) 	{ _width =  w; }
+		void SetCharWidth(U32 w) 	{ _charWidth =  w; }
 
-		U32 GetCharHeight(void) 	{ return _height; }
+		U32 GetCharHeight(void) 	{ return _charHeight; }
 
-		void SetCharHeight(U32 h) 	{ _height =  h; }
+		void SetCharHeight(U32 h) 	{ _charHeight =  h; }
 
 		U32 GetXOffset(void) 		{ return _xoffset; }
 
@@ -132,11 +132,11 @@ namespace KillerEngine
 
 	private:
 		TextureManager* 	_textureManager;
-		U32 				_id;
-		U32 				_x;
-		U32 				_y;
-		U32 				_width;
-		U32 				_height;
+		U32 				_charID;
+		U32 				_charX;
+		U32 				_charY;
+		U32 				_charWidth;
+		U32 				_charHeight;
 		U32 				_xoffset;
 		U32 				_yoffset;
 		U32 				_xadvance;

@@ -28,15 +28,6 @@ namespace KillerEngine
 
 	class World
 	{
-	private:
-		ErrorManager* 			   _errorManager;
-		Renderer* 				   _renderer;
-		std::map<string, GameObject*> _worldObjects;
-		
-		S32   _mapWidth;
-		S32   _mapHeight;
-		Col _bgColor;
-
 	public:
 		World(void): _errorManager(ErrorManager::Instance()),
 					 _renderer(Renderer::Instance()),
@@ -73,11 +64,15 @@ namespace KillerEngine
 		
 		void SetMapHeight(S32 h) { _mapHeight = h; }
 		
-		void SetMapDimensions(S32 w, S32 h) {
-			_mapWidth  = w;
-			_mapHeight = h;
-	}
-};
+		void SetMapDimensions(S32 w, S32 h) { _mapWidth  = w; _mapHeight = h; }
+	private:
+		ErrorManager* 			   _errorManager;
+		Renderer* 				   _renderer;
+		std::map<string, GameObject*> _worldObjects;
+		S32   _mapWidth;
+		S32   _mapHeight;
+		Col _bgColor;
+	};
 }//End namespace
 
 #endif
