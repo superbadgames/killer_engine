@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\Implementations\CharSprite.cpp">
+      <Filter>Components\Sprites\CharSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Controller.cpp">
+      <Filter>Components\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ErrorManager.cpp">
+      <Filter>Components\ErrorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Font.cpp">
+      <Filter>Components\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\KillerEngine.cpp">
+      <Filter>Components\KillerEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp">
+      <Filter>Components\ProgramWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Renderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\RenderText.cpp">
+      <Filter>Components\GameObjects\RenderText</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Sprite.cpp">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
+      <Filter>Components\Sprites\SqrSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\TextureManager.cpp">
+      <Filter>Components\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Timer.cpp">
+      <Filter>Components\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\World.cpp">
+      <Filter>Components\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\WorldManager.cpp">
+      <Filter>Components\WorldManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Headers\Engine\Atom.h">
+      <Filter>Components\Atom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Controller.h">
+      <Filter>Components\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\CharSprite.h">
+      <Filter>Components\Sprites\CharSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Color.hpp">
+      <Filter>Components\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ErrorManager.h">
+      <Filter>Components\ErrorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Font.h">
+      <Filter>Components\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject.hpp">
+      <Filter>Components\GameObjects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
+      <Filter>Components\KillerEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h">
+      <Filter>Components\ProgramWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Renderer.h">
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\RenderText.h">
+      <Filter>Components\GameObjects\RenderText</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\SqrSprite.h">
+      <Filter>Components\Sprites\SqrSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Texture.hpp">
+      <Filter>Components\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\TextureManager.h">
+      <Filter>Components\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Timer.h">
+      <Filter>Components\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\World.h">
+      <Filter>Components\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\WorldManager.h">
+      <Filter>Components\WorldManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{3a40b7d3-8621-4cbb-ba8d-84e66980b2b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites">
+      <UniqueIdentifier>{c07ec0db-9c7a-4929-9ba3-fa36c3d54d6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\CharSprite">
+      <UniqueIdentifier>{5f556360-3557-4d9f-9f98-870ce7ef0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Atom">
+      <UniqueIdentifier>{98f0c801-1b7e-4874-a555-2f65423e2180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Controller">
+      <UniqueIdentifier>{c0e67711-b0e4-48f0-842c-7e65c78625e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Color">
+      <UniqueIdentifier>{01a25287-009d-43c6-a545-e3426322691b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ErrorManager">
+      <UniqueIdentifier>{4518feb9-6e1e-4dfc-b2d6-c656402640a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Font">
+      <UniqueIdentifier>{5b30d52c-99aa-4fc5-9e57-678fcb247622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects">
+      <UniqueIdentifier>{69fd37f6-f40a-4c9d-b598-b87cda5a583b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects\GameObject">
+      <UniqueIdentifier>{d4fc7af3-9722-4049-a1d6-453cb8a4d546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\KillerEngine">
+      <UniqueIdentifier>{047f720b-25e6-437f-9500-95ee172baf32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ProgramWindow">
+      <UniqueIdentifier>{03cddbee-155a-40de-b475-157f0c0b78c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Renderer">
+      <UniqueIdentifier>{91a7d851-8c24-48e9-bbb5-4a80065cc47a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Texture">
+      <UniqueIdentifier>{f256a7f0-6b4a-4c21-82d8-e50b5f75e87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects\RenderText">
+      <UniqueIdentifier>{f6c09e4b-ba1a-4e01-aa9b-b27d7282b487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\Sprite">
+      <UniqueIdentifier>{0e9a976b-0fa8-4277-81b8-97d2016c5448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\SqrSprite">
+      <UniqueIdentifier>{f5d009e3-5133-49ff-8a31-e51af285ed4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TextureManager">
+      <UniqueIdentifier>{71322cb3-b0dc-41e7-b2c5-525a46751a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Timer">
+      <UniqueIdentifier>{c8db8e86-95e6-4748-9e97-aae35206c154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\World">
+      <UniqueIdentifier>{c54686d7-90e6-4d2d-aa84-bf41a21ba9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\WorldManager">
+      <UniqueIdentifier>{e406af3f-ff3e-43f9-aba5-90818b974c32}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
