@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{68D60B4E-1A95-4381-975B-BFAEAD853890}</ProjectGuid>
     <RootNamespace>Killer1_Engine</RootNamespace>
+    <ProjectName>Killer_Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
