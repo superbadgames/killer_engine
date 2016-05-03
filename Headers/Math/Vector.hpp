@@ -607,7 +607,7 @@ namespace KillerMath
 		}
 		
 		//=====AddScales Vector=====
-		void AddScaledVector(const Vector2<T> V, T scale)
+		void AddScaledVector(const Vector3<T> V, T scale)
 		{
 			_v[0] += V.GetX() * scale;
 			_v[1] += V.GetY() * scale;

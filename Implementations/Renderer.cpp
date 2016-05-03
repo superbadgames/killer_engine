@@ -87,6 +87,7 @@ namespace KillerEngine
 			//=====test for textures, failed finish later=====
 			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
 			"	color = texture(ourTexture, vs_tex_coord);									\n"
+			//"	GL_FragColor = texture(ourTexture, vs_tex_coord);									\n"
 			"}																				\n"
 		};
 
