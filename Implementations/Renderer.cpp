@@ -265,6 +265,9 @@ namespace KillerEngine
 			
 		    glUseProgram(_renderingProgramTexture);
 
+		    glEnable(GL_BLEND);
+		    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 			GLuint buffers[2];
 			glGenBuffers(2, buffers);
 
@@ -279,6 +282,8 @@ namespace KillerEngine
 			glEnableVertexAttribArray(1);
 			
 			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+
+			glDisable(GL_BLEND);
 		}	
 
 		
