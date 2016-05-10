@@ -23,11 +23,13 @@ Written by Maxwell Miller
 #include <Math/Vector.hpp>
 #include <Math/Matrix.hpp>
 
+//=====Windows Includes=====
+#include <windows.h>
+
 //=====OGL Includes=====
 #include <GL/gl3w.h>
 
-//=====Windows Includes=====
-#include <windows.h>
+
 
 //=====STD Includes=====
 #include <string>

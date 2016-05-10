@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;Killer_Math_Win32_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;Killer_Math_Win32_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,7 +112,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;Killer_Math_Win32_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;Killer_Math_Win32_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
