@@ -52,7 +52,7 @@
 #define RANDOM_GEN_H
 
 //Includes
-#include <Math/Atom.h>
+#include <Engine/Atom.h>
 #include <functional>
 #include <vector>
 #include <time.h>

@@ -1,4 +1,4 @@
-#include <Engine/World.h>
+#include <Engine/World2D.h>
 
 namespace KillerEngine 
 {
@@ -6,7 +6,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //AddObjectToWorld
 //--------------------------------------------------------------
-	void World::AddObjectToWorld(string objId, GameObject* obj)
+	void World2D::AddObjectToWorld(string objId, GameObject2D* obj)
 	{
 		_worldObjects[objId] = obj;
 		

@@ -24,14 +24,15 @@ Written by Maxwell Miller
 #include <Engine/ProgramWindow.h>
 #include <Engine/Renderer.h>
 #include <Engine/Timer.h>
-#include <Engine/WorldManager.h>
+#include <Engine/WorldManager2D.h>
 #include <Engine/TextureManager.h>
 
+namespace KM = KillerMath;
 
 namespace KillerEngine 
 {
 
-	class KillerEngine 
+	class KillerEngine2D 
 	{
 
 	public:
@@ -49,7 +50,7 @@ namespace KillerEngine
 			_textureManager->LoadTexture(path, name, width, height); 
 		}
 		
-		void AddWorldToManager(const string id, World* world) { _worldManager->AddWorld(id, world); }
+		void AddWorldToManager(const string id, World2D* world) { _worldManager->AddWorld(id, world); }
 
 		void SetActiveWorld(const string id) { _worldManager->SetActiveWorld(id); }
 
@@ -61,7 +62,7 @@ namespace KillerEngine
 //Singleton functions
 //
 //==========================================================================================================================
-		static KillerEngine* Instance();		
+		static KillerEngine2D* Instance();		
 
 	protected:
 //==========================================================================================================================
@@ -69,7 +70,7 @@ namespace KillerEngine
 //Constructor
 //
 //==========================================================================================================================		
-		KillerEngine(void);
+		KillerEngine2D(void);
 
 	private:
 //==========================================================================================================================
@@ -77,13 +78,13 @@ namespace KillerEngine
 //Members
 //
 //==========================================================================================================================
-		static KillerEngine* 	_instance;
+		static KillerEngine2D* 	_instance;
 			   ErrorManager* 	_errorManager;
 			   Controller*   	_controller;
 			   ProgramWindow* 	_programWindow;
 			   Renderer* 		_renderer;
-			   Timer* 			_timer;
-			   WorldManager* 	_worldManager;
+			   KM::Timer* 		_timer;
+			   WorldManager2D* 	_worldManager;
 			   TextureManager* _textureManager;
 
 		

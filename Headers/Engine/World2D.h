@@ -13,7 +13,7 @@ Written by Maxwell Miller
 //===Killer1 includes===
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
-#include <Engine/GameObject.hpp>
+#include <Engine/GameObject2D.hpp>
 #include <Engine/Renderer.h>
 
 //=====STL includes=====
@@ -26,16 +26,16 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class World
+	class World2D
 	{
 	public:
-		World(void): _errorManager(ErrorManager::Instance()),
+		World2D(void): _errorManager(ErrorManager::Instance()),
 					 _renderer(Renderer::Instance()),
 					 _mapWidth(0),
 					 _mapHeight(0),
 					 _bgColor() {  }
 		
-		~World(void) {  }
+		~World2D(void) {  }
 
 		virtual void InitWorld(S32 w, S32 h, Col& c)=0;
 		
@@ -44,7 +44,7 @@ namespace KillerEngine
 		virtual void Render(void)=0;
 
 		//======Accessors=====
-		void AddObjectToWorld(string objId, GameObject* obj);
+		void AddObjectToWorld(string objId, GameObject2D* obj);
 		
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {
@@ -68,7 +68,7 @@ namespace KillerEngine
 	private:
 		ErrorManager* 			   _errorManager;
 		Renderer* 				   _renderer;
-		std::map<string, GameObject*> _worldObjects;
+		std::map<string, GameObject2D*> _worldObjects;
 		S32   _mapWidth;
 		S32   _mapHeight;
 		Col _bgColor;

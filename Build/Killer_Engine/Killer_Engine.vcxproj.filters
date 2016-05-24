@@ -55,14 +55,38 @@
     <Filter Include="Components\TextureManager">
       <UniqueIdentifier>{9cf645df-f4b4-417c-92f1-1c4cc356a975}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Timer">
-      <UniqueIdentifier>{d95a6a48-7e2e-4741-b39d-f6a1c763e14d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\World">
       <UniqueIdentifier>{3820084b-1115-47ff-b532-adca4671f2e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components\WorldManager">
       <UniqueIdentifier>{0848391e-09fc-4949-ad36-3ea60b4741da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{9e6deab4-04ba-4e5d-a927-ac83649188fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles">
+      <UniqueIdentifier>{57925e0b-6c1a-46f2-92b3-fb68a9630ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D">
+      <UniqueIdentifier>{b6fe0ea0-8fbd-4f8b-ac6e-f4a7ef34a949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\3D">
+      <UniqueIdentifier>{63bcd68c-6905-4860-97d6-ee3ca171435d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math">
+      <UniqueIdentifier>{4b9e6bed-5956-4340-8293-4302ef41d7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\LinearAlgebra">
+      <UniqueIdentifier>{f7ce502c-f857-4759-98ab-dd273a5641ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\RandomGen">
+      <UniqueIdentifier>{1f3a7113-0f33-4da8-9c3d-2d1d584a3c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\Timer">
+      <UniqueIdentifier>{d95a6a48-7e2e-4741-b39d-f6a1c763e14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\Point">
+      <UniqueIdentifier>{cee02548-231c-44eb-9305-256d775b11a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,12 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Font.h">
       <Filter>Components\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\GameObject.hpp">
-      <Filter>Components\GameObjects\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
-      <Filter>Components\KillerEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h">
       <Filter>Components\ProgramWindow</Filter>
@@ -112,13 +130,40 @@
       <Filter>Components\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Timer.h">
-      <Filter>Components\Timer</Filter>
+      <Filter>Components\Math\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\World.h">
+    <ClInclude Include="..\..\Headers\Engine\Particle2D.h">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle3D.h">
+      <Filter>Components\Physics\Particles\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Matrix.hpp">
+      <Filter>Components\Math\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\RandomGen.h">
+      <Filter>Components\Math\RandomGen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
+      <Filter>Components\Math\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Point.hpp">
+      <Filter>Components\Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Implementations\Point.hpp">
+      <Filter>Components\Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\World2D.h">
       <Filter>Components\World</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\WorldManager.h">
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.hpp">
+      <Filter>Components\GameObjects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h">
       <Filter>Components\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h">
+      <Filter>Components\KillerEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +178,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Font.cpp">
       <Filter>Components\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\KillerEngine.cpp">
-      <Filter>Components\KillerEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\ProgramWindow.cpp">
       <Filter>Components\ProgramWindow</Filter>
@@ -156,13 +198,25 @@
       <Filter>Components\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Timer.cpp">
-      <Filter>Components\Timer</Filter>
+      <Filter>Components\Math\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\World.cpp">
+    <ClCompile Include="..\..\Implementations\Particle2D.cpp">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle3D.cpp">
+      <Filter>Components\Physics\Particles\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\RandomGen.cpp">
+      <Filter>Components\Math\RandomGen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\World2D.cpp">
       <Filter>Components\World</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\WorldManager.cpp">
+    <ClCompile Include="..\..\Implementations\WorldManager2D.cpp">
       <Filter>Components\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp">
+      <Filter>Components\KillerEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

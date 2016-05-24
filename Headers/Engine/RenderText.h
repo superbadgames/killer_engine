@@ -3,8 +3,8 @@ This class will hold all the data for a string of text that will be drawn
 to the screen. It will use the font class and the texture manager to keep
 track of all the character data and the texture for the font. 
 
-It is considered a GameObject, and when adding it to the work it should
-be treated as any other GameObject.
+It is considered a GameObject2D, and when adding it to the work it should
+be treated as any other GameObject2D.
 
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
@@ -16,7 +16,7 @@ Written by Maxwell Miller
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
-#include <Engine/GameObject.hpp>
+#include <Engine/GameObject2D.hpp>
 #include <Engine/Font.h>
 #include <Engine/CharSprite.h>
 
@@ -25,7 +25,7 @@ Written by Maxwell Miller
 
 namespace KillerEngine
 {
-	class RenderText : public GameObject
+	class RenderText : public GameObject2D
 	{
 	public:
 //==========================================================================================================================

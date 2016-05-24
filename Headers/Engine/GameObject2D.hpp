@@ -34,7 +34,7 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 	
-	class GameObject
+	class GameObject2D
 	{
 	public:
 //==========================================================================================================================
@@ -64,63 +64,76 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=====ID=====		
-		const string GetID(void) { return __id; }
+		const string GetID(void) { return ID; }
 
-		void SetID(string id) { __id = id; }
-
-//=====Position=====
-		const Vec2& GetPosition(void) { return __position; }
-		
-		void SetPosition(Vec2& pos) { __position = pos; }
-
-		void SetPosition(F32 x, F32 y) { __position = Vec2(x, y); }
+		void SetID(string id) { ID = id; }
 
 //=====Dimensions=====
 //Settings are virtual so that each GameObject
 //Can make sure to update its sprite, if it has one
 //with a default version in the case of no sprite.
 		
-		const F32 GetWidth(void) { return __width; }
+		const F32 GetWidth(void) { return width; }
 
-		virtual void SetWidth(F32 w) { __width = w; }
+		virtual void SetWidth(F32 w) { width = w; }
 
-		const F32 GetHeight(void) { return __height; }
+		const F32 GetHeight(void) { return height; }
 
-		virtual void SetHeight(F32 h) { __height = h; }
+		virtual void SetHeight(F32 h) { height = h; }
 
 		virtual void SetDimensions(const F32 w, const F32 h) 
 		{
-			__width = w;
-			__height = h;
+			width = w;
+			height = h;
 		}
 
 //=====Color=====
-		const Col* GetColor(void) { return &__color; }
+		const Col* GetColor(void) { return &color; }
 
-		void SetColor(Col& col) { __color = col; }
+		void SetColor(Col& col) { color = col; }
 
 //=====Texture=====
-		const Texture* GetTexture(void) { return &__texture; }
+		const Texture* GetTexture(void) { return &texture; }
 
-		void SetTexture(Texture& texture) { __texture = texture; }
+		void SetTexture(Texture& texture) { texture = texture; }
 
 //=====Active=====
-		const bool GetActive(void)   { return __active; }
+		const bool GetActive(void)   { return active; }
 
-		void SetActive(void)   { __active = true; }
+		void SetActive(void)   { active = true; }
 		
-		void SetInactive(void) { __active = false; }
+		void SetInactive(void) { active = false; }
+
+//=====Position=====
+		const Vec2& GetPosition(void) { return position; }
+		
+		void SetPosition(Vec2& pos) { position = pos; }
+
+		void SetPosition(F32 x, F32 y) { position = Vec2(x, y); }
+
+//=====Velocity=====
+		const Vec2& GetVelocity(void) { return velocity; }
+
+		void SetVelocity(Vec2& v) { velocity = v; }
+
+//=====Acceleration=====
+		const Vec2& GetAcceleration(void) { return acceleration; }
+
+		void SetAcceleration(Vec2& a) { acceleration = a; }
 
 
 
 	protected:
-		string 	 __id;
-		Vec2     __position;
-		F32      __width;
-		F32      __height;
-		Col      __color;
-		Texture  __texture;
-		bool 	 __active;
+		string 	 ID;
+		bool 	 active;
+		F32      width;
+		F32      height;
+		Col      color;
+		Texture  texture;
+		
+		Vec2     position;
+		Vec2	 velocity;
+		Vec2	 acceleration;
 	};
 
 }//End namespace

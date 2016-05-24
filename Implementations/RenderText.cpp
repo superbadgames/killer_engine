@@ -50,8 +50,8 @@ namespace KillerEngine
 
 		_text = text;
 
-		F32 currentX = __position.GetX();
-		F32 currentY = __position.GetY();
+		F32 currentX = GameObject2D::position.GetX();
+		F32 currentY = GameObject2D::position.GetY();
 
 		Texture& texture = _font.GetTexture();
 

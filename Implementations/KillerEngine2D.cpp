@@ -1,4 +1,4 @@
-#include <Engine/KillerEngine.h>
+#include <Engine/KillerEngine2D.h>
 
 namespace KillerEngine 
 {
@@ -10,11 +10,11 @@ namespace KillerEngine
 //=======================================================================================================
 //Init
 //=======================================================================================================
-	void KillerEngine::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
+	void KillerEngine2D::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
 	{
 		_errorManager = ErrorManager::Instance();
-		_timer = Timer::Instance();
-		_worldManager = WorldManager::Instance();
+		_timer = KM::Timer::Instance();
+		_worldManager = WorldManager2D::Instance();
 		_controller = Controller::Instance();
 		_programWindow = ProgramWindow::Instance();
 
@@ -31,7 +31,7 @@ namespace KillerEngine
 //=======================================================================================================
 //Update
 //=======================================================================================================
-	void KillerEngine::Update(void) 
+	void KillerEngine2D::Update(void) 
 	{
 		_programWindow->ProcessWndEvents();
 
@@ -45,7 +45,7 @@ namespace KillerEngine
 //=======================================================================================================
 //FunctionName
 //=======================================================================================================
-	void KillerEngine::Render(void) 
+	void KillerEngine2D::Render(void) 
 	{
 		_worldManager->Render();
 
@@ -61,11 +61,11 @@ namespace KillerEngine
 //Singleton functions
 //
 //==========================================================================================================================
-	KillerEngine* KillerEngine::_instance = NULL;
+	KillerEngine2D* KillerEngine2D::_instance = NULL;
 
-	KillerEngine* KillerEngine::Instance(void) 
+	KillerEngine2D* KillerEngine2D::Instance(void) 
 	{
-		if(_instance == NULL) { _instance = new KillerEngine(); }
+		if(_instance == NULL) { _instance = new KillerEngine2D(); }
 
 		return _instance;
 	}
@@ -75,7 +75,7 @@ namespace KillerEngine
 //Constructor
 //
 //==========================================================================================================================		
-		KillerEngine::KillerEngine(void) {  }
+		KillerEngine2D::KillerEngine2D(void) {  }
 
 
 }//End namespace

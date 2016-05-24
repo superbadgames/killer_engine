@@ -48,17 +48,13 @@ Librarian -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetN
 
 ->General -> Additional Library Directories: $(ProjectDir)..\..\Lib\
 
--> Additional Dependancies: OpenGL32.lib
+-> Additional Dependancies: 
+OpenGL32.lib
+GL3W.lib
+SOIL.lib
+dinput8.lib
+dxguid.lib
 
-->	 		    GL3W.lib
-
-->			    SOIL.lib
-
-->			    dinput8.lib
-
-->			    dxguid.lib
-
--> 			    Killer_Math_Win32_Debug.lib
 
 -> Debugging -> Map File : $(TargetDir)$(TargetName).map [May have to enable the file to even be made]
 
