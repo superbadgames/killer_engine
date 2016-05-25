@@ -147,7 +147,6 @@
     <ClInclude Include="..\..\Headers\Engine\Vector.hpp" />
     <ClInclude Include="..\..\Headers\Engine\World2D.h" />
     <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h" />
-    <ClInclude Include="..\..\Implementations\Point.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp" />

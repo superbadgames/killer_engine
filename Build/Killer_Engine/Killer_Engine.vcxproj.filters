@@ -150,9 +150,6 @@
     <ClInclude Include="..\..\Headers\Engine\Point.hpp">
       <Filter>Components\Math\Point</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Implementations\Point.hpp">
-      <Filter>Components\Math\Point</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\World2D.h">
       <Filter>Components\World</Filter>
     </ClInclude>

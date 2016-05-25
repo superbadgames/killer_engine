@@ -31,9 +31,9 @@ namespace KillerEngine
 	public:
 		World2D(void): _errorManager(ErrorManager::Instance()),
 					 _renderer(Renderer::Instance()),
-					 _mapWidth(0),
-					 _mapHeight(0),
-					 _bgColor() {  }
+					 mapWidth(0),
+					 mapHeight(0),
+					 bgColor() {  }
 		
 		~World2D(void) {  }
 
@@ -52,26 +52,57 @@ namespace KillerEngine
 			}
 		}
 		
-		void SetBackgroundColor(Col& c) { _bgColor = c; }
+		void SetBackgroundColor(Col& c) { bgColor = c; }
 		
-		void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(_bgColor); }
+		void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(bgColor); }
 		
-		S32  GetMapWidth(void)   { return _mapWidth; }
+		S32  GetMapWidth(void)   { return mapWidth; }
 		
-		S32  GetMapHeight(void)  { return _mapHeight; }
+		S32  GetMapHeight(void)  { return mapHeight; }
 		
-		void SetMapWidth(S32 w)  { _mapWidth = w; }
+		void SetMapWidth(S32 w)  { mapWidth = w; }
 		
-		void SetMapHeight(S32 h) { _mapHeight = h; }
+		void SetMapHeight(S32 h) { mapHeight = h; }
 		
-		void SetMapDimensions(S32 w, S32 h) { _mapWidth  = w; _mapHeight = h; }
+		void SetMapDimensions(S32 w, S32 h) { mapWidth  = w; mapHeight = h; }
+		
+		void SetTopBorder(S32 top) { mapTopBorder = top; }
+
+		void SetBottomBorder(S32 bottom) { mapBottomBorder = bottom; }
+
+		void SetRigthBorder(S32 right) { mapRightBorder = right; }
+
+		void SetLeftBorder(S32 left) { mapLeftBorder = left; }
+
+		void SetMapBorders(S32 top, S32 bottom, S32 left, S32 right)
+		{
+			mapTopBorder = top;
+			mapBottomBorder = bottom;
+			mapLeftBorder = left;
+			mapRightBorder = right;
+		}
+		
+		S32 GetTopBorder(void) { return mapTopBorder; }
+
+		S32 GetBottomBorder(void)  { return mapBottomBorder; }
+		
+		S32 GetLeftBorder(void) { return mapLeftBorder; }
+
+		S32 GetRightBorder(void) { return mapRightBorder; }
+
+	protected:
+		S32   mapWidth;
+		S32   mapHeight;
+		S32   mapTopBorder;
+		S32   mapBottomBorder;
+		S32   mapLeftBorder;
+		S32   mapRightBorder;
+		Col   bgColor;
+
 	private:
 		ErrorManager* 			   _errorManager;
 		Renderer* 				   _renderer;
 		std::map<string, GameObject2D*> _worldObjects;
-		S32   _mapWidth;
-		S32   _mapHeight;
-		Col _bgColor;
 	};
 }//End namespace
 

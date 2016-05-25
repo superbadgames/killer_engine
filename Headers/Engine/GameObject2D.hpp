@@ -116,10 +116,14 @@ namespace KillerEngine
 
 		void SetVelocity(Vec2& v) { velocity = v; }
 
+		void SetVelocity(F32 x, F32 y) { velocity = Vec2(x, y); }
+
 //=====Acceleration=====
 		const Vec2& GetAcceleration(void) { return acceleration; }
 
 		void SetAcceleration(Vec2& a) { acceleration = a; }
+
+		void SetAcceleration(F32 x, F32 y) { acceleration = Vec2(x, y); }
 
 
 
