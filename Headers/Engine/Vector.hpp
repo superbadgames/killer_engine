@@ -314,6 +314,8 @@ namespace KillerMath
 			_v[0] += V.GetX() * scale;
 			_v[1] += V.GetY() * scale;
 		}
+
+		
 		
 		//=====Component Mulitplication=====
 		Vector2<T> ComponentProduct(const Vector2<T>& V) 
