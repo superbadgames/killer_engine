@@ -22,15 +22,20 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //AddWorld
 //--------------------------------------------------------------
-	void WorldManager2D::AddWorld(const string worldID, World2D* world) 
+	void WorldManager2D::AddWorld(World2D* world) 
 	{
-		_worlds[worldID] = world; 
+		_worlds.insert(std::map<U32, World2D*>::value_type(world->GetID(), world));
+		
+		if(_worlds.find(world->GetID()) == _worlds.end()) 
+		{ 
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddWorld to WorldManager"); 
+		}
 	}
 
 //--------------------------------------------------------------
 //RemoveWorld
 //--------------------------------------------------------------
-	void WorldManager2D::RemoveWorld(string worldID) 
+	void WorldManager2D::RemoveWorld(U32 worldID) 
 	{
 		auto w = _worlds.find(worldID);
 		_worlds.erase(w);
@@ -39,7 +44,7 @@ namespace KillerEngine
 //--------------------------------------------------------------
 //SetActiveWorld
 //--------------------------------------------------------------
-	void WorldManager2D::SetActiveWorld(string worldID) 
+	void WorldManager2D::SetActiveWorld(U32 worldID) 
 	{
 		_activeWorldID = worldID;
 		auto w = _worlds.find(worldID);

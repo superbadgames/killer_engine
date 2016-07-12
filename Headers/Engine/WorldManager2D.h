@@ -19,6 +19,7 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/World2D.h>
+#include <Engine/ErrorManager.h>
 
 //=====STL includes=====
 #include <map>
@@ -29,9 +30,9 @@ namespace KillerEngine
 	class WorldManager2D
 	{
 	private:
-		std::map<string, World2D*> _worlds;
+		std::map<U32, World2D*>    _worlds;
 		World2D* 				   _activeWorld;
-		string 				   	   _activeWorldID;
+		U32 				   	   _activeWorldID;
 		bool				   	   _running;			
 		static WorldManager2D*     _instance;
 
@@ -45,17 +46,23 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void AddWorld(const string worldID, World2D* world);
+		void AddWorld(World2D* world);
 		
-		void RemoveWorld(string worldID);
+		void RemoveWorld(U32 worldID);
 		
-		void SetActiveWorld(string worldID);
+		void SetActiveWorld(U32 worldID);
 		
-		string GetActiveWorldID(void) { return _activeWorldID; }
+		U32 GetActiveWorldID(void) { return _activeWorldID; }
 		
 		void SetRunning(bool r) { _running = r; }
 		
 		bool GetRunning(void) { return _running; } 
+
+//==========================================================================================================================
+//
+//Integrators
+//
+//==========================================================================================================================
 
 		void Update(void);
 		

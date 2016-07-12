@@ -27,6 +27,9 @@ Written by Maxwell Miller
 #include <Engine/WorldManager2D.h>
 #include <Engine/TextureManager.h>
 
+//======Math includes=====
+//#include <Engine/RandomGen.h>
+
 namespace KM = KillerMath;
 
 namespace KillerEngine 
@@ -43,16 +46,16 @@ namespace KillerEngine
 //==========================================================================================================================
 		void Init(const S32 width, const S32 height, const string title, const bool fullscreen);
 
-		bool Running(void) { return _worldManager->GetRunning(); }
+		bool Running(void) { return WorldManager2D::Instance()->GetRunning(); }
 
 		void LoadTexture(const string path, const string name, const S32 width, const S32 height) 
 		{ 
-			_textureManager->LoadTexture(path, name, width, height); 
+			TextureManager::Instance()->LoadTexture(path, name, width, height); 
 		}
 		
-		void AddWorldToManager(const string id, World2D* world) { _worldManager->AddWorld(id, world); }
+		void AddWorldToManager(World2D* world) { WorldManager2D::Instance()->AddWorld(world); }
 
-		void SetActiveWorld(const string id) { _worldManager->SetActiveWorld(id); }
+		void SetActiveWorld(const U32 id) { WorldManager2D::Instance()->SetActiveWorld(id); }
 
 		void Update(void);
 
@@ -79,15 +82,6 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		static KillerEngine2D* 	_instance;
-			   ErrorManager* 	_errorManager;
-			   Controller*   	_controller;
-			   ProgramWindow* 	_programWindow;
-			   Renderer* 		_renderer;
-			   KM::Timer* 		_timer;
-			   WorldManager2D* 	_worldManager;
-			   TextureManager* _textureManager;
-
-		
 
 	};
 

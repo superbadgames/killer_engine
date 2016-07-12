@@ -64,9 +64,13 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=====ID=====		
-		const string GetID(void) { return ID; }
+		const U32 GetID(void) { return ID; }
 
-		void SetID(string id) { ID = id; }
+		void SetID(void) 
+		{
+			ID = _nextID;
+			++_nextID;
+		}
 
 //=====Dimensions=====
 //Settings are virtual so that each GameObject
@@ -127,8 +131,8 @@ namespace KillerEngine
 
 
 
-	protected:
-		string 	 ID;
+	protected:	
+		U32 	 ID;
 		bool 	 active;
 		F32      width;
 		F32      height;
@@ -138,7 +142,12 @@ namespace KillerEngine
 		Vec2     position;
 		Vec2	 velocity;
 		Vec2	 acceleration;
+
+	private:
+		static U32 _nextID;
 	};
+
+	U32 GameObject2D::_nextID = 1;
 
 }//End namespace
 

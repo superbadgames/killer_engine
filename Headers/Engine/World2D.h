@@ -29,13 +29,20 @@ namespace KillerEngine
 	class World2D
 	{
 	public:
-		World2D(void): _errorManager(ErrorManager::Instance()),
-					 _renderer(Renderer::Instance()),
-					 mapWidth(0),
-					 mapHeight(0),
-					 bgColor() {  }
-		
+//==========================================================================================================================
+//
+//Constructors
+//
+//==========================================================================================================================		
+		World2D(void);
+
 		~World2D(void) {  }
+
+//==========================================================================================================================
+//
+//Virtual Functions
+//
+//==========================================================================================================================
 
 		virtual void InitWorld(S32 w, S32 h, Col& c)=0;
 		
@@ -43,8 +50,12 @@ namespace KillerEngine
 		
 		virtual void Render(void)=0;
 
-		//======Accessors=====
-		void AddObjectToWorld(string objId, GameObject2D* obj);
+//==========================================================================================================================
+//
+//Accessors
+//
+//==========================================================================================================================
+		void AddObjectToWorld(GameObject2D* obj);
 		
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {
@@ -54,7 +65,7 @@ namespace KillerEngine
 		
 		void SetBackgroundColor(Col& c) { bgColor = c; }
 		
-		void ActivateBackgroundColor(void) { _renderer->SetBackgroundColor(bgColor); }
+		void ActivateBackgroundColor(void) { Renderer::Instance()->SetBackgroundColor(bgColor); }
 		
 		S32  GetMapWidth(void)   { return mapWidth; }
 		
@@ -90,6 +101,8 @@ namespace KillerEngine
 
 		S32 GetRightBorder(void) { return mapRightBorder; }
 
+		U32 GetID(void) { return _ID; }
+
 	protected:
 		S32   mapWidth;
 		S32   mapHeight;
@@ -100,9 +113,9 @@ namespace KillerEngine
 		Col   bgColor;
 
 	private:
-		ErrorManager* 			   _errorManager;
-		Renderer* 				   _renderer;
-		std::map<string, GameObject2D*> _worldObjects;
+		std::map<U32, GameObject2D*> 	_worldObjects;
+		U32								_ID;
+		static U32						_nextID;
 	};
 }//End namespace
 

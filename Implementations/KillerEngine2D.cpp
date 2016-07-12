@@ -12,20 +12,11 @@ namespace KillerEngine
 //=======================================================================================================
 	void KillerEngine2D::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
 	{
-		_errorManager = ErrorManager::Instance();
-		_timer = KM::Timer::Instance();
-		_worldManager = WorldManager2D::Instance();
-		_controller = Controller::Instance();
-		_programWindow = ProgramWindow::Instance();
+		ProgramWindow::Instance()->Init(width, height, title, fullscreen);
 
-		_programWindow->Init(width, height, title, fullscreen);
+		Controller::Instance()->Init(ProgramWindow::Instance()->GetHINSTANCE(), ProgramWindow::Instance()->GetHWND());
 
-		_textureManager = TextureManager::Instance();
-		_renderer = Renderer::Instance();
-
-		_controller->Init(_programWindow->GetHINSTANCE(), _programWindow->GetHWND());
-
-		_errorManager->DisplayErrors();
+		ErrorManager::Instance()->DisplayErrors();
 	}
 
 //=======================================================================================================
@@ -33,13 +24,13 @@ namespace KillerEngine
 //=======================================================================================================
 	void KillerEngine2D::Update(void) 
 	{
-		_programWindow->ProcessWndEvents();
+		ProgramWindow::Instance()->ProcessWndEvents();
 
-		_timer->Update();
+		KM::Timer::Instance()->Update();
 		
-		_controller->UpdateKeyboard();
+		Controller::Instance()->UpdateKeyboard();
 		
-		_worldManager->Update();
+		WorldManager2D::Instance()->Update();
 	}
 
 //=======================================================================================================
@@ -47,13 +38,13 @@ namespace KillerEngine
 //=======================================================================================================
 	void KillerEngine2D::Render(void) 
 	{
-		_worldManager->Render();
+		WorldManager2D::Instance()->Render();
 
-		_renderer->Draw();
+		Renderer::Instance()->Draw();
 
-		_programWindow->BufferSwap();
+		ProgramWindow::Instance()->BufferSwap();
 		
-		_errorManager->DisplayErrors();
+		ErrorManager::Instance()->DisplayErrors();
 	}
 
 //==========================================================================================================================
