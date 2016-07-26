@@ -48,9 +48,9 @@ namespace KillerEngine
 
 		bool Running(void) { return WorldManager2D::Instance()->GetRunning(); }
 
-		void LoadTexture(const string path, const string name, const S32 width, const S32 height) 
+		void LoadTexture(const string path, const U32 id, const S32 width, const S32 height) 
 		{ 
-			TextureManager::Instance()->LoadTexture(path, name, width, height); 
+			TextureManager::Instance()->LoadTexture(path, id, width, height); 
 		}
 		
 		void AddWorldToManager(World2D* world) { WorldManager2D::Instance()->AddWorld(world); }

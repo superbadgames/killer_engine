@@ -107,7 +107,7 @@ namespace KillerEngine
 
 		string GetName(void) 		  	  { return _fontName; }
 
-		void SetTexture(string fontTexture) { _texture = _textureManager->GetTexture(fontTexture); }
+		void SetTexture(U32 textureID) { _texture = _textureManager->GetTexture(textureID); }
 
 		Texture& GetTexture(void) 		  { return _texture; }
 

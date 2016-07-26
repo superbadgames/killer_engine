@@ -20,7 +20,7 @@ namespace KillerEngine
 
 	void TextureManager::Shutdown(void) 
 	{
-		map<string, Texture>::iterator i;
+		map<U32, Texture>::iterator i;
 		
 		for(i = _loadedTextures.begin(); i != _loadedTextures.end(); ++i) 
 		{
@@ -46,7 +46,7 @@ namespace KillerEngine
 //TextureManager Functions
 //
 //=====================================================================================================
-	void TextureManager::LoadTexture(string path, string name, S32 width, S32 height) 
+	void TextureManager::LoadTexture(string path, U32 id, S32 width, S32 height) 
 	{
 
 		unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
@@ -54,7 +54,7 @@ namespace KillerEngine
 		if(image == 0) 
 		{
 			string errorMessage = string("SOIL_load_image failed to load image: ") + path;
-			_errorManager->SetError(EC_TextureManager, errorMessage);
+			ErrorManager::Instance()->SetError(EC_TextureManager, errorMessage);
 		}
 		
 		else 
@@ -79,7 +79,9 @@ namespace KillerEngine
 						 );
 			glGenerateMipmap(GL_TEXTURE_2D);
 
-			_loadedTextures[name] = new Texture(texture, width, height);
+			Texture* newTexture = new Texture(texture, width, height);
+
+			_loadedTextures.insert(std::map<U32, Texture*>::value_type(id, newTexture));
 
 			SOIL_free_image_data(image);
 			glBindTexture(GL_TEXTURE_2D, 0);
