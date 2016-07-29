@@ -48,7 +48,7 @@
 
 namespace KillerMath
 {
-	#define MAXINT (std::numeric_limits<int>::max)()
+	//#define MAXINT (std::numeric_limits<int>::max)()
 
 	RandomGen* RandomGen::_instance = NULL;
 

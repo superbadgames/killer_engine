@@ -44,7 +44,7 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-		virtual void InitWorld(S32 w, S32 h, Col& c)=0;
+		virtual void InitWorld(U32 id, S32 w, S32 h, Col& c)=0;
 		
 		virtual void Update(void)=0;
 		
@@ -81,7 +81,7 @@ namespace KillerEngine
 
 		void SetBottomBorder(S32 bottom) { mapBottomBorder = bottom; }
 
-		void SetRigthBorder(S32 right) { mapRightBorder = right; }
+		void SetRightBorder(S32 right) { mapRightBorder = right; }
 
 		void SetLeftBorder(S32 left) { mapLeftBorder = left; }
 
@@ -101,6 +101,8 @@ namespace KillerEngine
 
 		S32 GetRightBorder(void) { return mapRightBorder; }
 
+		void SetID(U32 id) { _ID = id; }
+
 		U32 GetID(void) { return _ID; }
 
 	protected:
@@ -115,8 +117,9 @@ namespace KillerEngine
 	private:
 		std::map<U32, GameObject2D*> 	_worldObjects;
 		U32								_ID;
-		static U32						_nextID;
+		//static U32						_nextID;
 	};
+		//U32 World2D::_nextID = 1;
 }//End namespace
 
 #endif

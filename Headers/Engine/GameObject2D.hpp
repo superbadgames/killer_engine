@@ -129,8 +129,6 @@ namespace KillerEngine
 
 		void SetAcceleration(F32 x, F32 y) { acceleration = Vec2(x, y); }
 
-
-
 	protected:	
 		U32 	 ID;
 		bool 	 active;
