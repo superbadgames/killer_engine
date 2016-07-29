@@ -153,14 +153,14 @@
     <ClInclude Include="..\..\Headers\Engine\World2D.h">
       <Filter>Components\World</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\GameObject2D.hpp">
-      <Filter>Components\GameObjects\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h">
       <Filter>Components\WorldManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h">
       <Filter>Components\KillerEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h">
+      <Filter>Components\GameObjects\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp">
       <Filter>Components\KillerEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\GameObject2D.cpp">
+      <Filter>Components\GameObjects\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -145,7 +145,7 @@ namespace KillerEngine
 		static U32 _nextID;
 	};
 
-	U32 GameObject2D::_nextID = 1;
+	
 
 }//End namespace
 

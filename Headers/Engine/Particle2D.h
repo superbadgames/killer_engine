@@ -17,7 +17,7 @@ Written by Maxwell Miller
 //=====KillerMath includes=====
 #include <Engine/Timer.h>
 #include <Engine/Atom.h>
-#include <Engine/GameObject2D.hpp>
+#include <Engine/GameObject2D.h>
 
 //=====STL and other includes=====
 #include <cassert>

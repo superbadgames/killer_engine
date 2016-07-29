@@ -16,7 +16,7 @@ Written by Maxwell Miller
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
-#include <Engine/GameObject2D.hpp>
+#include <Engine/GameObject2D.h>
 #include <Engine/Font.h>
 #include <Engine/CharSprite.h>
 

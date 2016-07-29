@@ -129,7 +129,7 @@
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Font.h" />
-    <ClInclude Include="..\..\Headers\Engine\GameObject2D.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h" />
     <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h" />
     <ClInclude Include="..\..\Headers\Engine\Matrix.hpp" />
     <ClInclude Include="..\..\Headers\Engine\Particle2D.h" />
@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
     <ClCompile Include="..\..\Implementations\Font.cpp" />
+    <ClCompile Include="..\..\Implementations\GameObject2D.cpp" />
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
