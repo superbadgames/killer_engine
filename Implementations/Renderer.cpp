@@ -302,10 +302,7 @@ namespace KillerEngine
 //
 //=======================================================================================================
 	Renderer::Renderer(void): _maxBatchSize(1000), 
-							  _currentBatchSize(0),
-							  _errorManager(ErrorManager::Instance()),
-							  _textureManager(TextureManager::Instance()),
-							  _programWindow(ProgramWindow::Instance()) 
+							  _currentBatchSize(0)
 	{ 
 		_CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);

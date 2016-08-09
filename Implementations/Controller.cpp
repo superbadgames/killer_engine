@@ -19,6 +19,9 @@ namespace KillerEngine
 		return _instance;
 	}
 
+
+/* delete this when new version is working
+
 	void Controller::Init(HINSTANCE hInstance, HWND hwnd) 
 	{
 		HRESULT result;
@@ -39,17 +42,21 @@ namespace KillerEngine
 		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to Acquire keyboard"); }
 	}
 
+*/
+
+
 //=======================================================================================================
 //Shutdown
 //=======================================================================================================
 	void Controller::ShutDown(void) 
 	{
-		if(_keyboard) 
+/*		if(_keyboard) 
 		{
 			_keyboard->Unacquire();
 			_keyboard->Release();
 			_keyboard = 0;
 		}
+*/		
 	}
 
 //==========================================================================================================================
@@ -57,6 +64,10 @@ namespace KillerEngine
 //Controller Functions
 //
 //==========================================================================================================================
+/*
+
+	delete when new version is working
+
 	void Controller::UpdateKeyboard(void) 
 	{
 		HRESULT result;
@@ -66,15 +77,18 @@ namespace KillerEngine
 		if(FAILED(result)) 
 		{
 			if((result == DIERR_INPUTLOST) || (result == DIERR_NOTACQUIRED)) { _keyboard->Acquire(); }
-			else { _errorManager->SetError(EC_DirectInput, "Failed to Get keyboard state, and failed to Re-Aquire"); }
+			else { ErrorManager::Instance()->SetError(EC_DirectInput, "Failed to Get keyboard state, and failed to Re-Aquire"); }
 		}					
 	}
+
+*/
 
 //==========================================================================================================================
 //
 //Constructor
 //
 //==========================================================================================================================
-	Controller::Controller(void) : _errorManager(ErrorManager::Instance()), _directInput(0), _keyboard(0) {	}
+	Controller::Controller(void)
+	{	}
 
 }//End namespace	

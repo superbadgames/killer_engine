@@ -135,7 +135,7 @@
     <ClInclude Include="..\..\Headers\Engine\Particle2D.h" />
     <ClInclude Include="..\..\Headers\Engine\Particle3D.h" />
     <ClInclude Include="..\..\Headers\Engine\Point.hpp" />
-    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h" />
+    <ClInclude Include="..\..\Headers\Engine\WinProgram.h" />
     <ClInclude Include="..\..\Headers\Engine\RandomGen.h" />
     <ClInclude Include="..\..\Headers\Engine\Renderer.h" />
     <ClInclude Include="..\..\Headers\Engine\RenderText.h" />
@@ -157,7 +157,7 @@
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
-    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp" />
+    <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
     <ClCompile Include="..\..\Implementations\RandomGen.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />
     <ClCompile Include="..\..\Implementations\RenderText.cpp" />

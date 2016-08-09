@@ -13,8 +13,8 @@ of KillerWave.
 
 Written by Maxwell Miller
 ===========================================================================*/
-#ifndef PROGRAM_WINDOW_H
-#define PROGRAM_WINDOW_H
+#ifndef WIN_PROGRAM_H
+#define WIN_PROGRAM_H
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
@@ -29,10 +29,10 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class ProgramWindow
+	class WinProgram
 	{
 	private:
-		static ProgramWindow* _instance;
+		static WinProgram* _instance;
 		bool 		  _isFullScreen;
 		static S32    _totalWidth;
 		static S32    _totalHeight;
@@ -53,7 +53,7 @@ namespace KillerEngine
 
 //==========================================================================================================================
 //
-//Private ProgramWindow Functions
+//Private WinProgram Functions
 //
 //==========================================================================================================================
 		void _SetTempPixelFormat(void);
@@ -66,9 +66,9 @@ public:
 //Constructors
 //
 //==========================================================================================================================
-		ProgramWindow(void);
+		WinProgram(void);
 		
-		~ProgramWindow(void) {  }
+		~WinProgram(void) {  }
 
 //==========================================================================================================================
 //
@@ -94,14 +94,16 @@ public:
 
 //==========================================================================================================================
 //
-//ProgramWindow Functions
+//WinProgram Functions
 //
 //==========================================================================================================================
-		static ProgramWindow* Instance(void);
+		static WinProgram* Instance(void);
 
 		void Init(S32 width, S32 height, string wndName, bool isFullScreen);
 		
 		void ProcessWndEvents(void);
+
+		Keys ConvertKeyCodes(WPARAM wParam);
 		
 		void BufferSwap(void);
 

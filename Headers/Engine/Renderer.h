@@ -25,7 +25,7 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/Sprite.h>
-#include <Engine/ProgramWindow.h>
+#include <Engine/WinProgram.h>
 #include <Engine/TextureManager.h>
 #include <Engine/Texture.hpp>
 #include <Engine/ErrorManager.h>
@@ -72,7 +72,7 @@ namespace KillerEngine
 //Renderer Funtions
 //
 //==========================================================================================================================
-		void SetBackgroundColor(Col& c) { _programWindow->SetBackgroundColor(c); }
+		void SetBackgroundColor(Col& c) { WinProgram::Instance()->SetBackgroundColor(c); }
 
 		void AddToBatch(std::vector<F32> v, std::vector<F32> c);
 
@@ -90,9 +90,6 @@ namespace KillerEngine
 
 	private:
 		static Renderer* 	 _instance;
-		ErrorManager* 		 _errorManager;
-		ProgramWindow* 		 _programWindow;
-		TextureManager* 	 _textureManager;
 		U32 				 _maxBatchSize;
 		U32 				 _currentBatchSize;
 		std::vector<F32> 	 _vertices;

@@ -34,9 +34,6 @@
     <Filter Include="Components\KillerEngine">
       <UniqueIdentifier>{66fd72d2-3739-4584-a963-04c6b35f6d8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\ProgramWindow">
-      <UniqueIdentifier>{381d786c-065e-4c73-9294-7079cbccce17}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Renderer">
       <UniqueIdentifier>{ff42337a-ce7b-447a-8fdd-338dba10e918}</UniqueIdentifier>
     </Filter>
@@ -88,6 +85,9 @@
     <Filter Include="Components\Math\Point">
       <UniqueIdentifier>{cee02548-231c-44eb-9305-256d775b11a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\ProgramWindows">
+      <UniqueIdentifier>{381d786c-065e-4c73-9294-7079cbccce17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -107,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Font.h">
       <Filter>Components\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h">
-      <Filter>Components\ProgramWindow</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Renderer.h">
       <Filter>Components\Renderer</Filter>
@@ -162,6 +159,9 @@
     <ClInclude Include="..\..\Headers\Engine\GameObject2D.h">
       <Filter>Components\GameObjects\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\WinProgram.h">
+      <Filter>Components\ProgramWindows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -175,9 +175,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Font.cpp">
       <Filter>Components\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp">
-      <Filter>Components\ProgramWindow</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Renderer.cpp">
       <Filter>Components\Renderer</Filter>
@@ -217,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\GameObject2D.cpp">
       <Filter>Components\GameObjects\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\WinProgram.cpp">
+      <Filter>Components\ProgramWindows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
