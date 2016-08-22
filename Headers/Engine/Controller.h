@@ -75,66 +75,7 @@ namespace KillerEngine
 		RIGHT_MOUSE=49,
 		LEFT_MOUSE=50,
 		MIDDLE_MOUSE=51,
-
 	};
-
-/*
-enum Keys 
-	{
-		NO_KEY=0x00,
-		A_KEY=0x41,
-		B_KEY=0x42,
-		C_KEY=0x43,
-		D_KEY=0x44,
-		E_KEY=0x45,
-		F_KEY=0x46,
-		G_KEY=0x47,
-		H_KEY=0x48,
-		I_KEY=0x49,
-		J_KEY=0x4A,
-		K_KEY=0x4B,
-		L_KEY=0x4C,
-		M_KEY=0x4D,
-		N_KEY=0x4E,
-		O_KEY=0x4F,
-		P_KEY=0x50,
-		Q_KEY=0x51,
-		R_KEY=0x52,
-		S_KEY=0x53,
-		T_KEY=0x54,
-		U_KEY=0x55,
-		V_KEY=0x56,
-		W_KEY=0x57,
-		X_KEY=0x58,
-		Y_KEY=0x59,
-		Z_KEY=0x5A,
-		UP_ARROW=0x26,
-		DOWN_ARROW=0x28,
-		LEFT_ARROW=0x25,
-		RIGHT_ARRO=0x27,
-		ZERO_KEY=0x30,
-		ONE_KEY=0x31,
-		TWO_KEY=0x32,
-		THREE_KEY=0x33,
-		FOUR_KEY=0x34,
-		FIVE_KEY=0x35,
-		SIX_KEY=0x36,
-		SEVEN_KEY=0x37,
-		EIGHT_KEY=0x38,
-		NINE_KEY=0x39,
-		MINUS_KEY=0xBD,
-		EQUALS_KEY=0xBC,
-		SPACEBAR_KEY=0x20,
-		ESCAPE_KEY=0x1B,
-		TAB_KEY=0x09,
-		LSHIFT_KEY=0xA0,
-		RSHIFT_KEY=0xA2,
-		ENTER_KEY=0x0D,
-		RIGHT_MOUSE=0x02,
-		LEFT_MOUSE=0x01,
-		MIDDLE_MOUSE=0x05
-	};
-*/
 	
 	class Controller 
 	{
@@ -167,9 +108,9 @@ enum Keys
 //==========================================================================================================================
 		//void UpdateKeyboard(void);
 
-		void KeyPress(Keys k) { _activeKeys[k] = true; }
+		void KeyDown(Keys k);
 
-		void KeyRelease(Keys k) { _activeKeys[k] = false; }
+		void KeyUp(Keys k);
 
 		//bool GetKeyboardState(void) { return _activeKeys; }
 
