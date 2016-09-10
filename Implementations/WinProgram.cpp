@@ -285,13 +285,13 @@ namespace KillerEngine {
             case WM_KEYDOWN:
             {
                 Keys keydown = ConvertKeyCodes(wParam);
-                Controller::Instance()->KeyPress(keydown);
+                Controller::Instance()->KeyDown(keydown);
                 break;
             }
             case WM_KEYUP:
             {
                 Keys keyup = ConvertKeyCodes(wParam);
-                Controller::Instance()->KeyRelease(keyup);
+                Controller::Instance()->KeyUp(keyup);
                 break;
             }
             default:
@@ -305,55 +305,55 @@ namespace KillerEngine {
         switch(wParam)
         {
             case 'A':
-                return Keys::A_KEY;
+                return Keys::A;
             case 'B':
-                return Keys::B_KEY;
+                return Keys::B;
             case 'C':
-                return Keys::C_KEY;
+                return Keys::C;
             case 'D':
-                return Keys::D_KEY;
+                return Keys::D;
             case 'E':
-                return Keys::E_KEY;
+                return Keys::E;
             case 'F':
-                return Keys::F_KEY;
+                return Keys::F;
             case 'G':
-                return Keys::G_KEY;
+                return Keys::G;
             case 'H':
-                return Keys::H_KEY;
+                return Keys::H;
             case 'I':
-                return Keys::I_KEY;
+                return Keys::I;
             case 'J':
-                return Keys::J_KEY;
+                return Keys::J;
             case 'K':
-                return Keys::K_KEY;    
+                return Keys::K;    
             case 'L':
-                return Keys::L_KEY;
+                return Keys::L;
             case 'M':
-                return Keys::M_KEY;
+                return Keys::M;
             case 'N':
-                return Keys::N_KEY;
+                return Keys::N;
             case 'O':
-                return Keys::O_KEY;
+                return Keys::O;
             case 'P':
-                return Keys::P_KEY;
+                return Keys::P;
             case 'Q':
-                return Keys::Q_KEY;
+                return Keys::Q;
             case 'R':
-                return Keys::R_KEY;
+                return Keys::R;
             case 'S':
-                return Keys::S_KEY;
+                return Keys::S;
             case 'T':
-                return Keys::T_KEY;
+                return Keys::T;
             case 'U':
-                return Keys::U_KEY;
+                return Keys::U;
             case 'V':
-                return Keys::V_KEY;
+                return Keys::V;
             case 'X':
-                return Keys::X_KEY;
+                return Keys::X;
             case 'Y':
-                return Keys::Y_KEY;
+                return Keys::Y;
             case 'Z':
-                return Keys::Z_KEY;
+                return Keys::Z;
             case VK_UP:
                 return Keys::UP_ARROW;
             case VK_DOWN:
@@ -363,41 +363,41 @@ namespace KillerEngine {
             case VK_RIGHT:
                 return Keys::RIGHT_ARROW;
             case '0':
-                return Keys::ZERO_KEY;
+                return Keys::ZERO;
             case '1':
-                return Keys::ONE_KEY;
+                return Keys::ONE;
             case '2':
-                return Keys::TWO_KEY;
+                return Keys::TWO;
             case '3':
-                return Keys::THREE_KEY;
+                return Keys::THREE;
             case '4':
-                return Keys::FOUR_KEY;
+                return Keys::FOUR;
             case '5':
-                return Keys::FIVE_KEY;
+                return Keys::FIVE;
             case '6':
-                return Keys::SIX_KEY;
+                return Keys::SIX;
             case '7':
-                return Keys::SEVEN_KEY;
+                return Keys::SEVEN;
             case '8':
-                return Keys::EIGHT_KEY;
+                return Keys::EIGHT;
             case '9':
-                return Keys::NINE_KEY;
+                return Keys::NINE;
             case VK_OEM_MINUS:
-                return Keys::MINUS_KEY;
+                return Keys::MINUS;
             case VK_OEM_PLUS:
-                return Keys::PLUS_KEY;
+                return Keys::PLUS;
             case VK_SPACE:
-                return Keys::SPACEBAR_KEY;
+                return Keys::SPACE;
             case VK_ESCAPE:
-                return Keys::ESCAPE_KEY;
+                return Keys::ESCAPE;
             case VK_TAB:
-                return Keys::TAB_KEY;
+                return Keys::TAB;
             case VK_LSHIFT:
-                return Keys::LSHIFT_KEY;
+                return Keys::LSHIFT;
             case VK_RSHIFT:
-                return Keys::RSHIFT_KEY;
+                return Keys::RSHIFT;
             case VK_RETURN:
-                return Keys::ENTER_KEY;
+                return Keys::ENTER;
             case VK_RBUTTON:
                 return Keys::RIGHT_MOUSE;
             case VK_LBUTTON:
