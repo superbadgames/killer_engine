@@ -84,6 +84,8 @@ namespace KillerEngine
 		//IDirectInputDevice8*  _keyboard;
 		//unsigned char 		_keyboardState[256];
 		bool   					_activeKeys[51];
+		Vec2 					_leftClickCoordinates;
+		Vec2					_rightClickCoordinates;
 		static Controller*   	_instance;
 		
 
@@ -111,6 +113,14 @@ namespace KillerEngine
 		void KeyDown(Keys k);
 
 		void KeyUp(Keys k);
+
+		void LeftMouseClick(Vec2 coord) { _leftClickCoordinates = coord; }
+
+		Vec2 GetLeftMouseCoord(void) { return _leftClickCoordinates; }
+
+		void RightMouseClick(Vec2 coord) { _rightClickCoordinates = coord; }
+
+		Vec2 GetRightMouseCoord(void) { return _rightClickCoordinates; }
 
 		//bool GetKeyboardState(void) { return _activeKeys; }
 
