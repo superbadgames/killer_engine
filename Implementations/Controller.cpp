@@ -18,84 +18,70 @@ namespace KillerEngine
 		if (_instance == NULL) { _instance = new Controller(); }
 		return _instance;
 	}
-
-
-/* delete this when new version is working
-
-	void Controller::Init(HINSTANCE hInstance, HWND hwnd) 
-	{
-		HRESULT result;
-
-		result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&_directInput, NULL);
-		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to Create Input"); }
-
-		result = _directInput->CreateDevice(GUID_SysKeyboard, &_keyboard, NULL);
-		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to create Keyboard Device"); }
-
-		result = _keyboard->SetDataFormat(&c_dfDIKeyboard);
-		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to set Keyboard DataFormat"); }
-
-		result = _keyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
-		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to set Keyboard Cooperative Level"); }
-
-		result = _keyboard->Acquire();
-		if(FAILED(result)) { _errorManager->SetError(EC_DirectInput, "Failed to Acquire keyboard"); }
-	}
-
-*/
-
-//==========================================================================================================================
-//
-//Controller Functions
-//
-//==========================================================================================================================
-	void Controller::KeyDown(Keys k)
-	{
-		_activeKeys[k] = true;
-	}
-
-	void Controller::KeyUp(Keys k)
-	{
-		_activeKeys[k] = false;
-	}
+	
 
 //=======================================================================================================
 //Shutdown
 //=======================================================================================================
 	void Controller::ShutDown(void) 
-	{
-/*		if(_keyboard) 
-		{
-			_keyboard->Unacquire();
-			_keyboard->Release();
-			_keyboard = 0;
-		}
-*/		
-	}
-
+	{  }		
+	
 //==========================================================================================================================
 //
 //Controller Functions
 //
 //==========================================================================================================================
-/*
-
-	delete when new version is working
-
-	void Controller::UpdateKeyboard(void) 
+	void Controller::Update(void)
 	{
-		HRESULT result;
-
-		result = _keyboard->GetDeviceState(sizeof(_keyboardState), (void*)&_keyboardState);
-		
-		if(FAILED(result)) 
+		for(int i = 0; i < _totalKeys; ++i)
 		{
-			if((result == DIERR_INPUTLOST) || (result == DIERR_NOTACQUIRED)) { _keyboard->Acquire(); }
-			else { ErrorManager::Instance()->SetError(EC_DirectInput, "Failed to Get keyboard state, and failed to Re-Aquire"); }
-		}					
+			//check if key was just pressed
+			if(!_pastActiveKeys[i] && _curActiveKeys[i])
+				_keyStates[i] = KeyStates::KEY_DOWN;
+
+			//check if key is being held
+			if(_pastActiveKeys[i] && _curActiveKeys[i])
+				_keyStates[i] = KeyStates::KEY_HELD;
+
+			//check if key has been release this frame
+			if(_pastActiveKeys[i] && !_curActiveKeys[i])
+				_keyStates[i] = KeyStates::KEY_UP;
+
+			//check if key is not being pressed
+			if(!_pastActiveKeys[i] && !_curActiveKeys[i] )
+				_keyStates[i] = KeyStates::KEY_RELEASED;
+
+			//Save current state for next frame
+			_pastActiveKeys[i] = _curActiveKeys[i];
+		}
 	}
 
-*/
+//=======================================================================================================
+//KeyState Accessors
+//=======================================================================================================
+	bool Controller::GetKeyDown(Keys k)
+	{
+		if(_keyStates[k] == KeyStates::KEY_DOWN) { return true; }
+		else 									 { return false; }
+	}
+
+	bool Controller::GetKeyHeld(Keys k)
+	{
+		if(_keyStates[k] == KeyStates::KEY_HELD) { return true; }
+		else									{ return false; }
+	}
+
+	bool Controller::GetKeyUp(Keys k)
+	{
+		if(_keyStates[k] == KeyStates::KEY_UP) { return true; }
+		else								   { return false; }
+	}
+
+	bool Controller::GetKeyReleased(Keys k)
+	{
+		if(_keyStates[k] == KeyStates::KEY_RELEASED) { return true; }
+		else										 { return false; }
+	}
 
 //==========================================================================================================================
 //
@@ -104,9 +90,10 @@ namespace KillerEngine
 //==========================================================================================================================
 	Controller::Controller(void)
 	{
-		for(int i = 0; i < 51; ++i)
+		for(int i = 0; i < _totalKeys; ++i)
 		{
-			_activeKeys[i] = false;
+			_curActiveKeys[i] = false;//KeyStates::KEY_RELEASED;
+			_pastActiveKeys[i] = false; //KeyStates::KEY_RELEASED;
 		}
 	}
 

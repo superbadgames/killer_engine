@@ -28,7 +28,7 @@ namespace KillerEngine
 
 		KM::Timer::Instance()->Update();
 		
-		//Controller::Instance()->UpdateKeyboard();
+		Controller::Instance()->Update();
 		
 		WorldManager2D::Instance()->Update();
 	}

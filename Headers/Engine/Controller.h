@@ -1,6 +1,21 @@
 /*========================================================================
-Human input device controller. Will use SDL to poll input from the key-
-board and any other controller devices.
+Human input device controller. Abstract Keyboard input is received through
+a system all found in the *Program class. 
+
+For example, in WinProgram, when windows gets a key input message for a
+key down even, KeyDown(Keys k) is called.
+
+Two enums are defined. 
+
+KeyStates represents all the possible states that
+a key can have. KEY_RELEASED  means that the key is not pressed. KEY_UP 
+means that the key was released this frame. 
+
+Keys represents all the supported keys. 
+
+Update handles the logic of changing they key states, with two KeyState 
+arrays holding the current key states, that is the key states of this frame
+and the past key states, that is the key states from last frame.
 
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
@@ -21,6 +36,14 @@ Written by Maxwell Miller
 
 namespace KillerEngine 
 {
+	enum KeyStates
+	{
+		KEY_DOWN = 1,
+		KEY_HELD,
+		KEY_UP,
+		KEY_RELEASED
+	};
+
 	enum Keys 
 	{
 		NO_KEY=0,
@@ -79,16 +102,6 @@ namespace KillerEngine
 	
 	class Controller 
 	{
-	private:
-		//IDirectInput8*    	_directInput;
-		//IDirectInputDevice8*  _keyboard;
-		//unsigned char 		_keyboardState[256];
-		bool   					_activeKeys[51];
-		Vec2 					_leftClickCoordinates;
-		Vec2					_rightClickCoordinates;
-		static Controller*   	_instance;
-		
-
 	public:
 //==========================================================================================================================
 //
@@ -96,10 +109,6 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		static Controller* Instance();
-
-		//void Init(HINSTANCE hInstance, HWND hwnd);
-
-
 		 
 		void ShutDown(void);
 
@@ -108,11 +117,11 @@ namespace KillerEngine
 //Controller Functions
 //
 //==========================================================================================================================
-		//void UpdateKeyboard(void);
+		void Update(void);
 
-		void KeyDown(Keys k);
+		void KeyDown(Keys k) { _curActiveKeys[k] = true; }
 
-		void KeyUp(Keys k);
+		void KeyUp(Keys k) { _curActiveKeys[k] = false; }
 
 		void LeftMouseClick(Vec2 coord) { _leftClickCoordinates = coord; }
 
@@ -122,9 +131,15 @@ namespace KillerEngine
 
 		Vec2 GetRightMouseCoord(void) { return _rightClickCoordinates; }
 
-		//bool GetKeyboardState(void) { return _activeKeys; }
+		//KeyState GetKeyState(Keys k) { return _curKeyStates[k]; }
 
-		bool GetKeyState(Keys k) { return _activeKeys[k]; }
+		bool GetKeyDown(Keys k);
+
+		bool GetKeyHeld(Keys k);
+
+		bool GetKeyUp(Keys k);
+
+		bool GetKeyReleased(Keys k);
 
 		Controller* operator =(Controller& c) { return &c; }
 
@@ -135,6 +150,15 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		explicit Controller(void);		
+
+	private:
+		static const int 		_totalKeys = 51;
+		KeyStates   			_keyStates[_totalKeys];
+		bool 					_pastActiveKeys[_totalKeys];
+		bool					_curActiveKeys[_totalKeys];
+		Vec2 					_leftClickCoordinates;
+		Vec2					_rightClickCoordinates;
+		static Controller*   	_instance;
 	};
 }//End namespace
 
