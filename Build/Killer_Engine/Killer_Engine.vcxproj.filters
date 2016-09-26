@@ -1,55 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Implementations\CharSprite.cpp">
-      <Filter>Components\Sprites\CharSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Controller.cpp">
-      <Filter>Components\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\ErrorManager.cpp">
-      <Filter>Components\ErrorManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Font.cpp">
-      <Filter>Components\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\KillerEngine.cpp">
-      <Filter>Components\KillerEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp">
-      <Filter>Components\ProgramWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Renderer.cpp">
-      <Filter>Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\RenderText.cpp">
-      <Filter>Components\GameObjects\RenderText</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Sprite.cpp">
-      <Filter>Components\Sprites\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
-      <Filter>Components\Sprites\SqrSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\TextureManager.cpp">
-      <Filter>Components\TextureManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Timer.cpp">
-      <Filter>Components\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\World.cpp">
-      <Filter>Components\World</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\WorldManager.cpp">
-      <Filter>Components\WorldManager</Filter>
-    </ClCompile>
+    <Filter Include="Components">
+      <UniqueIdentifier>{ed9bde4f-7cd2-4615-9aae-49be835522c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Atom">
+      <UniqueIdentifier>{cd2e098b-d0b5-443f-a980-bb5adc24d8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites">
+      <UniqueIdentifier>{d0711876-6e25-4524-90f9-403826adba23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\CharSprite">
+      <UniqueIdentifier>{5b41e7e3-94c3-44fe-b56a-f7799be0e4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Color">
+      <UniqueIdentifier>{5d83855b-baf9-4d27-bc54-347079ecb506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Controller">
+      <UniqueIdentifier>{949bad72-f361-4e38-b352-64dbb4371cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ErrorManager">
+      <UniqueIdentifier>{ce3f617a-fab4-4c47-8413-bfad33649533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Font">
+      <UniqueIdentifier>{8ee5872e-c61d-47ce-889d-c375d165cfae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects">
+      <UniqueIdentifier>{5c9e9e45-d24d-478b-867f-8057a804f074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects\GameObject">
+      <UniqueIdentifier>{271c9817-2622-490e-9c17-2d9949d87bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\KillerEngine">
+      <UniqueIdentifier>{66fd72d2-3739-4584-a963-04c6b35f6d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Renderer">
+      <UniqueIdentifier>{ff42337a-ce7b-447a-8fdd-338dba10e918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects\RenderText">
+      <UniqueIdentifier>{7e0d93d1-f85e-4c81-9b66-d130c9d7e5df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\Sprite">
+      <UniqueIdentifier>{e222f9d6-81c8-468c-b522-04aa743035a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprites\SqrSprite">
+      <UniqueIdentifier>{49894d25-2d14-493a-9687-b6f8bc51d4c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Texture">
+      <UniqueIdentifier>{70216902-edb5-4822-8aec-ed808572d931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TextureManager">
+      <UniqueIdentifier>{9cf645df-f4b4-417c-92f1-1c4cc356a975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\World">
+      <UniqueIdentifier>{3820084b-1115-47ff-b532-adca4671f2e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\WorldManager">
+      <UniqueIdentifier>{0848391e-09fc-4949-ad36-3ea60b4741da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{9e6deab4-04ba-4e5d-a927-ac83649188fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles">
+      <UniqueIdentifier>{57925e0b-6c1a-46f2-92b3-fb68a9630ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D">
+      <UniqueIdentifier>{b6fe0ea0-8fbd-4f8b-ac6e-f4a7ef34a949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\3D">
+      <UniqueIdentifier>{63bcd68c-6905-4860-97d6-ee3ca171435d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math">
+      <UniqueIdentifier>{4b9e6bed-5956-4340-8293-4302ef41d7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\LinearAlgebra">
+      <UniqueIdentifier>{f7ce502c-f857-4759-98ab-dd273a5641ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\RandomGen">
+      <UniqueIdentifier>{1f3a7113-0f33-4da8-9c3d-2d1d584a3c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\Timer">
+      <UniqueIdentifier>{d95a6a48-7e2e-4741-b39d-f6a1c763e14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\Point">
+      <UniqueIdentifier>{cee02548-231c-44eb-9305-256d775b11a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ProgramWindows">
+      <UniqueIdentifier>{381d786c-065e-4c73-9294-7079cbccce17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
       <Filter>Components\Atom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Controller.h">
-      <Filter>Components\Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\CharSprite.h">
       <Filter>Components\Sprites\CharSprite</Filter>
@@ -57,20 +99,14 @@
     <ClInclude Include="..\..\Headers\Engine\Color.hpp">
       <Filter>Components\Color</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Controller.h">
+      <Filter>Components\Controller</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h">
       <Filter>Components\ErrorManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Font.h">
       <Filter>Components\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\GameObject.hpp">
-      <Filter>Components\GameObjects\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\KillerEngine.h">
-      <Filter>Components\KillerEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h">
-      <Filter>Components\ProgramWindow</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Renderer.h">
       <Filter>Components\Renderer</Filter>
@@ -91,78 +127,96 @@
       <Filter>Components\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Timer.h">
-      <Filter>Components\Timer</Filter>
+      <Filter>Components\Math\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\World.h">
+    <ClInclude Include="..\..\Headers\Engine\Particle2D.h">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle3D.h">
+      <Filter>Components\Physics\Particles\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Matrix.hpp">
+      <Filter>Components\Math\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\RandomGen.h">
+      <Filter>Components\Math\RandomGen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
+      <Filter>Components\Math\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Point.hpp">
+      <Filter>Components\Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\World2D.h">
       <Filter>Components\World</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\WorldManager.h">
+    <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h">
       <Filter>Components\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h">
+      <Filter>Components\KillerEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h">
+      <Filter>Components\GameObjects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\WinProgram.h">
+      <Filter>Components\ProgramWindows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Components">
-      <UniqueIdentifier>{3a40b7d3-8621-4cbb-ba8d-84e66980b2b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Sprites">
-      <UniqueIdentifier>{c07ec0db-9c7a-4929-9ba3-fa36c3d54d6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Sprites\CharSprite">
-      <UniqueIdentifier>{5f556360-3557-4d9f-9f98-870ce7ef0008}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Atom">
-      <UniqueIdentifier>{98f0c801-1b7e-4874-a555-2f65423e2180}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Controller">
-      <UniqueIdentifier>{c0e67711-b0e4-48f0-842c-7e65c78625e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Color">
-      <UniqueIdentifier>{01a25287-009d-43c6-a545-e3426322691b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\ErrorManager">
-      <UniqueIdentifier>{4518feb9-6e1e-4dfc-b2d6-c656402640a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Font">
-      <UniqueIdentifier>{5b30d52c-99aa-4fc5-9e57-678fcb247622}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\GameObjects">
-      <UniqueIdentifier>{69fd37f6-f40a-4c9d-b598-b87cda5a583b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\GameObjects\GameObject">
-      <UniqueIdentifier>{d4fc7af3-9722-4049-a1d6-453cb8a4d546}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\KillerEngine">
-      <UniqueIdentifier>{047f720b-25e6-437f-9500-95ee172baf32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\ProgramWindow">
-      <UniqueIdentifier>{03cddbee-155a-40de-b475-157f0c0b78c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Renderer">
-      <UniqueIdentifier>{91a7d851-8c24-48e9-bbb5-4a80065cc47a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Texture">
-      <UniqueIdentifier>{f256a7f0-6b4a-4c21-82d8-e50b5f75e87e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\GameObjects\RenderText">
-      <UniqueIdentifier>{f6c09e4b-ba1a-4e01-aa9b-b27d7282b487}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Sprites\Sprite">
-      <UniqueIdentifier>{0e9a976b-0fa8-4277-81b8-97d2016c5448}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Sprites\SqrSprite">
-      <UniqueIdentifier>{f5d009e3-5133-49ff-8a31-e51af285ed4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\TextureManager">
-      <UniqueIdentifier>{71322cb3-b0dc-41e7-b2c5-525a46751a0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Timer">
-      <UniqueIdentifier>{c8db8e86-95e6-4748-9e97-aae35206c154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\World">
-      <UniqueIdentifier>{c54686d7-90e6-4d2d-aa84-bf41a21ba9ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\WorldManager">
-      <UniqueIdentifier>{e406af3f-ff3e-43f9-aba5-90818b974c32}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="..\..\Implementations\CharSprite.cpp">
+      <Filter>Components\Sprites\CharSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Controller.cpp">
+      <Filter>Components\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ErrorManager.cpp">
+      <Filter>Components\ErrorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Font.cpp">
+      <Filter>Components\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Renderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\RenderText.cpp">
+      <Filter>Components\GameObjects\RenderText</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Sprite.cpp">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
+      <Filter>Components\Sprites\SqrSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\TextureManager.cpp">
+      <Filter>Components\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Timer.cpp">
+      <Filter>Components\Math\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2D.cpp">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle3D.cpp">
+      <Filter>Components\Physics\Particles\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\RandomGen.cpp">
+      <Filter>Components\Math\RandomGen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\World2D.cpp">
+      <Filter>Components\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\WorldManager2D.cpp">
+      <Filter>Components\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp">
+      <Filter>Components\KillerEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\GameObject2D.cpp">
+      <Filter>Components\GameObjects\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\WinProgram.cpp">
+      <Filter>Components\ProgramWindows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

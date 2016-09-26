@@ -20,14 +20,16 @@ Written by Maxwell Miller
 #include <Engine/Color.hpp>
 
 //=====KillerMath Includes=====
-#include <Math/Vector.hpp>
-#include <Math/Matrix.hpp>
+#include <Engine/Vector.hpp>
+#include <Engine/Matrix.hpp>
+
+//=====Windows Includes=====
+#include <windows.h>
 
 //=====OGL Includes=====
 #include <GL/gl3w.h>
 
-//=====Windows Includes=====
-#include <windows.h>
+
 
 //=====STD Includes=====
 #include <string>
@@ -65,6 +67,19 @@ typedef KillerMath::Matrix4<F32> Mat;
 //Vector type
 typedef KillerMath::Vector2<F32> Vec2;
 typedef KillerMath::Vector3<F32> Vec3;
+
+typedef double real;
+#define DOUBLE_PRECISION
+#define REAL_MAX DBL_MAX
+#define real_sqrt sqrt	
+#define real_abs fabs
+#define real_sin sin
+#define real_cos cos
+#define real_exp exp
+#define real_pow pow
+#define real_fmod fmod
+#define real_epsilon DBL_EPSILON
+#define R_PI 3.14159265358979
 
 
 #endif

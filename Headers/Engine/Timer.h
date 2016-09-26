@@ -22,7 +22,9 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 
-namespace KillerEngine 
+//namespace KE = KillerEngine;
+
+namespace KillerMath 
 {
 
 	class Timer 

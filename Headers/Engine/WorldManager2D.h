@@ -18,7 +18,8 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
-#include <Engine/World.h>
+#include <Engine/World2D.h>
+#include <Engine/ErrorManager.h>
 
 //=====STL includes=====
 #include <map>
@@ -26,43 +27,49 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class WorldManager
+	class WorldManager2D
 	{
 	private:
-		std::map<string, World*> _worlds;
-		World* 				   _activeWorld;
-		string 				   _activeWorldID;
-		bool				   _running;			
-		static WorldManager*   _instance;
+		std::map<U32, World2D*>    _worlds;
+		World2D* 				   _activeWorld;
+		U32 				   	   _activeWorldID;
+		bool				   	   _running;			
+		static WorldManager2D*     _instance;
 
 	public:
-		~WorldManager(void) {  }
+		~WorldManager2D(void) {  }
 
-		static WorldManager* Instance();
+		static WorldManager2D* Instance();
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		void AddWorld(const string worldID, World* world);
+		void AddWorld(World2D* world);
 		
-		void RemoveWorld(string worldID);
+		void RemoveWorld(U32 worldID);
 		
-		void SetActiveWorld(string worldID);
+		void SetActiveWorld(U32 worldID);
 		
-		string GetActiveWorldID(void) { return _activeWorldID; }
+		U32 GetActiveWorldID(void) { return _activeWorldID; }
 		
 		void SetRunning(bool r) { _running = r; }
 		
 		bool GetRunning(void) { return _running; } 
+
+//==========================================================================================================================
+//
+//Integrators
+//
+//==========================================================================================================================
 
 		void Update(void);
 		
 		void Render(void);
 
 	protected:
-		WorldManager(void) : _running(true) {  }
+		WorldManager2D(void) : _running(true) {  }
 
 	};
 

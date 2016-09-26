@@ -9,11 +9,19 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{68D60B4E-1A95-4381-975B-BFAEAD853890}</ProjectGuid>
-    <RootNamespace>Killer1_Engine</RootNamespace>
-    <ProjectName>Killer_Engine</ProjectName>
+    <ProjectGuid>{27850EA3-AA75-4669-AF23-80B8F950F31F}</ProjectGuid>
+    <RootNamespace>Killer_Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -29,55 +37,64 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="KillerComons.props" />
+    <Import Project="KillerEngine.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="KillerComons.props" />
+    <Import Project="KillerEngine.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="KillerComons.props" />
+    <Import Project="KillerEngine.props" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="KillerComons.props" />
+    <Import Project="KillerEngine.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\Temp\$(ProjectName)$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)_$(PlatformName)_$(Configuration)</TargetName>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\Temp\$(ProjectName)$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Headers\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
-    </Link>
-    <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-    <PreBuildEvent>
-      <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
-del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
-    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -86,27 +103,24 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\ExLib\Headers\;$(ProjectDir)..\..\Headers\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
-    <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <PreBuildEvent>
-      <Command>del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
-del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy F:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
-xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Command>
-    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h" />
@@ -115,9 +129,14 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Font.h" />
-    <ClInclude Include="..\..\Headers\Engine\GameObject.hpp" />
-    <ClInclude Include="..\..\Headers\Engine\KillerEngine.h" />
-    <ClInclude Include="..\..\Headers\Engine\ProgramWindow.h" />
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\Matrix.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\Particle2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\Particle3D.h" />
+    <ClInclude Include="..\..\Headers\Engine\Point.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\WinProgram.h" />
+    <ClInclude Include="..\..\Headers\Engine\RandomGen.h" />
     <ClInclude Include="..\..\Headers\Engine\Renderer.h" />
     <ClInclude Include="..\..\Headers\Engine\RenderText.h" />
     <ClInclude Include="..\..\Headers\Engine\Sprite.h" />
@@ -125,31 +144,29 @@ xcopy F:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y</Co
     <ClInclude Include="..\..\Headers\Engine\Texture.hpp" />
     <ClInclude Include="..\..\Headers\Engine\TextureManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Timer.h" />
-    <ClInclude Include="..\..\Headers\Engine\World.h" />
-    <ClInclude Include="..\..\Headers\Engine\WorldManager.h" />
+    <ClInclude Include="..\..\Headers\Engine\Vector.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\World2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
     <ClCompile Include="..\..\Implementations\Font.cpp" />
-    <ClCompile Include="..\..\Implementations\KillerEngine.cpp" />
-    <ClCompile Include="..\..\Implementations\ProgramWindow.cpp" />
+    <ClCompile Include="..\..\Implementations\GameObject2D.cpp" />
+    <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp" />
+    <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
+    <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
+    <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
+    <ClCompile Include="..\..\Implementations\RandomGen.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />
     <ClCompile Include="..\..\Implementations\RenderText.cpp" />
     <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />
     <ClCompile Include="..\..\Implementations\Timer.cpp" />
-    <ClCompile Include="..\..\Implementations\World.cpp" />
-    <ClCompile Include="..\..\Implementations\WorldManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\Docs\KillerCodingStandards.txt" />
-    <Text Include="..\..\Docs\Manual.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\Assets\Fonts\default_font_data.fnt" />
+    <ClCompile Include="..\..\Implementations\World2D.cpp" />
+    <ClCompile Include="..\..\Implementations\WorldManager2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

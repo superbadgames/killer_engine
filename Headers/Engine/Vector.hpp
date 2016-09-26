@@ -26,7 +26,7 @@ Written by Maxwell Miller
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include <Math/Atom.h>
+#include <Engine/Atom.h>
 
 namespace KillerMath 
 {
@@ -314,6 +314,8 @@ namespace KillerMath
 			_v[0] += V.GetX() * scale;
 			_v[1] += V.GetY() * scale;
 		}
+
+		
 		
 		//=====Component Mulitplication=====
 		Vector2<T> ComponentProduct(const Vector2<T>& V) 
@@ -607,7 +609,7 @@ namespace KillerMath
 		}
 		
 		//=====AddScales Vector=====
-		void AddScaledVector(const Vector2<T> V, T scale)
+		void AddScaledVector(const Vector3<T> V, T scale)
 		{
 			_v[0] += V.GetX() * scale;
 			_v[1] += V.GetY() * scale;

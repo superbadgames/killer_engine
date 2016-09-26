@@ -131,7 +131,7 @@ namespace KillerEngine
 		//Make ID avilable first
  		id.erase(id.begin(), id.begin() + id.find_first_of("=")+1);
  		
- 		U32 charID = std::stoi(id);
+ 		U32 charID = std::stoul(id);
 
  		_fontCharData.insert(std::pair<U32, CharacterData*>(charID, new CharacterData()));
 

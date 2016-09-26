@@ -1,4 +1,4 @@
-#include <Engine/KillerEngine.h>
+#include <Engine/KillerEngine2D.h>
 
 namespace KillerEngine 
 {
@@ -10,50 +10,41 @@ namespace KillerEngine
 //=======================================================================================================
 //Init
 //=======================================================================================================
-	void KillerEngine::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
+	void KillerEngine2D::Init(const S32 width, const S32 height, const string title, const bool fullscreen) 
 	{
-		_errorManager = ErrorManager::Instance();
-		_timer = Timer::Instance();
-		_worldManager = WorldManager::Instance();
-		_controller = Controller::Instance();
-		_programWindow = ProgramWindow::Instance();
+		WinProgram::Instance()->Init(width, height, title, fullscreen);
 
-		_programWindow->Init(width, height, title, fullscreen);
+		//Controller::Instance()->Init(WinProgram::Instance()->GetHINSTANCE(), WinProgram::Instance()->GetHWND());
 
-		_textureManager = TextureManager::Instance();
-		_renderer = Renderer::Instance();
-
-		_controller->Init(_programWindow->GetHINSTANCE(), _programWindow->GetHWND());
-
-		_errorManager->DisplayErrors();
+		ErrorManager::Instance()->DisplayErrors();
 	}
 
 //=======================================================================================================
 //Update
 //=======================================================================================================
-	void KillerEngine::Update(void) 
+	void KillerEngine2D::Update(void) 
 	{
-		_programWindow->ProcessWndEvents();
+		WinProgram::Instance()->ProcessWndEvents();
 
-		_timer->Update();
+		KM::Timer::Instance()->Update();
 		
-		_controller->UpdateKeyboard();
+		Controller::Instance()->Update();
 		
-		_worldManager->Update();
+		WorldManager2D::Instance()->Update();
 	}
 
 //=======================================================================================================
 //FunctionName
 //=======================================================================================================
-	void KillerEngine::Render(void) 
+	void KillerEngine2D::Render(void) 
 	{
-		_worldManager->Render();
+		WorldManager2D::Instance()->Render();
 
-		_renderer->Draw();
+		Renderer::Instance()->Draw();
 
-		_programWindow->BufferSwap();
+		WinProgram::Instance()->BufferSwap();
 		
-		_errorManager->DisplayErrors();
+		ErrorManager::Instance()->DisplayErrors();
 	}
 
 //==========================================================================================================================
@@ -61,11 +52,11 @@ namespace KillerEngine
 //Singleton functions
 //
 //==========================================================================================================================
-	KillerEngine* KillerEngine::_instance = NULL;
+	KillerEngine2D* KillerEngine2D::_instance = NULL;
 
-	KillerEngine* KillerEngine::Instance(void) 
+	KillerEngine2D* KillerEngine2D::Instance(void) 
 	{
-		if(_instance == NULL) { _instance = new KillerEngine(); }
+		if(_instance == NULL) { _instance = new KillerEngine2D(); }
 
 		return _instance;
 	}
@@ -75,7 +66,7 @@ namespace KillerEngine
 //Constructor
 //
 //==========================================================================================================================		
-		KillerEngine::KillerEngine(void) {  }
+		KillerEngine2D::KillerEngine2D(void) {  }
 
 
 }//End namespace

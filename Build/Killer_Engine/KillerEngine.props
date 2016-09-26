@@ -7,8 +7,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <Link>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

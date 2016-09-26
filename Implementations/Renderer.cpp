@@ -87,6 +87,7 @@ namespace KillerEngine
 			//=====test for textures, failed finish later=====
 			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
 			"	color = texture(ourTexture, vs_tex_coord);									\n"
+			//"	GL_FragColor = texture(ourTexture, vs_tex_coord);									\n"
 			"}																				\n"
 		};
 
@@ -264,6 +265,9 @@ namespace KillerEngine
 			
 		    glUseProgram(_renderingProgramTexture);
 
+		    glEnable(GL_BLEND);
+		    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 			GLuint buffers[2];
 			glGenBuffers(2, buffers);
 
@@ -278,6 +282,8 @@ namespace KillerEngine
 			glEnableVertexAttribArray(1);
 			
 			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+
+			glDisable(GL_BLEND);
 		}	
 
 		
@@ -296,10 +302,7 @@ namespace KillerEngine
 //
 //=======================================================================================================
 	Renderer::Renderer(void): _maxBatchSize(1000), 
-							  _currentBatchSize(0),
-							  _errorManager(ErrorManager::Instance()),
-							  _textureManager(TextureManager::Instance()),
-							  _programWindow(ProgramWindow::Instance()) 
+							  _currentBatchSize(0)
 	{ 
 		_CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);

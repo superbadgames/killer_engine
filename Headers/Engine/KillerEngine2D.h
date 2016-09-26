@@ -21,17 +21,21 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
 #include <Engine/Controller.h>
-#include <Engine/ProgramWindow.h>
+#include <Engine/WinProgram.h>
 #include <Engine/Renderer.h>
 #include <Engine/Timer.h>
-#include <Engine/WorldManager.h>
+#include <Engine/WorldManager2D.h>
 #include <Engine/TextureManager.h>
 
+//======Math includes=====
+//#include <Engine/RandomGen.h>
+
+namespace KM = KillerMath;
 
 namespace KillerEngine 
 {
 
-	class KillerEngine 
+	class KillerEngine2D 
 	{
 
 	public:
@@ -42,16 +46,16 @@ namespace KillerEngine
 //==========================================================================================================================
 		void Init(const S32 width, const S32 height, const string title, const bool fullscreen);
 
-		bool Running(void) { return _worldManager->GetRunning(); }
+		bool Running(void) { return WorldManager2D::Instance()->GetRunning(); }
 
-		void LoadTexture(const string path, const string name, const S32 width, const S32 height) 
+		void LoadTexture(const string path, const U32 id, const S32 width, const S32 height) 
 		{ 
-			_textureManager->LoadTexture(path, name, width, height); 
+			TextureManager::Instance()->LoadTexture(path, id, width, height); 
 		}
 		
-		void AddWorldToManager(const string id, World* world) { _worldManager->AddWorld(id, world); }
+		void AddWorldToManager(World2D* world) { WorldManager2D::Instance()->AddWorld(world); }
 
-		void SetActiveWorld(const string id) { _worldManager->SetActiveWorld(id); }
+		void SetActiveWorld(const U32 id) { WorldManager2D::Instance()->SetActiveWorld(id); }
 
 		void Update(void);
 
@@ -61,7 +65,7 @@ namespace KillerEngine
 //Singleton functions
 //
 //==========================================================================================================================
-		static KillerEngine* Instance();		
+		static KillerEngine2D* Instance();		
 
 	protected:
 //==========================================================================================================================
@@ -69,7 +73,7 @@ namespace KillerEngine
 //Constructor
 //
 //==========================================================================================================================		
-		KillerEngine(void);
+		KillerEngine2D(void);
 
 	private:
 //==========================================================================================================================
@@ -77,16 +81,7 @@ namespace KillerEngine
 //Members
 //
 //==========================================================================================================================
-		static KillerEngine* 	_instance;
-			   ErrorManager* 	_errorManager;
-			   Controller*   	_controller;
-			   ProgramWindow* 	_programWindow;
-			   Renderer* 		_renderer;
-			   Timer* 			_timer;
-			   WorldManager* 	_worldManager;
-			   TextureManager* _textureManager;
-
-		
+		static KillerEngine2D* 	_instance;
 
 	};
 

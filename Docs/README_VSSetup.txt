@@ -48,6 +48,14 @@ Librarian -> Debugging -> Generate Program Database File : $(TargetDir)$(TargetN
 
 ->General -> Additional Library Directories: $(ProjectDir)..\..\Lib\
 
+-> Additional Dependancies: 
+OpenGL32.lib
+GL3W.lib
+SOIL.lib
+dinput8.lib
+dxguid.lib
+
+
 -> Debugging -> Map File : $(TargetDir)$(TargetName).map [May have to enable the file to even be made]
 
 Set this up in a LocalMachine.props file to be stored in the build directory
@@ -56,5 +64,5 @@ Build Events -> Pre Build Events ->
 
 del $(ProjectDir)..\..\Lib\Killer_Math_Win32_Debug.lib
 del $(ProjectDir)..\..\Headers\Math\ /S /Q
-xcopy <Dir>:\Projets\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
+xcopy <Dir>:\Projects\Killer_Math\Bin\Win32_Debug\Killer_Math_Win32_Debug.lib $(ProjectDir)..\..\Lib\ /s /i /y
 xcopy <Dir>:\Projects\Killer_Math\Headers\* $(ProjectDir)..\..\Headers\ /s /i /y

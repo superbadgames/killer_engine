@@ -1,16 +1,16 @@
-#include <Engine/ProgramWindow.h>
+#include <Engine/WinProgram.h>
 
 namespace KillerEngine {
 
 //==========================================================================================================================
 //
-//Private ProgramWindow Functions
+//Private WinProgram Functions
 //
 //==========================================================================================================================
 //=======================================================================================================
 //_SetTempPixelFormat
 //=======================================================================================================
-    void ProgramWindow::_SetTempPixelFormat(void) 
+    void WinProgram::_SetTempPixelFormat(void) 
     {
         S32 pixelFormat;
 
@@ -44,7 +44,7 @@ namespace KillerEngine {
 //=======================================================================================================
 //_SetPixelFormat
 //=======================================================================================================
-    void ProgramWindow::_SetPixelFormat(void) 
+    void WinProgram::_SetPixelFormat(void) 
     {
         bool worked = true;
 
@@ -88,14 +88,14 @@ namespace KillerEngine {
 //Constructors
 //
 //==========================================================================================================================
-    S32 ProgramWindow::_totalWidth  = 0;
-    S32 ProgramWindow::_totalHeight = 0;
-    S32 ProgramWindow::_right       = 0;
-    S32 ProgramWindow::_left        = 0;
-    S32 ProgramWindow::_top         = 0;
-    S32 ProgramWindow::_bottom      = 0;
-    ProgramWindow::ProgramWindow(): _isFullScreen(false),
-    								_wndName("ProgramWindow"),
+    S32 WinProgram::_totalWidth  = 0;
+    S32 WinProgram::_totalHeight = 0;
+    S32 WinProgram::_right       = 0;
+    S32 WinProgram::_left        = 0;
+    S32 WinProgram::_top         = 0;
+    S32 WinProgram::_bottom      = 0;
+    WinProgram::WinProgram(): _isFullScreen(false),
+    								_wndName("WinProgram"),
     								_hwnd(NULL),
                                     _hglrc(NULL),
                                     _errorManager(ErrorManager::Instance()),
@@ -105,24 +105,24 @@ namespace KillerEngine {
     }
 //==========================================================================================================================
 //
-//ProgramWindow Functions
+//WinProgram Functions
 //
 //==========================================================================================================================
 //=======================================================================================================
 //Instance
 //=======================================================================================================
-    ProgramWindow* ProgramWindow::_instance = NULL;
+    WinProgram* WinProgram::_instance = NULL;
 
-    ProgramWindow* ProgramWindow::Instance(void) 
+    WinProgram* WinProgram::Instance(void) 
     {
-        if(_instance == NULL) { _instance = new ProgramWindow; }
+        if(_instance == NULL) { _instance = new WinProgram; }
         return _instance;
     }
 
 //=======================================================================================================
 //InitWindow
 //=======================================================================================================    
-    void ProgramWindow::Init(S32 width, S32 height, string wndName, bool isFullScreen) 
+    void WinProgram::Init(S32 width, S32 height, string wndName, bool isFullScreen) 
     {
         _totalWidth     = width;
         _totalHeight    = height;
@@ -167,13 +167,13 @@ namespace KillerEngine {
         ShowWindow(_hwnd, SW_SHOW);
         UpdateWindow(_hwnd);
 
-        _controller->Init(_wndClass.hInstance, _hwnd);
+        //_controller->Init(_wndClass.hInstance, _hwnd);
     }
 
 //=======================================================================================================
 //ProcessWndEvents
 //=======================================================================================================
-    void ProgramWindow::ProcessWndEvents(void) 
+    void WinProgram::ProcessWndEvents(void) 
     {
         MSG msg;
 
@@ -187,7 +187,7 @@ namespace KillerEngine {
 //=======================================================================================================
 //BufferSwap
 //=======================================================================================================
-    void ProgramWindow::BufferSwap(void)
+    void WinProgram::BufferSwap(void)
     { 
         glFlush(); 
         SwapBuffers(_hdc); 
@@ -201,19 +201,19 @@ namespace KillerEngine {
 //=======================================================================================================
 //StaticWndProc
 //=======================================================================================================    
-    LRESULT CALLBACK ProgramWindow::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+    LRESULT CALLBACK WinProgram::StaticWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     {
-    	ProgramWindow* window = NULL;
+    	WinProgram* window = NULL;
 
         if(uMsg == WM_CREATE) 
         {
-            window = (ProgramWindow*)((LPCREATESTRUCT)lParam)->lpCreateParams;
+            window = (WinProgram*)((LPCREATESTRUCT)lParam)->lpCreateParams;
 
             SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)window);
         }
         else 
         {
-            window = (ProgramWindow*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+            window = (WinProgram*)GetWindowLongPtr(hWnd, GWL_USERDATA);
 
     		if (!window) { DefWindowProc(hWnd, uMsg, wParam, lParam); }
         }
@@ -224,7 +224,7 @@ namespace KillerEngine {
 //=======================================================================================================
 //WndProc
 //=======================================================================================================    
-    LRESULT ProgramWindow::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+    LRESULT WinProgram::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     {
         switch(uMsg) 
         {
@@ -282,10 +282,157 @@ namespace KillerEngine {
                 //_OnResize(); */
             //}
             //break;
+            case WM_KEYDOWN:
+            {
+                Keys keydown = ConvertKeyCodes(wParam);
+                Controller::Instance()->KeyDown(keydown);
+                break;
+            }
+            case WM_KEYUP:
+            {
+                Keys keyup = ConvertKeyCodes(wParam);
+                Controller::Instance()->KeyUp(keyup);
+                break;
+            }
+            case WM_LBUTTONDOWN:
+            {
+                POINT p;
+                if(!GetCursorPos(&p)) { ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to find Left Cursor Position in WinProgram!"); }
+                if(!ScreenToClient(_hwnd, &p)) { ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to convert Left Cursor to client in WinProgram!"); }
+                Controller::Instance()->LeftMouseClick(Vec2((F32)p.x, (F32)p.y));
+                Controller::Instance()->KeyDown(Keys::LEFT_MOUSE);
+                break; 
+            }
+            case WM_LBUTTONUP:
+            {
+                Controller::Instance()->KeyUp(Keys::LEFT_MOUSE);
+                Controller::Instance()->LeftMouseClick(Vec2(0.0f, 0.0f));
+                break;
+            }
+            case WM_RBUTTONDOWN:
+            {
+                POINT p;
+                if(!GetCursorPos(&p)) { ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to find Right Cursor Position in WinProgram!"); }
+                if(!ScreenToClient(_hwnd, &p)) { ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to convert Right Cursor to client in WinProgram!"); }
+                Controller::Instance()->RightMouseClick(Vec2((F32)p.x, (F32)p.y));
+                Controller::Instance()->KeyDown(Keys::RIGHT_MOUSE);
+                break;
+            }
+            case WM_RBUTTONUP:
+            {
+                Controller::Instance()->KeyUp(Keys::RIGHT_MOUSE);
+                Controller::Instance()->RightMouseClick(Vec2(0.0f, 0.0f));
+                break;
+            }
             default:
             	return DefWindowProc(hWnd, uMsg, wParam, lParam);
         }
     	return 0;
+    }
+
+    Keys WinProgram::ConvertKeyCodes(WPARAM wParam)
+    {
+        switch(wParam)
+        {
+            case 'A':
+                return Keys::A;
+            case 'B':
+                return Keys::B;
+            case 'C':
+                return Keys::C;
+            case 'D':
+                return Keys::D;
+            case 'E':
+                return Keys::E;
+            case 'F':
+                return Keys::F;
+            case 'G':
+                return Keys::G;
+            case 'H':
+                return Keys::H;
+            case 'I':
+                return Keys::I;
+            case 'J':
+                return Keys::J;
+            case 'K':
+                return Keys::K;    
+            case 'L':
+                return Keys::L;
+            case 'M':
+                return Keys::M;
+            case 'N':
+                return Keys::N;
+            case 'O':
+                return Keys::O;
+            case 'P':
+                return Keys::P;
+            case 'Q':
+                return Keys::Q;
+            case 'R':
+                return Keys::R;
+            case 'S':
+                return Keys::S;
+            case 'T':
+                return Keys::T;
+            case 'U':
+                return Keys::U;
+            case 'V':
+                return Keys::V;
+            case 'X':
+                return Keys::X;
+            case 'Y':
+                return Keys::Y;
+            case 'Z':
+                return Keys::Z;
+            case VK_UP:
+                return Keys::UP_ARROW;
+            case VK_DOWN:
+                return Keys::DOWN_ARROW;
+            case VK_LEFT:
+                return Keys::LEFT_ARROW;
+            case VK_RIGHT:
+                return Keys::RIGHT_ARROW;
+            case '0':
+                return Keys::ZERO;
+            case '1':
+                return Keys::ONE;
+            case '2':
+                return Keys::TWO;
+            case '3':
+                return Keys::THREE;
+            case '4':
+                return Keys::FOUR;
+            case '5':
+                return Keys::FIVE;
+            case '6':
+                return Keys::SIX;
+            case '7':
+                return Keys::SEVEN;
+            case '8':
+                return Keys::EIGHT;
+            case '9':
+                return Keys::NINE;
+            case VK_OEM_MINUS:
+                return Keys::MINUS;
+            case VK_OEM_PLUS:
+                return Keys::PLUS;
+            case VK_SPACE:
+                return Keys::SPACE;
+            case VK_ESCAPE:
+                return Keys::ESCAPE;
+            case VK_TAB:
+                return Keys::TAB;
+            case VK_LSHIFT:
+                return Keys::LSHIFT;
+            case VK_RSHIFT:
+                return Keys::RSHIFT;
+            case VK_RETURN:
+                return Keys::ENTER;
+            case VK_XBUTTON1:
+                return Keys::MIDDLE_MOUSE;
+            default:
+                return Keys::NO_KEY;
+        }
     }
 
 }//End namespace    

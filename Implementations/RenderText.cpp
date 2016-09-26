@@ -8,10 +8,14 @@ namespace KillerEngine
 //
 //==========================================================================================================================	
 	RenderText::RenderText(void) : _text(), _font(), _totalWidth(0), _totalHeight(0)
-	{  }
+	{
+		GameObject2D::SetID();
+	}
 
 	RenderText::RenderText(Font& font) : _text(), _font(font), _totalWidth(0), _totalHeight(0)
-	{  }
+	{
+		GameObject2D::SetID();
+	}
 
 	RenderText::RenderText(string text, Font& font) : _text(text), _font(font), _totalWidth(0), _totalHeight(0)
 	{
@@ -50,8 +54,8 @@ namespace KillerEngine
 
 		_text = text;
 
-		F32 currentX = __position.GetX();
-		F32 currentY = __position.GetY();
+		F32 currentX = GameObject2D::position.GetX();
+		F32 currentY = GameObject2D::position.GetY();
 
 		Texture& texture = _font.GetTexture();
 
