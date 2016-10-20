@@ -2,10 +2,10 @@
 
 namespace KillerEngine
 {
-	Font::Font(void) : _texture(), _fontFile(), _fontName(), _textureManager(TextureManager::Instance())
+	Font::Font(void) : _textureID(0), _fontFile(), _fontName() 
 	{  }
 
-	Font::Font(Texture* texture) : _texture(texture), _fontFile(), _fontName(), _textureManager(TextureManager::Instance())
+	Font::Font(U32 tID) : _textureID(tID), _fontFile(), _fontName() 
 	{  }
 
 	void Font::InitFont(string fontName, string fontFile)
@@ -125,7 +125,7 @@ namespace KillerEngine
 	}
 
 	void Font::_AddNewCharacterData(string id,      string x, 		string y,
-							    	string width,   string height,   string xoffset,
+							    	string width,   string height,  string xoffset,
 							    	string yoffset, string xadvance)
 	{
 		//Make ID avilable first

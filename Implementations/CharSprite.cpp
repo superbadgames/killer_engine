@@ -3,11 +3,11 @@
 namespace KillerEngine
 {
 	CharSprite::CharSprite(void) : _charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
-	{ _textureManager = TextureManager::Instance(); }
+	{  }
 
 	CharSprite::CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance) 
 						     :_charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
-	{ _textureManager = TextureManager::Instance(); }
+	{  }
 
 //==========================================================================================================================
 //
@@ -16,177 +16,171 @@ namespace KillerEngine
 //==========================================================================================================================
 	void CharSprite::v_RenderSprite(void)
 	{
-		//if(_vertexUvs.size() > 0)
+		//if(Sprite::vertexUvs.size() > 0)
 		//{
 			//Make sure texture is loaded into OGL
-			if(_textureManager->GetCurrentTextureId() != _texture.GetId())
+			if(TextureManager::Instance()->GetCurrentTextureID() != Sprite::textureID)
 			{
-				_renderer->Draw();
-				_textureManager->SetCurrentTextureId(_texture.GetId());
+				Renderer::Instance()->Draw();
+				TextureManager::Instance()->SetCurrentTextureID(Sprite::textureID);
 			}
 
-			_renderer->AddTextureToBatch(_vertexPositions, _vertexUvs);
+			Renderer::Instance()->AddTextureToBatch(Sprite::vertexPositions, Sprite::vertexUvs);
 		//}
 		
-		//else if(_vertexColors.size() > 0)
-		//	_renderer->AddToBatch(_vertexPositions, _vertexColors);
+		//else if(Sprite::vertexColors.size() > 0)
+		//	v_SetVertexPositions();
+			//Renderer::Instance()->AddToBatch(Sprite::vertexPositions, Sprite::vertexColors);
 	}
 
 
 	void CharSprite::v_SetVertexPositions(void)
 	{
-		_vertexPositions.clear();
+		Sprite::vertexPositions.clear();
 
-		F32 halfW = F32(_width / 2);
-		F32 halfH = F32(_height / 2);
-		F32 X = _position.GetX();
-		F32 Y = _position.GetY();
-		F32 Z = _position.GetZ();
-		F32 W = _position.GetW();
+		F32 halfW = F32(Sprite::width / 2);
+		F32 halfH = F32(Sprite::height / 2);
+		F32 X = Sprite::position.GetX();
+		F32 Y = Sprite::position.GetY();
+		F32 Z = Sprite::position.GetZ();
+		F32 W = Sprite::position.GetW();
 
 		//=====Triangle1=====
 		//=====top right=====
-		_vertexPositions.push_back(X + halfW); //x
-		_vertexPositions.push_back(Y + halfH); //y
-		_vertexPositions.push_back(Z);		   //z
-		_vertexPositions.push_back(W);		   //w
+		Sprite::vertexPositions.push_back(X + halfW); //x
+		Sprite::vertexPositions.push_back(Y + halfH); //y
+		Sprite::vertexPositions.push_back(Z);		   //z
+		Sprite::vertexPositions.push_back(W);		   //w
 		
 
 		//=====bottom right=====
-		_vertexPositions.push_back(X + halfW);	//x
-		_vertexPositions.push_back(Y - halfH);	//y
-		_vertexPositions.push_back(Z);			//z
-		_vertexPositions.push_back(W);			//w
+		Sprite::vertexPositions.push_back(X + halfW);	//x
+		Sprite::vertexPositions.push_back(Y - halfH);	//y
+		Sprite::vertexPositions.push_back(Z);			//z
+		Sprite::vertexPositions.push_back(W);			//w
 
 
 		//=====bottom left=====
-		_vertexPositions.push_back(X - halfW);	//x
-		_vertexPositions.push_back(Y - halfH);	//y
-		_vertexPositions.push_back(Z);			//z
-		_vertexPositions.push_back(W);			//w
+		Sprite::vertexPositions.push_back(X - halfW);	//x
+		Sprite::vertexPositions.push_back(Y - halfH);	//y
+		Sprite::vertexPositions.push_back(Z);			//z
+		Sprite::vertexPositions.push_back(W);			//w
 
 
 		//=====Triangle2=====
 		//=====top right=====
-		_vertexPositions.push_back(X + halfW);	//x
-		_vertexPositions.push_back(Y + halfH);	//y
-		_vertexPositions.push_back(Z);			//z
-		_vertexPositions.push_back(W);			//w
+		Sprite::vertexPositions.push_back(X + halfW);	//x
+		Sprite::vertexPositions.push_back(Y + halfH);	//y
+		Sprite::vertexPositions.push_back(Z);			//z
+		Sprite::vertexPositions.push_back(W);			//w
 
 
 		//=====top left=====
-		_vertexPositions.push_back(X - halfW);	//x
-		_vertexPositions.push_back(Y + halfH);	//y
-		_vertexPositions.push_back(Z);			//z
-		_vertexPositions.push_back(W);			//w
+		Sprite::vertexPositions.push_back(X - halfW);	//x
+		Sprite::vertexPositions.push_back(Y + halfH);	//y
+		Sprite::vertexPositions.push_back(Z);			//z
+		Sprite::vertexPositions.push_back(W);			//w
 
 
 		//=====bottom left=====
-		_vertexPositions.push_back(X - halfW);	//x
-		_vertexPositions.push_back(Y - halfH);	//y
-		_vertexPositions.push_back(Z);			//z
-		_vertexPositions.push_back(W);			//w
+		Sprite::vertexPositions.push_back(X - halfW);	//x
+		Sprite::vertexPositions.push_back(Y - halfH);	//y
+		Sprite::vertexPositions.push_back(Z);			//z
+		Sprite::vertexPositions.push_back(W);			//w
 
 	}
 	
 	void CharSprite::v_SetVertexColors(void)
 	{
-		_vertexColors.clear();
+		Sprite::vertexColors.clear();
 
-		F32 R = _color.GetRed();
-		F32 G = _color.GetGreen();
- 		F32 B = _color.GetBlue();
- 		F32 A = _color.GetAlpha();
+		F32 R = Sprite::color.GetRed();
+		F32 G = Sprite::color.GetGreen();
+ 		F32 B = Sprite::color.GetBlue();
+ 		F32 A = Sprite::color.GetAlpha();
 
  		//=====Triangle1=====
 		//=====top right=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 
 		//=====bottom right=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 
 		//=====bottom left=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 
 		//=====Triangle2=====
 		//=====top right=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 
 		//=====top left=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 
 		//=====bottom left=====
-		_vertexColors.push_back(R);
-		_vertexColors.push_back(G);
-		_vertexColors.push_back(B);
-		_vertexColors.push_back(A);
+		Sprite::vertexColors.push_back(R);
+		Sprite::vertexColors.push_back(G);
+		Sprite::vertexColors.push_back(B);
+		Sprite::vertexColors.push_back(A);
 	}
 
 	void CharSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
 	{
-		_vertexUvs.clear();
+		Sprite::vertexUvs.clear();
 
 		//=====Vertices=====
 		//=====Triangle1=====
 		//top right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(top);
+		Sprite::vertexUvs.push_back(right);
+		Sprite::vertexUvs.push_back(top);
 
 		//bottom right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(bottom);
+		Sprite::vertexUvs.push_back(right);
+		Sprite::vertexUvs.push_back(bottom);
 
 		//bottom left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(bottom);
+		Sprite::vertexUvs.push_back(left);
+		Sprite::vertexUvs.push_back(bottom);
 
 		//=====Triangle2=====
 		//top right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(top);
+		Sprite::vertexUvs.push_back(right);
+		Sprite::vertexUvs.push_back(top);
 
 		//top left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(top);
+		Sprite::vertexUvs.push_back(left);
+		Sprite::vertexUvs.push_back(top);
 
 		//bottom left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(bottom);
+		Sprite::vertexUvs.push_back(left);
+		Sprite::vertexUvs.push_back(bottom);
 	}
 
-	void CharSprite::SetPosition(Vec2& position)
+	void CharSprite::v_SetPosition(Vec2& position)
 	{
-		_position = position;
+		Sprite::position = position;
 
 		v_SetVertexPositions();
 	}
 
-	void CharSprite::SetColor(Col& col)
+	void CharSprite::v_SetColor(Col& col)
 	{
-		_color = col;
+		Sprite::color = col;
 
 		v_SetVertexColors();
-	}
-
-	void CharSprite::SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left)
-	{
-		_texture = texture;
-
-		v_SetTextureCoords(top, bottom, left, right);
 	}
 }

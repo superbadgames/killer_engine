@@ -62,7 +62,9 @@ namespace KillerEngine
 //Constructors	 	
 //
 //==========================================================================================================================		
-		SqrSprite(void);
+		SqrSprite(void) {  }
+
+		~SqrSprite(void) {  }
 
 //==========================================================================================================================
 //
@@ -77,14 +79,9 @@ namespace KillerEngine
 		
 		void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left);
 
-		void SetPosition(Vec2& position);
+		void v_SetPosition(Vec2& position);
 
-		void SetColor(Col& col);
-
-		void SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left);
-
-	private:
-		TextureManager* _textureManager;
+		void v_SetColor(Col& col);
 
 	};
 }

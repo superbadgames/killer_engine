@@ -49,21 +49,23 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-			void SetWidth(F32 w)  { _width = w; }
+			void SetWidth(F32 w)  { width = w; }
 
-			F32 GetWidth(void)    { return _width; }
+			F32 GetWidth(void)    { return width; }
 
-			void SetHeight(F32 h) { _height = h; }
+			void SetHeight(F32 h) { height = h; }
 
-			F32 GetHeight(void)   { return _height; }
+			F32 GetHeight(void)   { return height; }
 
-			void SetDimensions(F32 w, F32 h) { _width = w; _height = h; }			
+			void SetDimensions(F32 w, F32 h) { width = w; height = h; }			
 
-			Vec2& GetPosition(void) { return _position; }
+			Vec2& GetPosition(void) { return position; }
 
-			Col& GetColor(void) { return _color; }
+			Col& GetColor(void) { return color; }
 
-			Texture& GetTexture(void) { return _texture; }
+			U32 GetTextureID(void) { return textureID; }
+
+
  
 //==========================================================================================================================
 //
@@ -72,10 +74,10 @@ namespace KillerEngine
 //==========================================================================================================================
 		Sprite& operator=(Sprite& sprite) 
 		{
-			_width = sprite.GetWidth();
-			_height = sprite.GetHeight();
-			SetPosition(sprite.GetPosition());
-			SetColor(sprite.GetColor());
+			width = sprite.GetWidth();
+			height = sprite.GetHeight();
+			v_SetPosition(sprite.GetPosition());
+			v_SetColor(sprite.GetColor());
 
 			return *this;
 		}
@@ -87,13 +89,18 @@ namespace KillerEngine
 //==========================================================================================================================
 		virtual void v_RenderSprite(void)=0;
 
-		//virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const Texture& tex) {  }
+		//virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const U32 tex) {  }
 
-		virtual void SetPosition(Vec2& position)=0;
+		virtual void v_SetPosition(Vec2& position)=0;
 
-		virtual void SetColor(Col& col)=0;
+		virtual void v_SetColor(Col& col)=0;
 
-		virtual void SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left)=0;
+		virtual void v_SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left)
+		{
+			textureID = tID;
+
+			v_SetTextureCoords(top, bottom, left, right);
+		}
 
 //==========================================================================================================================
 //
@@ -102,19 +109,18 @@ namespace KillerEngine
 //==========================================================================================================================
 
 	protected:
-		Renderer* 		 _renderer;
-		std::vector<F32> _vertexPositions;
-		std::vector<F32> _vertexColors;
-		std::vector<F32> _vertexUvs;
-		F32				 _width;
-		F32				 _height;
-		Vec2			 _position;
-		Col			 	 _color;
-		Texture	    	 _texture;
+		std::vector<F32> vertexPositions;
+		std::vector<F32> vertexColors;
+		std::vector<F32> vertexUvs;
+		F32				 width;
+		F32				 height;
+		U32				 textureID;
+		Vec2			 position;
+		Col			 	 color;
+		
 		
 
 		virtual void v_SetVertexPositions(void) = 0;
-		//virtual void v_SetVertexData(const Vec& p, const F32 w, const F32 h, const color& col) = 0;
 		
 		virtual void v_SetVertexColors(void) = 0;
 		
@@ -129,11 +135,11 @@ namespace KillerEngine
 
 		Sprite(const F32 width, const F32 height);
 
-		Sprite(const F32 width, const F32 height, Col& col);
+		Sprite(const F32 width, const F32 height, Col& col);											      
 
-		Sprite(const F32 width, const F32 height, Texture& texture);
+		Sprite(const F32 width, const F32 height, U32 tID);													     
 
-		Sprite(const F32 width, const F32 height, Col& col, Texture& texture);
+		Sprite(const F32 width, const F32 height, Col& col, U32 tID);																   
 
 	};
 }//End namespace

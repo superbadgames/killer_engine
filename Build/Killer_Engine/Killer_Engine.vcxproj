@@ -157,11 +157,11 @@
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
+    <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
     <ClCompile Include="..\..\Implementations\RandomGen.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />
     <ClCompile Include="..\..\Implementations\RenderText.cpp" />
-    <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />
     <ClCompile Include="..\..\Implementations\Timer.cpp" />

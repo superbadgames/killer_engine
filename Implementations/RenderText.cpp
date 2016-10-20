@@ -57,7 +57,7 @@ namespace KillerEngine
 		F32 currentX = GameObject2D::position.GetX();
 		F32 currentY = GameObject2D::position.GetY();
 
-		Texture& texture = _font.GetTexture();
+		Texture& texture = TextureManager::Instance()->GetTexture(_font.GetTextureID());
 
 
 		for(char& c : text)
@@ -67,7 +67,7 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
 
@@ -83,7 +83,7 @@ namespace KillerEngine
 			F32 leftCoord  = rightCoord + charWidth / textureWidth;
 			F32 bottomCoord = topCoord + charHeight / textureHeight;
 
-			sprite->SetTexture(texture, topCoord, bottomCoord, rightCoord, leftCoord);
+			sprite->v_SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
 
 			F32 totalCharWidth = charWidth * _widthScaleFactor;
 			F32 totalCharHeight = charHeight * _heightScaleFactor;
@@ -107,7 +107,7 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
 		}

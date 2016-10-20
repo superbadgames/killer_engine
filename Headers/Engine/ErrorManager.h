@@ -35,7 +35,8 @@ namespace KillerEngine
 		EC_Windows,
 		EC_OpenGL,
 		EC_DirectInput,
-		EC_TextureManager
+		EC_TextureManager,
+		EC_GAMEOBJECT
 	};
 
 	class ErrorManager 

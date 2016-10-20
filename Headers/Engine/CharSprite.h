@@ -124,14 +124,11 @@ namespace KillerEngine
 		
 		void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left);
 
-		void SetPosition(Vec2& position);
+		void v_SetPosition(Vec2& position);
 
-		void SetColor(Col& col);
-
-		void SetTexture(Texture& texture, const F32 top, const F32 bottom, const F32 right, const F32 left);
+		void v_SetColor(Col& col);
 
 	private:
-		TextureManager* 	_textureManager;
 		U32 				_charID;
 		U32 				_charX;
 		U32 				_charY;
