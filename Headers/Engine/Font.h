@@ -53,7 +53,7 @@ namespace KillerEngine
 //==========================================================================================================================		
 		Font(void);
 
-		Font(Texture* texture);
+		Font(U32 tID);
 
 //==========================================================================================================================
 //
@@ -76,7 +76,7 @@ namespace KillerEngine
 
 		Font& operator=(Font* font)
 		{
-			_texture = font->GetTexture();
+			_textureID = font->GetTextureID();
 			_fontFile = font->GetFile();
 			_fontName = font->GetName();
 			_fontCharData = font->GetDataMap();
@@ -86,7 +86,7 @@ namespace KillerEngine
 
 		Font& operator=(Font& font)
 		{
-			_texture = font.GetTexture();
+			_textureID = font.GetTextureID();
 			_fontFile = font.GetFile();
 			_fontName = font.GetName();
 			_fontCharData = font.GetDataMap();
@@ -107,17 +107,16 @@ namespace KillerEngine
 
 		string GetName(void) 		  	  { return _fontName; }
 
-		void SetTexture(U32 textureID) { _texture = _textureManager->GetTexture(textureID); }
+		void SetTexture(U32 tID) 		  { _textureID = tID; }
 
-		Texture& GetTexture(void) 		  { return _texture; }
+		U32 GetTextureID(void)			  { return  _textureID; }
 
 	private:
-		Texture 					 _texture;
+		U32 					 	 _textureID;
 		string  					 _fontFile;
 		string  					 _fontName;
 		U32     					 _headerSize = 26;
 		std::map<U32, CharacterData*> _fontCharData;
-		TextureManager*				  _textureManager;
 
 		void _AddNewCharacterData(string id,      string x, 		string y,
 							  	  string width,   string height,   string xoffset,

@@ -45,16 +45,16 @@ namespace KillerEngine
 
 		Texture(GLuint id, S32 width, S32 height) : _id(id), _width(width), _height(height) {  }
 
-		Texture(const Texture& T) : _id(T.GetId()), _width(T.GetWidth()), _height(T.GetHeight()) {  }
+		Texture(const Texture& T) : _id(T.GetID()), _width(T.GetWidth()), _height(T.GetHeight()) {  }
 
-		Texture(const Texture* T) : _id(T->GetId()), _width(T->GetWidth()), _height(T->GetHeight()) {  }
+		Texture(const Texture* T) : _id(T->GetID()), _width(T->GetWidth()), _height(T->GetHeight()) {  }
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		GLuint GetId(void) const { return _id; }
+		GLuint GetID(void) const { return _id; }
 
 		void SetId(GLuint id) { _id = id; }
 
@@ -73,7 +73,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		Texture& operator=(const Texture& T) 
 		{
-			_id     = T.GetId();
+			_id     = T.GetID();
 			_width  = T.GetWidth();
 			_height = T.GetHeight();
 
@@ -82,7 +82,7 @@ namespace KillerEngine
 
 		Texture& operator=(Texture* T)
 		{
-			_id     = T->GetId();
+			_id     = T->GetID();
 			_width  = T->GetWidth();
 			_height = T->GetHeight();
 

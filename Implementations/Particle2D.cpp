@@ -8,8 +8,7 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================	
-	Particle2D::Particle2D(void) : _timer(KM::Timer::Instance())
-	{  }
+	Particle2D::Particle2D(void) {  }
 
 	Particle2D::~Particle2D(void) {  }
 
@@ -41,7 +40,7 @@ namespace KillerPhysics
 		//if there no mass, there is no update
 		if(inverseMass == 0) return;
 
-		F32 delta = _timer->DeltaTime();
+		F32 delta = KM::Timer::Instance()->DeltaTime();
 
 		//Update position
 		KE::GameObject2D::position.AddScaledVector(velocity, delta);

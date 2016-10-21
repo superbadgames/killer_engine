@@ -24,7 +24,7 @@ namespace KillerEngine
 		
 		for(i = _loadedTextures.begin(); i != _loadedTextures.end(); ++i) 
 		{
-			GLuint texture = i->second.GetId();
+			GLuint texture = i->second.GetID();
 			glDeleteTextures(1, &texture);
 		}
 	}
@@ -34,11 +34,11 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-	void TextureManager::SetCurrentTextureId(GLuint textureId)
+	void TextureManager::SetCurrentTextureID(U32 tID)
 	{ 
-		_currentTextureId = textureId; 
+		_currentTextureID = tID; 
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _currentTextureId);
+		glBindTexture(GL_TEXTURE_2D, _loadedTextures[tID].GetID());
 	}
 
 //====================================================================================================
@@ -59,9 +59,9 @@ namespace KillerEngine
 		
 		else 
 		{
-			GLuint texture;
-			glGenTextures(1, &texture);
-			glBindTexture(GL_TEXTURE_2D, texture);
+			GLuint glTexture;
+			glGenTextures(1, &glTexture);
+			glBindTexture(GL_TEXTURE_2D, glTexture);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -79,7 +79,7 @@ namespace KillerEngine
 						 );
 			glGenerateMipmap(GL_TEXTURE_2D);
 
-			Texture* newTexture = new Texture(texture, width, height);
+			Texture* newTexture = new Texture(glTexture, width, height);
 
 			_loadedTextures.insert(std::map<U32, Texture*>::value_type(id, newTexture));
 

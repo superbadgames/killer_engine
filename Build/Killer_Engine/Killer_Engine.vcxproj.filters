@@ -114,9 +114,6 @@
     <ClInclude Include="..\..\Headers\Engine\RenderText.h">
       <Filter>Components\GameObjects\RenderText</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
-      <Filter>Components\Sprites\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\SqrSprite.h">
       <Filter>Components\Sprites\SqrSprite</Filter>
     </ClInclude>
@@ -162,6 +159,9 @@
     <ClInclude Include="..\..\Headers\Engine\WinProgram.h">
       <Filter>Components\ProgramWindows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Sprite.h">
+      <Filter>Components\Sprites\Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -181,9 +181,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\RenderText.cpp">
       <Filter>Components\GameObjects\RenderText</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Sprite.cpp">
-      <Filter>Components\Sprites\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp">
       <Filter>Components\Sprites\SqrSprite</Filter>
@@ -217,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\WinProgram.cpp">
       <Filter>Components\ProgramWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Sprite.cpp">
+      <Filter>Components\Sprites\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
