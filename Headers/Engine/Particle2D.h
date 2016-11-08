@@ -10,9 +10,8 @@ of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-#ifndef KILLER_ENGINE_H
-#define KILLER_ENGINE_H
-#pragma once
+#ifndef PARTICLE2D_H
+#define PARTICLE2D_H
 
 //=====KillerMath includes=====
 #include <Engine/Timer.h>

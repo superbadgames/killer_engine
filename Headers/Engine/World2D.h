@@ -57,6 +57,8 @@ namespace KillerEngine
 //==========================================================================================================================
 		void AddObjectToWorld(GameObject2D* obj);
 		
+		void RemoveObjectFromWorld(U32 id);
+
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {
 				i->second->v_Render();

@@ -19,6 +19,7 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/World2D.h>
+#include <Engine/GameObject2D.h>
 #include <Engine/ErrorManager.h>
 
 //=====STL includes=====
@@ -57,6 +58,10 @@ namespace KillerEngine
 		void SetRunning(bool r) { _running = r; }
 		
 		bool GetRunning(void) { return _running; } 
+
+		void AddObjectToWorld(U32 id, GameObject2D* obj);
+
+		void RemoveObjectFromWorld(U32 worldID, U32 ojbId);
 
 //==========================================================================================================================
 //

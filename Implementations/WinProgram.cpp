@@ -95,11 +95,11 @@ namespace KillerEngine {
     S32 WinProgram::_top         = 0;
     S32 WinProgram::_bottom      = 0;
     WinProgram::WinProgram(): _isFullScreen(false),
-    								_wndName("WinProgram"),
-    								_hwnd(NULL),
-                                    _hglrc(NULL),
-                                    _errorManager(ErrorManager::Instance()),
-                                    _controller(Controller::Instance())
+    						  _wndName("WinProgram"),
+    						  _hwnd(NULL),
+                              _hglrc(NULL),
+                              _errorManager(ErrorManager::Instance()),
+                              _controller(Controller::Instance())
     {
     	
     }

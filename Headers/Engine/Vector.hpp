@@ -288,6 +288,7 @@ namespace KillerMath
 		
 		T SqrMagnitude(void) { return _v[0]*_v[0] + _v[1]*_v[1] + _v[2]*_v[2]; }
 
+		//=====Makes this vector Unit=====
 		void Normalize(void) 
 		{
 			T mag = Magnitude();

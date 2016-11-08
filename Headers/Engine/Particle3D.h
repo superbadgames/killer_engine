@@ -10,8 +10,8 @@ of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-#ifndef KILLER_ENGINE_H
-#define KILLER_ENGINE_H
+#ifndef PARTICLE3D_H
+#define PARTICLE3D_H
 #pragma once
 
 //=====Physics includes=====
