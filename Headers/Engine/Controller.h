@@ -29,6 +29,8 @@ Written by Maxwell Miller
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
+#include <Engine/Matrix.hpp>
+namespace KM = KillerMath;
 
 
 //=====DirectInput includes=====
@@ -119,6 +121,8 @@ namespace KillerEngine
 //==========================================================================================================================
 		void Update(void);
 
+		void Init(F32 w, F32 h, F32 d) { _transform.MakeOrthographic(w, h, d); }
+
 		void KeyDown(Keys k) { _curActiveKeys[k] = true; }
 
 		void KeyUp(Keys k) { _curActiveKeys[k] = false; }
@@ -159,6 +163,7 @@ namespace KillerEngine
 		Vec2 					_leftClickCoordinates;
 		Vec2					_rightClickCoordinates;
 		static Controller*   	_instance;
+		KM::Matrix4<F32>		_transform;
 	};
 }//End namespace
 

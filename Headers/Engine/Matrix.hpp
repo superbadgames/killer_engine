@@ -47,6 +47,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
+#include <Engine/Vector.hpp>
 
 namespace KillerMath {
 
@@ -253,6 +254,24 @@ namespace KillerMath {
 		Matrix4<T>& operator *=(Matrix4<T>& RHM) {
 			*this = *this * RHM;
 			return *this;
+		}
+
+		Vector2<T>& operator *(const Vector2<T>& RHV)
+		{
+			return Vector2<T>
+			(
+				RHV.GetX() * _m[0] + RHV.GetY() * _m[1],
+				RHV.GetX() * _m[4] + RHV.GetY() * _m[5]
+			);
+		}
+
+		Vector3<T>& operator *(const Vector3<T>& RHV)
+		{
+			return Vector3<T>
+			(
+				RHV.GetX() * _m[0] + RHV.GetY() * _m[1] + RHV.GetZ() * _m[2],
+				RHV.GetX() * _m[4] + RHV.GetY() * _m[5] + RHV.GetZ() * _m[6]
+			);
 		}
 	};
 

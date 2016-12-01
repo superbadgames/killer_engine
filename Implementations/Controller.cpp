@@ -88,7 +88,7 @@ namespace KillerEngine
 //Constructor
 //
 //==========================================================================================================================
-	Controller::Controller(void)
+	Controller::Controller(void) : _transform()
 	{
 		for(int i = 0; i < _totalKeys; ++i)
 		{
