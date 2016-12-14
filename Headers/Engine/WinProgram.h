@@ -28,6 +28,8 @@ Written by Maxwell Miller
 
 namespace KillerEngine 
 {
+	class Controller;
+	enum Keys;
 
 	class WinProgram
 	{

@@ -28,6 +28,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
+#include <Engine/WinProgram.h>
 #include <Engine/ErrorManager.h>
 #include <Engine/Matrix.hpp>
 namespace KM = KillerMath;
@@ -127,8 +128,12 @@ namespace KillerEngine
 
 		void KeyUp(Keys k) { _curActiveKeys[k] = false; }
 
-		void LeftMouseClick(Vec2 coord) { _leftClickCoordinates = coord; }
-
+		void LeftMouseClick(Vec2 coord);
+/*		{ 
+			_leftClickCoordinates = coord; 
+			//_leftClickCoordinates.SetY(-coord.GetY());
+		}
+*/
 		Vec2 GetLeftMouseCoord(void) { return _leftClickCoordinates; }
 
 		void RightMouseClick(Vec2 coord) { _rightClickCoordinates = coord; }

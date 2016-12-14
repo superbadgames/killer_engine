@@ -121,12 +121,12 @@ namespace KillerMath {
 //
 //==========================================================================================================================
 		void MakeOrthographic(T width, T height, T depth) {
-		  	T right  = width   / 2;
-		  	T left   = -width  / 2;
-			T top    = height  / 2;
-			T bottom = -height / 2;
-			T far    = depth   / 2;
-			T near   = -depth  / 2;
+		  	T right  = width;
+		  	T left   = 0;
+			T top    = height;
+			T bottom = 0;
+			T far    = depth;
+			T near   = 0;
 
 		  	//Reset Matrix
 			_m[0]  =  _m[1]  =  _m[2]  =  _m[3]  = 0;

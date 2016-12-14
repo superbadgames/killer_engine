@@ -106,8 +106,12 @@ namespace KillerMath
 //
 //==========================================================================================================================
 		T GetX() const { return _v[0]; }
+
+		void SetX(T x) { _v[0] = x; }
 		
 		T GetY() const { return _v[1]; }
+
+		void SetY(T y) { _v[1] = y; } 
 		
 		T GetZ() const { return _v[2]; }
 		
