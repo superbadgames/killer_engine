@@ -2,9 +2,13 @@
 
 namespace KillerEngine 
 {
-	World2D::World2D(void) : mapWidth(0),
-					   		 mapHeight(0),
-					   		 bgColor()
+	World2D::World2D(void) : _mapWidth(0),
+					   		 _mapHeight(0),
+					   		 _mapTopBorder(0),
+					   		 _mapBottomBorder(0),
+					   		 _mapRightBorder(0),
+					   		 _mapLeftBorder(0),
+					   		 _bgColor()
 	{  }
 
 //=============================================================================

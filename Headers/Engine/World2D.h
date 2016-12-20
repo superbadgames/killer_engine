@@ -65,63 +65,59 @@ namespace KillerEngine
 			}
 		}
 		
-		void SetBackgroundColor(Col& c) { bgColor = c; }
+		void SetBackgroundColor(Col& c) { _bgColor = c; }
 		
-		void ActivateBackgroundColor(void) { Renderer::Instance()->SetBackgroundColor(bgColor); }
+		void ActivateBackgroundColor(void) { Renderer::Instance()->SetBackgroundColor(_bgColor); }
 		
-		S32  GetMapWidth(void)   { return mapWidth; }
+		S32  GetMapWidth(void) const { return _mapWidth; }
 		
-		S32  GetMapHeight(void)  { return mapHeight; }
+		S32  GetMapHeight(void) const { return _mapHeight; }
 		
-		void SetMapWidth(S32 w)  { mapWidth = w; }
+		void SetMapWidth(S32 w)  { _mapWidth = w; }
 		
-		void SetMapHeight(S32 h) { mapHeight = h; }
+		void SetMapHeight(S32 h) { _mapHeight = h; }
 		
-		void SetMapDimensions(S32 w, S32 h) { mapWidth  = w; mapHeight = h; }
+		void SetMapDimensions(S32 w, S32 h) { _mapWidth  = w; _mapHeight = h; }
 		
-		void SetTopBorder(S32 top) { mapTopBorder = top; }
+		void SetTopBorder(S32 top) { _mapTopBorder = top; }
 
-		void SetBottomBorder(S32 bottom) { mapBottomBorder = bottom; }
+		void SetBottomBorder(S32 bottom) { _mapBottomBorder = bottom; }
 
-		void SetRightBorder(S32 right) { mapRightBorder = right; }
+		void SetRightBorder(S32 right) { _mapRightBorder = right; }
 
-		void SetLeftBorder(S32 left) { mapLeftBorder = left; }
+		void SetLeftBorder(S32 left) { _mapLeftBorder = left; }
 
-		void SetMapBorders(S32 top, S32 bottom, S32 left, S32 right)
+		void SetMapBorders(S32 top, S32 bottom, S32 right, S32 left)
 		{
-			mapTopBorder = top;
-			mapBottomBorder = bottom;
-			mapLeftBorder = left;
-			mapRightBorder = right;
+			_mapTopBorder = top;
+			_mapBottomBorder = bottom;
+			_mapLeftBorder = left;
+			_mapRightBorder = right;
 		}
 		
-		S32 GetTopBorder(void) { return mapTopBorder; }
+		S32 GetTopBorder(void) const { return _mapTopBorder; }
 
-		S32 GetBottomBorder(void)  { return mapBottomBorder; }
+		S32 GetBottomBorder(void) const { return _mapBottomBorder; }
 		
-		S32 GetLeftBorder(void) { return mapLeftBorder; }
+		S32 GetLeftBorder(void) const { return _mapLeftBorder; }
 
-		S32 GetRightBorder(void) { return mapRightBorder; }
+		S32 GetRightBorder(void) const { return _mapRightBorder; }
 
 		void SetID(U32 id) { _ID = id; }
 
-		U32 GetID(void) { return _ID; }
-
-	protected:
-		S32   mapWidth;
-		S32   mapHeight;
-		S32   mapTopBorder;
-		S32   mapBottomBorder;
-		S32   mapLeftBorder;
-		S32   mapRightBorder;
-		Col   bgColor;
+		U32 GetID(void) const { return _ID; }
 
 	private:
+		S32 _mapWidth;
+		S32 _mapHeight;
+		S32 _mapTopBorder;
+		S32 _mapBottomBorder;
+		S32 _mapRightBorder;
+		S32 _mapLeftBorder;
+		Col _bgColor;
+		U32 _ID;
 		std::map<U32, GameObject2D*> 	_worldObjects;
-		U32								_ID;
-		//static U32						_nextID;
 	};
-		//U32 World2D::_nextID = 1;
 }//End namespace
 
 #endif

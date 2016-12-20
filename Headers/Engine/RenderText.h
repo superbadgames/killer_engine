@@ -69,6 +69,8 @@ namespace KillerEngine
 
 		F32 GetTotalHeight(void) { return _totalHeight; }
 
+		Vec2& GetCenter(void) { return _center; }
+
 	private:
 		string _text;
 		Font   _font;
@@ -77,6 +79,7 @@ namespace KillerEngine
 		F32 _heightScaleFactor;
 		F32 _totalWidth;
 		F32 _totalHeight;
+		Vec2 _center;	
 	};
 }
 
