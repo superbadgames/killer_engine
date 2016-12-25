@@ -65,6 +65,14 @@ namespace KillerMath
 			_v[2] = 0;
 			_v[3] = 1;
 		}
+
+		Vector2(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[0] = 0;
+			_v[3] = 1;
+		}
 		
 		Vector2(T x, T y)
 		{
@@ -369,6 +377,14 @@ namespace KillerMath
 			_v[0] = 0;
 			_v[1] = 0;
 			_v[2] = 0;
+			_v[3] = 1;
+		}
+
+		Vector3(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[2] = v;
 			_v[3] = 1;
 		}
 		
