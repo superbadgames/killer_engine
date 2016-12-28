@@ -158,7 +158,6 @@
     <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
     <ClCompile Include="..\..\Implementations\Sprite.cpp" />
-    <ClCompile Include="..\..\Implementations\Vector.cpp" />
     <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
     <ClCompile Include="..\..\Implementations\RandomGen.cpp" />
     <ClCompile Include="..\..\Implementations\Renderer.cpp" />

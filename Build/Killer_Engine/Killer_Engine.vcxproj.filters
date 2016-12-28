@@ -224,8 +224,5 @@
     <ClCompile Include="..\..\Implementations\Sprite.cpp">
       <Filter>Components\Sprites\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\Vector.cpp">
-      <Filter>Components\Math\LinearAlgebra\Vector</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
