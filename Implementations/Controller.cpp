@@ -62,39 +62,46 @@ namespace KillerEngine
 	bool Controller::GetKeyDown(Keys k)
 	{
 		if(_keyStates[k] == KeyStates::KEY_DOWN) { return true; }
-		else 									 { return false; }
+		else { return false; }
 	}
 
 	bool Controller::GetKeyHeld(Keys k)
 	{
 		if(_keyStates[k] == KeyStates::KEY_HELD) { return true; }
-		else									{ return false; }
+		else { return false; }
 	}
 
 	bool Controller::GetKeyUp(Keys k)
 	{
 		if(_keyStates[k] == KeyStates::KEY_UP) { return true; }
-		else								   { return false; }
+		else { return false; }
 	}
 
 	bool Controller::GetKeyReleased(Keys k)
 	{
 		if(_keyStates[k] == KeyStates::KEY_RELEASED) { return true; }
-		else										 { return false; }
+		else { return false; }
 	}
+
+	void Controller::LeftMouseClick(Vec2 coord)
+	{
+		_leftClickCoordinates.SetX(coord.GetX());// - (F32)WinProgram::Instance()->GetWidth() * -1.0f);
+		_leftClickCoordinates.SetY(-(coord.GetY() - (F32)WinProgram::Instance()->GetHeight()));
+	} 
 
 //==========================================================================================================================
 //
 //Constructor
 //
 //==========================================================================================================================
-	Controller::Controller(void)
+	Controller::Controller(void) : _transform()
 	{
 		for(int i = 0; i < _totalKeys; ++i)
 		{
 			_curActiveKeys[i] = false;//KeyStates::KEY_RELEASED;
 			_pastActiveKeys[i] = false; //KeyStates::KEY_RELEASED;
 		}
+	//	_transform = 
 	}
 
 }//End namespace	

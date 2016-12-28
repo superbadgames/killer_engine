@@ -144,7 +144,7 @@ namespace KillerEngine
 	void Renderer::_SetOrthoProjection(void) 
 	{
 		Mat projection{};
-		projection.MakeOrthographic(1024, 768, 200);
+		projection.MakeOrthographic((F32)WinProgram::Instance()->GetWidth(), (F32)WinProgram::Instance()->GetHeight(), 200);
 
 		Mat model(1.0f);
 

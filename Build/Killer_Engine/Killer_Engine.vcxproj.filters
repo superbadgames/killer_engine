@@ -88,6 +88,12 @@
     <Filter Include="Components\ProgramWindows">
       <UniqueIdentifier>{381d786c-065e-4c73-9294-7079cbccce17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Math\LinearAlgebra\Vector">
+      <UniqueIdentifier>{2d795523-a23d-4211-b17f-2919e5a6a30f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Math\LinearAlgebra\Matrix">
+      <UniqueIdentifier>{b47791cc-1241-40a1-9bf3-9df0eb96250c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -132,14 +138,8 @@
     <ClInclude Include="..\..\Headers\Engine\Particle3D.h">
       <Filter>Components\Physics\Particles\3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Matrix.hpp">
-      <Filter>Components\Math\LinearAlgebra</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\RandomGen.h">
       <Filter>Components\Math\RandomGen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
-      <Filter>Components\Math\LinearAlgebra</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Point.hpp">
       <Filter>Components\Math\Point</Filter>
@@ -161,6 +161,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Sprite.h">
       <Filter>Components\Sprites\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
+      <Filter>Components\Math\LinearAlgebra\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Matrix.hpp">
+      <Filter>Components\Math\LinearAlgebra\Matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

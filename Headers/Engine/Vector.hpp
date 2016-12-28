@@ -65,6 +65,14 @@ namespace KillerMath
 			_v[2] = 0;
 			_v[3] = 1;
 		}
+
+		Vector2(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[0] = 0;
+			_v[3] = 1;
+		}
 		
 		Vector2(T x, T y)
 		{
@@ -106,8 +114,12 @@ namespace KillerMath
 //
 //==========================================================================================================================
 		T GetX() const { return _v[0]; }
+
+		void SetX(T x) { _v[0] = x; }
 		
 		T GetY() const { return _v[1]; }
+
+		void SetY(T y) { _v[1] = y; } 
 		
 		T GetZ() const { return _v[2]; }
 		
@@ -288,6 +300,7 @@ namespace KillerMath
 		
 		T SqrMagnitude(void) { return _v[0]*_v[0] + _v[1]*_v[1] + _v[2]*_v[2]; }
 
+		//=====Makes this vector Unit=====
 		void Normalize(void) 
 		{
 			T mag = Magnitude();
@@ -364,6 +377,14 @@ namespace KillerMath
 			_v[0] = 0;
 			_v[1] = 0;
 			_v[2] = 0;
+			_v[3] = 1;
+		}
+
+		Vector3(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[2] = v;
 			_v[3] = 1;
 		}
 		

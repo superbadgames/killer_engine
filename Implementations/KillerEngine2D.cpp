@@ -31,6 +31,8 @@ namespace KillerEngine
 		Controller::Instance()->Update();
 		
 		WorldManager2D::Instance()->Update();
+
+		ErrorManager::Instance()->DisplayErrors();
 	}
 
 //=======================================================================================================

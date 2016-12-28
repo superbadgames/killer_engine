@@ -68,4 +68,29 @@ namespace KillerEngine
 		_activeWorld->Render();
 	}
 
+//==========================================================================================================================
+//
+//AddObjectToWorld
+//
+//This function will add a GameObject to an existing, registered world. It will check to make sure that the called worled
+//in fact is registered with the manager, and will throw and error if it is not. 
+//	
+//==========================================================================================================================
+	void WorldManager2D::AddObjectToWorld(U32 id, GameObject2D* obj)
+	{
+		if(_worlds.find(id) != _worlds.end()) { _worlds[id]->AddObjectToWorld(obj); } 
+		else ErrorManager::Instance()->SetError(EC_KillerEngine, "WorldManager2D -> Tried to call the AddObjectToWorld() function for a world that does not exist.");
+	}
+
+//==========================================================================================================================
+//
+//RemoveObjectFromWorld
+//	
+//==========================================================================================================================
+
+	void WorldManager2D::RemoveObjectFromWorld(U32 worldID, U32 objID)
+	{
+		if(_worlds.find(worldID) != _worlds.end()) { _worlds[worldID]->RemoveObjectFromWorld(objID); }
+	}
+
 }//End namsepace

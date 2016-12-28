@@ -36,7 +36,7 @@ namespace KillerEngine
 		EC_OpenGL,
 		EC_DirectInput,
 		EC_TextureManager,
-		EC_GAMEOBJECT
+		EC_GameObject
 	};
 
 	class ErrorManager 
@@ -44,7 +44,7 @@ namespace KillerEngine
 	private:
 		U32       			 _numErrors;
 		map<U32, ErrorCode>  _errorCodes;
-		map<U32, string>       _errorMessages;
+		map<U32, string>     _errorMessages;
 		static ErrorManager* _instance;
 
 	public:

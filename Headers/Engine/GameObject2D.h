@@ -71,6 +71,11 @@ namespace KillerEngine
 		{
 			ID = _nextID;
 			++_nextID;
+
+			//This is here to make sure that by this point the user has 
+			//added a sprite to the game object.
+			if(sprite == NULL)
+				ErrorManager::Instance()->SetError(EC_GameObject, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use before you call GameObject::SetID().");
 		}
 
 //=====Dimensions=====
@@ -78,72 +83,34 @@ namespace KillerEngine
 //Can make sure to update its sprite, if it has one
 //with a default version in the case of no sprite.
 		
-		const F32 GetWidth(void) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				return sprite->GetWidth();
-		}
+		const F32 GetWidth(void) { return sprite->GetWidth(); }
 
-		virtual void SetWidth(F32 w) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				sprite->SetWidth(w);
-		}
+		virtual void SetWidth(F32 w) { sprite->SetWidth(w); }
 
-		const F32 GetHeight(void) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				return sprite->GetHeight();
-		}
+		const F32 GetHeight(void) { return sprite->GetHeight(); }
 
-		virtual void SetHeight(F32 h) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				sprite->SetHeight(h);
-		}
+		virtual void SetHeight(F32 h) { sprite->SetHeight(h); }
 
-		virtual void SetDimensions(const F32 w, const F32 h) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				sprite->SetDimensions(w, h);
-		}
+		virtual void SetDimensions(const F32 w, const F32 h) { sprite->SetDimensions(w, h); }
 
 //=====Color=====
-		const Col& GetColor(void) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				return sprite->GetColor();	
-		}
+		const Col& GetColor(void) { return sprite->GetColor();	 }
 
-		void SetColor(Col& col) 
-		{
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				sprite->v_SetColor(col);
-		}
+		void SetColor(Col& col) { sprite->v_SetColor(col); }
+
+		void SetColor(F32 red, F32 blue, F32 green) { sprite->v_SetColor(Col(red, blue, green)); }
 
 //=====Texture=====
 		const  U32 GetTextureID(void) { return textureID; }
 
 		void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left) 
 		{ 
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				sprite->v_SetTexture(tID, top, bottom, right, left);
+			sprite->v_SetTexture(tID, top, bottom, right, left);
+		}
+
+		void SetTexture(U32 tID)
+		{
+			sprite->v_SetTexture(tID, 0.0f, 1.0f, 0.0f, 1.0f);
 		}
 
 //=====Active=====
@@ -154,15 +121,11 @@ namespace KillerEngine
 		void SetInactive(void) { active = false; }
 
 //=====Sprite=====
-		const Sprite* GetSprite(void) 
-		{ 
-			if(sprite == NULL)
-				ErrorManager::Instance()->SetError(EC_GAMEOBJECT, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use.");
-			else
-				return sprite;
-		}
+		const Sprite* GetSprite(void) { return sprite; }
 
-		void SetSprite(Sprite* s) { sprite = s; }		
+		void SetSprite(Sprite* s) { sprite = s; }	
+
+		void RenderSprite(void) { sprite->v_RenderSprite();  }	
 
 //=====Position=====
 		const Vec2& GetPosition(void) { return position; }
@@ -170,10 +133,16 @@ namespace KillerEngine
 		void SetPosition(Vec2& pos) 
 		{ 
 			position = pos;
-			sprite->v_SetPosition(pos); 
+			sprite->v_SetPosition(position); 
 		}
 
-		void SetPosition(F32 x, F32 y) { position = Vec2(x, y); }
+		void SetPosition(F32 x, F32 y) 
+		{ 
+			position = Vec2(x, y);
+			sprite->v_SetPosition(position);
+		}
+
+		void SetPosition(void) { sprite->v_SetPosition(position); }
 
 //=====Velocity=====
 		const Vec2& GetVelocity(void) { return velocity; }

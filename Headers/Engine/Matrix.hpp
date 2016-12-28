@@ -47,6 +47,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
+#include <Engine/Vector.hpp>
 
 namespace KillerMath {
 
@@ -120,12 +121,12 @@ namespace KillerMath {
 //
 //==========================================================================================================================
 		void MakeOrthographic(T width, T height, T depth) {
-		  	T right  = width   / 2;
-		  	T left   = -width  / 2;
-			T top    = height  / 2;
-			T bottom = -height / 2;
-			T far    = depth   / 2;
-			T near   = -depth  / 2;
+		  	T right  = width;
+		  	T left   = 0;
+			T top    = height;
+			T bottom = 0;
+			T far    = depth;
+			T near   = 0;
 
 		  	//Reset Matrix
 			_m[0]  =  _m[1]  =  _m[2]  =  _m[3]  = 0;
@@ -253,6 +254,24 @@ namespace KillerMath {
 		Matrix4<T>& operator *=(Matrix4<T>& RHM) {
 			*this = *this * RHM;
 			return *this;
+		}
+
+		Vector2<T>& operator *(const Vector2<T>& RHV)
+		{
+			return Vector2<T>
+			(
+				RHV.GetX() * _m[0] + RHV.GetY() * _m[1],
+				RHV.GetX() * _m[4] + RHV.GetY() * _m[5]
+			);
+		}
+
+		Vector3<T>& operator *(const Vector3<T>& RHV)
+		{
+			return Vector3<T>
+			(
+				RHV.GetX() * _m[0] + RHV.GetY() * _m[1] + RHV.GetZ() * _m[2],
+				RHV.GetX() * _m[4] + RHV.GetY() * _m[5] + RHV.GetZ() * _m[6]
+			);
 		}
 	};
 

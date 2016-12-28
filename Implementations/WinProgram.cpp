@@ -95,11 +95,11 @@ namespace KillerEngine {
     S32 WinProgram::_top         = 0;
     S32 WinProgram::_bottom      = 0;
     WinProgram::WinProgram(): _isFullScreen(false),
-    								_wndName("WinProgram"),
-    								_hwnd(NULL),
-                                    _hglrc(NULL),
-                                    _errorManager(ErrorManager::Instance()),
-                                    _controller(Controller::Instance())
+    						  _wndName("WinProgram"),
+    						  _hwnd(NULL),
+                              _hglrc(NULL),
+                              _errorManager(ErrorManager::Instance()),
+                              _controller(Controller::Instance())
     {
     	
     }
@@ -147,7 +147,7 @@ namespace KillerEngine {
 
     	if (!RegisterClassEx(&_wndClass)) { _errorManager->SetError(EC_OpenGL, "Failed to register window class"); }
 
-    	_hwnd = CreateWindowEx(NULL,        //WS_EX_APPWINDOW | WS_EX_WINDOWEDGE,
+    	_hwnd = CreateWindowEx(NULL,        							//WS_EX_APPWINDOW | WS_EX_WINDOWEDGE,
     				   		   _wndName.c_str(),					    //Window Class name
     				   		   _wndName.c_str(),						//Window Name
     				   		   WS_CLIPSIBLINGS 	   | WS_CLIPCHILDREN |  //Window Styles
@@ -160,6 +160,8 @@ namespace KillerEngine {
     				   		   this); 									//lpParam
     	if (!_hwnd) { _errorManager->SetError(EC_OpenGL, "Failed to create HWND"); }
 
+    	SetWindowLong(_hwnd, GWL_STYLE, WS_BORDER);
+
         _hdc = GetDC(_hwnd);
 
         if(!_hdc) { _errorManager->SetError(EC_OpenGL, "Failed to get HDC"); }
@@ -167,7 +169,7 @@ namespace KillerEngine {
         ShowWindow(_hwnd, SW_SHOW);
         UpdateWindow(_hwnd);
 
-        //_controller->Init(_wndClass.hInstance, _hwnd);
+        Controller::Instance()->Init((F32)width, (F32)height, 200.0f);
     }
 
 //=======================================================================================================
