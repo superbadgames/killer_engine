@@ -13,9 +13,6 @@ Written by Maxwell Miller
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
-typedef unsigned __int32 U32;
-#include <string>
-typedef std::string string;
 
 //=====STL includes=====
 #include <map>

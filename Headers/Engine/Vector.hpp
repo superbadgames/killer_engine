@@ -27,7 +27,7 @@ Written by Maxwell Miller
 #define VECTOR_HPP
 
 #include <Engine/Atom.h>
-#include <Engine/ErrorManager.h>
+#include <cassert>
 
 namespace KillerMath 
 {
@@ -277,18 +277,11 @@ namespace KillerMath
 
 		Vector2<T>& operator /=(const T d) 
 		{
-			if (d == 0) 
-			{ 
-				//KE::ErrorManager::Instance()->SetError(KE::ErrorCode::EC_MATH, "Divide by Zero Error."); 
-				return *this;
-			}
+			assert(d != 0);
 			
-			else 
-			{
-				_v[0] /= d;
-				_v[1] /= d;
-			}
-
+			_v[0] /= d;
+			_v[1] /= d;
+			
 			return *this;
 		}
 
@@ -609,19 +602,12 @@ namespace KillerMath
 
 		Vector3<T>& operator /=(const T d) 
 		{
-			if (d == 0) 
-			{ 
-				//do nothing  ----------------------Needs to make error for this in error system 
-				return *this;
-			}
+			assert(d != 0);
 			
-			else 
-			{
-				_v[0] /= d;
-				_v[1] /= d;
-				_v[2] /= d;
-			}
-
+			_v[0] /= d;
+			_v[1] /= d;
+			_v[2] /= d;
+			
 			return *this;
 		}
 
