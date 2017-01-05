@@ -27,6 +27,7 @@ Written by Maxwell Miller
 #define VECTOR_HPP
 
 #include <Engine/Atom.h>
+#include <Engine/ErrorManager.h>
 
 namespace KillerMath 
 {
@@ -130,7 +131,7 @@ namespace KillerMath
 //Operator Overloads
 //
 //==========================================================================================================================
-		//=====Copy assignment=====
+//=====Copy assignment=====
 		Vector2<T>& operator =(const Vector2<T>& V) 
 		{
 			_v[0] = V.GetX();
@@ -141,7 +142,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Add by vector=====
+//=====Add by vector=====
 		Vector2<T> operator +(const Vector2<T>& V) 
 		{
 			return Vector2<T>( _v[0] + V.GetX(),
@@ -158,7 +159,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Add by scalar=====
+//=====Add by scalar=====
 		Vector2<T> operator +(const T& a) 
 		{
 			return Vector2<T>( _v[0] + a,
@@ -175,7 +176,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Minus from vector=====
+//=====Minus from vector=====
 		Vector2<T> operator-(const Vector2<T>& V) 
 		{
 			return Vector2<T>( _v[0] - V.GetX(),
@@ -191,7 +192,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Minus from scalar=====
+//=====Minus from scalar=====
 		Vector2<T> operator-(const T& s) 
 		{
 			return Vector2<T>( _v[0] - s,
@@ -207,7 +208,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Multiply by a scalar=====
+//=====Multiply by a scalar=====
 		Vector2<T> operator*(const T m) 
 		{
 			return Vector2<T>( _v[0] * m,
@@ -224,7 +225,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Straight Multiply by Vector2=====
+//=====Straight Multiply by Vector2=====
 		Vector2<T>& operator *=(const Vector2<T> v)
 		{
 			_v[0] *= v.GetX();
@@ -234,7 +235,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Dot Product=====
+//=====Dot Product=====
 		T DotProduct(const Vector2<T>& V) 
 		{
 			return _v[0] * V.GetX() +
@@ -264,7 +265,7 @@ namespace KillerMath
 			return *this;
 	    }
 
-		//=====Division by scalar=====
+//=====Division by scalar=====
 		Vector2<T> operator /(const T d) 
 		{
 			if(d == 0) { return *this; }
@@ -278,7 +279,7 @@ namespace KillerMath
 		{
 			if (d == 0) 
 			{ 
-				//do nothing  ----------------------Needs to make error for this in error system 
+				//KE::ErrorManager::Instance()->SetError(KE::ErrorCode::EC_MATH, "Divide by Zero Error."); 
 				return *this;
 			}
 			
@@ -300,7 +301,7 @@ namespace KillerMath
 		
 		T SqrMagnitude(void) { return _v[0]*_v[0] + _v[1]*_v[1] + _v[2]*_v[2]; }
 
-		//=====Makes this vector Unit=====
+//=====Makes this vector Unit=====
 		void Normalize(void) 
 		{
 			T mag = Magnitude();
@@ -321,7 +322,7 @@ namespace KillerMath
 			B = C % A;
 		}
 
-		//=====AddScales Vector=====
+//=====AddScales Vector=====
 		void AddScaledVector(const Vector2<T> V, T scale)
 		{
 			_v[0] += V.GetX() * scale;
@@ -330,7 +331,7 @@ namespace KillerMath
 
 		
 		
-		//=====Component Mulitplication=====
+//=====Component Mulitplication=====
 		Vector2<T> ComponentProduct(const Vector2<T>& V) 
 		{
 			return Vector2<T>( _v[0] * V.GetX(),
@@ -343,6 +344,21 @@ namespace KillerMath
 			_v[0] *= V.GetX();
 			_v[1] *= V.GetY();
 			_v[2] *= V.GetZ();
+		}
+
+//=====Clear will reset the vector to 0 or to v=====
+		void Clear(void)
+		{
+			_v[0] = 0;
+			_v[1] = 0;
+			_v[3] = 0;
+		}
+
+		void Clear(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[3] = 0;
 		}
 
 	};
@@ -440,7 +456,7 @@ namespace KillerMath
 //Operator Overloads
 //
 //==========================================================================================================================
-		//=====Copy assignment=====
+//=====Copy assignment=====
 		Vector3<T>& operator =(const Vector3<T>& V) 
 		{
 			_v[0] = V.GetX();
@@ -451,7 +467,16 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Add by vector=====
+		Vector3<T>& operator =(const T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[3] = v;
+
+			return *this;
+		}
+
+//=====Add by vector=====
 		Vector3<T> operator +(const Vector3<T>& V) 
 		{
 			return Vector3<T>( _v[0] + V.GetX(),
@@ -469,7 +494,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Add by scalar=====
+//=====Add by scalar=====
 		Vector3<T> operator +(const T& a) 
 		{
 			return Vector3<T>( _v[0] + a,
@@ -487,7 +512,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Minus from vector=====
+//=====Minus from vector=====
 		Vector3<T> operator-(const Vector3<T>& V) 
 		{
 			return Vector3<T>( _v[0] - V.GetX(),
@@ -505,7 +530,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Minus from scalar=====
+//=====Minus from scalar=====
 		Vector3<T> operator-(const T& s) 
 		{
 			return Vector3<T>( _v[0] - s,
@@ -523,7 +548,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Multiply by a scalar=====
+//=====Multiply by a scalar=====
 		Vector3<T> operator*(const T m) 
 		{
 			return Vector3<T>( _v[0] * m,
@@ -541,7 +566,7 @@ namespace KillerMath
 			return *this;
 		}
 
-		//=====Dot Product=====
+//=====Dot Product=====
 		T DotProduct(const Vector3<T>& V) 
 		{
 			return _v[0] * V.GetX() +
@@ -551,7 +576,7 @@ namespace KillerMath
 
 		T operator *(const Vector3<T>& V) { return DotProduct(V); } 
 
-		//====Cross Product=====
+//====Cross Product=====
 		Vector3<T> CrossProduct(const Vector3<T>& V) 
 		{ 
 			return Vector3<T>( _v[1] * V.GetZ() - _v[2] * V.GetY(), 
@@ -571,7 +596,7 @@ namespace KillerMath
 			return *this;
 	    }
 
-		//=====Division by scalar=====
+//=====Division by scalar=====
 		Vector3<T> operator /(const T d) 
 		{
 			if(d == 0) { return *this; }
@@ -629,7 +654,7 @@ namespace KillerMath
 			B = C % A;
 		}
 		
-		//=====AddScales Vector=====
+//=====AddScales Vector=====
 		void AddScaledVector(const Vector3<T> V, T scale)
 		{
 			_v[0] += V.GetX() * scale;
@@ -637,7 +662,7 @@ namespace KillerMath
 			_v[2] += V.GetZ() * scale;
 		}
 
-		//=====Component Mulitplication=====
+//=====Component Mulitplication=====
 		Vector3<T> ComponentProduct(const Vector3<T>& V) 
 		{
 			return Vector3<T>( _v[0] * V.GetX(),
@@ -650,6 +675,21 @@ namespace KillerMath
 			_v[0] *= V.GetX();
 			_v[1] *= V.GetY();
 			_v[2] *= V.GetZ();
+		}
+
+//=====Clear will reset the vector to 0 or to v=====
+		void Clear(void)
+		{
+			_v[0] = 0;
+			_v[1] = 0;
+			_v[3] = 0;
+		}
+
+		void Clear(T v)
+		{
+			_v[0] = v;
+			_v[1] = v;
+			_v[3] = v;
 		}
 
 	};
