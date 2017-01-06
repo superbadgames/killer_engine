@@ -31,6 +31,11 @@ namespace KillerPhysics
 		_inverseMass = real(1.0) / mass;
 	}
 
+	bool Particle2D::HasFiniteMass(void)
+	{
+		return _inverseMass >= 0.0f;
+	}
+
 //==========================================================================================================================
 //
 //Particle Functions
@@ -56,12 +61,17 @@ namespace KillerPhysics
 
 		KE::GameObject2D::SetVelocity(velocity);
 
-		//=====clear force accumulator will go here when it is written=====
+		ClearAccumulator();
 	}
 
 	void Particle2D::ClearAccumulator(void)
 	{
 		_forceAccum.Clear();
+	}
+
+	void Particle2D::AddForce(const Vec2& force)
+	{
+		_forceAccum += force;
 	}
 
 }//end namespace

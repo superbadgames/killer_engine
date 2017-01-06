@@ -94,6 +94,9 @@
     <Filter Include="Components\Math\LinearAlgebra\Vector">
       <UniqueIdentifier>{2d795523-a23d-4211-b17f-2919e5a6a30f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Forces">
+      <UniqueIdentifier>{3ab69d62-709f-4749-9c69-23a2631242a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -168,6 +171,18 @@
     <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
       <Filter>Components\Math\LinearAlgebra\Vector</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ParticleForceGenerator2D.h">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ParticleForceRegistry2D.h">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ParticleGravity2D.h">
+      <Filter>Components\Physics\Particles\2D\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\ParticleDrag2D.h">
+      <Filter>Components\Physics\Particles\2D\Forces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -223,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Sprite.cpp">
       <Filter>Components\Sprites\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ParticleForceRegistry2D.cpp">
+      <Filter>Components\Physics\Particles\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ParticleGravity2D.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\ParticleDrag2D.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -55,6 +55,9 @@ namespace KillerPhysics
 
 		void SetMass(const real mass);
 
+		bool HasFiniteMass(void);
+
+
 //==========================================================================================================================
 //
 //Particle functions
@@ -63,6 +66,8 @@ namespace KillerPhysics
 		void Update(void);
 
 		void ClearAccumulator(void);
+
+		void AddForce(const Vec2& force);
 
 	private:
 		//=====Description=====
@@ -77,8 +82,6 @@ namespace KillerPhysics
 		real _inverseMass;
 
 		Vec2 _forceAccum;
-
-		KM::Timer* _timer;
 	};
 }//End namespace
 
