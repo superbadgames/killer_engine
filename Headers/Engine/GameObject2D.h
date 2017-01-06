@@ -144,6 +144,12 @@ namespace KillerEngine
 
 		void SetPosition(void) { sprite->v_SetPosition(position); }
 
+		void SetScaledPosition(const Vec2& v, F32 scale)
+		{
+			position.AddScaledVector(v, scale);
+			sprite->v_SetPosition(position);
+		}
+
 //=====Velocity=====
 		const Vec2& GetVelocity(void) { return velocity; }
 

@@ -43,17 +43,20 @@ namespace KillerPhysics
 //Accessors
 //
 //==========================================================================================================================
-		real GetDamping(void) { return damping; }
+		real GetDamping(void) { return _damping; }
 
-		void SetDamping(real damp) { damping = damp; }
+		void SetDamping(real damp) { _damping = damp; }
 
-		real GetInverseMass(void) { return inverseMass; }
+		real GetInverseMass(void) { return _inverseMass; }
 
-		void SetInverseMass(real mass) { inverseMass = ((real)1.0f) / mass; }
+		void SetInverseMass(real mass) { _inverseMass = ((real)1.0f) / mass; }
 
 		real GetMass(void);
 
 		void SetMass(const real mass);
+
+		bool HasFiniteMass(void);
+
 
 //==========================================================================================================================
 //
@@ -62,20 +65,23 @@ namespace KillerPhysics
 //==========================================================================================================================
 		void Update(void);
 
-	protected:
+		void ClearAccumulator(void);
+
+		void AddForce(const Vec2& force);
+
+	private:
 		//=====Description=====
 		//Used to simulate Newtons first law
-		real damping;
+		real _damping;
 
 		//=====Description=====
 		//Mass stored over 1 in order to take
 		//advantage of the equation -> a = 1/m * f
 		//which is a transformed version of -> f = m * a
 		//where f is a force applied to the particle. 
-		real inverseMass;
+		real _inverseMass;
 
-	private:
-		KM::Timer* _timer;
+		Vec2 _forceAccum;
 	};
 }//End namespace
 

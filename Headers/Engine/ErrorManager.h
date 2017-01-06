@@ -11,7 +11,7 @@ Written by Maxwell Miller
 #ifndef ERROR_MANAGER_H
 #define ERROR_MANAGER_H
 
-//=====Killer1 Includes=====
+//=====Engine includes=====
 #include <Engine/Atom.h>
 
 //=====STL includes=====
@@ -41,13 +41,7 @@ namespace KillerEngine
 
 	class ErrorManager 
 	{
-	private:
-		U32       			 _numErrors;
-		map<U32, ErrorCode>  _errorCodes;
-		map<U32, string>     _errorMessages;
-		static ErrorManager* _instance;
-
-	public:
+public:
 //==========================================================================================================================
 //
 //Destructor
@@ -71,15 +65,20 @@ namespace KillerEngine
 		
 		void DisplayErrors(void);
 
-	protected:
+protected:
 //==========================================================================================================================
 //
 //Constructor
 //
 //==========================================================================================================================
 		ErrorManager(void): _numErrors(0) {  }
-	};
 
+private:
+		U32       			 _numErrors;
+		map<U32, ErrorCode>  _errorCodes;
+		map<U32, string>     _errorMessages;
+		static ErrorManager* _instance;
+	};//End class
 }//End namespace
 
 #endif
