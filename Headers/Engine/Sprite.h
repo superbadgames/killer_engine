@@ -35,6 +35,9 @@ Written by Maxwell Miller
 //=====STD includes=====
 #include <vector>
 
+//=====Typedef=====
+typedef std::vector<F32> Array;
+
 namespace KillerEngine 
 {
 
@@ -59,11 +62,25 @@ namespace KillerEngine
 
 			void SetDimensions(F32 w, F32 h) { width = w; height = h; }			
 
+			void SetPosition(Vec2& pos) { position = pos; }
+
 			Vec2& GetPosition(void) { return position; }
+
+			void SetColor(Col& col) { color = col; }
 
 			Col& GetColor(void) { return color; }
 
 			U32 GetTextureID(void) { return textureID; }
+
+			void SetVertices(Array vertices) { vertexPositions = vertices; }
+
+			Array GetVertices(void) { return vertexPositions; }
+
+			void SetVertexColors(Array colors) { vertexColors = colors; }
+
+			Array GetVertexColors(void) { return vertexColors; }
+
+			Array GetVertexUvs(void) { return vertexUvs;}
 
 
  
@@ -109,9 +126,9 @@ namespace KillerEngine
 //==========================================================================================================================
 
 	protected:
-		std::vector<F32> vertexPositions;
-		std::vector<F32> vertexColors;
-		std::vector<F32> vertexUvs;
+		Array vertexPositions;
+		Array vertexColors;
+		Array vertexUvs;
 		F32				 width;
 		F32				 height;
 		U32				 textureID;

@@ -97,6 +97,9 @@
     <Filter Include="Components\Physics\Particles\2D\Forces">
       <UniqueIdentifier>{3ab69d62-709f-4749-9c69-23a2631242a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Sprites\TriSprite">
+      <UniqueIdentifier>{0c6cd213-02b1-4316-83bb-ec602d3d99d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="..\..\Headers\Engine\ParticleDrag2D.h">
       <Filter>Components\Physics\Particles\2D\Forces</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\TriSprite.h">
+      <Filter>Components\Sprites\TriSprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\ParticleDrag2D.cpp">
       <Filter>Components\Physics\Particles\2D\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\TriSprite.cpp">
+      <Filter>Components\Sprites\TriSprite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
