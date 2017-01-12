@@ -52,15 +52,28 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-			void SetWidth(F32 w)  { width = w; }
+			void SetWidth(F32 w)  
+			{ 
+				width = w;
+				v_SetVertexPositions(); 
+			}
 
-			F32 GetWidth(void)    { return width; }
+			F32 GetWidth(void) { return width; }
 
-			void SetHeight(F32 h) { height = h; }
+			void SetHeight(F32 h) 
+			{ 
+				height = h; 
+				v_SetVertexPositions();
+			}
 
-			F32 GetHeight(void)   { return height; }
+			F32 GetHeight(void) { return height; }
 
-			void SetDimensions(F32 w, F32 h) { width = w; height = h; }			
+			void SetDimensions(F32 w, F32 h) 
+			{ 
+				width = w; 
+				height = h; 
+				v_SetVertexPositions();
+			}			
 
 			void SetPosition(Vec2& pos) { position = pos; }
 

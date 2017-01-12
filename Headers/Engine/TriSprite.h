@@ -34,7 +34,7 @@ namespace KillerEngine
 //Virtual Functions
 //
 //==========================================================================================================================
-		void v_RenderSprite(void) { Renderer::Instance()->AddToBatch(Sprite::GetVertices(), Sprite::GetVertexColors()); }
+		void v_RenderSprite(void);
 
 		void v_SetVertexPositions(void);
 		

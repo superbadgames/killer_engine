@@ -1,4 +1,5 @@
 #include <Engine/TriSprite.h>
+#include <iostream>
 
 namespace KillerEngine
 {
@@ -16,8 +17,21 @@ namespace KillerEngine
 //Virtual Functions
 //
 //==========================================================================================================================
+	void TriSprite::v_RenderSprite(void)
+	{
+		//v_SetVertexPositions();
+
+		Array ver = Sprite::GetVertices();
+
+		//std::cout << "Sprite ver: " << ver[0] << ":" << ver[1] << ":" << ver[2] << "\n";
+
+		Renderer::Instance()->AddToBatch(Sprite::GetVertices(), Sprite::GetVertexColors());
+	}
+
 	void TriSprite::v_SetVertexPositions(void)
 	{
+		std::cout << "vertices called\n";
+
 		Array vertices = Sprite::GetVertices();
 
 		vertices.clear();
