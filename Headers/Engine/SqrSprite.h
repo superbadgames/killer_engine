@@ -46,7 +46,7 @@ Written by Maxwell Miller
 #ifndef SQRSPRITE_H
 #define SQRSPRITE_H
 
-//=====Killer1 Includes=====
+//=====Engine Includes=====
 #include <Engine/Atom.h>
 #include <Engine/Sprite.h>
 #include <Engine/Texture.hpp>

@@ -24,7 +24,7 @@ namespace KE = KillerEngine;
 
 namespace KillerPhysics
 {
-	class ParticleGravity2D : ParticleForceGenerator2D
+	class ParticleGravity2D : public ParticleForceGenerator2D
 	{
 	public:
 //==========================================================================================================================

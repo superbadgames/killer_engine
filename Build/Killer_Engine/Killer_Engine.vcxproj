@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\Headers\Engine\Particle3D.h" />
     <ClInclude Include="..\..\Headers\Engine\ParticleForceRegistry2D.h" />
     <ClInclude Include="..\..\Headers\Engine\Point.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\TriSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\WinProgram.h" />
     <ClInclude Include="..\..\Headers\Engine\RandomGen.h" />
     <ClInclude Include="..\..\Headers\Engine\Renderer.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="..\..\Implementations\Particle2D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
     <ClCompile Include="..\..\Implementations\ParticleForceRegistry2D.cpp" />
+    <ClCompile Include="..\..\Implementations\TriSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
     <ClCompile Include="..\..\Implementations\RandomGen.cpp" />
