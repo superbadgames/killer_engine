@@ -1,4 +1,5 @@
 #include <Engine/Renderer.h>
+#include <iostream>
 
 namespace KillerEngine 
 {
@@ -201,6 +202,35 @@ namespace KillerEngine
 //=======================================================================================================
 //AddToBatch
 //=======================================================================================================
+	void Renderer::AddToBatch(GLuint shader, Vec2& pos, U32 w, U32 h, Col& c)
+	{
+		if(_currentShader != shader)
+		{
+			Draw();
+			_currentShader = shader;
+
+			glUseProgram(_currentShader);
+		}
+
+		if(_currentBatchSize + 1 >= _maxBatchSize) { Draw(); }
+
+		_vertices.push_back(pos.GetX());
+		_vertices.push_back(pos.GetY());
+		_vertices.push_back(pos.GetZ());
+		_vertices.push_back(pos.GetW());
+		
+		_xDimensions.push_back((F32)w);
+		_yDimensions.push_back((F32)h);
+
+		
+		_colors.push_back(c.GetRed());
+		_colors.push_back(c.GetGreen());
+		_colors.push_back(c.GetBlue());
+		_colors.push_back(c.GetAlpha());
+		
+		++_currentBatchSize;
+	}
+/*
 	void Renderer::AddToBatch(std::vector<F32> ver, std::vector<F32> col)
 	{
 		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
@@ -213,10 +243,12 @@ namespace KillerEngine
 		_colors.insert(_colors.end(), col.begin(), col.end());
 
 	}
-
+*/
 //=======================================================================================================
 //AddTextureToBatch
 //=======================================================================================================
+
+
 	void Renderer::AddTextureToBatch(std::vector<F32> ver, std::vector<F32> uv)
 	{
 		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
@@ -230,9 +262,46 @@ namespace KillerEngine
 
 	}
 
+
 //=======================================================================================================
 //Draw
 //=======================================================================================================
+	void Renderer::Draw(void)
+	{
+		if(_currentBatchSize == 0) return;
+
+		GLuint buffers[4];
+		glGenBuffers(4, buffers);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+		
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(U32) * _xDimensions.size()), &_xDimensions[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+		
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(U32) * _yDimensions.size()), &_yDimensions[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+		
+		
+		glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
+
+		_currentBatchSize = 0;
+	}
+
+/*
 	void Renderer::Draw(void) 
 	{
 		if(_currentBatchSize == 0) { return; } //End if there are no verticies to draw
@@ -295,7 +364,7 @@ namespace KillerEngine
 			_uvs.clear();
 			_currentBatchSize = 0;
 	}
-
+*/
 //=======================================================================================================
 //
 //Constructor

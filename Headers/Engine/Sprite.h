@@ -31,6 +31,7 @@ Written by Maxwell Miller
 //=====OGL includes=====
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <GL/wglext.h>
 
 //=====STD includes=====
 #include <vector>
@@ -132,6 +133,8 @@ namespace KillerEngine
 			v_SetTextureCoords(top, bottom, left, right);
 		}
 
+		virtual GLuint v_GetShader(void) =0;
+
 //==========================================================================================================================
 //
 //Sprite Functions 	 	
@@ -147,14 +150,16 @@ namespace KillerEngine
 		U32				 textureID;
 		Vec2			 position;
 		Col			 	 color;
-		
+	
 		
 
-		virtual void v_SetVertexPositions(void) = 0;
+		virtual void v_SetVertexPositions(void)=0;
 		
-		virtual void v_SetVertexColors(void) = 0;
+		virtual void v_SetVertexColors(void)=0;
 		
-		virtual void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left) = 0;
+		virtual void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)=0;
+
+		virtual void v_InitShader(void)=0;
 
 //==========================================================================================================================
 //
