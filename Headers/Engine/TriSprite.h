@@ -46,6 +46,19 @@ namespace KillerEngine
 
 		void v_SetColor(Col& col);
 
+		GLuint v_GetShader(void);
+
+		void v_InitShader(void);
+
+	private:
+		static GLuint _shaderProgram;
+		static const GLchar* _vertexShaderSource[];
+		static const GLchar* _geometryShaderSource[];
+		static const GLchar* _fragmentShaderSource[];
+
+		static const GLchar* orig_vertexShaderSource[];
+		static const GLchar* orig_fragmentShaderSource[];
+
 	};//end Class
 }//end Namespace
 #endif

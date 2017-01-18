@@ -83,6 +83,11 @@ namespace KillerEngine
 
 		void v_SetColor(Col& col);
 
+		GLuint v_GetShader(void);
+
+		void v_InitShader(void);
+
+
 	};
 }
 
