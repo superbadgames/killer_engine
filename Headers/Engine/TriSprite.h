@@ -56,6 +56,9 @@ namespace KillerEngine
 		static const GLchar* _geometryShaderSource[];
 		static const GLchar* _fragmentShaderSource[];
 
+		static const GLchar* orig_vertexShaderSource[];
+		static const GLchar* orig_fragmentShaderSource[];
+
 	};//end Class
 }//end Namespace
 #endif
