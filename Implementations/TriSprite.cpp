@@ -25,19 +25,6 @@ namespace KillerEngine
 		Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor());
 	}
 
-
-	void TriSprite::v_SetPosition(Vec2& position)
-	{
-		Sprite::SetPosition(position);
-		v_SetVertexPositions();
-	}
-
-	void TriSprite::v_SetColor(Col& col)
-	{
-		Sprite::SetColor(col);
-		v_SetVertexColors();
-	}
-
 	GLuint TriSprite::_shaderProgram = NULL;
 	GLuint TriSprite::v_GetShader(void)
 	{

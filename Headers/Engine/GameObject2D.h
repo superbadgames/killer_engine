@@ -96,21 +96,21 @@ namespace KillerEngine
 //=====Color=====
 		const Col& GetColor(void) { return sprite->GetColor();	 }
 
-		void SetColor(Col& col) { sprite->v_SetColor(col); }
+		void SetColor(Col& col) { sprite->SetColor(col); }
 
-		void SetColor(F32 red, F32 blue, F32 green) { sprite->v_SetColor(Col(red, blue, green)); }
+		void SetColor(F32 red, F32 blue, F32 green) { sprite->SetColor(Col(red, blue, green)); }
 
 //=====Texture=====
 		const  U32 GetTextureID(void) { return textureID; }
 
 		void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left) 
 		{ 
-			sprite->v_SetTexture(tID, top, bottom, right, left);
+			sprite->SetTexture(tID, top, bottom, right, left);
 		}
 
 		void SetTexture(U32 tID)
 		{
-			sprite->v_SetTexture(tID, 0.0f, 1.0f, 0.0f, 1.0f);
+			sprite->SetTexture(tID, 0.0f, 1.0f, 0.0f, 1.0f);
 		}
 
 //=====Active=====
@@ -133,21 +133,21 @@ namespace KillerEngine
 		void SetPosition(Vec2& pos) 
 		{ 
 			position = pos;
-			sprite->v_SetPosition(position); 
+			sprite->SetPosition(position); 
 		}
 
 		void SetPosition(F32 x, F32 y) 
 		{ 
 			position = Vec2(x, y);
-			sprite->v_SetPosition(position);
+			sprite->SetPosition(position);
 		}
 
-		void SetPosition(void) { sprite->v_SetPosition(position); }
+		void SetPosition(void) { sprite->SetPosition(position); }
 
 		void SetScaledPosition(const Vec2& v, F32 scale)
 		{
 			position.AddScaledVector(v, scale);
-			sprite->v_SetPosition(position);
+			sprite->SetPosition(position);
 		}
 
 //=====Velocity=====

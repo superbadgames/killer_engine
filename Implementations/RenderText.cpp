@@ -27,14 +27,6 @@ namespace KillerEngine
 //Virtual Functions
 //
 //==========================================================================================================================
-	void RenderText::v_Update(void)
-	{
-		for(auto &sprite : _spriteList)
-		{
-			sprite->v_SetVertexPositions();
-		}
-	}
-
 	void RenderText::v_Render(void)
 	{
 		for(auto &sprite : _spriteList)
@@ -67,7 +59,7 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
 
@@ -83,7 +75,7 @@ namespace KillerEngine
 			F32 leftCoord  = rightCoord + charWidth / textureWidth;
 			F32 bottomCoord = topCoord + charHeight / textureHeight;
 
-			sprite->v_SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
+			sprite->SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
 
 			F32 totalCharWidth = charWidth * _widthScaleFactor;
 			F32 totalCharHeight = charHeight * _heightScaleFactor;
@@ -109,7 +101,7 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
 		}

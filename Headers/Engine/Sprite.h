@@ -36,9 +36,6 @@ Written by Maxwell Miller
 //=====STD includes=====
 #include <vector>
 
-//=====Typedef=====
-typedef std::vector<F32> Array;
-
 namespace KillerEngine 
 {
 
@@ -56,7 +53,7 @@ namespace KillerEngine
 			void SetWidth(F32 w)  
 			{ 
 				width = w;
-				v_SetVertexPositions(); 
+				//v_SetVertexPositions(); 
 			}
 
 			F32 GetWidth(void) { return width; }
@@ -64,7 +61,7 @@ namespace KillerEngine
 			void SetHeight(F32 h) 
 			{ 
 				height = h; 
-				v_SetVertexPositions();
+				//v_SetVertexPositions();
 			}
 
 			F32 GetHeight(void) { return height; }
@@ -73,7 +70,7 @@ namespace KillerEngine
 			{ 
 				width = w; 
 				height = h; 
-				v_SetVertexPositions();
+				//v_SetVertexPositions();
 			}			
 
 			void SetPosition(Vec2& pos) { position = pos; }
@@ -86,16 +83,15 @@ namespace KillerEngine
 
 			U32 GetTextureID(void) { return textureID; }
 
-			void SetVertices(Array vertices) { vertexPositions = vertices; }
+			void SetUVs(Vec2& origin, Vec2& limit)
+			{
+				uvOrigin = origin;
+				uvLimit = limit;
+			}
 
-			Array GetVertices(void) { return vertexPositions; }
+			Vec2& GetUVOrigin(void) { return uvOrigin; }
 
-			void SetVertexColors(Array colors) { vertexColors = colors; }
-
-			Array GetVertexColors(void) { return vertexColors; }
-
-			Array GetVertexUvs(void) { return vertexUvs;}
-
+			Vec2& GetUVLimit(void) { return uvLimit; }
 
  
 //==========================================================================================================================
@@ -107,8 +103,8 @@ namespace KillerEngine
 		{
 			width = sprite.GetWidth();
 			height = sprite.GetHeight();
-			v_SetPosition(sprite.GetPosition());
-			v_SetColor(sprite.GetColor());
+			SetPosition(sprite.GetPosition());
+			SetColor(sprite.GetColor());
 
 			return *this;
 		}
@@ -120,17 +116,11 @@ namespace KillerEngine
 //==========================================================================================================================
 		virtual void v_RenderSprite(void)=0;
 
-		//virtual void v_RenderSprite(const Vec& pos, F32 w, F32 h, const Col& col, const U32 tex) {  }
-
-		virtual void v_SetPosition(Vec2& position)=0;
-
-		virtual void v_SetColor(Col& col)=0;
-
-		virtual void v_SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left)
+		virtual void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left)
 		{
 			textureID = tID;
-
-			v_SetTextureCoords(top, bottom, left, right);
+			uvOrigin = Vec2(top, right);
+			uvLimit  = Vec2(bottom, left);
 		}
 
 		virtual GLuint v_GetShader(void) =0;
@@ -141,31 +131,21 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-	protected:
-		Array vertexPositions;
-		Array vertexColors;
-		Array vertexUvs;
+	private:
+		Vec2 			 uvOrigin;
+		Vec2 			 uvLimit;
 		F32				 width;
 		F32				 height;
 		U32				 textureID;
 		Vec2			 position;
 		Col			 	 color;
-	
-		
-
-		virtual void v_SetVertexPositions(void)=0;
-		
-		virtual void v_SetVertexColors(void)=0;
-		
-		virtual void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)=0;
-
-		virtual void v_InitShader(void)=0;
 
 //==========================================================================================================================
 //
 //Constructors
 //
 //==========================================================================================================================
+		protected:
 		Sprite(void);
 
 		Sprite(const F32 width, const F32 height);
@@ -174,7 +154,9 @@ namespace KillerEngine
 
 		Sprite(const F32 width, const F32 height, U32 tID);													     
 
-		Sprite(const F32 width, const F32 height, Col& col, U32 tID);																   
+		Sprite(const F32 width, const F32 height, Col& col, U32 tID);
+
+		virtual void v_InitShader(void)=0;																   
 
 	};
 }//End namespace
