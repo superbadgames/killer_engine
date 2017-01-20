@@ -36,16 +36,6 @@ namespace KillerEngine
 //==========================================================================================================================
 		void v_RenderSprite(void);
 
-		void v_SetVertexPositions(void);
-		
-		void v_SetVertexColors(void);
-		
-		void v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left) {  }
-
-		void v_SetPosition(Vec2& position);
-
-		void v_SetColor(Col& col);
-
 		GLuint v_GetShader(void);
 
 		void v_InitShader(void);
@@ -55,9 +45,6 @@ namespace KillerEngine
 		static const GLchar* _vertexShaderSource[];
 		static const GLchar* _geometryShaderSource[];
 		static const GLchar* _fragmentShaderSource[];
-
-		static const GLchar* orig_vertexShaderSource[];
-		static const GLchar* orig_fragmentShaderSource[];
 
 	};//end Class
 }//end Namespace
