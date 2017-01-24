@@ -115,12 +115,14 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		virtual void v_RenderSprite(void)=0;
-
+		
 		virtual void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left)
 		{
 			textureID = tID;
-			uvOrigin = Vec2(top, right);
-			uvLimit  = Vec2(bottom, left);
+			uvOrigin = Vec2(bottom, right);
+			uvLimit  = Vec2(top, left);
+
+
 		}
 
 		virtual GLuint v_GetShader(void) =0;

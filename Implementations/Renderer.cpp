@@ -235,6 +235,7 @@ namespace KillerEngine
 
 	void Renderer::AddToBatch(GLuint shader, Vec2& pos, F32 w, F32 h, Col& c, U32 textureID, Vec2& origin, Vec2& limit)
 	{
+		
 		if(TextureManager::Instance()->GetCurrentTextureID() != textureID)
 		{
 			Draw();
@@ -263,12 +264,12 @@ namespace KillerEngine
 		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-
+		
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
 		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-		
+
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
 		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _dimensions.size()), &_dimensions[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(2);
@@ -278,12 +279,12 @@ namespace KillerEngine
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
 			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvOrigins.size()), &_uvOrigins[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(2);
+			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 	
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
 			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvLimits.size()), &_uvLimits[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(2);
+			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 		}
 		

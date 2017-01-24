@@ -1,9 +1,12 @@
 #include <Engine/CharSprite.h>
+#include <iostream>
 
 namespace KillerEngine
 {
 	CharSprite::CharSprite(void) : _charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
-	{  }
+	{
+		v_InitShader();
+	}
 
 	CharSprite::CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance) 
 						     :_charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
@@ -19,6 +22,8 @@ namespace KillerEngine
 		//Renderer::Instance()->AddToBatch(Sprite::vertexPositions, Sprite::vertexColors);
 		Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor(), 
 							   			 Sprite::GetTextureID(), Sprite::GetUVOrigin(), Sprite::GetUVLimit());
+		//std::cout << "char sprite render\n";
+		//Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor());
 	}
 
 	GLuint CharSprite::_shaderProgram = NULL;
@@ -28,6 +33,39 @@ namespace KillerEngine
 		return _shaderProgram;
 	}
 
+/*
+	void CharSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
+	{
+		Sprite::vertexUvs.clear();
+
+		//=====Vertices=====
+		//=====Triangle1=====
+		//top right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
+
+		//bottom right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(bottom);
+
+		//bottom left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
+
+		//=====Triangle2=====
+		//top right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
+
+		//top left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(top);
+
+		//bottom left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
+	}
+*/
 //==========================================================================================================================
 //Shader
 //==========================================================================================================================
@@ -81,24 +119,28 @@ namespace KillerEngine
 			"in vec2 gs_uvLimit[];															\n"
 			
 			"out vec4 fs_color; 															\n"
-			"out vec2 fs_uvCoord;															\n"
+			"out vec2 fs_uvs;															\n"
 			
 			"void main()																	\n"
 			"{																				\n"
 			//Bottom Right
 			"	fs_uvs = vec2(gs_uvOrigin[0].x, gs_uvLimit[0].y);												\n"
+			"	fs_color = gs_color[0];																			\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, -gs_dimensions[0].y, 0, 0);		\n"
 			" 	EmitVertex(); 																					\n"
 			//Top Right
 			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
+			"	fs_color = gs_color[0];																			\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, gs_dimensions[0].y, 0.0, 0.0);	\n"
 			"	EmitVertex(); 																					\n"
 			//Bottom Left
 			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvLimit[0].y);												\n"
+			"	fs_color = gs_color[0];																			\n"
 			" 	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, -gs_dimensions[0].y, 0.0, 0.0); 	\n"
 			"	EmitVertex();				 																	\n"
 			//Top Left
 			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
+			"	fs_color = gs_color[0];																			\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, gs_dimensions[0].y, 0, 0); 		\n"
 			"	EmitVertex(); 																					\n"
 			
@@ -114,13 +156,15 @@ namespace KillerEngine
 		{
 			"#version 430 core																\n"
 	
+			"uniform sampler2D tex;													\n"
 			"in vec4 fs_color;																\n"
 			"in vec2 fs_uvs;																\n"
-			"out vec4 color;																\n"
+			"out vec4 color;"
 			
 			"void main(void) 																\n"
 			"{																				\n"
-			"	color = texture(ourTexture, fs_uvs);										\n"
+			"	color = texture(tex, fs_uvs);										\n"
+			//"	breakgl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);															\n"
 			"}																				\n"
 		};
 
@@ -179,5 +223,4 @@ namespace KillerEngine
 		glDeleteShader(geometryShaderProgram);
 		glDeleteShader(fragmentShaderProgram);
 	}
-
-}
+}//end namespace

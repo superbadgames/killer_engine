@@ -1,4 +1,5 @@
 #include <Engine/RenderText.h>
+#include <iostream>
 
 namespace KillerEngine
 {
@@ -29,7 +30,7 @@ namespace KillerEngine
 //==========================================================================================================================
 	void RenderText::v_Render(void)
 	{
-		for(auto &sprite : _spriteList)
+		for(CharSprite* sprite : _spriteList)
 		{
 			sprite->v_RenderSprite();
 		}
@@ -46,8 +47,8 @@ namespace KillerEngine
 
 		_text = text;
 
-		F32 currentX = GameObject2D::position.GetX();
-		F32 currentY = GameObject2D::position.GetY();
+		F32 currentX = GameObject2D::GetPosition().GetX();
+		F32 currentY = GameObject2D::GetPosition().GetY();
 
 		Texture& texture = TextureManager::Instance()->GetTexture(_font.GetTextureID());
 
@@ -74,6 +75,8 @@ namespace KillerEngine
 			F32 topCoord    = charY / textureHeight;
 			F32 leftCoord  = rightCoord + charWidth / textureWidth;
 			F32 bottomCoord = topCoord + charHeight / textureHeight;
+
+			std::cout << "Top=" << topCoord << "\nBottom=" << bottomCoord << "\nrRight=" << rightCoord << "\nLeft=" << leftCoord << "\n";
 
 			sprite->SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
 
@@ -104,6 +107,14 @@ namespace KillerEngine
 			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
+		}
+	}
+
+	void RenderText::SetTextColor(Col& col)
+	{
+		for(CharSprite* sprite : _spriteList)
+		{
+			sprite->SetColor(col);
 		}
 	}
 
