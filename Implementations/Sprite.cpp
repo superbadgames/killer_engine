@@ -7,40 +7,40 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================
-	Sprite::Sprite(void) :  uvOrigin(),
-							uvLimit(),
+	Sprite::Sprite(void) :  _bottomTop(),
+							_leftRight(),
 						    width(NULL),
 						    height(NULL),
 						    color(),
 						    textureID()
 	{  }
 
-	Sprite::Sprite(const F32 width, const F32 height) :  uvOrigin(),
-														 uvLimit(),
+	Sprite::Sprite(const F32 width, const F32 height) :  _bottomTop(),
+														 _leftRight(),
 													     width(width),
 													     height(height),
 													     color(),
 													     textureID()
 	{  }
 
-	Sprite::Sprite(const F32 width, const F32 height, Col& col) :  uvOrigin(),
-														 		   uvLimit(),
+	Sprite::Sprite(const F32 width, const F32 height, Col& col) :  _bottomTop(),
+														 		   _leftRight(),
 															       width(width),
 															       height(height),
 															       color(col),
 															       textureID()
 	{  }
 
-	Sprite::Sprite(const F32 width, const F32 height, U32 tID) :  uvOrigin(),
-														 		  uvLimit(),
+	Sprite::Sprite(const F32 width, const F32 height, U32 tID) :  _bottomTop(),
+														 		  _leftRight(),
 														          width(width),
 														          height(height),
 														          color(),
 														          textureID(tID)
 	{  }
 	
-	Sprite::Sprite(const F32 width, const F32 height, Col& col, U32 tID) :  uvOrigin(),
-														 		   			uvLimit(),
+	Sprite::Sprite(const F32 width, const F32 height, Col& col, U32 tID) :  _bottomTop(),
+														 		   			_leftRight(),
 																			width(width),
 																			height(height),
 																			color(col),

@@ -48,7 +48,11 @@ namespace KillerEngine
 
 		void v_Render(void);
 
-		void SetPosition(Vec2& pos) { SetTextPosition(pos); }
+		void v_SetPosition(Vec2 pos)
+		{
+			GameObject2D::SetPositionNoSprite(pos);
+			SetTextPosition(pos);
+		}
 
 //==========================================================================================================================
 //
@@ -58,6 +62,8 @@ namespace KillerEngine
 		void AddText(string text);
 
 		void SetTextPosition(Vec2& pos);
+
+		void SetTextColor(Col& col);
 
 		void SetWidthScaleFactor(F32 w) { _widthScaleFactor = w; }
 

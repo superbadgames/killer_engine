@@ -1,9 +1,12 @@
 #include <Engine/CharSprite.h>
+#include <iostream>
 
 namespace KillerEngine
 {
 	CharSprite::CharSprite(void) : _charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
-	{  }
+	{
+		v_InitShader();
+	}
 
 	CharSprite::CharSprite(U32 x, U32 y, U32 width, U32 height, U32 xoffset, U32 yoffset, U32 xadvance) 
 						     :_charX(0), _charY(0), _charWidth(0), _charHeight(0), _xoffset(0), _yoffset(0), _xadvance(0)
@@ -18,7 +21,8 @@ namespace KillerEngine
 	{
 		//Renderer::Instance()->AddToBatch(Sprite::vertexPositions, Sprite::vertexColors);
 		Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor(), 
-							   			 Sprite::GetTextureID(), Sprite::GetUVOrigin(), Sprite::GetUVLimit());
+							   			 Sprite::GetTextureID(), Sprite::GetUVBottomTop(), Sprite::GetUVLeftRight());
+		//Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor());
 	}
 
 	GLuint CharSprite::_shaderProgram = NULL;
@@ -28,6 +32,39 @@ namespace KillerEngine
 		return _shaderProgram;
 	}
 
+/*
+	void CharSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
+	{
+		Sprite::vertexUvs.clear();
+
+		//=====Vertices=====
+		//=====Triangle1=====
+		//top right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
+
+		//bottom right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(bottom);
+
+		//bottom left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
+
+		//=====Triangle2=====
+		//top right
+		_vertexUvs.push_back(right);
+		_vertexUvs.push_back(top);
+
+		//top left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(top);
+
+		//bottom left
+		_vertexUvs.push_back(left);
+		_vertexUvs.push_back(bottom);
+	}
+*/
 //==========================================================================================================================
 //Shader
 //==========================================================================================================================
@@ -45,23 +82,23 @@ namespace KillerEngine
 			"layout (location = 0) in vec4 position;										\n"
 			"layout (location = 1) in vec4 color; 											\n"
 			"layout (location = 2) in vec2 dimensions;										\n"
-			"layout (location = 3) in vec2 uvOrigin;										\n"
-			"layout (location = 4) in vec2 uvLimit;											\n"
+			"layout (location = 3) in vec2 bottomTop;										\n"
+			"layout (location = 4) in vec2 leftRight;										\n"
 
 			"uniform mat4 transform_mat;													\n"
 			
 			"out vec4 gs_color;																\n"
 			"out vec4 gs_dimensions;														\n"
-			"out vec2 gs_uvOrigin;															\n"
-			"out vec2 gs_uvLimit;"
+			"out vec2 gs_bottomTop;															\n"
+			"out vec2 gs_leftRight;"
 
 			"void main(void) 																\n"
 			"{																				\n"
 			"	gl_Position = transform_mat * position;										\n"
 			"	gs_color = color;															\n"
 			"	gs_dimensions = transform_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
-			"	gs_uvOrigin = uvOrigin;														\n"
-			"	gs_uvLimit = uvLimit;														\n"
+			"	gs_bottomTop = bottomTop;													\n"
+			"	gs_leftRight = leftRight;													\n"
 			"}																				\n"
 		};
 
@@ -77,28 +114,29 @@ namespace KillerEngine
 			
 			"in vec4 gs_color[]; 															\n"
 			"in vec4 gs_dimensions[]; 														\n"
-			"in vec2 gs_uvOrigin[];															\n"
-			"in vec2 gs_uvLimit[];															\n"
+			"in vec2 gs_bottomTop[];														\n"
+			"in vec2 gs_leftRight[];														\n"
 			
 			"out vec4 fs_color; 															\n"
-			"out vec2 fs_uvCoord;															\n"
+			"out vec2 fs_uvs; 																\n"
 			
 			"void main()																	\n"
 			"{																				\n"
-			//Bottom Right
-			"	fs_uvs = vec2(gs_uvOrigin[0].x, gs_uvLimit[0].y);												\n"
+			"	fs_color = gs_color[0]; 													\n"
+			//Right Bottom
+			"	fs_uvs = vec2(gs_leftRight[0].y gs_bottomTop[0].x);												\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, -gs_dimensions[0].y, 0, 0);		\n"
 			" 	EmitVertex(); 																					\n"
-			//Top Right
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
+			//Right Top
+			"	fs_uvs = vec2(gs_leftRight[0].y, gs_bottomTop[0].y);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, gs_dimensions[0].y, 0.0, 0.0);	\n"
 			"	EmitVertex(); 																					\n"
-			//Bottom Left
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvLimit[0].y);												\n"
+			//Left Bottom
+			"	fs_uvs = vec2(gs_leftRight[0].x, gs_bottomTop[0].x);											\n"
 			" 	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, -gs_dimensions[0].y, 0.0, 0.0); 	\n"
 			"	EmitVertex();				 																	\n"
-			//Top Left
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
+			//Left Top
+			"	fs_uvs = vec2(gs_leftRight[0].x, gs_bottomTop[0].y);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, gs_dimensions[0].y, 0, 0); 		\n"
 			"	EmitVertex(); 																					\n"
 			
@@ -114,13 +152,16 @@ namespace KillerEngine
 		{
 			"#version 430 core																\n"
 	
+			"uniform sampler2D tex;															\n"
+
 			"in vec4 fs_color;																\n"
-			"in vec2 fs_uvs;																\n"
+			"in vec2 fs_uvs;"
 			"out vec4 color;																\n"
 			
 			"void main(void) 																\n"
 			"{																				\n"
-			"	color = texture(ourTexture, fs_uvs);										\n"
+			"	if(fs_uvs == vec2(0, 0)) { color = fs_color; }								\n"
+			"	else { color = texture(tex, fs_uvs); } 										\n"
 			"}																				\n"
 		};
 
@@ -179,5 +220,4 @@ namespace KillerEngine
 		glDeleteShader(geometryShaderProgram);
 		glDeleteShader(fragmentShaderProgram);
 	}
-
-}
+}//end namespace

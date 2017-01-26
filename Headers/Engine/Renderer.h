@@ -101,8 +101,8 @@ namespace KillerEngine
 		std::vector<F32> 	 _vertices;
 		std::vector<F32> 	 _colors;
 		std::vector<F32> 	 _dimensions;
-		std::vector<F32> 	 _uvOrigins;
-		std::vector<F32>     _uvLimits;	
+		std::vector<F32> 	 _bottomTop;
+		std::vector<F32>     _leftRight;	
 		GLuint				 _renderingProgramColor;
 		GLuint   			 _renderingProgramTexture;
 		GLuint   			 _vertexArrayObject;

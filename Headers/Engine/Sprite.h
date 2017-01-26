@@ -83,15 +83,15 @@ namespace KillerEngine
 
 			U32 GetTextureID(void) { return textureID; }
 
-			void SetUVs(Vec2& origin, Vec2& limit)
+			void SetUVs(Vec2& bottomTop, Vec2& leftRight)
 			{
-				uvOrigin = origin;
-				uvLimit = limit;
+				_bottomTop = bottomTop;
+				_leftRight = leftRight;
 			}
 
-			Vec2& GetUVOrigin(void) { return uvOrigin; }
+			Vec2& GetUVBottomTop(void) { return _bottomTop; }
 
-			Vec2& GetUVLimit(void) { return uvLimit; }
+			Vec2& GetUVLeftRight(void) { return _leftRight; }
 
  
 //==========================================================================================================================
@@ -115,12 +115,12 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 		virtual void v_RenderSprite(void)=0;
-
+		
 		virtual void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left)
 		{
 			textureID = tID;
-			uvOrigin = Vec2(top, right);
-			uvLimit  = Vec2(bottom, left);
+			_bottomTop = Vec2(bottom, top);
+			_leftRight  = Vec2(left, right);
 		}
 
 		virtual GLuint v_GetShader(void) =0;
@@ -132,8 +132,8 @@ namespace KillerEngine
 //==========================================================================================================================
 
 	private:
-		Vec2 			 uvOrigin;
-		Vec2 			 uvLimit;
+		Vec2 			 _bottomTop;
+		Vec2 			 _leftRight;
 		F32				 width;
 		F32				 height;
 		U32				 textureID;

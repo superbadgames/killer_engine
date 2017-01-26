@@ -52,6 +52,8 @@ Written by Maxwell Miller
 #include <Engine/TextureManager.h>
 #include <Engine/Font.h>
 
+#include <vector>
+
 namespace KillerEngine
 {
 	//Forward declar font
@@ -132,7 +134,6 @@ namespace KillerEngine
 		U32 				_xoffset;
 		U32 				_yoffset;
 		U32 				_xadvance;
-
 		static GLuint 		 _shaderProgram;
 		static const GLchar* _vertexShaderSource[];
 		static const GLchar* _geometryShaderSource[];
