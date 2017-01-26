@@ -169,12 +169,22 @@ namespace KillerEngine
 
 		void SetVelocity(Vec2& v) { _velocity = v; }
 
+		void SetScaledVelocity(const Vec2& vec, F32 scale)
+		{
+			_velocity.AddScaledVector(vec, scale);
+		}
+
 		void SetVelocity(F32 x, F32 y) { _velocity = Vec2(x, y); }
 
 //=====Acceleration=====
 		const Vec2& GetAcceleration(void) { return _acceleration; }
 
 		void SetAcceleration(Vec2& a) { _acceleration = a; }
+
+		void SetScaledAccelleration(const Vec2& vec, F32 scale)
+		{
+			_acceleration.AddScaledVector(vec, scale);
+		}
 
 		void SetAcceleration(F32 x, F32 y) { _acceleration = Vec2(x, y); }
 
