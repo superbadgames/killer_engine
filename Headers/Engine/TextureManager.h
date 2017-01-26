@@ -59,7 +59,7 @@ namespace KillerEngine
 //==========================================================================================================================
 		U32 GetCurrentTextureID(void) { return _currentTextureID; }
 		
-		void SetCurrentTextureID(GLuint textureId); 
+		void SetCurrentTextureID(U32 textureId); 
 
 
 //==========================================================================================================================

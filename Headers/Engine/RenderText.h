@@ -44,9 +44,15 @@ namespace KillerEngine
 //Virtual Functions
 //
 //==========================================================================================================================
-		void v_Update(void);
+		void v_Update(void) {  }
 
 		void v_Render(void);
+
+		void v_SetPosition(Vec2 pos)
+		{
+			GameObject2D::SetPositionNoSprite(pos);
+			SetTextPosition(pos);
+		}
 
 //==========================================================================================================================
 //
@@ -56,6 +62,8 @@ namespace KillerEngine
 		void AddText(string text);
 
 		void SetTextPosition(Vec2& pos);
+
+		void SetTextColor(Col& col);
 
 		void SetWidthScaleFactor(F32 w) { _widthScaleFactor = w; }
 

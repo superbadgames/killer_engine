@@ -65,16 +65,16 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=====ID=====		
-		const U32 GetID(void) { return ID; }
+		const U32 GetID(void) { return _ID; }
 
 		void SetID(void) 
 		{
-			ID = _nextID;
+			_ID = _nextID;
 			++_nextID;
 
 			//This is here to make sure that by this point the user has 
 			//added a sprite to the game object.
-			if(sprite == NULL)
+			if(_sprite == NULL)
 				ErrorManager::Instance()->SetError(EC_GameObject, "Error! Sprite is Null, you must pass a pointer to the sprite you wish to use before you call GameObject::SetID().");
 		}
 
@@ -83,97 +83,102 @@ namespace KillerEngine
 //Can make sure to update its sprite, if it has one
 //with a default version in the case of no sprite.
 		
-		const F32 GetWidth(void) { return sprite->GetWidth(); }
+		const F32 GetWidth(void) { return _sprite->GetWidth(); }
 
-		virtual void SetWidth(F32 w) { sprite->SetWidth(w); }
+		virtual void SetWidth(F32 w) { _sprite->SetWidth(w); }
 
-		const F32 GetHeight(void) { return sprite->GetHeight(); }
+		const F32 GetHeight(void) { return _sprite->GetHeight(); }
 
-		virtual void SetHeight(F32 h) { sprite->SetHeight(h); }
+		virtual void SetHeight(F32 h) { _sprite->SetHeight(h); }
 
-		virtual void SetDimensions(const F32 w, const F32 h) { sprite->SetDimensions(w, h); }
+		virtual void SetDimensions(const F32 w, const F32 h) { _sprite->SetDimensions(w, h); }
 
 //=====Color=====
-		const Col& GetColor(void) { return sprite->GetColor();	 }
+		const Col& GetColor(void) { return _sprite->GetColor();	 }
 
-		void SetColor(Col& col) { sprite->v_SetColor(col); }
+		void SetColor(Col& col) { _sprite->SetColor(col); }
 
-		void SetColor(F32 red, F32 blue, F32 green) { sprite->v_SetColor(Col(red, blue, green)); }
+		void SetColor(F32 red, F32 blue, F32 green) { _sprite->SetColor(Col(red, blue, green)); }
 
 //=====Texture=====
-		const  U32 GetTextureID(void) { return textureID; }
+		const  U32 GetTextureID(void) { return _sprite->GetTextureID(); }
 
 		void SetTexture(U32 tID, const F32 top, const F32 bottom, const F32 right, const F32 left) 
 		{ 
-			sprite->v_SetTexture(tID, top, bottom, right, left);
+			_sprite->SetTexture(tID, top, bottom, right, left);
 		}
 
 		void SetTexture(U32 tID)
 		{
-			sprite->v_SetTexture(tID, 0.0f, 1.0f, 0.0f, 1.0f);
+			_sprite->SetTexture(tID, 0.0f, 1.0f, 0.0f, 1.0f);
+
 		}
 
 //=====Active=====
-		const bool GetActive(void)   { return active; }
+		const bool GetActive(void)   { return _active; }
 
-		void SetActive(void)   { active = true; }
+		void SetActive(void)   { _active = true; }
 		
-		void SetInactive(void) { active = false; }
+		void SetInactive(void) { _active = false; }
 
 //=====Sprite=====
-		const Sprite* GetSprite(void) { return sprite; }
+		const Sprite* GetSprite(void) { return _sprite; }
 
-		void SetSprite(Sprite* s) { sprite = s; }	
+		void SetSprite(Sprite* s) { _sprite = s; }	
 
-		void RenderSprite(void) { sprite->v_RenderSprite();  }	
+		void RenderSprite(void) { _sprite->v_RenderSprite();  }	
 
 //=====Position=====
-		const Vec2& GetPosition(void) { return position; }
+		const Vec2& GetPosition(void) { return _position; }
 		
 		void SetPosition(Vec2& pos) 
 		{ 
-			position = pos;
-			sprite->v_SetPosition(position); 
+			_position = pos;
+			_sprite->SetPosition(_position); 
 		}
 
 		void SetPosition(F32 x, F32 y) 
 		{ 
-			position = Vec2(x, y);
-			sprite->v_SetPosition(position);
+			_position = Vec2(x, y);
+			_sprite->SetPosition(_position);
 		}
-
-		void SetPosition(void) { sprite->v_SetPosition(position); }
 
 		void SetScaledPosition(const Vec2& v, F32 scale)
 		{
-			position.AddScaledVector(v, scale);
-			sprite->v_SetPosition(position);
+			_position.AddScaledVector(v, scale);
+			_sprite->SetPosition(_position);
+		}
+
+		void SetPositionNoSprite(Vec2& pos)
+		{
+			_position = pos;
+		}
+
+		void virtual v_SetPosition(Vec2& pos)
+		{
+			SetPosition(pos);
+		}
+
+		void virtual v_SetPosition(F32 x, F32 y)
+		{
+			SetPosition(x, y);
 		}
 
 //=====Velocity=====
-		const Vec2& GetVelocity(void) { return velocity; }
+		const Vec2& GetVelocity(void) { return _velocity; }
 
-		void SetVelocity(Vec2& v) { velocity = v; }
+		void SetVelocity(Vec2& v) { _velocity = v; }
 
-		void SetVelocity(F32 x, F32 y) { velocity = Vec2(x, y); }
+		void SetVelocity(F32 x, F32 y) { _velocity = Vec2(x, y); }
 
 //=====Acceleration=====
-		const Vec2& GetAcceleration(void) { return acceleration; }
+		const Vec2& GetAcceleration(void) { return _acceleration; }
 
-		void SetAcceleration(Vec2& a) { acceleration = a; }
+		void SetAcceleration(Vec2& a) { _acceleration = a; }
 
-		void SetAcceleration(F32 x, F32 y) { acceleration = Vec2(x, y); }
+		void SetAcceleration(F32 x, F32 y) { _acceleration = Vec2(x, y); }
 
-	protected:	
-		U32 	 ID;
-		bool 	 active;
-		U32		 textureID;
-		Sprite*  sprite;
-		
-		Vec2     position;
-		Vec2	 velocity;
-		Vec2	 acceleration;
-
+	protected:
 //==========================================================================================================================
 //
 //GameObject Functions
@@ -184,8 +189,17 @@ namespace KillerEngine
 		void CreateSqrSprite(Vec2& pos, Col& col, Texture& texture);
 		void CreateSqrSprite(void);
 
-	private:
+
+	private:	
 		static U32 _nextID;
+
+		U32 	 _ID;
+		bool 	 _active;
+		Sprite*  _sprite;
+		
+		Vec2     _position;
+		Vec2	 _velocity;
+		Vec2	 _acceleration;	
 	};
 
 	

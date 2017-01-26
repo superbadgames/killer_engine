@@ -1,4 +1,5 @@
 #include <Engine/Renderer.h>
+#include <iostream>
 
 namespace KillerEngine 
 {
@@ -152,23 +153,9 @@ namespace KillerEngine
 
 		const F32* data = final.GetElems();
 
-		//=====Color Shader setup=====
-		glUseProgram(_renderingProgramColor);
-
-		GLint transform1 = glGetUniformLocation(_renderingProgramColor, "transform_mat");
+		GLint transform1 = glGetUniformLocation(_currentShader, "transform_mat");
 
 		glUniformMatrix4fv(transform1, 1, GL_FALSE, data);
-
-		glUseProgram(0);
-
-		//=====Texture Shader setup=====
-		glUseProgram(_renderingProgramTexture);
-
-		GLint transform2 = glGetUniformLocation(_renderingProgramTexture, "transform_mat");
-
-		glUniformMatrix4fv(transform2, 1, GL_FALSE, data);
-
-		glUseProgram(0);
 	}
 
 //==========================================================================================================================
@@ -201,101 +188,119 @@ namespace KillerEngine
 //=======================================================================================================
 //AddToBatch
 //=======================================================================================================
-	void Renderer::AddToBatch(std::vector<F32> ver, std::vector<F32> col)
+	void Renderer::AddToBatch(GLuint shader, Vec2& pos, F32 w, F32 h, Col& c)
 	{
-		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
+		if(_currentShader != shader)
+		{
+			Draw();
+			_currentShader = shader;
+
+			glUseProgram(_currentShader);
+
+			_SetOrthoProjection();
+		}
+
+		if(_currentBatchSize + 1 >= _maxBatchSize) { Draw(); }
+
+		_vertices.push_back(pos.GetX());
+		_vertices.push_back(pos.GetY());
+		_vertices.push_back(pos.GetZ());
+		_vertices.push_back(pos.GetW());
 		
-		_vertices.reserve(_vertices.size() + ver.size());
-		_vertices.insert(_vertices.end(), ver.begin(), ver.end());
-		_currentBatchSize += ver.size();
+		_dimensions.push_back(w/2);
+		_dimensions.push_back(h/2);
 
-		_colors.reserve(_colors.size() + col.size());
-		_colors.insert(_colors.end(), col.begin(), col.end());
-
+		_colors.push_back(c.GetRed());
+		_colors.push_back(c.GetGreen());
+		_colors.push_back(c.GetBlue());
+		_colors.push_back(c.GetAlpha());
+		
+		++_currentBatchSize;
 	}
 
-//=======================================================================================================
-//AddTextureToBatch
-//=======================================================================================================
-	void Renderer::AddTextureToBatch(std::vector<F32> ver, std::vector<F32> uv)
+	void Renderer::AddToBatch(GLuint shader, Vec2& pos, F32 w, F32 h, Col& c, U32 textureID)
 	{
-		if(_currentBatchSize + ver.size() >= _maxBatchSize) { Draw(); }
+		if(TextureManager::Instance()->GetCurrentTextureID() != textureID)
+		{
+			Draw();
+			TextureManager::Instance()->SetCurrentTextureID(textureID);
+		}
+
+		_bottomTop.push_back(0.0f);
+		_bottomTop.push_back(0.0f);
+		_leftRight.push_back(1.0f);
+		_leftRight.push_back(1.0f);
+		AddToBatch(shader, pos, w, h, c);
+	}
+
+	void Renderer::AddToBatch(GLuint shader, Vec2& pos, F32 w, F32 h, Col& c, U32 textureID, Vec2& origin, Vec2& limit)
+	{
 		
-		_vertices.reserve(_vertices.size() + ver.size());
-		_vertices.insert(_vertices.end(), ver.begin(), ver.end());
-		_currentBatchSize += ver.size();
-
-		_uvs.reserve(_uvs.size() + uv.size());
-		_uvs.insert(_uvs.end(), uv.begin(), uv.end());
-
+		if(TextureManager::Instance()->GetCurrentTextureID() != textureID)
+		{
+			Draw();
+			TextureManager::Instance()->SetCurrentTextureID(textureID);
+		}
+		
+		_bottomTop.push_back(origin.GetX());
+		_bottomTop.push_back(origin.GetY());
+		_leftRight.push_back(limit.GetX());
+		_leftRight.push_back(limit.GetY());
+		AddToBatch(shader, pos, w, h, c);
 	}
 
 //=======================================================================================================
 //Draw
 //=======================================================================================================
-	void Renderer::Draw(void) 
+
+	void Renderer::Draw(void)
 	{
-		if(_currentBatchSize == 0) { return; } //End if there are no verticies to draw
+		if(_currentBatchSize == 0) return;
 
-		if(_uvs.size() <= 0)
-		{
-			glUseProgram(0);	
-			
-		    glUseProgram(_renderingProgramColor);
+		GLuint buffers[5];
+		glGenBuffers(5, buffers);
 
-			GLuint buffers[2];
-			glGenBuffers(2, buffers);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(1);
-			
-			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
-		}
-
-		if(_uvs.size() >= 1 )
-		{
-			glUseProgram(0);	
-			
-		    glUseProgram(_renderingProgramTexture);
-
-		    glEnable(GL_BLEND);
-		    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-			GLuint buffers[2];
-			glGenBuffers(2, buffers);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvs.size()), &_uvs[0], GL_STATIC_DRAW);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-			glEnableVertexAttribArray(1);
-			
-			glDrawArrays(GL_TRIANGLES, 0, _currentBatchSize);
-
-			glDisable(GL_BLEND);
-		}	
-
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _vertices.size()), &_vertices[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, NULL);
 		
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _colors.size()), &_colors[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
+		glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _dimensions.size()), &_dimensions[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+
+		if(_bottomTop.size() > 0)
+		{
+			
+			glEnable (GL_BLEND); 
+			glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _bottomTop.size()), &_bottomTop[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(3);
+			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 	
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _leftRight.size()), &_leftRight[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(4);
+			glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+		}
+		
+		glDrawArrays(GL_POINTS, 0, _currentBatchSize);
 
 		//=====Reset All Containers and Counters=====
-			_vertices.clear();
-			_colors.clear();
-			_uvs.clear();
-			_currentBatchSize = 0;
+		_vertices.clear();
+		_dimensions.clear();
+		_colors.clear();
+		_bottomTop.clear();
+		_leftRight.clear();
+		_currentBatchSize = 0;
 	}
-
 //=======================================================================================================
 //
 //Constructor
@@ -304,10 +309,10 @@ namespace KillerEngine
 	Renderer::Renderer(void): _maxBatchSize(1000), 
 							  _currentBatchSize(0)
 	{ 
-		_CompileShaders();
+	//	_CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);
 		glBindVertexArray(_vertexArrayObject);
-		_SetOrthoProjection();
+		//_SetOrthoProjection();
 	}
 
 }//End namespace		

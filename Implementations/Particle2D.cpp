@@ -53,7 +53,7 @@ namespace KillerPhysics
 		//Update position
 		KE::GameObject2D::SetScaledPosition(velocity, delta);
 
-		Vec2 resultingAcc = KE::GameObject2D::acceleration;
+		Vec2 resultingAcc = KE::GameObject2D::GetAcceleration();
 
 		velocity.AddScaledVector(resultingAcc, delta);
 

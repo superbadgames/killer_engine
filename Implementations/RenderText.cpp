@@ -1,4 +1,5 @@
 #include <Engine/RenderText.h>
+#include <iostream>
 
 namespace KillerEngine
 {
@@ -27,17 +28,9 @@ namespace KillerEngine
 //Virtual Functions
 //
 //==========================================================================================================================
-	void RenderText::v_Update(void)
-	{
-		for(auto &sprite : _spriteList)
-		{
-			sprite->v_SetVertexPositions();
-		}
-	}
-
 	void RenderText::v_Render(void)
 	{
-		for(auto &sprite : _spriteList)
+		for(CharSprite* sprite : _spriteList)
 		{
 			sprite->v_RenderSprite();
 		}
@@ -54,8 +47,8 @@ namespace KillerEngine
 
 		_text = text;
 
-		F32 currentX = GameObject2D::position.GetX();
-		F32 currentY = GameObject2D::position.GetY();
+		F32 currentX = GameObject2D::GetPosition().GetX();
+		F32 currentY = GameObject2D::GetPosition().GetY();
 
 		Texture& texture = TextureManager::Instance()->GetTexture(_font.GetTextureID());
 
@@ -67,7 +60,7 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
 
@@ -83,7 +76,9 @@ namespace KillerEngine
 			F32 leftCoord  = rightCoord + charWidth / textureWidth;
 			F32 bottomCoord = topCoord + charHeight / textureHeight;
 
-			sprite->v_SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
+			//std::cout << "Top=" << topCoord << "\nBottom=" << bottomCoord << "\nrRight=" << rightCoord << "\nLeft=" << leftCoord << "\n";
+
+			sprite->SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
 
 			F32 totalCharWidth = charWidth * _widthScaleFactor;
 			F32 totalCharHeight = charHeight * _heightScaleFactor;
@@ -109,9 +104,17 @@ namespace KillerEngine
 			F32 xOffset = F32(sprite->GetXOffset() / 2);
 			F32 yOffset = F32(sprite->GetYOffset() / 2);
 
-			sprite->v_SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
+			sprite->SetPosition(Vec2(currentX + xOffset, currentY - yOffset));			
 
 			currentX += F32(sprite->GetXAdvance()) * _widthScaleFactor;
+		}
+	}
+
+	void RenderText::SetTextColor(Col& col)
+	{
+		for(CharSprite* sprite : _spriteList)
+		{
+			sprite->SetColor(col);
 		}
 	}
 

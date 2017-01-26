@@ -74,6 +74,12 @@ namespace KillerEngine
 //==========================================================================================================================
 		void SetBackgroundColor(Col& c) { WinProgram::Instance()->SetBackgroundColor(c); }
 
+		void AddToBatch(const GLuint shader, Vec2& pos, F32 w, F32 h, Col& c);
+
+		void AddToBatch(const GLuint shader, Vec2& pos, F32 w, F32 h, Col& c, U32 textureID);
+		
+		void AddToBatch(const GLuint shader, Vec2& pos, F32 w, F32 h, Col& c, U32 textureID, Vec2& origin, Vec2& limit);
+
 		void AddToBatch(std::vector<F32> v, std::vector<F32> c);
 
 		void AddTextureToBatch(std::vector<F32> v, std::vector<F32> uv);
@@ -94,10 +100,14 @@ namespace KillerEngine
 		U32 				 _currentBatchSize;
 		std::vector<F32> 	 _vertices;
 		std::vector<F32> 	 _colors;
-		std::vector<F32>     _uvs;	
+		std::vector<F32> 	 _dimensions;
+		std::vector<F32> 	 _bottomTop;
+		std::vector<F32>     _leftRight;	
 		GLuint				 _renderingProgramColor;
 		GLuint   			 _renderingProgramTexture;
 		GLuint   			 _vertexArrayObject;
+		
+		GLuint 				 _currentShader;
 		static const GLchar* _vertexShaderSourceColor[];
 		static const GLchar* _vertexShaderSourceTexture[];
 		static const GLchar* _fragmentShaderSourceColor[];

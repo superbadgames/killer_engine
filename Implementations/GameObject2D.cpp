@@ -9,6 +9,7 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================
-	GameObject2D::GameObject2D(void) : sprite(NULL)
+	GameObject2D::GameObject2D(void) : _ID(0), _active(true), _sprite(NULL), _position(0), _velocity(0), _acceleration(0)
 	{  }
+
 }
