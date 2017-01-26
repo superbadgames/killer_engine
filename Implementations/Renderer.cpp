@@ -226,10 +226,10 @@ namespace KillerEngine
 			TextureManager::Instance()->SetCurrentTextureID(textureID);
 		}
 
-		_uvOrigins.push_back(0.0f);
-		_uvOrigins.push_back(0.0f);
-		_uvLimits.push_back(1.0f);
-		_uvLimits.push_back(1.0f);
+		_bottomTop.push_back(0.0f);
+		_bottomTop.push_back(0.0f);
+		_leftRight.push_back(1.0f);
+		_leftRight.push_back(1.0f);
 		AddToBatch(shader, pos, w, h, c);
 	}
 
@@ -242,10 +242,10 @@ namespace KillerEngine
 			TextureManager::Instance()->SetCurrentTextureID(textureID);
 		}
 		
-		_uvOrigins.push_back(origin.GetX());
-		_uvOrigins.push_back(origin.GetY());
-		_uvLimits.push_back(limit.GetX());
-		_uvLimits.push_back(limit.GetY());
+		_bottomTop.push_back(origin.GetX());
+		_bottomTop.push_back(origin.GetY());
+		_leftRight.push_back(limit.GetX());
+		_leftRight.push_back(limit.GetY());
 		AddToBatch(shader, pos, w, h, c);
 	}
 
@@ -275,15 +275,18 @@ namespace KillerEngine
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-		if(_uvOrigins.size() > 0)
+		if(_bottomTop.size() > 0)
 		{
+			
+			glEnable (GL_BLEND); 
+			glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvOrigins.size()), &_uvOrigins[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _bottomTop.size()), &_bottomTop[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 	
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
-			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _uvLimits.size()), &_uvLimits[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, (sizeof(F32) * _leftRight.size()), &_leftRight[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 		}
@@ -294,8 +297,8 @@ namespace KillerEngine
 		_vertices.clear();
 		_dimensions.clear();
 		_colors.clear();
-		_uvOrigins.clear();
-		_uvLimits.clear();
+		_bottomTop.clear();
+		_leftRight.clear();
 		_currentBatchSize = 0;
 	}
 //=======================================================================================================

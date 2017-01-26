@@ -76,7 +76,7 @@ namespace KillerEngine
 			F32 leftCoord  = rightCoord + charWidth / textureWidth;
 			F32 bottomCoord = topCoord + charHeight / textureHeight;
 
-			std::cout << "Top=" << topCoord << "\nBottom=" << bottomCoord << "\nrRight=" << rightCoord << "\nLeft=" << leftCoord << "\n";
+			//std::cout << "Top=" << topCoord << "\nBottom=" << bottomCoord << "\nrRight=" << rightCoord << "\nLeft=" << leftCoord << "\n";
 
 			sprite->SetTexture(_font.GetTextureID(), topCoord, bottomCoord, rightCoord, leftCoord);
 

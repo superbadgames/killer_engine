@@ -21,8 +21,7 @@ namespace KillerEngine
 	{
 		//Renderer::Instance()->AddToBatch(Sprite::vertexPositions, Sprite::vertexColors);
 		Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor(), 
-							   			 Sprite::GetTextureID(), Sprite::GetUVOrigin(), Sprite::GetUVLimit());
-		//std::cout << "char sprite render\n";
+							   			 Sprite::GetTextureID(), Sprite::GetUVBottomTop(), Sprite::GetUVLeftRight());
 		//Renderer::Instance()->AddToBatch(_shaderProgram, Sprite::GetPosition(), Sprite::GetWidth(), Sprite::GetHeight(), Sprite::GetColor());
 	}
 
@@ -83,23 +82,23 @@ namespace KillerEngine
 			"layout (location = 0) in vec4 position;										\n"
 			"layout (location = 1) in vec4 color; 											\n"
 			"layout (location = 2) in vec2 dimensions;										\n"
-			"layout (location = 3) in vec2 uvOrigin;										\n"
-			"layout (location = 4) in vec2 uvLimit;											\n"
+			"layout (location = 3) in vec2 bottomTop;										\n"
+			"layout (location = 4) in vec2 leftRight;										\n"
 
 			"uniform mat4 transform_mat;													\n"
 			
 			"out vec4 gs_color;																\n"
 			"out vec4 gs_dimensions;														\n"
-			"out vec2 gs_uvOrigin;															\n"
-			"out vec2 gs_uvLimit;"
+			"out vec2 gs_bottomTop;															\n"
+			"out vec2 gs_leftRight;"
 
 			"void main(void) 																\n"
 			"{																				\n"
 			"	gl_Position = transform_mat * position;										\n"
 			"	gs_color = color;															\n"
 			"	gs_dimensions = transform_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
-			"	gs_uvOrigin = uvOrigin;														\n"
-			"	gs_uvLimit = uvLimit;														\n"
+			"	gs_bottomTop = bottomTop;													\n"
+			"	gs_leftRight = leftRight;													\n"
 			"}																				\n"
 		};
 
@@ -115,32 +114,29 @@ namespace KillerEngine
 			
 			"in vec4 gs_color[]; 															\n"
 			"in vec4 gs_dimensions[]; 														\n"
-			"in vec2 gs_uvOrigin[];															\n"
-			"in vec2 gs_uvLimit[];															\n"
+			"in vec2 gs_bottomTop[];														\n"
+			"in vec2 gs_leftRight[];														\n"
 			
 			"out vec4 fs_color; 															\n"
-			"out vec2 fs_uvs;															\n"
+			"out vec2 fs_uvs; 																\n"
 			
 			"void main()																	\n"
 			"{																				\n"
-			//Bottom Right
-			"	fs_uvs = vec2(gs_uvOrigin[0].x, gs_uvLimit[0].y);												\n"
-			"	fs_color = gs_color[0];																			\n"
+			"	fs_color = gs_color[0]; 													\n"
+			//Right Bottom
+			"	fs_uvs = vec2(gs_leftRight[0].y gs_bottomTop[0].x);												\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, -gs_dimensions[0].y, 0, 0);		\n"
 			" 	EmitVertex(); 																					\n"
-			//Top Right
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
-			"	fs_color = gs_color[0];																			\n"
+			//Right Top
+			"	fs_uvs = vec2(gs_leftRight[0].y, gs_bottomTop[0].y);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, gs_dimensions[0].y, 0.0, 0.0);	\n"
 			"	EmitVertex(); 																					\n"
-			//Bottom Left
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvLimit[0].y);												\n"
-			"	fs_color = gs_color[0];																			\n"
+			//Left Bottom
+			"	fs_uvs = vec2(gs_leftRight[0].x, gs_bottomTop[0].x);											\n"
 			" 	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, -gs_dimensions[0].y, 0.0, 0.0); 	\n"
 			"	EmitVertex();				 																	\n"
-			//Top Left
-			"	fs_uvs = vec2(gs_uvLimit[0].x, gs_uvOrigin[0].y);												\n"
-			"	fs_color = gs_color[0];																			\n"
+			//Left Top
+			"	fs_uvs = vec2(gs_leftRight[0].x, gs_bottomTop[0].y);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, gs_dimensions[0].y, 0, 0); 		\n"
 			"	EmitVertex(); 																					\n"
 			
@@ -156,15 +152,16 @@ namespace KillerEngine
 		{
 			"#version 430 core																\n"
 	
-			"uniform sampler2D tex;													\n"
+			"uniform sampler2D tex;															\n"
+
 			"in vec4 fs_color;																\n"
-			"in vec2 fs_uvs;																\n"
-			"out vec4 color;"
+			"in vec2 fs_uvs;"
+			"out vec4 color;																\n"
 			
 			"void main(void) 																\n"
 			"{																				\n"
-			"	color = texture(tex, fs_uvs);										\n"
-			//"	breakgl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);															\n"
+			"	if(fs_uvs == vec2(0, 0)) { color = fs_color; }								\n"
+			"	else { color = texture(tex, fs_uvs); } 										\n"
 			"}																				\n"
 		};
 
