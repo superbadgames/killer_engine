@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h" />
+    <ClInclude Include="..\..\Headers\Engine\Camera.h" />
     <ClInclude Include="..\..\Headers\Engine\CharSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Color.hpp" />
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Implementations\Camera.cpp" />
     <ClCompile Include="..\..\Implementations\CharSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />

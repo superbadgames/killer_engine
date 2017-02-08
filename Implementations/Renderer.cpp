@@ -10,146 +10,16 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 //=======================================================================================================
-//_CompileShaders
-//=======================================================================================================
-	void Renderer::_CompileShaders(void)
-	{
-		//=====Vertex Shaders=====
-		//=====Color Shader=====
-		//This is used when only colors, not textures are used to render
-		//a pirmitive
-		static const GLchar* _vertexShaderSourceColor[] = 
-		{
-			"#version 430 core																\n"
-			"																				\n"
-			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec4 color; 											\n"					
-			"uniform mat4 transform_mat;													\n"
-			"																				\n"
-			"out vec4 vs_color;																\n"
-			"																				\n"
-			"void main(void) 																\n"
-			"{																				\n"
-			"	gl_Position = transform_mat * position;										\n"
-			"	vs_color = color;															\n"
-			"}																				\n"
-		};
-
-		//=====Texture Shader=====
-		//This is used when the pirmitive to be drawn has a texture
-		//to be drawn with it
-		static const GLchar* _vertexShaderSourceTexture[] =
-		{
-			"#version 430 core																\n"
-			"																				\n"
-			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec2 tex_coord; 										\n"					
-			"uniform mat4 transform_mat;													\n"
-			"																				\n"
-			"out vec2 vs_tex_coord;															\n"
-			"																				\n"
-			"void main(void) 																\n"
-			"{																				\n"
-			"	gl_Position = transform_mat * position;										\n"
-			"	vs_tex_coord = vec2(tex_coord.x, tex_coord.y);								\n"
-			"}																				\n"
-		};
-
-		//=====Fragment Shaders=====
-		//=====Color Shader=====
-		//This is used when only colors, not textures are used to render
-		//a pirmitive
-		static const GLchar* _fragmentShaderSourceColor[] = 
-		{
-			"#version 430 core																\n"
-			"																				\n"
-			"in vec4 vs_color;																\n"
-			"out vec4 color;																\n"
-			"																				\n"
-			"void main(void) 																\n"
-			"{																				\n"
-			"	color = vs_color;															\n"
-			"}																				\n"
-		};
-
-		//=====Texture Shader=====
-		//This is used when the pirmitive to be drawn has a texture
-		//to be drawn with it
-		static const GLchar* _fragmentShaderSourceTexture[] =
-		{
-			"#version 430 core																\n"
-			"																				\n"
-			"uniform sampler2D ourTexture;													\n"
-			"in vec2 vs_tex_coord;															\n"
-			"out vec4 color;																\n"
-			"																				\n"
-			"void main(void) 																\n"
-			"{																				\n"
-			//=====test for textures, failed finish later=====
-			//"	color = texelFetch(sampler, ivec2(gl_FragCoord.xy), 0);						\n"
-			"	color = texture(ourTexture, vs_tex_coord);									\n"
-			//"	GL_FragColor = texture(ourTexture, vs_tex_coord);									\n"
-			"}																				\n"
-		};
-
-		//=====Create and compile vertext shader=====
-		GLuint vertexShaderProgramColor;
-		GLuint vertexShaderProgramTexture;
-		GLuint fragmentShaderProgramColor;
-		GLuint fragmentShaderProgramTexture;
-
-		//=====Compiled vertex shaders=====
-		//=====Color=====
-		vertexShaderProgramColor = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShaderProgramColor, 1, _vertexShaderSourceColor, NULL);
-		glCompileShader(vertexShaderProgramColor);
-
-		//=====Texutre=====
-		vertexShaderProgramTexture = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShaderProgramTexture, 1, _vertexShaderSourceTexture, NULL);
-		glCompileShader(vertexShaderProgramTexture);
-
-		//=====Compile fragment shaders=====
-		//=====Color=====
-		fragmentShaderProgramColor = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShaderProgramColor, 1, _fragmentShaderSourceColor, NULL);
-		glCompileShader(fragmentShaderProgramColor);
-
-		//=====Texture=====
-		fragmentShaderProgramTexture = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShaderProgramTexture, 1, _fragmentShaderSourceTexture, NULL);
-		glCompileShader(fragmentShaderProgramTexture);
-
-		//=====Create Color Shader, attach shader to it and link it=====
-		_renderingProgramColor = glCreateProgram();
-		glAttachShader(_renderingProgramColor, vertexShaderProgramColor);
-		glAttachShader(_renderingProgramColor, fragmentShaderProgramColor);
-		glLinkProgram(_renderingProgramColor);
-
-		//=====Create Texture Shader, attach shader to it and link it=====
-		_renderingProgramTexture = glCreateProgram();
-		glAttachShader(_renderingProgramTexture, vertexShaderProgramTexture);
-		glAttachShader(_renderingProgramTexture, fragmentShaderProgramTexture);
-		glLinkProgram(_renderingProgramTexture);
-
-		//=====Delete the sahders as the program now has them=====
-		glDeleteShader(vertexShaderProgramColor);
-		glDeleteShader(fragmentShaderProgramColor);
-		glDeleteShader(vertexShaderProgramTexture);
-		glDeleteShader(fragmentShaderProgramTexture);
-	}
-
-//=======================================================================================================
 //_SetOrthoProjection
 //=======================================================================================================
 	void Renderer::_SetOrthoProjection(void) 
 	{
-		Mat projection{};
+		Matrix projection{};
 		projection.MakeOrthographic((F32)WinProgram::Instance()->GetWidth(), (F32)WinProgram::Instance()->GetHeight(), 200);
 
-		Mat model(1.0f);
+		Matrix model(1.0f);
 
-		Mat final = projection * model;
+		Matrix final = projection * model;
 
 		const F32* data = final.GetElems();
 
@@ -197,7 +67,8 @@ namespace KillerEngine
 
 			glUseProgram(_currentShader);
 
-			_SetOrthoProjection();
+			//_SetOrthoProjection();
+			Camera::Instance()->SetUp(shader);
 		}
 
 		if(_currentBatchSize + 1 >= _maxBatchSize) { Draw(); }
@@ -309,10 +180,8 @@ namespace KillerEngine
 	Renderer::Renderer(void): _maxBatchSize(1000), 
 							  _currentBatchSize(0)
 	{ 
-	//	_CompileShaders();
 		glGenVertexArrays(1, &_vertexArrayObject);
 		glBindVertexArray(_vertexArrayObject);
-		//_SetOrthoProjection();
 	}
 
 }//End namespace		

@@ -62,7 +62,7 @@ typedef std::string string;
 typedef KillerEngine::Color<F32> Col;
 
 //Matrix type
-typedef KillerMath::Matrix4<F32> Mat;
+typedef KillerMath::Matrix4<F32> Matrix;
 
 //Vector type
 typedef KillerMath::Vector2<F32> Vec2;

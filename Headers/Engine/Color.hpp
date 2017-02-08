@@ -38,6 +38,12 @@ namespace KillerEngine
 			_values[3] = 1.0f;
 		}
 		
+		Color(T col)
+		{
+			_values[0] = _values[1] = _values[2] = col;
+			_values[3] = 1.0f;
+		}
+
 		Color(T red, T green, T blue) 
 		{
 			_values[0] = red;

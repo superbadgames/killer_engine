@@ -29,6 +29,7 @@ Written by Maxwell Miller
 #include <Engine/TextureManager.h>
 #include <Engine/Texture.hpp>
 #include <Engine/ErrorManager.h>
+#include <Engine/Camera.h>
 
 //=====OGL includes=====
 #include <GL/gl.h>
@@ -118,8 +119,6 @@ namespace KillerEngine
 //Private Renderer Functions
 //
 //==========================================================================================================================
-		void _CompileShaders(void);
-		
 		void _SetOrthoProjection(void);
 	};
 

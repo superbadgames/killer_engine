@@ -100,6 +100,9 @@
     <Filter Include="Components\Sprites\TriSprite">
       <UniqueIdentifier>{0c6cd213-02b1-4316-83bb-ec602d3d99d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{e63d13b7-e9e9-4c1b-8403-7f3d194c5129}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -189,6 +192,9 @@
     <ClInclude Include="..\..\Headers\Engine\TriSprite.h">
       <Filter>Components\Sprites\TriSprite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -256,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\TriSprite.cpp">
       <Filter>Components\Sprites\TriSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Camera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
