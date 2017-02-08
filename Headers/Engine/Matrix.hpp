@@ -19,6 +19,24 @@ matrix(single value) will create a identiy matrix of said value.
 maxtrix(16 values) will create a matrix as intended. It can take an array
 or the values themselves. 
 
+Since the matrix is column major, it is mapped as such: 
+
+| m00 | m10 | m20 | m30 |
+| m01 | m12 | m21 | m31 |
+| m03 | m13 | m22 | m32 |
+| m04 | m14 | m23 | m34 |
+
+This means that _m[0] -> _m[3] == m00 -> m04
+
+What this looks like is this:
+
+| _m[0] | _m[4] | _m[8]  | _m[12] |
+| _m[1] | _m[5] | _m[9]  | _m[13] |
+| _m[2] | _m[6] | _m[10] | _m[14] |
+| _m[3] | _m[7] | _m[11] | _m[15] |
+
+This is the way that the array mapping looks, for a quick reference. 
+
 For the construction of the orthographic or persepctive matricies, there
 is a funcion that you call to return the specified matrix. 
 
@@ -49,10 +67,11 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/Vector.hpp>
 
-namespace KillerMath {
-
+namespace KillerMath 
+{
 	template<typename T>
-	class Matrix4 {
+	class Matrix4 
+	{
 	private:
 		T _m[16];
 
@@ -62,14 +81,16 @@ namespace KillerMath {
 //Constructors
 //
 //==========================================================================================================================
-		Matrix4(void) {
+		Matrix4(void) 
+		{
 			_m[0]  = _m[1]  = _m[2]  = _m[3]  = 0;
 			_m[4]  = _m[5]  = _m[6]  = _m[7]  = 0;
 			_m[8]  = _m[9]  = _m[10] = _m[11] = 0;
 			_m[12] = _m[13] = _m[14] = _m[15] = 0;
 		}
 		
-		Matrix4(T val) {
+		Matrix4(T val) 
+		{
 			_m[0] = _m[5] = _m[10] = _m[15] = val;
 		
 			_m[1]  = _m[2]  = _m[3]  = 0;
@@ -78,7 +99,8 @@ namespace KillerMath {
 			_m[12] = _m[13] = _m[14] = 0;
 		}
 		
-		Matrix4(const T mSrc[16]) {
+		Matrix4(const T mSrc[16]) 
+		{
 			_m[0]  = mSrc[0];  _m[1] = mSrc[1];   _m[2]  = mSrc[2];  _m[3]  = mSrc[3];
 			_m[4]  = mSrc[4];  _m[5] = mSrc[5];   _m[6]  = mSrc[6];  _m[7]  = mSrc[7];
 			_m[8]  = mSrc[8];  _m[9] = mSrc[9];   _m[10] = mSrc[10]; _m[11] = mSrc[11];
@@ -89,6 +111,7 @@ namespace KillerMath {
 				 T m10, T m11, T m12, T m13,
 				 T m20, T m21, T m22, T m23,
 				 T m30, T m31, T m32, T m33)
+		
 		{
 			_m[0]  = m00;  _m[1] = m01;   _m[2]  = m02;  _m[3]  = m03;
 			
@@ -102,7 +125,8 @@ namespace KillerMath {
 
 /*
 	Work to fix this later, replace the default copy constructor.
-		Matrix4(Matrix4<T> M) {
+		Matrix4(Matrix4<T> M) 
+		{
 			T* m = M.GetElems();
 
 			_m[0]  = m[0];  _m[1]  = m[1];   _m[2]   = m[2];  _m[3]   = m[3];
@@ -120,7 +144,8 @@ namespace KillerMath {
 //Matrix functions
 //
 //==========================================================================================================================
-		void MakeOrthographic(T width, T height, T depth) {
+		void MakeOrthographic(T width, T height, T depth) 
+		{
 		  	T right  = width;
 		  	T left   = 0;
 			T top    = height;
@@ -147,6 +172,45 @@ namespace KillerMath {
 			_m[12] = (left + right) / (left - right);
 			_m[13] = (bottom + top) / (bottom - top);
 			_m[14] = (near + far)   / (far - near);
+
+		}
+
+		void SetTranslation(T x, T y, T z)
+		{
+			_m[12] = x;
+			_m[13] = y;
+			_m[14] = z;
+		}
+
+		void SetTranslation(Vector2<T> vec)
+		{
+			_m[12] = vec.GetX();
+			_m[13] = vec.GetY();
+			_m[14] = vec.GetZ();
+		}
+
+		void SetTranslation(Vector3<T> vec)
+		{
+			_m[12] = vec.GetX();
+			_m[13] = vec.GetY();
+			_m[14] = vec.GetZ();
+		}
+
+		void ResetMatrix(T val)
+		{
+			//Reset Matrix
+			_m[0]  =  _m[1]  =  _m[2]  =  _m[3]  = 0;
+
+			_m[4]  =  _m[5]  =  _m[6]  =  _m[7]  = 0;
+
+			_m[8]  =  _m[9]  =  _m[10] =  _m[11] = 0;
+
+			_m[12] =  _m[13] =  _m[14] =  _m[15] = 0;
+
+			_m[0] = val;
+			_m[5] = val;
+			_m[10] = val;
+			_m[15] = val;
 
 		}
 
@@ -196,7 +260,8 @@ namespace KillerMath {
 //Operator Overloads
 //
 //==========================================================================================================================
-		Matrix4<T>& operator=(const Matrix4<T>& M) {
+		Matrix4<T>& operator=(const Matrix4<T>& M) 
+		{
 			const T* elems = M.GetElems();
 
 			_m[0] = elems[0];
@@ -223,35 +288,40 @@ namespace KillerMath {
 			return *this;
 		}
 		
-		Matrix4<T> operator*(const Matrix4<T>& RHM) {
-			const T* lhm = this->GetElems();
-			const T* rhm = RHM.GetElems();
+		Matrix4<T>& operator*(const Matrix4<T>& RightMatrix) 
+		{
+			const T* left = this->GetElems();
+			const T* right = RightMatrix.GetElems();
 
-			return Matrix4<T>
+			Matrix4<T> newMatrix
 			(
-				lhm[0] * rhm[0] + lhm[1] * rhm[4] + lhm[2] * rhm[8]  + lhm[3] * rhm[12], //m11
-				lhm[0] * rhm[1] + lhm[1] * rhm[5] + lhm[2] * rhm[9]  + lhm[3] * rhm[13], //m12
-				lhm[0] * rhm[2] + lhm[1] * rhm[6] + lhm[2] * rhm[10] + lhm[3] * rhm[14], //m13
-				lhm[0] * rhm[3] + lhm[1] * rhm[7] + lhm[2] * rhm[11] + lhm[3] * rhm[15], //m14
+				left[0] * right[0] + left[1] * right[1] + left[2]  * right[2] + left[3] * right[3], //m00
+				left[4] * right[0] + left[5] * right[1] + left[6]  * right[2] + left[7] * right[3], //m01
+				left[8] * right[0] + left[9] * right[1] + left[10] * right[2] + left[11] * right[3], //m02
+				left[12] * right[0] + left[13] * right[1] + left[14] * right[2] + left[15] * right[3], //m03
 
-				lhm[4] * rhm[0] + lhm[5] * rhm[4] + lhm[6] * rhm[8]  + lhm[7] * rhm[12], //m21
-				lhm[4] * rhm[1] + lhm[5] * rhm[5] + lhm[6] * rhm[9]  + lhm[7] * rhm[13], //m22
-				lhm[4] * rhm[2] + lhm[5] * rhm[6] + lhm[6] * rhm[10] + lhm[7] * rhm[14], //m23
-				lhm[4] * rhm[3] + lhm[5] * rhm[7] + lhm[6] * rhm[11] + lhm[7] * rhm[15], //m24
+				left[0] * right[4] + left[1] * right[5] + left[2]  * right[6] + left[3] * right[7], //m10
+				left[4] * right[4] + left[5] * right[5] + left[6]  * right[6] + left[7] * right[7], //m11
+				left[8] * right[4] + left[9] * right[5] + left[10] * right[6] + left[11] * right[7], //m12
+				left[12] * right[4] + left[13] * right[5] + left[14] * right[6] + left[15] * right[7], //m13
 
-				lhm[8] * rhm[0] + lhm[9] * rhm[4] + lhm[10] * rhm[8]  + lhm[11] * rhm[12], //m31
-				lhm[8] * rhm[1] + lhm[9] * rhm[5] + lhm[10] * rhm[9]  + lhm[11] * rhm[13], //m32
-				lhm[8] * rhm[2] + lhm[9] * rhm[6] + lhm[10] * rhm[10] + lhm[11] * rhm[14], //m33
-				lhm[8] * rhm[3] + lhm[9] * rhm[7] + lhm[10] * rhm[11] + lhm[11] * rhm[15], //m34
+				left[0] * right[8] + left[1] * right[9] + left[2]  * right[10] + left[3] * right[11], //m20
+				left[4] * right[8] + left[5] * right[9] + left[6]  * right[10] + left[7] * right[11], //m21
+				left[8] * right[8] + left[9] * right[9] + left[10] * right[10] + left[11] * right[11], //m22
+				left[12] * right[8] + left[13] * right[9] + left[14] * right[10] + left[15] * right[11], //m23
 
-				lhm[12] * rhm[0] + lhm[13] * rhm[4] + lhm[14] * rhm[8]  + lhm[15] * rhm[12], //m41
-				lhm[12] * rhm[1] + lhm[13] * rhm[5] + lhm[14] * rhm[9]  + lhm[15] * rhm[13], //m42
-				lhm[12] * rhm[2] + lhm[13] * rhm[6] + lhm[14] * rhm[10] + lhm[15] * rhm[14], //m43
-				lhm[12] * rhm[3] + lhm[13] * rhm[7] + lhm[14] * rhm[11] + lhm[15] * rhm[15]  //m44
+				left[0] * right[12] + left[1] * right[13] + left[2]  * right[14] + left[3] * right[15], //m30
+				left[4] * right[12] + left[5] * right[13] + left[6]  * right[14] + left[7] * right[15], //m31
+				left[8] * right[12] + left[9] * right[13] + left[10] * right[14] + left[11] * right[15], //m32
+				left[12] * right[12] + left[13] * right[13] + left[14] * right[14] + left[15] * right[15]  //m33
 			);
+
+			*this = newMatrix;
+			return *this;
 		}
 		
-		Matrix4<T>& operator *=(Matrix4<T>& RHM) {
+		Matrix4<T>& operator *=(Matrix4<T>& RHM) 
+		{
 			*this = *this * RHM;
 			return *this;
 		}

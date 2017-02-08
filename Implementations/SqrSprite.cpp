@@ -45,29 +45,30 @@ namespace KillerEngine
 		//a pirmitive
 		static const GLchar* _vertexShaderSource[] = 
 		{
-			"#version 430 core																\n"
+			"#version 430 core																	\n"
 			
-			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec4 color; 											\n"
-			"layout (location = 2) in vec2 dimensions;										\n"
-			"layout (location = 3) in vec2 bottomTop;										\n"
-			"layout (location = 4) in vec2 leftRight; 										\n"
+			"layout (location = 0) in vec4 position;											\n"
+			"layout (location = 1) in vec4 color; 												\n"
+			"layout (location = 2) in vec2 dimensions;											\n"
+			"layout (location = 3) in vec2 bottomTop;											\n"
+			"layout (location = 4) in vec2 leftRight; 											\n"
 
-			"uniform mat4 transform_mat;													\n"
+			"uniform mat4 perspective_mat;														\n"
+			"uniform mat4 modelView_mat;														\n"
 			
-			"out vec4 gs_color;																\n"
-			"out vec4 gs_dimensions;														\n"
-			"out vec2 gs_bottomTop;															\n"
-			"out vec2 gs_leftRight;															\n"
+			"out vec4 gs_color;																	\n"
+			"out vec4 gs_dimensions;															\n"
+			"out vec2 gs_bottomTop;																\n"
+			"out vec2 gs_leftRight;																\n"
 
-			"void main(void) 																\n"
-			"{																				\n"
-			"	gl_Position = transform_mat * position;										\n"
-			"	gs_color = color;															\n"
-			"	gs_dimensions = transform_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
-			"	gs_bottomTop = bottomTop;													\n"
-			"	gs_leftRight = leftRight; 													\n"
-			"}																				\n"
+			"void main(void) 																	\n"
+			"{																					\n"
+			"	gl_Position = perspective_mat * modelView_mat * position;						\n"
+			"	gs_color = color;																\n"
+			"	gs_dimensions = perspective_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
+			"	gs_bottomTop = bottomTop;														\n"
+			"	gs_leftRight = leftRight; 														\n"
+			"}																					\n"
 		};
 
 
