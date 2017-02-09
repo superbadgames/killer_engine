@@ -1,8 +1,8 @@
-#include <Engine/World2D.h>
+#include <Engine/Map2D.h>
 
 namespace KillerEngine 
 {
-	World2D::World2D(void) : _mapWidth(0),
+	Map2D::Map2D(void) : _mapWidth(0),
 					   		 _mapHeight(0),
 					   		 _mapTopBorder(0),
 					   		 _mapBottomBorder(0),
@@ -13,25 +13,25 @@ namespace KillerEngine
 
 //=============================================================================
 //
-//AddObjectToWorld
+//AddObjectToMap
 //
 //=============================================================================
-	void World2D::AddObjectToWorld(GameObject2D* obj)
+	void Map2D::AddObjectToMap(GameObject2D* obj)
 	{
 		_worldObjects.insert(std::map<U32, GameObject2D*>::value_type(obj->GetID(), obj));
 		
 		if(_worldObjects.find(obj->GetID()) == _worldObjects.end()) 
 		{ 
-			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddWorld to _worldObjects"); 
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddMap to _worldObjects"); 
 		}
 	}
 
 //=============================================================================
 //
-//RemoveObjectFromWorld
+//RemoveObjectFromMap
 //
 //=============================================================================
-	void World2D::RemoveObjectFromWorld(U32 id)
+	void Map2D::RemoveObjectFromMap(U32 id)
 	{
 		std::map<U32, GameObject2D*>::iterator i = _worldObjects.find(id);
 

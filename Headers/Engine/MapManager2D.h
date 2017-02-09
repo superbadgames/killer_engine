@@ -18,7 +18,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
-#include <Engine/World2D.h>
+#include <Engine/Map2D.h>
 #include <Engine/GameObject2D.h>
 #include <Engine/ErrorManager.h>
 
@@ -28,40 +28,40 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class WorldManager2D
+	class MapManager2D
 	{
 	private:
-		std::map<U32, World2D*>    _worlds;
-		World2D* 				   _activeWorld;
-		U32 				   	   _activeWorldID;
+		std::map<U32, Map2D*>    _worlds;
+		Map2D* 				   _activeMap;
+		U32 				   	   _activeMapID;
 		bool				   	   _running;			
-		static WorldManager2D*     _instance;
+		static MapManager2D*     _instance;
 
 	public:
-		~WorldManager2D(void) {  }
+		~MapManager2D(void) {  }
 
-		static WorldManager2D* Instance();
+		static MapManager2D* Instance();
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		void AddWorld(World2D* world);
+		void AddMap(Map2D* world);
 		
-		void RemoveWorld(U32 worldID);
+		void RemoveMap(U32 worldID);
 		
-		void SetActiveWorld(U32 worldID);
+		void SetActiveMap(U32 worldID);
 		
-		U32 GetActiveWorldID(void) { return _activeWorldID; }
+		U32 GetActiveMapID(void) { return _activeMapID; }
 		
 		void SetRunning(bool r) { _running = r; }
 		
 		bool GetRunning(void) { return _running; } 
 
-		void AddObjectToWorld(U32 id, GameObject2D* obj);
+		void AddObjectToMap(U32 id, GameObject2D* obj);
 
-		void RemoveObjectFromWorld(U32 worldID, U32 ojbId);
+		void RemoveObjectFromMap(U32 worldID, U32 ojbId);
 
 //==========================================================================================================================
 //
@@ -74,7 +74,7 @@ namespace KillerEngine
 		void Render(void);
 
 	protected:
-		WorldManager2D(void) : _running(true) {  }
+		MapManager2D(void) : _running(true) {  }
 
 	};
 
