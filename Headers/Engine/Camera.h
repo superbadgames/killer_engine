@@ -5,7 +5,7 @@ have the ability to move, and will set the projection type.
 
 For now, I will build it out to be a singleton. I can see that there are 
 issues with this design that will need to be looked into, but it will make
-things easier to program for now. 
+things easier to program for now. This will be great
 
 This is not free to use, and cannot be used without the express permission
 of KillerWave. 
