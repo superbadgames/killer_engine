@@ -34,6 +34,7 @@ namespace KillerEngine
 		EC_KillerEngine,
 		EC_Windows,
 		EC_OpenGL,
+		EC_OpenGL_Shader,
 		EC_DirectInput,
 		EC_TextureManager,
 		EC_GameObject

@@ -1,5 +1,4 @@
 #include <Engine/CharSprite.h>
-#include <iostream>
 
 namespace KillerEngine
 {
@@ -31,40 +30,6 @@ namespace KillerEngine
 		if(_shaderProgram == NULL) { v_InitShader(); }
 		return _shaderProgram;
 	}
-
-/*
-	void CharSprite::v_SetTextureCoords(const F32 top, const F32 bottom, const F32 right, const F32 left)
-	{
-		Sprite::vertexUvs.clear();
-
-		//=====Vertices=====
-		//=====Triangle1=====
-		//top right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(top);
-
-		//bottom right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(bottom);
-
-		//bottom left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(bottom);
-
-		//=====Triangle2=====
-		//top right
-		_vertexUvs.push_back(right);
-		_vertexUvs.push_back(top);
-
-		//top left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(top);
-
-		//bottom left
-		_vertexUvs.push_back(left);
-		_vertexUvs.push_back(bottom);
-	}
-*/
 //==========================================================================================================================
 //Shader
 //==========================================================================================================================
@@ -77,29 +42,30 @@ namespace KillerEngine
 		//a pirmitive
 		static const GLchar* _vertexShaderSource[] = 
 		{
-			"#version 430 core																\n"
+			"#version 430 core																					\n"
 			
-			"layout (location = 0) in vec4 position;										\n"
-			"layout (location = 1) in vec4 color; 											\n"
-			"layout (location = 2) in vec2 dimensions;										\n"
-			"layout (location = 3) in vec2 bottomTop;										\n"
-			"layout (location = 4) in vec2 leftRight;										\n"
+			"layout (location = 0) in vec4 position;															\n"
+			"layout (location = 1) in vec4 color; 																\n"
+			"layout (location = 2) in vec2 dimensions;															\n"
+			"layout (location = 3) in vec2 bottomTop;															\n"
+			"layout (location = 4) in vec2 leftRight;															\n"
 
-			"uniform mat4 transform_mat;													\n"
+			"uniform mat4 perspective_mat;																		\n"
+			"uniform mat4 modelView_mat;																		\n"
 			
-			"out vec4 gs_color;																\n"
-			"out vec4 gs_dimensions;														\n"
-			"out vec2 gs_bottomTop;															\n"
+			"out vec4 gs_color;																					\n"
+			"out vec4 gs_dimensions;																			\n"
+			"out vec2 gs_bottomTop;																				\n"
 			"out vec2 gs_leftRight;"
 
-			"void main(void) 																\n"
-			"{																				\n"
-			"	gl_Position = transform_mat * position;										\n"
-			"	gs_color = color;															\n"
-			"	gs_dimensions = transform_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
-			"	gs_bottomTop = bottomTop;													\n"
-			"	gs_leftRight = leftRight;													\n"
-			"}																				\n"
+			"void main(void) 																					\n"
+			"{																									\n"
+			"	gl_Position = perspective_mat * modelView_mat * position;										\n"
+			"	gs_color = color;																				\n"
+			"	gs_dimensions = perspective_mat * modelView_mat * vec4(dimensions.x, dimensions.y, 0.0, 0.0);	\n"
+			"	gs_bottomTop = bottomTop;																		\n"
+			"	gs_leftRight = leftRight;																		\n"
+			"}																									\n"
 		};
 
 
@@ -107,24 +73,24 @@ namespace KillerEngine
 		//=====Geomtry Shader=====
 		static const GLchar* _geometryShaderSource[] =
 		{
-			"#version 430 core 																\n"
+			"#version 430 core 																					\n"
+				
+			"layout(points) in; 																				\n"
+			"layout(triangle_strip, max_vertices = 6) out;														\n"
 			
-			"layout(points) in; 															\n"
-			"layout(triangle_strip, max_vertices = 6) out;									\n"
+			"in vec4 gs_color[]; 																				\n"
+			"in vec4 gs_dimensions[]; 																			\n"
+			"in vec2 gs_bottomTop[];																			\n"
+			"in vec2 gs_leftRight[];																			\n"
 			
-			"in vec4 gs_color[]; 															\n"
-			"in vec4 gs_dimensions[]; 														\n"
-			"in vec2 gs_bottomTop[];														\n"
-			"in vec2 gs_leftRight[];														\n"
+			"out vec4 fs_color; 																				\n"
+			"out vec2 fs_uvs; 																					\n"
 			
-			"out vec4 fs_color; 															\n"
-			"out vec2 fs_uvs; 																\n"
-			
-			"void main()																	\n"
-			"{																				\n"
-			"	fs_color = gs_color[0]; 													\n"
+			"void main()																						\n"
+			"{																									\n"
+			"	fs_color = gs_color[0]; 																		\n"
 			//Right Bottom
-			"	fs_uvs = vec2(gs_leftRight[0].y gs_bottomTop[0].x);												\n"
+			"	fs_uvs = vec2(gs_leftRight[0].y, gs_bottomTop[0].x);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, -gs_dimensions[0].y, 0, 0);		\n"
 			" 	EmitVertex(); 																					\n"
 			//Right Top
@@ -140,8 +106,8 @@ namespace KillerEngine
 			"	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, gs_dimensions[0].y, 0, 0); 		\n"
 			"	EmitVertex(); 																					\n"
 			
-			"	EndPrimitive(); 															\n"
-			"}																				\n"
+			"	EndPrimitive(); 																				\n"
+			"}																									\n"
 		};
 
 
@@ -196,6 +162,7 @@ namespace KillerEngine
 		//=====Error Checking=====
 		if(isLinked == GL_FALSE)
 		{
+			string errorMessage("Compile Error in CharSprite\n");
 			GLint maxLength = 0;
 			glGetProgramiv(_shaderProgram, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -205,10 +172,10 @@ namespace KillerEngine
 
 			for(auto i = infoLog.begin(); i != infoLog.end(); ++i)
 			{
-				std::cout << *i ;
+				errorMessage += *i ;
 			}
 
-			std::cout << "\n";
+			ErrorManager::Instance()->SetError(EC_OpenGL_Shader, errorMessage);
 
 			//The program is useless now. So delete it.
 			glDeleteProgram(_shaderProgram);
