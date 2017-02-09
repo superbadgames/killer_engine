@@ -26,7 +26,7 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class World2D
+	class Map2D
 	{
 	public:
 //==========================================================================================================================
@@ -34,9 +34,9 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================		
-		World2D(void);
+		Map2D(void);
 
-		~World2D(void) {  }
+		~Map2D(void) {  }
 
 //==========================================================================================================================
 //
@@ -44,7 +44,7 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-		virtual void InitWorld(U32 id, S32 w, S32 h, Col& c)=0;
+		virtual void InitMap(U32 id, S32 w, S32 h, Col& c)=0;
 		
 		virtual void Update(void)=0;
 		
@@ -55,9 +55,9 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void AddObjectToWorld(GameObject2D* obj);
+		void AddObjectToMap(GameObject2D* obj);
 		
-		void RemoveObjectFromWorld(U32 id);
+		void RemoveObjectFromMap(U32 id);
 
 		void RenderObjects(void) {
 			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {

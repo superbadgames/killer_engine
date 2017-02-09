@@ -151,8 +151,8 @@
     <ClInclude Include="..\..\Headers\Engine\TextureManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Timer.h" />
     <ClInclude Include="..\..\Headers\Engine\Vector.hpp" />
-    <ClInclude Include="..\..\Headers\Engine\World2D.h" />
-    <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\Map2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\MapManager2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\Camera.cpp" />
@@ -176,8 +176,8 @@
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />
     <ClCompile Include="..\..\Implementations\Timer.cpp" />
-    <ClCompile Include="..\..\Implementations\World2D.cpp" />
-    <ClCompile Include="..\..\Implementations\WorldManager2D.cpp" />
+    <ClCompile Include="..\..\Implementations\Map2D.cpp" />
+    <ClCompile Include="..\..\Implementations\MapManager2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

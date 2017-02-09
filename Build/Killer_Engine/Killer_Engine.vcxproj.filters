@@ -52,12 +52,6 @@
     <Filter Include="Components\TextureManager">
       <UniqueIdentifier>{9cf645df-f4b4-417c-92f1-1c4cc356a975}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\World">
-      <UniqueIdentifier>{3820084b-1115-47ff-b532-adca4671f2e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\WorldManager">
-      <UniqueIdentifier>{0848391e-09fc-4949-ad36-3ea60b4741da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Physics">
       <UniqueIdentifier>{9e6deab4-04ba-4e5d-a927-ac83649188fa}</UniqueIdentifier>
     </Filter>
@@ -102,6 +96,12 @@
     </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{e63d13b7-e9e9-4c1b-8403-7f3d194c5129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Map">
+      <UniqueIdentifier>{3820084b-1115-47ff-b532-adca4671f2e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\MapManager">
+      <UniqueIdentifier>{0848391e-09fc-4949-ad36-3ea60b4741da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,12 +153,6 @@
     <ClInclude Include="..\..\Headers\Engine\Point.hpp">
       <Filter>Components\Math\Point</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\World2D.h">
-      <Filter>Components\World</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\WorldManager2D.h">
-      <Filter>Components\WorldManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h">
       <Filter>Components\KillerEngine</Filter>
     </ClInclude>
@@ -194,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Camera.h">
       <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Map2D.h">
+      <Filter>Components\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\MapManager2D.h">
+      <Filter>Components\MapManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,12 +233,6 @@
     <ClCompile Include="..\..\Implementations\RandomGen.cpp">
       <Filter>Components\Math\RandomGen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\World2D.cpp">
-      <Filter>Components\World</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\WorldManager2D.cpp">
-      <Filter>Components\WorldManager</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp">
       <Filter>Components\KillerEngine</Filter>
     </ClCompile>
@@ -265,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Camera.cpp">
       <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Map2D.cpp">
+      <Filter>Components\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\MapManager2D.cpp">
+      <Filter>Components\MapManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

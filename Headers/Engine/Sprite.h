@@ -27,6 +27,7 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/Texture.hpp>
 #include <Engine/Renderer.h>
+#include <Engine/ErrorManager.h>
 
 //=====OGL includes=====
 #include <GL/gl.h>

@@ -65,6 +65,10 @@ namespace KillerEngine
 					MessageBox(NULL, _errorMessages[i].c_str(), "OPENGL", MB_ICONERROR | MB_OK);
 					break;
 				}
+				case EC_OpenGL_Shader: {
+					MessageBox(NULL, _errorMessages[i].c_str(), "OPENGL SHADER", MB_ICONERROR | MB_OK);
+					break;
+				}
 				case EC_DirectInput: {
 					MessageBox(NULL, _errorMessages[i].c_str(), "DIRECT_INPUT", MB_ICONERROR | MB_OK);
 					break;

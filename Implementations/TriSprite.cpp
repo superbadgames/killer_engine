@@ -1,5 +1,4 @@
 #include <Engine/TriSprite.h>
-#include <iostream>
 
 namespace KillerEngine
 {
@@ -69,19 +68,19 @@ namespace KillerEngine
 		//=====Geomtry Shader=====
 		static const GLchar* _geometryShaderSource[] =
 		{
-			"#version 430 core 																\n"
+			"#version 430 core 																					\n"
 			
-			"layout(points) in; 															\n"
-			"layout(triangle_strip, max_vertices = 3) out;									\n"
+			"layout(points) in; 																				\n"
+			"layout(triangle_strip, max_vertices = 3) out;														\n"
 			
-			"in vec4 gs_color[]; 															\n"
-			"in vec4 gs_dimensions[]; 														\n"
+			"in vec4 gs_color[]; 																				\n"
+			"in vec4 gs_dimensions[]; 																			\n"
 			
-			"out vec4 fs_color; 															\n"
+			"out vec4 fs_color; 																				\n"
 			
-			"void main()																	\n"
-			"{																				\n"
-			"	fs_color = gs_color[0]; 													\n"
+			"void main()																						\n"
+			"{																									\n"
+			"	fs_color = gs_color[0]; 																		\n"
 			//Top
 			"	gl_Position = gl_in[0].gl_Position + vec4(0.0, gs_dimensions[0].y, 0.0, 0.0);					\n"
 			"	EmitVertex(); 																					\n"
@@ -92,8 +91,8 @@ namespace KillerEngine
 			" 	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, -gs_dimensions[0].y, 0.0, 0.0); 	\n"
 			"	EmitVertex();				 																	\n"
 			
-			"	EndPrimitive(); 															\n"
-			"}																				\n"
+			"	EndPrimitive(); 																				\n"
+			"}																									\n"
 		};
 
 
@@ -144,6 +143,7 @@ namespace KillerEngine
 		//=====Error Checking=====
 		if(isLinked == GL_FALSE)
 		{
+			string errorMessage("Compile Error in TriSprite\n");
 			GLint maxLength = 0;
 			glGetProgramiv(_shaderProgram, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -153,10 +153,10 @@ namespace KillerEngine
 
 			for(auto i = infoLog.begin(); i != infoLog.end(); ++i)
 			{
-				std::cout << *i ;
+				errorMessage += *i ;
 			}
 
-			std::cout << "\n";
+			ErrorManager::Instance()->SetError(EC_OpenGL_Shader, errorMessage);
 
 			//The program is useless now. So delete it.
 			glDeleteProgram(_shaderProgram);

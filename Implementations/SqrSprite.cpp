@@ -1,5 +1,4 @@
 #include <Engine/SqrSprite.h>
-#include <iostream>
 
 namespace KillerEngine
 {
@@ -76,22 +75,22 @@ namespace KillerEngine
 		//=====Geomtry Shader=====
 		static const GLchar* _geometryShaderSource[] =
 		{
-			"#version 430 core 																\n"
+			"#version 430 core 																					\n"
 			
-			"layout(points) in; 															\n"
-			"layout(triangle_strip, max_vertices = 6) out;									\n"
+			"layout(points) in; 																				\n"
+			"layout(triangle_strip, max_vertices = 6) out;														\n"
 			
-			"in vec4 gs_color[]; 															\n"
-			"in vec4 gs_dimensions[]; 														\n"
-			"in vec2 gs_bottomTop[];														\n"
-			"in vec2 gs_leftRight[];														\n"
+			"in vec4 gs_color[]; 																				\n"
+			"in vec4 gs_dimensions[]; 																			\n"
+			"in vec2 gs_bottomTop[];																			\n"
+			"in vec2 gs_leftRight[];																			\n"
 			
-			"out vec4 fs_color; 															\n"
-			"out vec2 fs_uvs; 																\n"
+			"out vec4 fs_color; 																				\n"
+			"out vec2 fs_uvs; 																					\n"
 			
-			"void main()																	\n"
-			"{																				\n"
-			"	fs_color = gs_color[0]; 													\n"
+			"void main()																						\n"
+			"{																									\n"
+			"	fs_color = gs_color[0]; 																		\n"
 			//Right Bottom
 			"	fs_uvs = vec2(gs_leftRight[0].y, gs_bottomTop[0].x);											\n"
 			"	gl_Position = gl_in[0].gl_Position + vec4(-gs_dimensions[0].x, -gs_dimensions[0].y, 0, 0);		\n"
@@ -109,8 +108,8 @@ namespace KillerEngine
 			"	gl_Position = gl_in[0].gl_Position + vec4(gs_dimensions[0].x, gs_dimensions[0].y, 0, 0); 		\n"
 			"	EmitVertex(); 																					\n"
 			
-			"	EndPrimitive(); 															\n"
-			"}																				\n"
+			"	EndPrimitive(); 																				\n"
+			"}																									\n"
 		};
 
 
@@ -165,6 +164,7 @@ namespace KillerEngine
 		//=====Error Checking=====
 		if(isLinked == GL_FALSE)
 		{
+			string errorMessage("Compile Error in SqrSprite\n");
 			GLint maxLength = 0;
 			glGetProgramiv(_shaderProgram, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -174,10 +174,10 @@ namespace KillerEngine
 
 			for(auto i = infoLog.begin(); i != infoLog.end(); ++i)
 			{
-				std::cout << *i ;
+				errorMessage += *i ;
 			}
 
-			std::cout << "\n";
+			ErrorManager::Instance()->SetError(EC_OpenGL_Shader, errorMessage);
 
 			//The program is useless now. So delete it.
 			glDeleteProgram(_shaderProgram);
