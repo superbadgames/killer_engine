@@ -15,9 +15,14 @@ Written by Maxwell Miller
 #include <Engine/ErrorManager.h>
 #include <Engine/GameObject2D.h>
 #include <Engine/Renderer.h>
+#include <Engine/TextureManager.h>
 
 //=====STL includes=====
 #include <map>
+#include <fstream>
+#include <algorithm>
+
+#include <TinyXML/tinyxml2.h>
 
 //=====OGL includes
 #include <GL/gl.h>
@@ -25,7 +30,6 @@ Written by Maxwell Miller
 
 namespace KillerEngine 
 {
-
 	class Map2D
 	{
 	public:
@@ -44,11 +48,13 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-		virtual void InitMap(U32 id, S32 w, S32 h, Col& c)=0;
+		virtual void v_InitMap(U32 id, S32 w, S32 h, Col& c)=0;
+
+		virtual void v_InitMap(string tmxFilePath)=0;
 		
-		virtual void Update(void)=0;
+		virtual void v_Update(void)=0;
 		
-		virtual void Render(void)=0;
+		virtual void v_Render(void) { RenderObjects(); }
 
 //==========================================================================================================================
 //
@@ -107,7 +113,31 @@ namespace KillerEngine
 
 		U32 GetID(void) const { return _ID; }
 
+	protected:
+		void Importer(string tmxFilePath);
+
 	private:
+		enum ObjectType
+		{
+			BACKGROUND,
+			PLAYER,
+			ENEMY,
+			END
+		};
+
+
+		struct TileData
+		{
+			int tileID;
+			int width;
+			int height;
+			string texturePath;
+			ObjectType type;
+			int textureID;
+			int posX;
+			int posY;
+		};
+
 		S32 _mapWidth;
 		S32 _mapHeight;
 		S32 _mapTopBorder;
@@ -116,7 +146,22 @@ namespace KillerEngine
 		S32 _mapLeftBorder;
 		Col _bgColor;
 		U32 _ID;
-		std::map<U32, GameObject2D*> 	_worldObjects;
+		std::map<U32, GameObject2D*> _worldObjects;
+		std::map<U32, TileData*> _tileData;
+
+		
+		struct MapData
+		{
+			int mapWidth;
+			int mapHeight;
+			int tileWidth;
+			int tileHeight;
+			Col color;
+		};
+
+		
+
+		void _AddTile(TileData* data);
 	};
 }//End namespace
 
