@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Link>
-      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GL3W.lib;SOIL.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

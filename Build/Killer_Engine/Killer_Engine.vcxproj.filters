@@ -103,6 +103,9 @@
     <Filter Include="Components\MapManager">
       <UniqueIdentifier>{0848391e-09fc-4949-ad36-3ea60b4741da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\GameObjects\EnvironmentObj">
+      <UniqueIdentifier>{e34428c4-21e7-40f7-9fe0-9eb037b1e2e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="..\..\Headers\Engine\MapManager2D.h">
       <Filter>Components\MapManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\EnvironmentObject.h">
+      <Filter>Components\GameObjects\EnvironmentObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -265,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\MapManager2D.cpp">
       <Filter>Components\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\EnvironmentObject.cpp">
+      <Filter>Components\GameObjects\EnvironmentObj</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

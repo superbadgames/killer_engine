@@ -15,9 +15,15 @@ Written by Maxwell Miller
 #include <Engine/ErrorManager.h>
 #include <Engine/GameObject2D.h>
 #include <Engine/Renderer.h>
+#include <Engine/TextureManager.h>
+#include <Engine/EnvironmentObject.h>
 
 //=====STL includes=====
 #include <map>
+#include <fstream>
+#include <algorithm>
+
+#include <TinyXML/tinyxml2.h>
 
 //=====OGL includes
 #include <GL/gl.h>
@@ -25,9 +31,41 @@ Written by Maxwell Miller
 
 namespace KillerEngine 
 {
-
 	class Map2D
 	{
+	protected:
+		enum ObjectType
+		{
+			BACKGROUND,
+			ENVIRONMENT,
+			PLAYER,
+			ENEMY,
+			END
+		};
+
+	private:
+		
+		struct TileData
+		{
+			int tileID;
+			int width;
+			int height;
+			string texturePath;
+			ObjectType type;
+			int textureID;
+			int posX;
+		};
+
+		struct MapData
+		{
+			int mapWidth;
+			int mapHeight;
+			int tileWidth;
+			int tileHeight;
+			Col color;
+		};
+			
+
 	public:
 //==========================================================================================================================
 //
@@ -44,11 +82,21 @@ namespace KillerEngine
 //
 //==========================================================================================================================
 
-		virtual void InitMap(U32 id, S32 w, S32 h, Col& c)=0;
+		virtual void v_InitMap(U32 id, S32 w, S32 h, Col& c)=0;
+
+		virtual void v_InitMap(U32 id, string tmxFilePath)=0;
 		
-		virtual void Update(void)=0;
+		virtual void v_Update(void)=0;
 		
-		virtual void Render(void)=0;
+		virtual void v_Render(void) { RenderObjects(); }
+
+/*		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, F32 w, F32 h) 
+		{
+			ErrorManager::Instance()->SetError(EC_Game, "CreateObject not defined in your Map");
+			return NULL; 
+		}
+*/
+		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h)=0;
 
 //==========================================================================================================================
 //
@@ -107,6 +155,11 @@ namespace KillerEngine
 
 		U32 GetID(void) const { return _ID; }
 
+	protected:
+		void Importer(string tmxFilePath);
+
+		virtual ObjectType v_StringToTileData(string s);
+
 	private:
 		S32 _mapWidth;
 		S32 _mapHeight;
@@ -116,7 +169,10 @@ namespace KillerEngine
 		S32 _mapLeftBorder;
 		Col _bgColor;
 		U32 _ID;
-		std::map<U32, GameObject2D*> 	_worldObjects;
+		std::map<U32, GameObject2D*> _worldObjects;
+		std::map<U32, TileData> _tileData;
+
+		void _AddTile(TileData data);
 	};
 }//End namespace
 

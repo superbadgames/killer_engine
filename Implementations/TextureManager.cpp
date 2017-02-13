@@ -1,4 +1,5 @@
 #include <Engine/TextureManager.h>
+#include <iostream>
 
 namespace KillerEngine 
 {
@@ -48,6 +49,11 @@ namespace KillerEngine
 //=====================================================================================================
 	void TextureManager::LoadTexture(string path, U32 id, S32 width, S32 height) 
 	{
+		if(_loadedTextures.find(id) != _loadedTextures.end())
+		{
+			std::cout << "TExture already loaded " << path << '\n';
+			return;
+		}
 
 		unsigned char* image = SOIL_load_image(path.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
