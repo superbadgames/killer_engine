@@ -16,6 +16,7 @@ Written by Maxwell Miller
 #include <Engine/GameObject2D.h>
 #include <Engine/Renderer.h>
 #include <Engine/TextureManager.h>
+#include <Engine/EnvironmentObject.h>
 
 //=====STL includes=====
 #include <map>
@@ -32,6 +33,16 @@ namespace KillerEngine
 {
 	class Map2D
 	{
+	protected:
+		enum ObjectType
+		{
+			BACKGROUND,
+			ENVIRONMENT,
+			PLAYER,
+			ENEMY,
+			END
+		};
+
 	public:
 //==========================================================================================================================
 //
@@ -50,11 +61,23 @@ namespace KillerEngine
 
 		virtual void v_InitMap(U32 id, S32 w, S32 h, Col& c)=0;
 
-		virtual void v_InitMap(string tmxFilePath)=0;
+		virtual void v_InitMap(U32 id, string tmxFilePath)=0;
 		
 		virtual void v_Update(void)=0;
 		
 		virtual void v_Render(void) { RenderObjects(); }
+
+		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, F32 w, F32 h) 
+		{
+			ErrorManager::Instance()->SetError(EC_Game, "CreateObject not defined in your Map");
+			return NULL; 
+		}
+
+		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h) 
+		{
+			ErrorManager::Instance()->SetError(EC_Game, "CreateObject not defined in your Map");
+			return NULL; 
+		}
 
 //==========================================================================================================================
 //
@@ -117,15 +140,7 @@ namespace KillerEngine
 		void Importer(string tmxFilePath);
 
 	private:
-		enum ObjectType
-		{
-			BACKGROUND,
-			PLAYER,
-			ENEMY,
-			END
-		};
-
-
+		
 		struct TileData
 		{
 			int tileID;
@@ -147,7 +162,7 @@ namespace KillerEngine
 		Col _bgColor;
 		U32 _ID;
 		std::map<U32, GameObject2D*> _worldObjects;
-		std::map<U32, TileData*> _tileData;
+		std::map<U32, TileData> _tileData;
 
 		
 		struct MapData
@@ -161,7 +176,7 @@ namespace KillerEngine
 
 		
 
-		void _AddTile(TileData* data);
+		void _AddTile(TileData data);
 	};
 }//End namespace
 

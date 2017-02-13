@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h" />
+    <ClInclude Include="..\..\Headers\Engine\EnvironmentObject.h" />
     <ClInclude Include="..\..\Headers\Engine\Camera.h" />
     <ClInclude Include="..\..\Headers\Engine\CharSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\Color.hpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="..\..\Headers\Engine\MapManager2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Implementations\EnvironmentObject.cpp" />
     <ClCompile Include="..\..\Implementations\Camera.cpp" />
     <ClCompile Include="..\..\Implementations\CharSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Controller.cpp" />

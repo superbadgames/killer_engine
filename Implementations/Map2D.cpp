@@ -27,11 +27,11 @@ namespace KillerEngine
 		}
 	}
 
-	void Map2D::_AddTile(TileData* data)
+	void Map2D::_AddTile(TileData data)
 	{
-		_tileData.insert(std::map<U32, TileData*>::value_type((*data).tileID, data));
+		_tileData.insert(std::map<U32, TileData>::value_type(data.tileID, data));
 
-		if(_tileData.find((*data).tileID) == _tileData.end())
+		if(_tileData.find(data.tileID) == _tileData.end())
 		{
 			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to add tile to _tileData");
 		}
@@ -66,7 +66,7 @@ namespace KillerEngine
 //Caputre map data
 //==========================================================================================================================			
 			MapData mapData;
-			TileData texData;
+			
 
 			tinyxml2::XMLElement* elem = doc.RootElement();
 
@@ -79,9 +79,19 @@ namespace KillerEngine
 				
 				string color = elem->Attribute("backgroundcolor");
 
-				F32 r = std::stof(color.substr(1,2)) / 255; 
-				F32 g = std::stof(color.substr(3,2)) / 255; 
-				F32 b = std::stof(color.substr(5,2)) / 255; 
+				string red = "0x" + color.substr(1,2);
+				string green = "0x" + color.substr(3,2);
+				string blue = "0x" + color.substr(5,2);
+
+				U32 ir = std::stoul(red, NULL, 16); 
+				U32 ig = std::stoul(green, NULL, 16); 
+				U32 ib = std::stoul(blue, NULL, 16); 
+
+				F32 r = (F32)ir / 255;
+				F32 g = (F32)ig / 255;
+				F32 b = (F32)ib / 255;
+
+				std::cout << "color " << r << " " << g << " " << b << "\n";
 							 
 				mapData.color = Col(r, g, b);
 			}
@@ -90,13 +100,10 @@ namespace KillerEngine
 				ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to open element or node");
 			}
 
-
-			std::cout << "width from file = " << mapData.mapWidth << '\n';
-			std::cout << "height from file = " << mapData.mapHeight << '\n';
-			std::cout << "tileWidth from file = " << mapData.tileWidth << '\n';
-			std::cout << "tileHeight from file = " << mapData.tileHeight << '\n';
-			std::cout << "color from file = " << mapData.color.GetRed() << " " << mapData.color.GetGreen() << " " << mapData.color.GetBlue() << '\n';
-
+			//=====Set Map variables=====
+			SetMapWidth(mapData.mapWidth * mapData.tileWidth);
+			SetMapHeight(mapData.mapHeight * mapData.tileHeight);
+			SetBackgroundColor(mapData.color);
 //==========================================================================================================================
 //Capture Tile Data
 //==========================================================================================================================
@@ -106,22 +113,39 @@ namespace KillerEngine
 			{
 				for(tinyxml2::XMLElement* e = elem->FirstChildElement("tile"); e != NULL; e = e->NextSiblingElement())
 				{
+					TileData texData;
+					
 					//=====Capture tile ID=====
 					e->QueryIntAttribute("id", &texData.tileID);
+
+					//Increase by one for now, but later this will be
+					//increased by the <tileset firstgid="1"
+					++texData.tileID;
 					
 					//=====Capture Custom Properties=====
 					//ObjectType
 					tinyxml2::XMLElement* p = e->FirstChildElement("properties")->FirstChildElement("property");
 
 					string att = p->Attribute("name");
-
+					
 					if(att == "ObjectType")
 					{
 						string name = p->Attribute("value");
+//=====Fix Object Type assignment here=====
+						//for(U32 i = 0; i < name.size(); ++i)
+						//{
+						//	name[i] = std::toupper(name[i]);
+						//}
+
+						//texData.type = ObjectType::name;
 	
 						if(name == "Background")
 						{
 							texData.type = ObjectType::BACKGROUND;
+						}
+						else if(name == "Environment")
+						{
+							texData.type = ObjectType::ENVIRONMENT;
 						}
 						else if(name == "Player")
 						{
@@ -131,6 +155,7 @@ namespace KillerEngine
 						{
 							texData.type = ObjectType::ENEMY;
 						}
+						
 						else
 						{
 							ErrorManager::Instance()->SetError(EC_KillerEngine, "No such object tag during import of file " + name);
@@ -162,7 +187,22 @@ namespace KillerEngine
 					image->QueryIntAttribute("height", &texData.height);
 					texData.texturePath = image->Attribute("source");
 
-					_AddTile(&texData);
+					//=====ReFormat the texture URL=====
+					for(auto i = texData.texturePath.begin(); i != texData.texturePath.end(); i++)
+					{
+						if(*i == '/')
+						{
+							*i = '\\';
+						}
+						if(*i == '.' && *(i+1) == '.')
+						{
+							texData.texturePath.erase(i, i + 1);
+						}
+					}
+
+					texData.texturePath = "..\\Assets" + texData.texturePath;
+					_AddTile(texData);
+					TextureManager::Instance()->LoadTexture(texData.texturePath, texData.textureID, texData.width, texData.height);
 				}
 //==========================================================================================================================
 //Caputre tile layout
@@ -200,9 +240,23 @@ namespace KillerEngine
 							}
 
 							y = mapData.mapHeight - ((i + 1) / mapData.mapHeight);
+
+							//=====Add Object to Map=====
+							S32 tile = csvData[i] - '0';
+
+							TileData currentTile = _tileData.find(tile)->second;
+
+//=====Fix Factory here=====
+							//AddObjectToMap(v_CreateObject(currentTile.type, 
+							//			   Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
+							//			   currentTile.textureID,
+							//			   (F32)currentTile.width, (F32)currentTile.height));
+
+							AddObjectToMap(new EnvironmentObject(Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
+										   						currentTile.textureID,
+										   						(F32)currentTile.width, (F32)currentTile.height));
 						}
  					}
-					std::cout << csvData << '\n';
 				}
 				else
 				{
