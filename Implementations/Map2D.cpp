@@ -131,35 +131,8 @@ namespace KillerEngine
 					if(att == "ObjectType")
 					{
 						string name = p->Attribute("value");
-//=====Fix Object Type assignment here=====
-						//for(U32 i = 0; i < name.size(); ++i)
-						//{
-						//	name[i] = std::toupper(name[i]);
-						//}
 
-						//texData.type = ObjectType::name;
-	
-						if(name == "Background")
-						{
-							texData.type = ObjectType::BACKGROUND;
-						}
-						else if(name == "Environment")
-						{
-							texData.type = ObjectType::ENVIRONMENT;
-						}
-						else if(name == "Player")
-						{
-							texData.type = ObjectType::PLAYER;
-						}
-						else if(name == "Enemy")
-						{
-							texData.type = ObjectType::ENEMY;
-						}
-						
-						else
-						{
-							ErrorManager::Instance()->SetError(EC_KillerEngine, "No such object tag during import of file " + name);
-						}
+						texData.type = v_StringToTileData(name);				
 					}
 					else
 					{
@@ -246,15 +219,10 @@ namespace KillerEngine
 
 							TileData currentTile = _tileData.find(tile)->second;
 
-//=====Fix Factory here=====
-							//AddObjectToMap(v_CreateObject(currentTile.type, 
-							//			   Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
-							//			   currentTile.textureID,
-							//			   (F32)currentTile.width, (F32)currentTile.height));
-
-							AddObjectToMap(new EnvironmentObject(Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
-										   						currentTile.textureID,
-										   						(F32)currentTile.width, (F32)currentTile.height));
+							AddObjectToMap(v_CreateObject(currentTile.type, 
+										   Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
+										   currentTile.textureID,
+										   (F32)currentTile.width, (F32)currentTile.height));
 						}
  					}
 				}
@@ -274,7 +242,28 @@ namespace KillerEngine
 			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to open file path to .tmx file " + tmxFilePath);
 		}
 
-	}
+	}//end Importer
 
+//==========================================================================================================================
+//
+//StringToEnum
+//
+//==========================================================================================================================
+	Map2D::ObjectType Map2D::v_StringToTileData(string s)
+	{
+		if(s == "Background") { return ObjectType::BACKGROUND; }
+		
+		else if(s == "Environment") { return ObjectType::ENVIRONMENT; }	
+		
+		else if(s == "Player") { return ObjectType::PLAYER;	}	
+		
+		else if(s == "Enemy") { return ObjectType::ENEMY; }
+		
+		else
+		{	
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "No such object tag during import of file " + s);
+			return ObjectType::END;
+		}
+	}
 
 }//End namespace

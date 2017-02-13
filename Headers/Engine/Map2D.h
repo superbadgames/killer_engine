@@ -43,6 +43,29 @@ namespace KillerEngine
 			END
 		};
 
+	private:
+		
+		struct TileData
+		{
+			int tileID;
+			int width;
+			int height;
+			string texturePath;
+			ObjectType type;
+			int textureID;
+			int posX;
+		};
+
+		struct MapData
+		{
+			int mapWidth;
+			int mapHeight;
+			int tileWidth;
+			int tileHeight;
+			Col color;
+		};
+			
+
 	public:
 //==========================================================================================================================
 //
@@ -67,17 +90,13 @@ namespace KillerEngine
 		
 		virtual void v_Render(void) { RenderObjects(); }
 
-		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, F32 w, F32 h) 
+/*		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, F32 w, F32 h) 
 		{
 			ErrorManager::Instance()->SetError(EC_Game, "CreateObject not defined in your Map");
 			return NULL; 
 		}
-
-		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h) 
-		{
-			ErrorManager::Instance()->SetError(EC_Game, "CreateObject not defined in your Map");
-			return NULL; 
-		}
+*/
+		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h)=0;
 
 //==========================================================================================================================
 //
@@ -139,20 +158,9 @@ namespace KillerEngine
 	protected:
 		void Importer(string tmxFilePath);
 
-	private:
-		
-		struct TileData
-		{
-			int tileID;
-			int width;
-			int height;
-			string texturePath;
-			ObjectType type;
-			int textureID;
-			int posX;
-			int posY;
-		};
+		virtual ObjectType v_StringToTileData(string s);
 
+	private:
 		S32 _mapWidth;
 		S32 _mapHeight;
 		S32 _mapTopBorder;
@@ -163,18 +171,6 @@ namespace KillerEngine
 		U32 _ID;
 		std::map<U32, GameObject2D*> _worldObjects;
 		std::map<U32, TileData> _tileData;
-
-		
-		struct MapData
-		{
-			int mapWidth;
-			int mapHeight;
-			int tileWidth;
-			int tileHeight;
-			Col color;
-		};
-
-		
 
 		void _AddTile(TileData data);
 	};
