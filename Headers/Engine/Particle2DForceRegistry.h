@@ -17,7 +17,7 @@ Written by Maxwell Miller
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
-#include <Engine/ParticleForceGenerator2D.h>
+#include <Engine/Particle2DForceGenerator.h>
 
 namespace KM = KillerMath;
 namespace KE = KillerEngine;
@@ -28,7 +28,7 @@ namespace KE = KillerEngine;
 namespace KillerPhysics
 {
 
-	class ParticleForceRegistry2D
+	class Particle2DForceRegistry
 	{
 	public:
 //==========================================================================================================================
@@ -36,18 +36,18 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================		
-		ParticleForceRegistry2D(void);
+		Particle2DForceRegistry(void);
 
-		~ParticleForceRegistry2D(void);
+		~Particle2DForceRegistry(void);
 
 //==========================================================================================================================
 //
 //ParticleForceRegistry functions
 //
 //==========================================================================================================================		
-		void Add(Particle2D* particle, ParticleForceGenerator2D* forceGen);
+		void Add(Particle2D* particle, Particle2DForceGenerator* forceGen);
 
-		void Remove(Particle2D* particle, ParticleForceGenerator2D* forceGen);
+		void Remove(Particle2D* particle, Particle2DForceGenerator* forceGen);
 
 		void Clear(void);
 
@@ -60,7 +60,7 @@ namespace KillerPhysics
 		struct ParticleForceRegistration
 		{
 			Particle2D* 			  particle;
-			ParticleForceGenerator2D* forceGen;
+			Particle2DForceGenerator* forceGen;
 
 			ParticleForceRegistration(void) {  }
 

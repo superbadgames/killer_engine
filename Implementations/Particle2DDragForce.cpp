@@ -1,4 +1,4 @@
-#include <Engine/ParticleDrag2D.h>
+#include <Engine/Particle2DDragForce.h>
 
 namespace KillerPhysics
 {
@@ -7,19 +7,19 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================
-	ParticleDrag2D::ParticleDrag2D(void) {  }
+	Particle2DDragForce::Particle2DDragForce(void) {  }
 
-	ParticleDrag2D::ParticleDrag2D(real k1, real k2) : _k1(k1), _k2(k2)
+	Particle2DDragForce::Particle2DDragForce(real k1, real k2) : _k1(k1), _k2(k2)
 	{  }
 
-	ParticleDrag2D::~ParticleDrag2D(void) {  }
+	Particle2DDragForce::~Particle2DDragForce(void) {  }
 
 //==========================================================================================================================
 //
 //Virtual Functions
 //
 //==========================================================================================================================
-	void ParticleDrag2D::v_UpdateForce(Particle2D& particle)
+	void Particle2DDragForce::v_UpdateForce(Particle2D& particle)
 	{
 		Vec2 force = particle.GetVelocity();
 

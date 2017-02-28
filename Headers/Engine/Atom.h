@@ -72,7 +72,7 @@ typedef double real;
 #define DOUBLE_PRECISION
 #define REAL_MAX DBL_MAX
 #define real_sqrt sqrt	
-#define real_abs fabs
+#define real_abs fabsf
 #define real_sin sin
 #define real_cos cos
 #define real_exp exp
