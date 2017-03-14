@@ -211,11 +211,11 @@ namespace KillerEngine {
         {
             window = (WinProgram*)((LPCREATESTRUCT)lParam)->lpCreateParams;
 
-            SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)window);
+            SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)window);
         }
         else 
         {
-            window = (WinProgram*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+            window = (WinProgram*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 
     		if (!window) { DefWindowProc(hWnd, uMsg, wParam, lParam); }
         }
