@@ -94,9 +94,6 @@
     <Filter Include="Components\Sprites\TriSprite">
       <UniqueIdentifier>{0c6cd213-02b1-4316-83bb-ec602d3d99d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{e63d13b7-e9e9-4c1b-8403-7f3d194c5129}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Map">
       <UniqueIdentifier>{3820084b-1115-47ff-b532-adca4671f2e9}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,30 @@
     </Filter>
     <Filter Include="Components\GameObjects\EnvironmentObj">
       <UniqueIdentifier>{e34428c4-21e7-40f7-9fe0-9eb037b1e2e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{e63d13b7-e9e9-4c1b-8403-7f3d194c5129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Forces\Drag">
+      <UniqueIdentifier>{9011a0d8-6c97-4773-b187-acb0d27376d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Forces\Gravity">
+      <UniqueIdentifier>{2feda301-ee03-4ffc-b0ea-625d489dac2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Particle2D">
+      <UniqueIdentifier>{3d64720f-43fb-4473-909b-d82d14b0c021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\ForceGenerator">
+      <UniqueIdentifier>{128415f5-4bcb-47fa-8bd6-af05ac197f78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\3D\Particle3D">
+      <UniqueIdentifier>{f6180fd1-cf89-4ce3-9baa-37af0e77b36c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Forces\Spring">
+      <UniqueIdentifier>{90b3a85a-49e6-4ef0-b9f4-28445503896b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics\Particles\2D\Forces\Bouyant">
+      <UniqueIdentifier>{792a4c9a-1a6b-4263-ab7b-9da00ab53439}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,12 +165,6 @@
     <ClInclude Include="..\..\Headers\Engine\Timer.h">
       <Filter>Components\Math\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Particle2D.h">
-      <Filter>Components\Physics\Particles\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Particle3D.h">
-      <Filter>Components\Physics\Particles\3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\RandomGen.h">
       <Filter>Components\Math\RandomGen</Filter>
     </ClInclude>
@@ -174,23 +189,11 @@
     <ClInclude Include="..\..\Headers\Engine\Vector.hpp">
       <Filter>Components\Math\LinearAlgebra\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ParticleForceGenerator2D.h">
-      <Filter>Components\Physics\Particles\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ParticleForceRegistry2D.h">
-      <Filter>Components\Physics\Particles\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ParticleGravity2D.h">
-      <Filter>Components\Physics\Particles\2D\Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\ParticleDrag2D.h">
-      <Filter>Components\Physics\Particles\2D\Forces</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\TriSprite.h">
       <Filter>Components\Sprites\TriSprite</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Camera.h">
-      <Filter>Camera</Filter>
+      <Filter>Components\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Map2D.h">
       <Filter>Components\Map</Filter>
@@ -200,6 +203,30 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\EnvironmentObject.h">
       <Filter>Components\GameObjects\EnvironmentObj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2D.h">
+      <Filter>Components\Physics\Particles\2D\Particle2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle3D.h">
+      <Filter>Components\Physics\Particles\3D\Particle3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DForceRegistry.h">
+      <Filter>Components\Physics\Particles\2D\ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DForceGenerator.h">
+      <Filter>Components\Physics\Particles\2D\ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DGravityForce.h">
+      <Filter>Components\Physics\Particles\2D\Forces\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DSpringForce.h">
+      <Filter>Components\Physics\Particles\2D\Forces\Spring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DDragForce.h">
+      <Filter>Components\Physics\Particles\2D\Forces\Drag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Particle2DBuoyantForce.h">
+      <Filter>Components\Physics\Particles\2D\Forces\Bouyant</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,12 +257,6 @@
     <ClCompile Include="..\..\Implementations\Timer.cpp">
       <Filter>Components\Math\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\Particle2D.cpp">
-      <Filter>Components\Physics\Particles\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Particle3D.cpp">
-      <Filter>Components\Physics\Particles\3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Implementations\RandomGen.cpp">
       <Filter>Components\Math\RandomGen</Filter>
     </ClCompile>
@@ -251,20 +272,11 @@
     <ClCompile Include="..\..\Implementations\Sprite.cpp">
       <Filter>Components\Sprites\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\ParticleForceRegistry2D.cpp">
-      <Filter>Components\Physics\Particles\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\ParticleGravity2D.cpp">
-      <Filter>Components\Physics\Particles\2D\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\ParticleDrag2D.cpp">
-      <Filter>Components\Physics\Particles\2D\Forces</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Implementations\TriSprite.cpp">
       <Filter>Components\Sprites\TriSprite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Camera.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Components\Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Map2D.cpp">
       <Filter>Components\Map</Filter>
@@ -274,6 +286,27 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\EnvironmentObject.cpp">
       <Filter>Components\GameObjects\EnvironmentObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2D.cpp">
+      <Filter>Components\Physics\Particles\2D\Particle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle3D.cpp">
+      <Filter>Components\Physics\Particles\3D\Particle3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2DForceRegistry.cpp">
+      <Filter>Components\Physics\Particles\2D\ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2DSpringForce.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces\Spring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2DGravityForce.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2DDragForce.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces\Drag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Particle2DBuoyantForce.cpp">
+      <Filter>Components\Physics\Particles\2D\Forces\Bouyant</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

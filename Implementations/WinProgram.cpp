@@ -133,7 +133,7 @@ namespace KillerEngine {
 
         //=========Window Class registration and creation===========
     	_wndClass.cbSize        = sizeof(WNDCLASSEX);
-        _wndClass.style 		= CS_HREDRAW | CS_VREDRAW | CS_OWNDC; //Window Style
+        _wndClass.style 		= CS_HREDRAW | CS_VREDRAW; //| CS_OWNDC; //Window Style
     	_wndClass.lpfnWndProc   = &StaticWndProc; 	    //Windows Proc Callback function
     	_wndClass.cbClsExtra    = 0;
         _wndClass.cbWndExtra    = 0;
@@ -147,11 +147,11 @@ namespace KillerEngine {
 
     	if (!RegisterClassEx(&_wndClass)) { _errorManager->SetError(EC_OpenGL, "Failed to register window class"); }
 
-    	_hwnd = CreateWindowEx(NULL,        							//WS_EX_APPWINDOW | WS_EX_WINDOWEDGE,
+    	_hwnd = CreateWindowEx(WS_EX_APPWINDOW | WS_EX_WINDOWEDGE,
     				   		   _wndName.c_str(),					    //Window Class name
     				   		   _wndName.c_str(),						//Window Name
     				   		   WS_CLIPSIBLINGS 	   | WS_CLIPCHILDREN |  //Window Styles
-    				   		   WS_OVERLAPPEDWINDOW | WS_VISIBLE,		//^           ^
+    				   		   WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_CAPTION,		//^           ^
     				   	  	   0,0,										//position of window
     				   		   _totalWidth, _totalHeight,				//Dimensions
     				   		   NULL, 									//Parent Window
@@ -211,11 +211,11 @@ namespace KillerEngine {
         {
             window = (WinProgram*)((LPCREATESTRUCT)lParam)->lpCreateParams;
 
-            SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)window);
+            SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)window);
         }
         else 
         {
-            window = (WinProgram*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+            window = (WinProgram*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 
     		if (!window) { DefWindowProc(hWnd, uMsg, wParam, lParam); }
         }

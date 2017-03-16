@@ -1,6 +1,5 @@
 /*========================================================================
-The ParticleForceGenerator2D provides the interface for forces to be generated 
-and then accumulated by anything that uses forces for physics calculations.
+Particle Drag for 2D Particles. 
 
 It is based on the Cyclone engine design found in "Game Physics En-
 gine Development, second edition" by Ian Millington.
@@ -12,20 +11,19 @@ of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-#ifndef P_FORCE_GENERATOR_2D_H
-#define P_FORCE_GENERATOR_2D_H
+#ifndef P_DRAG_2D_H
+#define P_DRAG_2D_H
 
-//=====Engine Includes=====
+//=====Engine includes=====
 #include <Engine/Atom.h>
-#include <Engine/Timer.h>
-#include <Engine/Particle2D.h>
+#include <Engine/Particle2DForceGenerator.h>
 
 namespace KM = KillerMath;
 namespace KE = KillerEngine;
 
 namespace KillerPhysics
 {
-	class ParticleForceGenerator2D
+	class Particle2DDragForce : public Particle2DForceGenerator
 	{
 	public:
 //==========================================================================================================================
@@ -33,19 +31,24 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================
-		ParticleForceGenerator2D(void) { }
+		Particle2DDragForce(void);
 
-		~ParticleForceGenerator2D(void) { }
+		Particle2DDragForce(real k1, real k2);
 
+		~Particle2DDragForce(void);
 
 //==========================================================================================================================
 //
 //Virtual Functions
 //
-//==========================================================================================================================	
-		virtual void v_UpdateForce(Particle2D& particle)=0;
-	private:
+//==========================================================================================================================		
+		void v_UpdateForce(Particle2D& particle);
 
+	private:
+		//Drag Coefficient
+		real _k1;
+		//Drag Coefficient Squared
+		real _k2;
 	};//end class
 }//end namespace
 

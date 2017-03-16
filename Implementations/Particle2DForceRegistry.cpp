@@ -1,4 +1,4 @@
-#include <Engine/ParticleForceRegistry2D.h>
+#include <Engine/Particle2DForceRegistry.h>
 
 namespace KillerPhysics
 {
@@ -7,29 +7,29 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================
-	ParticleForceRegistry2D::ParticleForceRegistry2D(void)
+	Particle2DForceRegistry::Particle2DForceRegistry(void)
 	{  }
 
-	ParticleForceRegistry2D::~ParticleForceRegistry2D(void)
+	Particle2DForceRegistry::~Particle2DForceRegistry(void)
 	{  }
 
 //==========================================================================================================================
 //
-//ParticleForceRegistry2D functions
+//Particle2DForceRegistry functions
 //
 //==========================================================================================================================	
-	void ParticleForceRegistry2D::Add(Particle2D* particle, ParticleForceGenerator2D* forceGen)
+	void Particle2DForceRegistry::Add(Particle2D* particle, Particle2DForceGenerator* forceGen)
 	{
-		ParticleForceRegistry2D::ParticleForceRegistration registration;
+		Particle2DForceRegistry::ParticleForceRegistration registration;
 		registration.particle = particle;
 		registration.forceGen = forceGen;
 
 		_registrations.push_back(registration);
 	}
 
-	void ParticleForceRegistry2D::Remove(Particle2D* particle, ParticleForceGenerator2D* forceGen)
+	void Particle2DForceRegistry::Remove(Particle2D* particle, Particle2DForceGenerator* forceGen)
 	{
-		ParticleForceRegistry2D::ParticleForceRegistration registration;
+		Particle2DForceRegistry::ParticleForceRegistration registration;
 		registration.particle = particle;
 		registration.forceGen = forceGen;
 
@@ -41,12 +41,12 @@ namespace KillerPhysics
 		}
 	}
 
-	void ParticleForceRegistry2D::Clear(void)
+	void Particle2DForceRegistry::Clear(void)
 	{
 		_registrations.clear();
 	}
 
-	void ParticleForceRegistry2D::UpdateForces(void)
+	void Particle2DForceRegistry::UpdateForces(void)
 	{
 		Registry::iterator i = _registrations.begin();
 		for(; i != _registrations.end(); ++i)

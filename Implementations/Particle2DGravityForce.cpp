@@ -1,4 +1,4 @@
-#include <Engine/ParticleGravity2D.h>
+#include <Engine/Particle2DGravityForce.h>
 
 namespace KillerPhysics
 {
@@ -7,19 +7,19 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================
-	ParticleGravity2D::ParticleGravity2D(void) {  }
+	Particle2DGravityForce::Particle2DGravityForce(void) {  }
 
-	ParticleGravity2D::ParticleGravity2D(const Vec2& gravity) : _gravityAcc(gravity) 
+	Particle2DGravityForce::Particle2DGravityForce(const Vec2& gravity) : _gravityAcc(gravity) 
 	{  }
 
-	ParticleGravity2D::~ParticleGravity2D(void) {  }
+	Particle2DGravityForce::~Particle2DGravityForce(void) {  }
 
 //==========================================================================================================================
 //
 //Virtual Functions
 //
 //==========================================================================================================================
-	void ParticleGravity2D::v_UpdateForce(Particle2D& particle)
+	void Particle2DGravityForce::v_UpdateForce(Particle2D& particle)
 	{
 		if(!particle.HasFiniteMass()) return;
 

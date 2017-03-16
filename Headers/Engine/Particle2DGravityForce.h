@@ -1,5 +1,6 @@
 /*========================================================================
-Particle Drag for 2D Particles. 
+A Particle force for 2D particles which simulates Gravity. In this case, 
+down is going to be -y. 
 
 It is based on the Cyclone engine design found in "Game Physics En-
 gine Development, second edition" by Ian Millington.
@@ -11,44 +12,41 @@ of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-#ifndef P_DRAG_2D_H
-#define P_DRAG_2D_H
+#ifndef GRAVITY_2D_H
+#define GRAVITY_2D_H
 
 //=====Engine includes=====
 #include <Engine/Atom.h>
-#include <Engine/ParticleForceGenerator2D.h>
+#include <Engine/Particle2DForceGenerator.h>
 
 namespace KM = KillerMath;
 namespace KE = KillerEngine;
 
 namespace KillerPhysics
 {
-	class ParticleDrag2D : public ParticleForceGenerator2D
+	class Particle2DGravityForce : public Particle2DForceGenerator
 	{
 	public:
 //==========================================================================================================================
 //
 //Constructors
 //
-//==========================================================================================================================
-		ParticleDrag2D(void);
+//==========================================================================================================================		
+		Particle2DGravityForce(void);
 
-		ParticleDrag2D(real k1, real k2);
+		Particle2DGravityForce(const Vec2& gravity);
 
-		~ParticleDrag2D(void);
+		~Particle2DGravityForce(void);
 
 //==========================================================================================================================
 //
-//Virtual Functions
+//Virtual functions
 //
 //==========================================================================================================================		
 		void v_UpdateForce(Particle2D& particle);
 
 	private:
-		//Drag Coefficient
-		real _k1;
-		//Drag Coefficient Squared
-		real _k2;
+		Vec2 _gravityAcc;
 	};//end class
 }//end namespace
 

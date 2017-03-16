@@ -48,6 +48,8 @@ namespace KillerEngine
 
 		bool Running(void) { return MapManager2D::Instance()->GetRunning(); }
 
+		void End(void) { MapManager2D::Instance()->SetRunning(false); }
+
 		void LoadTexture(const string path, const U32 id, const S32 width, const S32 height) 
 		{ 
 			TextureManager::Instance()->LoadTexture(path, id, width, height); 
