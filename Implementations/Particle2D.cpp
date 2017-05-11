@@ -11,7 +11,8 @@ namespace KillerPhysics
 	Particle2D::Particle2D(void) : _damping(0.0f), _inverseMass(0.0f), _forceAccum()
 	{  }
 
-	Particle2D::~Particle2D(void) {  }
+	Particle2D::~Particle2D(void) 
+	{  }
 
 //==========================================================================================================================
 //
@@ -44,7 +45,10 @@ namespace KillerPhysics
 	void Particle2D::Update(void) 
 	{
 		//if there no mass, there is no update
-		if(_inverseMass == 0) return;
+		if(_inverseMass == 0)
+		{
+			return;
+		} 
 
 		F32 delta = KM::Timer::Instance()->DeltaTime();
 
