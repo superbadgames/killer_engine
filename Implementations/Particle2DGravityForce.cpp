@@ -7,7 +7,8 @@ namespace KillerPhysics
 //Constructors
 //
 //==========================================================================================================================
-	Particle2DGravityForce::Particle2DGravityForce(void) {  }
+	Particle2DGravityForce::Particle2DGravityForce(void) : _gravityAcc(Vec2(0.0f, 1.0f, 0.0f))
+	{  }
 
 	Particle2DGravityForce::Particle2DGravityForce(const Vec2& gravity) : _gravityAcc(gravity) 
 	{  }
