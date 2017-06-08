@@ -295,25 +295,25 @@ namespace KillerMath
 
 			Matrix4<T> newMatrix
 			(
-				left[0] * right[0] + left[4] * right[1] + left[8]  * right[2] + left[12] * right[3], //m00
-				left[4] * right[0] + left[5] * right[1] + left[6]  * right[2] + left[7] * right[3], //m01
-				left[8] * right[0] + left[9] * right[1] + left[10] * right[2] + left[11] * right[3], //m02
-				left[12] * right[0] + left[13] * right[1] + left[14] * right[2] + left[15] * right[3], //m03
+				left[0] * right[0] + left[1] * right[4] + left[2]  * right[8] + left[3] * right[12], //m00
+				left[0] * right[1] + left[1] * right[5] + left[2]  * right[9] + left[3] * right[13], //m01
+				left[0] * right[2] + left[1] * right[6] + left[2] * right[10] + left[3] * right[14], //m02
+				left[0] * right[3] + left[1] * right[7] + left[2] * right[11] + left[3] * right[15], //m03
 
-				left[0] * right[4] + left[1] * right[5] + left[2]  * right[6] + left[3] * right[7], //m10
-				left[4] * right[4] + left[5] * right[5] + left[6]  * right[6] + left[7] * right[7], //m11
-				left[8] * right[4] + left[9] * right[5] + left[10] * right[6] + left[11] * right[7], //m12
-				left[12] * right[4] + left[13] * right[5] + left[14] * right[6] + left[15] * right[7], //m13
+				left[4] * right[0] + left[5] * right[4] + left[6]  * right[8] + left[7] * right[12], //m10
+				left[4] * right[1] + left[5] * right[5] + left[6]  * right[9] + left[7] * right[13], //m11
+				left[4] * right[2] + left[5] * right[6] + left[6] * right[10] + left[7] * right[14], //m12
+				left[4] * right[3] + left[5] * right[7] + left[6] * right[11] + left[7] * right[15], //m13
 
-				left[0] * right[8] + left[1] * right[9] + left[2]  * right[10] + left[3] * right[11], //m20
-				left[4] * right[8] + left[5] * right[9] + left[6]  * right[10] + left[7] * right[11], //m21
-				left[8] * right[8] + left[9] * right[9] + left[10] * right[10] + left[11] * right[11], //m22
-				left[12] * right[8] + left[13] * right[9] + left[14] * right[10] + left[15] * right[11], //m23
+				left[8] * right[0] + left[9] * right[4] + left[10]  * right[8] + left[11] * right[12], //m20
+				left[8] * right[1] + left[9] * right[5] + left[10]  * right[9] + left[11] * right[13], //m21
+				left[8] * right[2] + left[9] * right[6] + left[10] * right[10] + left[11] * right[14], //m22
+				left[8] * right[3] + left[9] * right[7] + left[10] * right[11] + left[11] * right[15], //m23
 
-				left[0] * right[12] + left[1] * right[13] + left[2]  * right[14] + left[3] * right[15], //m30
-				left[4] * right[12] + left[5] * right[13] + left[6]  * right[14] + left[7] * right[15], //m31
-				left[8] * right[12] + left[9] * right[13] + left[10] * right[14] + left[11] * right[15], //m32
-				left[12] * right[12] + left[13] * right[13] + left[14] * right[14] + left[15] * right[15]  //m33
+				left[12] * right[0] + left[13] * right[4] + left[14]  * right[8] + left[15] * right[12], //m30
+				left[12] * right[1] + left[13] * right[5] + left[14]  * right[9] + left[15] * right[13], //m31
+				left[12] * right[2] + left[13] * right[6] + left[14] * right[10] + left[15] * right[14], //m32
+				left[12] * right[3] + left[13] * right[7] + left[14] * right[11] + left[15] * right[15]  //m33
 			);
 
 			*this = newMatrix;
