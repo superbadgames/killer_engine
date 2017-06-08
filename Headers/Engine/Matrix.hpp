@@ -295,7 +295,7 @@ namespace KillerMath
 
 			Matrix4<T> newMatrix
 			(
-				left[0] * right[0] + left[1] * right[1] + left[2]  * right[2] + left[3] * right[3], //m00
+				left[0] * right[0] + left[4] * right[1] + left[8]  * right[2] + left[12] * right[3], //m00
 				left[4] * right[0] + left[5] * right[1] + left[6]  * right[2] + left[7] * right[3], //m01
 				left[8] * right[0] + left[9] * right[1] + left[10] * right[2] + left[11] * right[3], //m02
 				left[12] * right[0] + left[13] * right[1] + left[14] * right[2] + left[15] * right[3], //m03
