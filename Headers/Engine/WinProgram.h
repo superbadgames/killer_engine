@@ -33,7 +33,7 @@ namespace KillerEngine
 
 	class WinProgram
 	{
-	private:
+private:
 		static WinProgram* _instance;
 		bool 		  _isFullScreen;
 		static S32    _totalWidth;

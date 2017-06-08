@@ -208,14 +208,14 @@ namespace KillerMath
 		}
 
 //=====Multiply by a scalar=====
-		Vector2<T> operator*(const T m) 
+		Vector2<T> operator*(const T& m) 
 		{
 			return Vector2<T>( _v[0] * m,
 							   _v[1] * m,
 							   _v[2], _v[3] );
 		}
 
-		Vector2<T>& operator *=(const T m) 
+		Vector2<T>& operator *=(const T& m) 
 		{
 			_v[0] *= m;
 			_v[1] *= m;

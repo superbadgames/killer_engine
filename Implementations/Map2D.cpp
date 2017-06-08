@@ -220,7 +220,7 @@ namespace KillerEngine
 							TileData currentTile = _tileData.find(tile)->second;
 
 							AddObjectToMap(v_CreateObject(currentTile.type, 
-										   Vec2( (x * mapData.tileWidth)+(currentTile.width / 2), (y * mapData.tileHeight)+(currentTile.height / 2)),
+										   Vec2( (F32)(x * mapData.tileWidth)+(currentTile.width / 2), (F32)(y * mapData.tileHeight)+(currentTile.height / 2)),
 										   currentTile.textureID,
 										   (F32)currentTile.width, (F32)currentTile.height));
 						}

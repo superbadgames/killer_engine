@@ -84,7 +84,12 @@ namespace KillerEngine
 
 		virtual void v_InitMap(U32 id, S32 w, S32 h, Col& c)=0;
 
-		virtual void v_InitMap(U32 id, string tmxFilePath)=0;
+		virtual void v_InitMap(U32 id, string tmxFilePath)
+		{
+			SetID(id);
+			Importer(tmxFilePath);
+
+		}
 		
 		virtual void v_Update(void)=0;
 		
