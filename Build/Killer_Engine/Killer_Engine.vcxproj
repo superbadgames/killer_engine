@@ -131,6 +131,10 @@
     <ClInclude Include="..\..\Headers\Engine\Controller.h" />
     <ClInclude Include="..\..\Headers\Engine\ErrorManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Font.h" />
+    <ClInclude Include="..\..\Headers\Engine\GameObject3D.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Particle2DBuoyantForce.h" />
     <ClInclude Include="..\..\Headers\Engine\Particle2DDragForce.h" />
     <ClInclude Include="..\..\Headers\Engine\Particle2DGravityForce.h" />
@@ -154,8 +158,8 @@
     <ClInclude Include="..\..\Headers\Engine\TextureManager.h" />
     <ClInclude Include="..\..\Headers\Engine\Timer.h" />
     <ClInclude Include="..\..\Headers\Engine\Vector.hpp" />
-    <ClInclude Include="..\..\Headers\Engine\Map2D.h" />
-    <ClInclude Include="..\..\Headers\Engine\MapManager2D.h" />
+    <ClInclude Include="..\..\Headers\Engine\Map.h" />
+    <ClInclude Include="..\..\Headers\Engine\MapManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\EnvironmentObject.cpp" />
@@ -165,6 +169,10 @@
     <ClCompile Include="..\..\Implementations\ErrorManager.cpp" />
     <ClCompile Include="..\..\Implementations\Font.cpp" />
     <ClCompile Include="..\..\Implementations\GameObject2D.cpp" />
+    <ClCompile Include="..\..\Implementations\GameObject3D.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="..\..\Implementations\Particle2DBuoyantForce.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2DDragForce.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2DGravityForce.cpp" />
@@ -182,8 +190,8 @@
     <ClCompile Include="..\..\Implementations\SqrSprite.cpp" />
     <ClCompile Include="..\..\Implementations\TextureManager.cpp" />
     <ClCompile Include="..\..\Implementations\Timer.cpp" />
-    <ClCompile Include="..\..\Implementations\Map2D.cpp" />
-    <ClCompile Include="..\..\Implementations\MapManager2D.cpp" />
+    <ClCompile Include="..\..\Implementations\Map.cpp" />
+    <ClCompile Include="..\..\Implementations\MapManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
