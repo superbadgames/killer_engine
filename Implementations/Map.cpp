@@ -4,12 +4,12 @@
 namespace KillerEngine 
 {
 	Map::Map(void) : _mapWidth(0),
-					   		 _mapHeight(0),
-					   		 _mapTopBorder(0),
-					   		 _mapBottomBorder(0),
-					   		 _mapRightBorder(0),
-					   		 _mapLeftBorder(0),
-					   		 _bgColor()
+			   		 _mapHeight(0),
+			   		 _mapTopBorder(0),
+			   		 _mapBottomBorder(0),
+			   		 _mapRightBorder(0),
+			   		 _mapLeftBorder(0),
+			   		 _bgColor()
 	{  }
 
 //=============================================================================
@@ -17,7 +17,7 @@ namespace KillerEngine
 //AddObjectToMap
 //
 //=============================================================================
-	void Map::Add2DObjectToMap(GameObject2D* obj)
+	void Map::AddObjectToMap(GameObject2D* obj)
 	{
 		_2DWorldObjects.insert(std::map<U32, GameObject2D*>::value_type(obj->GetID(), obj));
 		
@@ -27,7 +27,7 @@ namespace KillerEngine
 		}
 	}
 
-	void Map::Add3DObjectToMap(GameObject3D* obj)
+	void Map::AddObjectToMap(GameObject3D* obj)
 	{
 		_3DWorldObjects.insert(std::map<U32, GameObject3D*>::value_type(obj->GetID(), obj));
 		
@@ -236,7 +236,7 @@ namespace KillerEngine
 
 							TileData currentTile = _2DTileData.find(tile)->second;
 
-							Add2DObjectToMap(v_CreateObject(currentTile.type, 
+							AddObjectToMap(v_CreateObject(currentTile.type, 
 										   Vec2( (F32)(x * mapData.tileWidth)+(currentTile.width / 2), (F32)(y * mapData.tileHeight)+(currentTile.height / 2)),
 										   currentTile.textureID,
 										   (F32)currentTile.width, (F32)currentTile.height));

@@ -108,9 +108,9 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void Add2DObjectToMap(GameObject2D* obj);
+		void AddObjectToMap(GameObject2D* obj);
 
-		void Add3DObjectToMap(GameObject3D* obj);
+		void AddObjectToMap(GameObject3D* obj);
 		
 		void Remove2DObjectFromMap(U32 id);
 

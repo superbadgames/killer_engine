@@ -52,11 +52,11 @@ namespace KillerEngine
 		
 		bool GetRunning(void) { return _running; } 
 
-		void Add2DObjectToMap(U32 id, GameObject2D* obj);
+		void AddObjectToMap(U32 id, GameObject2D* obj);
 
+		void AddObjectToMap(U32 id, GameObject3D* obj);
+		
 		void Remove2DObjectFromMap(U32 worldID, U32 ojbId);
-
-		void Add3DObjectToMap(U32 id, GameObject3D* obj);
 
 		void Remove3DObjectFromMap(U32 worldID, U32 ojbId);
 
