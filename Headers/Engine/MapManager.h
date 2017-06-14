@@ -18,7 +18,7 @@ Written by Maxwell Miller
 
 //=====Killer1 includes=====
 #include <Engine/Atom.h>
-#include <Engine/Map2D.h>
+#include <Engine/Map.h>
 #include <Engine/GameObject2D.h>
 #include <Engine/ErrorManager.h>
 
@@ -28,26 +28,19 @@ Written by Maxwell Miller
 namespace KillerEngine 
 {
 
-	class MapManager2D
+	class MapManager
 	{
-	private:
-		std::map<U32, Map2D*>    _worlds;
-		Map2D* 				   _activeMap;
-		U32 				   	   _activeMapID;
-		bool				   	   _running;			
-		static MapManager2D*     _instance;
-
 	public:
-		~MapManager2D(void) {  }
+		~MapManager(void) {  }
 
-		static MapManager2D* Instance();
+		static MapManager* Instance();
 
 //==========================================================================================================================
 //
 //Accessors
 //
 //==========================================================================================================================
-		void AddMap(Map2D* world);
+		void AddMap(Map* world);
 		
 		void RemoveMap(U32 worldID);
 		
@@ -59,9 +52,13 @@ namespace KillerEngine
 		
 		bool GetRunning(void) { return _running; } 
 
-		void AddObjectToMap(U32 id, GameObject2D* obj);
+		void Add2DObjectToMap(U32 id, GameObject2D* obj);
 
-		void RemoveObjectFromMap(U32 worldID, U32 ojbId);
+		void Remove2DObjectFromMap(U32 worldID, U32 ojbId);
+
+		void Add3DObjectToMap(U32 id, GameObject3D* obj);
+
+		void Remove3DObjectFromMap(U32 worldID, U32 ojbId);
 
 //==========================================================================================================================
 //
@@ -74,7 +71,14 @@ namespace KillerEngine
 		void Render(void);
 
 	protected:
-		MapManager2D(void) : _running(true) {  }
+		MapManager(void) : _running(true) {  }
+
+	private:
+		std::map<U32, Map*>    _worlds;
+		Map* 				   _activeMap;
+		U32 				   _activeMapID;
+		bool				   _running;			
+		static MapManager*     _instance;
 
 	};
 

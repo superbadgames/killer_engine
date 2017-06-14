@@ -18,13 +18,15 @@ rendering algorithm is used.
 Accessors are created for the derived classes to access the cell, but the 
 cell is to be accessed directly only by the GameObject itself. 
 
+GameObject2D will specifically apply to 2D game objects. 
+
 This is not free to use, and cannot be used without the express permission
 of KillerWave.
 
 Written by Maxwell Miller
 ========================================================================*/
-#ifndef GAME_OBJECT_H
-#define GAME_OBJECT_H
+#ifndef GAME_OBJECT2D_H
+#define GAME_OBJECT2D_H
 
 //=====Engine Includes======
 #include <Engine/Atom.h>

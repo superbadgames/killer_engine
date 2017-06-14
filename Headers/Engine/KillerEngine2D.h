@@ -24,7 +24,7 @@ Written by Maxwell Miller
 #include <Engine/WinProgram.h>
 #include <Engine/Renderer.h>
 #include <Engine/Timer.h>
-#include <Engine/MapManager2D.h>
+#include <Engine/MapManager.h>
 #include <Engine/TextureManager.h>
 
 //======Math includes=====
@@ -46,18 +46,18 @@ namespace KillerEngine
 //==========================================================================================================================
 		void Init(const S32 width, const S32 height, const string title, const bool fullscreen);
 
-		bool Running(void) { return MapManager2D::Instance()->GetRunning(); }
+		bool Running(void) { return MapManager::Instance()->GetRunning(); }
 
-		void End(void) { MapManager2D::Instance()->SetRunning(false); }
+		void End(void) { MapManager::Instance()->SetRunning(false); }
 
 		void LoadTexture(const string path, const U32 id, const S32 width, const S32 height) 
 		{ 
 			TextureManager::Instance()->LoadTexture(path, id, width, height); 
 		}
 		
-		void AddMapToManager(Map2D* world) { MapManager2D::Instance()->AddMap(world); }
+		void AddMapToManager(Map* world) { MapManager::Instance()->AddMap(world); }
 
-		void SetActiveMap(const U32 id) { MapManager2D::Instance()->SetActiveMap(id); }
+		void SetActiveMap(const U32 id) { MapManager::Instance()->SetActiveMap(id); }
 
 		void Update(void);
 

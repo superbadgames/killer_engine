@@ -28,6 +28,7 @@ Written by Maxwell Miller
 
 #include <Engine/Atom.h>
 #include <cassert>
+#include <iostream>
 
 namespace KillerMath 
 {
@@ -106,7 +107,10 @@ namespace KillerMath
 			_v[3] = V.GetW();
 		}
 			
-		~Vector2<T>() {	 }
+		~Vector2<T>()
+		{
+
+		}
 
 //==========================================================================================================================
 //
@@ -428,7 +432,10 @@ namespace KillerMath
 			_v[3] = V.GetW();
 		}
 			
-		~Vector3<T>() {	 }
+		~Vector3<T>() 
+		{
+
+		}
 
 //==========================================================================================================================
 //
@@ -453,7 +460,7 @@ namespace KillerMath
 		{
 			_v[0] = V.GetX();
 			_v[1] = V.GetY();
-			_v[2] = V.GetX();
+			_v[2] = V.GetZ();
 			_v[3] = V.GetW();
 
 			return *this;

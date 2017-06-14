@@ -14,6 +14,7 @@ Written by Maxwell Miller
 #include <Engine/Atom.h>
 #include <Engine/ErrorManager.h>
 #include <Engine/GameObject2D.h>
+#include <Engine/GameObject3D.h>
 #include <Engine/Renderer.h>
 #include <Engine/TextureManager.h>
 #include <Engine/EnvironmentObject.h>
@@ -31,7 +32,7 @@ Written by Maxwell Miller
 
 namespace KillerEngine 
 {
-	class Map2D
+	class Map
 	{
 	protected:
 		enum ObjectType
@@ -72,9 +73,9 @@ namespace KillerEngine
 //Constructors
 //
 //==========================================================================================================================		
-		Map2D(void);
+		Map(void);
 
-		~Map2D(void) {  }
+		~Map(void) {  }
 
 //==========================================================================================================================
 //
@@ -87,8 +88,7 @@ namespace KillerEngine
 		virtual void v_InitMap(U32 id, string tmxFilePath)
 		{
 			SetID(id);
-			Importer(tmxFilePath);
-
+			Importer2D(tmxFilePath);
 		}
 		
 		virtual void v_Update(void)=0;
@@ -108,12 +108,22 @@ namespace KillerEngine
 //Accessors
 //
 //==========================================================================================================================
-		void AddObjectToMap(GameObject2D* obj);
+		void Add2DObjectToMap(GameObject2D* obj);
+
+		void Add3DObjectToMap(GameObject3D* obj);
 		
-		void RemoveObjectFromMap(U32 id);
+		void Remove2DObjectFromMap(U32 id);
+
+		void Remove3DObjectFromMap(U32 id);
 
 		void RenderObjects(void) {
-			for(auto i = _worldObjects.begin(); i!=_worldObjects.end(); ++i) {
+			for(auto i = _2DWorldObjects.begin(); i!=_2DWorldObjects.end(); ++i) 
+			{
+				i->second->v_Render();
+			}
+
+			for(auto i = _3DWorldObjects.begin(); i!=_3DWorldObjects.end(); ++i)
+			{
 				i->second->v_Render();
 			}
 		}
@@ -161,7 +171,7 @@ namespace KillerEngine
 		U32 GetID(void) const { return _ID; }
 
 	protected:
-		void Importer(string tmxFilePath);
+		void Importer2D(string tmxFilePath);
 
 		virtual ObjectType v_StringToTileData(string s);
 
@@ -174,8 +184,9 @@ namespace KillerEngine
 		S32 _mapLeftBorder;
 		Col _bgColor;
 		U32 _ID;
-		std::map<U32, GameObject2D*> _worldObjects;
-		std::map<U32, TileData> _tileData;
+		std::map<U32, GameObject2D*> _2DWorldObjects;
+		std::map<U32, GameObject3D*> _3DWorldObjects;
+		std::map<U32, TileData> _2DTileData;
 
 		void _AddTile(TileData data);
 	};

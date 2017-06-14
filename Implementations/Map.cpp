@@ -1,9 +1,9 @@
-#include <Engine/Map2D.h>
+#include <Engine/Map.h>
 #include <iostream>
 
 namespace KillerEngine 
 {
-	Map2D::Map2D(void) : _mapWidth(0),
+	Map::Map(void) : _mapWidth(0),
 					   		 _mapHeight(0),
 					   		 _mapTopBorder(0),
 					   		 _mapBottomBorder(0),
@@ -17,36 +17,53 @@ namespace KillerEngine
 //AddObjectToMap
 //
 //=============================================================================
-	void Map2D::AddObjectToMap(GameObject2D* obj)
+	void Map::Add2DObjectToMap(GameObject2D* obj)
 	{
-		_worldObjects.insert(std::map<U32, GameObject2D*>::value_type(obj->GetID(), obj));
+		_2DWorldObjects.insert(std::map<U32, GameObject2D*>::value_type(obj->GetID(), obj));
 		
-		if(_worldObjects.find(obj->GetID()) == _worldObjects.end()) 
+		if(_2DWorldObjects.find(obj->GetID()) == _2DWorldObjects.end()) 
 		{ 
-			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddMap to _worldObjects"); 
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddMap to _2DWorldObjects"); 
 		}
 	}
 
-	void Map2D::_AddTile(TileData data)
+	void Map::Add3DObjectToMap(GameObject3D* obj)
 	{
-		_tileData.insert(std::map<U32, TileData>::value_type(data.tileID, data));
-
-		if(_tileData.find(data.tileID) == _tileData.end())
-		{
-			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to add tile to _tileData");
+		_3DWorldObjects.insert(std::map<U32, GameObject3D*>::value_type(obj->GetID(), obj));
+		
+		if(_3DWorldObjects.find(obj->GetID()) == _3DWorldObjects.end()) 
+		{ 
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to AddMap to _3DWorldObjects"); 
 		}
-}
+	}
+
+	void Map::_AddTile(TileData data)
+	{
+		_2DTileData.insert(std::map<U32, TileData>::value_type(data.tileID, data));
+
+		if(_2DTileData.find(data.tileID) == _2DTileData.end())
+		{
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Unable to add tile to _2DTileData");
+		}
+	}
 
 //=============================================================================
 //
 //RemoveObjectFromMap
 //
 //=============================================================================
-	void Map2D::RemoveObjectFromMap(U32 id)
+	void Map::Remove2DObjectFromMap(U32 id)
 	{
-		std::map<U32, GameObject2D*>::iterator i = _worldObjects.find(id);
+		std::map<U32, GameObject2D*>::iterator i = _2DWorldObjects.find(id);
 
-		_worldObjects.erase(i);
+		_2DWorldObjects.erase(i);
+	}
+
+	void Map::Remove3DObjectFromMap(U32 id)
+	{
+		std::map<U32, GameObject3D*>::iterator i = _3DWorldObjects.find(id);
+
+		_3DWorldObjects.erase(i);
 	}
 
 //==========================================================================================================================
@@ -54,7 +71,7 @@ namespace KillerEngine
 //TMX file Importer
 //
 //==========================================================================================================================	
-	void Map2D::Importer(string tmxFilePath)
+	void Map::Importer2D(string tmxFilePath)
 	{
 
 		tinyxml2::XMLDocument doc;
@@ -217,9 +234,9 @@ namespace KillerEngine
 							//=====Add Object to Map=====
 							S32 tile = csvData[i] - '0';
 
-							TileData currentTile = _tileData.find(tile)->second;
+							TileData currentTile = _2DTileData.find(tile)->second;
 
-							AddObjectToMap(v_CreateObject(currentTile.type, 
+							Add2DObjectToMap(v_CreateObject(currentTile.type, 
 										   Vec2( (F32)(x * mapData.tileWidth)+(currentTile.width / 2), (F32)(y * mapData.tileHeight)+(currentTile.height / 2)),
 										   currentTile.textureID,
 										   (F32)currentTile.width, (F32)currentTile.height));
@@ -249,7 +266,7 @@ namespace KillerEngine
 //StringToEnum
 //
 //==========================================================================================================================
-	Map2D::ObjectType Map2D::v_StringToTileData(string s)
+	Map::ObjectType Map::v_StringToTileData(string s)
 	{
 		if(s == "Background") { return ObjectType::BACKGROUND; }
 		

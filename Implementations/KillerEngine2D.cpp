@@ -30,7 +30,7 @@ namespace KillerEngine
 		
 		Controller::Instance()->Update();
 		
-		MapManager2D::Instance()->Update();
+		MapManager::Instance()->Update();
 
 		ErrorManager::Instance()->DisplayErrors();
 	}
@@ -40,7 +40,7 @@ namespace KillerEngine
 //=======================================================================================================
 	void KillerEngine2D::Render(void) 
 	{
-		MapManager2D::Instance()->Render();
+		MapManager::Instance()->Render();
 
 		Renderer::Instance()->Draw();
 

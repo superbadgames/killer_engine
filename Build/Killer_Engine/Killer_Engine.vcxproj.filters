@@ -127,6 +127,12 @@
     <Filter Include="Components\Physics\Particles\2D\Forces\Bouyant">
       <UniqueIdentifier>{792a4c9a-1a6b-4263-ab7b-9da00ab53439}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\GameObjects\GameObject\2D">
+      <UniqueIdentifier>{d0d12d87-de69-42af-9f30-fb68d307c6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameObjects\GameObject\3D">
+      <UniqueIdentifier>{35b9d80d-2b32-4b04-b905-e2040b88907d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -174,9 +180,6 @@
     <ClInclude Include="..\..\Headers\Engine\KillerEngine2D.h">
       <Filter>Components\KillerEngine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h">
-      <Filter>Components\GameObjects\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\WinProgram.h">
       <Filter>Components\ProgramWindows</Filter>
     </ClInclude>
@@ -194,12 +197,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Camera.h">
       <Filter>Components\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\Map2D.h">
-      <Filter>Components\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Headers\Engine\MapManager2D.h">
-      <Filter>Components\MapManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\EnvironmentObject.h">
       <Filter>Components\GameObjects\EnvironmentObj</Filter>
@@ -227,6 +224,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Particle2DBuoyantForce.h">
       <Filter>Components\Physics\Particles\2D\Forces\Bouyant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Map.h">
+      <Filter>Components\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\MapManager.h">
+      <Filter>Components\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject2D.h">
+      <Filter>Components\GameObjects\GameObject\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\GameObject3D.h">
+      <Filter>Components\GameObjects\GameObject\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,9 +272,6 @@
     <ClCompile Include="..\..\Implementations\KillerEngine2D.cpp">
       <Filter>Components\KillerEngine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Implementations\GameObject2D.cpp">
-      <Filter>Components\GameObjects\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Implementations\WinProgram.cpp">
       <Filter>Components\ProgramWindows</Filter>
     </ClCompile>
@@ -277,12 +283,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Camera.cpp">
       <Filter>Components\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\Map2D.cpp">
-      <Filter>Components\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Implementations\MapManager2D.cpp">
-      <Filter>Components\MapManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\EnvironmentObject.cpp">
       <Filter>Components\GameObjects\EnvironmentObj</Filter>
@@ -307,6 +307,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Particle2DBuoyantForce.cpp">
       <Filter>Components\Physics\Particles\2D\Forces\Bouyant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Map.cpp">
+      <Filter>Components\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\MapManager.cpp">
+      <Filter>Components\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\GameObject2D.cpp">
+      <Filter>Components\GameObjects\GameObject\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\GameObject3D.cpp">
+      <Filter>Components\GameObjects\GameObject\3D</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
