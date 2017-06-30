@@ -93,7 +93,10 @@ namespace KillerEngine
 		
 		virtual void v_Update(void)=0;
 		
-		virtual void v_Render(void) { RenderObjects(); }
+		virtual void v_Render(void) 
+		{ 
+			RenderObjects(); 
+		}
 
 /*		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, F32 w, F32 h) 
 		{
@@ -101,7 +104,11 @@ namespace KillerEngine
 			return NULL; 
 		}
 */
-		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h)=0;
+		virtual GameObject2D* v_CreateObject(ObjectType type, Vec2& pos, U32 textureID, F32 w, F32 h)
+		{
+			ErrorManager::Instance()->SetError(EC_KillerEngine, "Attempted to call v_CreateObject without Map Implementation");
+			return NULL;
+		}
 
 //==========================================================================================================================
 //
