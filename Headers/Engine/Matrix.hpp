@@ -220,7 +220,10 @@ namespace KillerMath
 //
 //==========================================================================================================================
 //=====Return the array containing all the elements=====
-		const T* GetElems(void) const { return _m; }
+		const T* GetElems(void) const 
+		{ 
+			return _m; 
+		}
 
 //=====Return each element===== 
 		T Get11(void) const { return _m[0];  }
