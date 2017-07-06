@@ -74,6 +74,10 @@ namespace KillerMath
 
 		Quaternion& operator/= (real d);
 
+		Quaternion operator* (real m);
+
+		Quaternion& operator*= (real m);
+
 //==========================================================================================================================
 //
 //Quaternion Functions

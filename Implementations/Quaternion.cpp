@@ -61,6 +61,16 @@ namespace KillerMath
 		return *this;
 	}
 
+	Quaternion Quaternion::operator* (real m)
+	{
+		return *this;
+	}
+
+	Quaternion& Quaternion::operator*= (real m)
+	{
+		return *this;
+	}
+
 //==========================================================================================================================
 //
 //Quaternion Functions

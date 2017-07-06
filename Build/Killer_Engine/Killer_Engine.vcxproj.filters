@@ -133,7 +133,7 @@
     <Filter Include="Components\GameObjects\GameObject\3D">
       <UniqueIdentifier>{35b9d80d-2b32-4b04-b905-e2040b88907d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Math\LinearAlgebra\Quaternion">
+    <Filter Include="Components\Math\Quaternion">
       <UniqueIdentifier>{c515a409-dc39-49f7-98ad-057c2f9db072}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -241,7 +241,7 @@
       <Filter>Components\GameObjects\GameObject\3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\Quaternion.h">
-      <Filter>Components\Math\LinearAlgebra\Quaternion</Filter>
+      <Filter>Components\Math\Quaternion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +327,7 @@
       <Filter>Components\GameObjects\GameObject\3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Quaternion.cpp">
-      <Filter>Components\Math\LinearAlgebra\Quaternion</Filter>
+      <Filter>Components\Math\Quaternion</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
