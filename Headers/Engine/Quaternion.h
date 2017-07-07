@@ -13,6 +13,8 @@ Written by Maxwell Miller
 //=====Engine Includes=====
 #include <Engine/Atom.h>
 
+#include <assert.h>
+
 namespace KillerMath
 {
 	class Quaternion
@@ -76,7 +78,11 @@ namespace KillerMath
 
 		Quaternion operator* (real m);
 
+		Quaternion operator* (Quaternion q2);
+
 		Quaternion& operator*= (real m);
+
+		Quaternion& operator*= (Quaternion q2);
 
 //==========================================================================================================================
 //
