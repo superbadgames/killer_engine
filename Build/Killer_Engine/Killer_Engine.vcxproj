@@ -147,6 +147,10 @@
     <ClInclude Include="..\..\Headers\Engine\Particle2DForceRegistry.h" />
     <ClInclude Include="..\..\Headers\Engine\Particle2DSpringForce.h" />
     <ClInclude Include="..\..\Headers\Engine\Point.hpp" />
+    <ClInclude Include="..\..\Headers\Engine\Quaternion.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="..\..\Headers\Engine\TriSprite.h" />
     <ClInclude Include="..\..\Headers\Engine\WinProgram.h" />
     <ClInclude Include="..\..\Headers\Engine\RandomGen.h" />
@@ -181,6 +185,10 @@
     <ClCompile Include="..\..\Implementations\Particle3D.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2DForceRegistry.cpp" />
     <ClCompile Include="..\..\Implementations\Particle2DSpringForce.cpp" />
+    <ClCompile Include="..\..\Implementations\Quaternion.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="..\..\Implementations\TriSprite.cpp" />
     <ClCompile Include="..\..\Implementations\Sprite.cpp" />
     <ClCompile Include="..\..\Implementations\WinProgram.cpp" />
