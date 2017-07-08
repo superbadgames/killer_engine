@@ -96,8 +96,15 @@ namespace KillerMath
 		Quaternion Inverse(void);
 
 		Quaternion Difference(Quaternion Q);
-		
 
+		real Dot(Quaternion Q);
+
+		void Negate(void);
+
+		Quaternion Opposite(void);
+
+		void Normalize(void);
+		
 	private:
 		real _q[4];
 	};//end Class

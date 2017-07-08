@@ -145,4 +145,26 @@ namespace KillerMath
 		return Q * inverse;
 	}
 
+	real Quaternion::Dot(Quaternion Q)
+	{
+		return _q[0] * Q.GetW() + _q[1] * Q.GetX() + _q[2] * Q.GetY() + _q[3] * Q.GetZ();
+	}
+
+	void Quaternion::Negate(void)
+	{
+		_q[0] *= -1;
+		_q[1] *= -1;
+		_q[2] *= -1;
+		_q[3] *= -1;
+	}
+
+	Quaternion Quaternion::Opposite(void)
+	{
+		return Quaternion(_q[0] * -1, _q[1] * -1, _q[2] * -1, _q[3] * -1);
+	}
+
+	void Quaternion::Normalize(void)
+	{
+		*this /= Magnitude();
+	}
 }//end namespace
