@@ -138,5 +138,11 @@ namespace KillerMath
 		return conjugate / mag;
 	}
 
+	Quaternion Quaternion::Difference(Quaternion Q)
+	{
+		Quaternion inverse = Inverse();
+
+		return Q * inverse;
+	}
 
 }//end namespace

@@ -94,6 +94,8 @@ namespace KillerMath
 		Quaternion Conjugate(void);
 
 		Quaternion Inverse(void);
+
+		Quaternion Difference(Quaternion Q);
 		
 
 	private:
