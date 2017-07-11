@@ -162,6 +162,10 @@ namespace KillerMath
 
 			_m[12] =  _m[13] =  _m[14] =  _m[15] = 0;
 
+			assert(right - left != 0);
+			assert(bottom - top != 0);
+			assert(near - far != 0);
+
 			//Diagnal
 			_m[0]  = 2 / (right - left);
 			_m[5]  = 2 / (top - bottom);
@@ -173,6 +177,41 @@ namespace KillerMath
 			_m[13] = (bottom + top) / (bottom - top);
 			_m[14] = (near + far)   / (far - near);
 
+		}
+
+		void MakePerspective(T width, T height, T depth)
+		{
+			T right   = width; 
+			T left    = 0; 
+			T top     = height;
+			T bottom  = 0; 
+			T far     = depth; 
+			T near    = 0;
+
+			//Reset Matrix 
+			_m[0]  =  _m[1]  =  _m[2]  =  _m[3]  = 0;
+
+			_m[4]  =  _m[5]  =  _m[6]  =  _m[7]  = 0;
+
+			_m[8]  =  _m[9]  =  _m[10] =  _m[11] = 0;
+
+			_m[12] =  _m[13] =  _m[14] =  _m[15] = 0;
+
+			assert(right - left != 0);
+			assert(bottom - top != 0);
+			assert(near - far != 0);
+
+			//Diagnal
+			_m[0]  = (2 * near) / (right - left);
+			_m[5]  = (2 * near) / (top - bottom);
+			_m[10] = (near + far) / (near - far);
+			_m[15] = 0;
+
+			//Transform "Vector"
+			_m[8] = (right - left) / (right - left);
+			_m[9] = (top + bottom) / (top - bottom);
+			_m[14] = (2 * near * far) / (near - far);
+			_m[11] = -1;
 		}
 
 		void SetTranslation(T x, T y, T z)
