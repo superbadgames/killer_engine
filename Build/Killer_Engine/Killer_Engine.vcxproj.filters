@@ -136,6 +136,9 @@
     <Filter Include="Components\Math\Quaternion">
       <UniqueIdentifier>{c515a409-dc39-49f7-98ad-057c2f9db072}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Model">
+      <UniqueIdentifier>{b052f8a3-7bd6-4da4-a4a5-cc4dd017486f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Engine\Atom.h">
@@ -243,6 +246,9 @@
     <ClInclude Include="..\..\Headers\Engine\Quaternion.h">
       <Filter>Components\Math\Quaternion</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Headers\Engine\Model.h">
+      <Filter>Components\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Implementations\CharSprite.cpp">
@@ -328,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Implementations\Quaternion.cpp">
       <Filter>Components\Math\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Implementations\Model.cpp">
+      <Filter>Components\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
