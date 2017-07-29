@@ -17,6 +17,7 @@ namespace KillerEngine
 
 	void Camera::SetUp(GLuint shader)
 	{
+		
 		//temporary fix to get camera working for now. 
 		const F32* data = _projection.GetElems();
 
@@ -30,16 +31,17 @@ namespace KillerEngine
 
 		glUniformMatrix4fv(transform2, 1, GL_FALSE, data2);
 
-
-/*		not working matrix multiplication. Will fix later
-		_translation = _projection * _translation;
+/*	
+		//not working matrix multiplication. Will fix later
+		//_translation = _projection * _translation;
+		_translation *= _projection;
 		
 		const F32* data = _translation.GetElems();
 
 		GLint transform1 = glGetUniformLocation(shader, "transform_mat");
 
 		glUniformMatrix4fv(transform1, 1, GL_FALSE, data);
-*/
+*/		
 	}
 
 //==========================================================================================================================

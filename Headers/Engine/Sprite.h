@@ -124,7 +124,7 @@ namespace KillerEngine
 			_leftRight  = Vec2(left, right);
 		}
 
-		virtual GLuint v_GetShader(void) =0;
+		virtual GLuint v_GetShader(void)=0;
 
 //==========================================================================================================================
 //
